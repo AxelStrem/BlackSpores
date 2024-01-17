@@ -1,50 +1,76 @@
-[gd_scene load_steps=7 format=3 uid="uid://31svuo307e77"]
+[gd_scene load_steps=8 format=3 uid="uid://31svuo307e77"]
 
 [ext_resource type="Script" path="res://black_spore.gd" id="1_tr7qa"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_2u8f2"]
+radius = 0.25
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_pqxde"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_84r6q"]
+radius = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_piy1l"]
 shading_mode = 0
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_rywk1"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_2u8f2"]
-radius = 0.345497
+radial_segments = 16
+rings = 8
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bq5d4"]
 radius = 0.504966
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_5buwo"]
 
 [node name="black_spore" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.23457, 0.615766, 0)
 script = ExtResource("1_tr7qa")
 
-[node name="ball" type="MeshInstance3D" parent="."]
-material_override = SubResource("StandardMaterial3D_piy1l")
-mesh = SubResource("SphereMesh_rywk1")
+[node name="hitbox_init_test_allowed" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
 
-[node name="hitbox_disable" type="Area3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_init_test_allowed"]
+shape = SubResource("SphereShape3D_2u8f2")
+
+[node name="hitbox_init_test_rejected" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 8
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_init_test_rejected"]
+shape = SubResource("SphereShape3D_2u8f2")
+
+[node name="hitbox_init_overlapped" type="Area3D" parent="."]
 collision_layer = 0
 collision_mask = 4
 monitorable = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_disable"]
-shape = SubResource("SphereShape3D_2u8f2")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_init_overlapped"]
+shape = SubResource("SphereShape3D_pqxde")
 
 [node name="hitbox" type="Area3D" parent="."]
 collision_layer = 4
 collision_mask = 0
 monitoring = false
+monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
+shape = SubResource("SphereShape3D_84r6q")
+
+[node name="spore" type="Node3D" parent="."]
+
+[node name="ball" type="MeshInstance3D" parent="spore"]
+visible = false
+material_override = SubResource("StandardMaterial3D_piy1l")
+mesh = SubResource("SphereMesh_rywk1")
+skeleton = NodePath("../..")
+
+[node name="hitbox" type="Area3D" parent="spore"]
+collision_layer = 4
+collision_mask = 0
+monitoring = false
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spore/hitbox"]
 shape = SubResource("SphereShape3D_bq5d4")
-
-[node name="hitbox_attach" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_attach"]
-shape = SubResource("SphereShape3D_5buwo")
-
-[connection signal="area_entered" from="hitbox_attach" to="." method="_on_hitbox_attach_area_entered"]

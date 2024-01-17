@@ -1,0 +1,17 @@
+extends Node3D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+func align_mesh(p1, p2, w):
+	$mesh.look_at_from_position((p1+p2)*0.5,p2)
+	$mesh.scale.z = (p2-p1).length()
+	$mesh.scale.x = w
+	$mesh.scale.y = w
+	pass
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	#align_mesh($p1.global_position, $p2.global_position)
+	pass

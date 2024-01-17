@@ -1,0 +1,49 @@
+[gd_scene load_steps=6 format=3 uid="uid://ba82khvabxls4"]
+
+[ext_resource type="Script" path="res://shlong.gd" id="1_5hsik"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_ylixc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ty5j3"]
+albedo_color = Color(1, 0.388235, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4huhv"]
+bottom_radius = 0.1
+height = 1.0
+radial_segments = 6
+rings = 1
+cap_top = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2rqle"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="shlong" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22.4428, 0)
+script = ExtResource("1_5hsik")
+
+[node name="p1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.26953, 0.952105, 2.49519)
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="p1"]
+visible = false
+mesh = SubResource("BoxMesh_ylixc")
+
+[node name="p2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0608, 0, 0)
+visible = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="p2"]
+visible = false
+material_override = SubResource("StandardMaterial3D_ty5j3")
+mesh = SubResource("BoxMesh_ylixc")
+skeleton = NodePath("../../p1")
+
+[node name="mesh" type="Node3D" parent="."]
+
+[node name="mesh" type="MeshInstance3D" parent="mesh"]
+transform = Transform3D(1.91069e-15, -4.37114e-08, -1, -1, -4.37114e-08, 0, -4.37114e-08, 1, -4.37114e-08, 0, 0.229704, 0)
+mesh = SubResource("CylinderMesh_4huhv")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_2rqle")

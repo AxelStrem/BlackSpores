@@ -2,99 +2,128 @@ extends Node3D
 
 const sv_sideways = 2.0
 
-var next_eruption = 1.0
+var shlong_scene = preload("res://shlong.tscn")
 
-var current_state = 0
+var next_eruption = 1.0
 
 var velocity = Vector3(-1.0, 3.0, 0.0)
 var accel = Vector3(0.0, -5.0, 0.0)
 var current_scale = 1.0
 
 var lifetime = 10.0
+var wait_init = 0
 
 var spawner = null
+var shlong = null
 
+var mistries = 5
+
+var state = 0
+var type = 0
+var max_rad = 3.0
+var rate = 1.0
+var shlong_progress=0.1
+var shlong_midpoint = Vector3(0.0,0.0,0.0)
+
+func update_scale():
+	$spore.scale = Vector3(1.0,1.0,1.0)*current_scale*Global.spore_scale
+
+func try_init():
+	#$hitbox_init_test.collision_mask = mask_allow_spawn
+	if !$hitbox_init_test_allowed.has_overlapping_areas():
+		queue_free()
+		return 1
+	if $hitbox_init_test_rejected.has_overlapping_areas():
+		queue_free()
+		return 1
+	if $hitbox_init_overlapped.has_overlapping_areas():
+		queue_free()
+		return 2
+	
+	$hitbox_init_test_allowed.monitoring = false
+	$hitbox_init_test_rejected.monitoring = false
+	$hitbox_init_overlapped.monitoring = false
+	$hitbox.monitorable = true
+	$spore/hitbox.monitorable = true
+	$spore/ball.show()
+	current_scale = 0.01
+	update_scale()
+	max_rad = 1.5 + randf()*1.5
+	rate = 0.5+randf()
+	type = randi_range(0,4)
+	if type==0:
+		max_rad+=5.0
+	state = 5
+	shlong = shlong_scene.instantiate()
+	shlong_midpoint = Vector3(randf()-0.5, randf()-0.5, randf()-0.5)*2.0
+	add_child(shlong)
+	#shlong.visible=false
+	
+	return 0
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$hitbox_disable/CollisionShape3D.shape = $hitbox_disable/CollisionShape3D.shape.duplicate()
-	$hitbox/CollisionShape3D.shape = $hitbox/CollisionShape3D.shape.duplicate()
-	$hitbox_attach/CollisionShape3D.shape = $hitbox_attach/CollisionShape3D.shape.duplicate()
+	#$hitbox/CollisionShape3D.shape.radius = 0.6*Global.spore_scale
+	#$hitbox_init_test_allowed/CollisionShape3D.shape.radius = 0.25*Global.spore_scale
+	#$hitbox_init_test_rejected/CollisionShape3D.shape.radius = 0.25*Global.spore_scale
+	#$hitbox_init_overlapped/CollisionShape3D.shape.radius = 0.5*Global.spore_scale
 	pass # Replace with function body.
 
-func set_state(ns):
-	current_state = ns
-	
-func set_radius(rad):
-	$ball.scale = Vector3(1.0,1.0,1.0)*rad
-	$hitbox_disable/CollisionShape3D.shape.radius = rad*0.3
-	$hitbox/CollisionShape3D.shape.radius = rad*0.5
-	$hitbox_attach/CollisionShape3D.shape.radius = rad*0.5
-
-func erupt():
-	var spore = self.duplicate()
-	spore.global_transform = self.global_transform
-	spore.current_scale = 0.2
-	spore.scale = Vector3(1.0,1.0,1.0)
-	spore.set_radius(spore.current_scale)
-	get_parent().add_child(spore)
-	spore.velocity = Vector3((randf()*2.0-1.0)*sv_sideways,  (randf()*2.0-1.0)*sv_sideways, (randf()*2.0-1.0)*sv_sideways)
-	spore.position += velocity.normalized()*current_scale*0.6
-	spore.set_state(1)
-	spore.spawner = self
-	spore.find_child("hitbox").monitorable = false
-	spore.find_child("hitbox_attach").monitoring = true
-	spore.find_child("hitbox_disable").monitoring = true
-	spore.lifetime = 10.0
+func deactivate():
+	mistries-=1
+	if mistries<=0:
+		next_eruption = 500.0
 
 func _process(delta):
-	if current_state==0:
-		current_scale += delta*0.2
-		set_radius(current_scale)
-		#scale = Vector3(1.0,1.0,1.0)*current_scale
-		next_eruption -= delta
-		if next_eruption <= 0.0:
-			erupt()
-			next_eruption = 0.01 + randf()*0.5
-		var ars = $hitbox_disable.get_overlapping_areas()
-		for a in ars:
-			var bs = a.get_parent()
-			var dist = (self.global_position - bs.global_position).length()
-			if dist < 0.5*abs(bs.current_scale - current_scale):
-				if bs.current_scale > current_scale:
-					get_parent().remove_shit()
-					queue_free()
-					break
-	if current_state==1:
-		self.position += velocity*delta
-		#velocity += accel*delta
-		lifetime -= delta
-		if lifetime < 0.0:
-			queue_free()
-	if current_state==2:
-		current_scale += delta
-		#scale = Vector3(1.0,1.0,1.0)*current_scale
-		set_radius(current_scale)
-		if(current_scale >= 1.0):
-			current_state = 0
-
-
-func _on_hitbox_attach_area_entered(_area):
-
-	#$hitbox_disable.monitoring = true
-	if current_state == 1:
-		if lifetime > 9.5:
-			queue_free()
-			return
-		else:
-			print(_area.get_parent())
-		$hitbox_attach.set_deferred("monitoring", false)		
-		var ars = $hitbox_disable.get_overlapping_areas()
-		#$hitbox_disable.set_deferred("monitoring", false)
-		#print(ars.size())
-		if (ars.size()>0):
-			queue_free()
-		else:
-			current_state = 2
-			$hitbox.set_deferred("monitorable", true)
-			get_parent().add_black_shit()
-		$hitbox_attach.disable_mode = true
+		if state == 1:
+			current_scale += delta*rate
+			update_scale()
+			if current_scale >= max_rad:
+				state = 2
+		if state==2 and type!=0:
+			current_scale -= delta*0.2
+			
+			if current_scale <= 0.1:
+				queue_free()
+				return
+		if state==2 and type==0:
+			current_scale += delta*rate*0.3
+			update_scale()
+		if state != 2 and state != 5:
+			next_eruption -= delta
+			if next_eruption <= 0.0:
+				get_parent().add_active_spore(self)
+				next_eruption = randf()*0.1
+		if state == 5:
+			shlong_progress+=delta*2.0
+			if shlong_progress >= 1.0:
+				state = 1
+			elif spawner!=null:
+				var p1 = spawner.global_position
+				var p2 = self.global_position
+				p2 = p1 + (p2-p1)*shlong_progress
+				var midoff = sqrt(0.25-(shlong_progress-0.5)**2)
+				p2 += midoff*shlong_midpoint
+				var w = shlong_progress
+				if w < 0.1:
+					w=0.1
+				if w >0.4:
+					w=0.4
+				shlong.align_mesh(p1,p2, w*Global.spore_scale)
+				shlong.visible = true
+				
+			
+func _physics_process(_delta):
+	if wait_init>1:
+		wait_init-=1
+		return
+	if wait_init==1:
+		wait_init = 0
+		var ti = try_init()
+		if spawner != null:
+			if ti == 0:
+				spawner.next_eruption = 0.0 + randf()*0.1
+			else:
+				spawner.next_eruption = 0.0 + randf()*0.0005
+			if ti==2:
+				spawner.deactivate()
