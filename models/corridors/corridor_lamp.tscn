@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc2aq7fagi26u"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_6twbt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kshmg"]
+shading_mode = 0
+
+[node name="CorridorLamp" type="MeshInstance3D"]
+transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, 0.354367)
+mesh = SubResource("QuadMesh_6twbt")
+surface_material_override/0 = SubResource("StandardMaterial3D_kshmg")
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(0.817003, 1.04902e-08, -6.98492e-08, -1.76283e-07, -13.1238, -4.03289, -4.27472e-08, 0.14687, -0.477943, -0.00252831, 0.954679, -0.443569)
+light_energy = 3.91
+spot_range = 6.9057
+spot_angle = 44.4008

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://1lrfertbffmc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b6h5"]
+shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_hnj4n"]
+
+[node name="lobby_lamp" type="MeshInstance3D"]
+transform = Transform3D(0.536893, -0.186164, 3.09086e-08, 0, -1.15081e-08, -1, 0.536893, 0.186164, -3.09086e-08, 1.13526, 1.07533, -1.14872)
+material_override = SubResource("StandardMaterial3D_8b6h5")
+mesh = SubResource("QuadMesh_hnj4n")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.423479, -0.115746, 4.28679e-08, -0.333811, -1.22131, -5.68607e-07, 7.08659e-08, 1.35822e-07, -0.333333, 0, 0, 0.0319364)
+spot_range = 8.05526

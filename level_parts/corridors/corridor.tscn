@@ -1,0 +1,68 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsx181u4v8naq"]
+
+[ext_resource type="PackedScene" uid="uid://c6pqnckdiwoa7" path="res://models/corridors/corridor.glb" id="1_5iyar"]
+[ext_resource type="PackedScene" uid="uid://il4xvjrrddkt" path="res://models/corridors/cs_corridor_spore.tscn" id="2_rthtl"]
+[ext_resource type="PackedScene" uid="uid://bc2aq7fagi26u" path="res://models/corridors/corridor_lamp.tscn" id="3_ei3vd"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cmmsr"]
+size = Vector3(1.62476, 0.167572, 4.77075)
+
+[node name="Corridor" type="Node3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+
+[node name="corridor" parent="." instance=ExtResource("1_5iyar")]
+
+[node name="clip_brush1" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="shape" type="CollisionShape3D" parent="clip_brush1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)
+shape = SubResource("BoxShape3D_cmmsr")
+
+[node name="clip_brush4" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49472, 0)
+collision_mask = 0
+
+[node name="shape" type="CollisionShape3D" parent="clip_brush4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)
+shape = SubResource("BoxShape3D_cmmsr")
+
+[node name="clip_brush2" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.103094, -0.00425577, 0)
+collision_mask = 0
+
+[node name="shape" type="CollisionShape3D" parent="clip_brush2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)
+shape = SubResource("BoxShape3D_cmmsr")
+
+[node name="clip_brush3" type="StaticBody3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.67501, -0.00425577, 0)
+collision_mask = 0
+
+[node name="shape" type="CollisionShape3D" parent="clip_brush3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)
+shape = SubResource("BoxShape3D_cmmsr")
+
+[node name="spore_brush1" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0213764, 0.00114214, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="shape" parent="spore_brush1" instance=ExtResource("2_rthtl")]
+
+[node name="CorridorLamp" parent="." instance=ExtResource("3_ei3vd")]
+
+[node name="CorridorLamp2" parent="." instance=ExtResource("3_ei3vd")]
+transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, 1.16085)
+
+[node name="CorridorLamp3" parent="." instance=ExtResource("3_ei3vd")]
+transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, 1.96908)
+
+[node name="CorridorLamp4" parent="." instance=ExtResource("3_ei3vd")]
+transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, -0.335801)
+
+[node name="CorridorLamp5" parent="." instance=ExtResource("3_ei3vd")]
+transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, -1.15595)
+
+[node name="CorridorLamp6" parent="." instance=ExtResource("3_ei3vd")]
+transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, -1.9705)

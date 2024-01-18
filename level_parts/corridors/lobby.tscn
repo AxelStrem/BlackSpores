@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://ct5nwamfcsfuh"]
+
+[ext_resource type="PackedScene" uid="uid://c5sej6o7kxvnv" path="res://models/corridors/lobby.glb" id="1_o3ega"]
+[ext_resource type="PackedScene" uid="uid://c8tk54mx3baoi" path="res://models/corridors/cs_lobby_spore.tscn" id="2_q8hm0"]
+[ext_resource type="PackedScene" uid="uid://b6ln5lbl4lv05" path="res://models/corridors/cs_lobby_clip.tscn" id="3_5n5vr"]
+[ext_resource type="PackedScene" uid="uid://1lrfertbffmc" path="res://models/corridors/lobby_lamp.tscn" id="4_tvnwn"]
+
+[node name="Lobby" type="Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+
+[node name="lobby" parent="." instance=ExtResource("1_o3ega")]
+
+[node name="spore_brush1" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0213764, 0.00114214, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="lobby_spore_shape" parent="spore_brush1" instance=ExtResource("2_q8hm0")]
+
+[node name="clip_brush" type="StaticBody3D" parent="."]
+collision_mask = 0
+
+[node name="lobby_clip_shape" parent="clip_brush" instance=ExtResource("3_5n5vr")]
+
+[node name="lobby_lamp" parent="." instance=ExtResource("4_tvnwn")]
+
+[node name="lobby_lamp2" parent="." instance=ExtResource("4_tvnwn")]
+transform = Transform3D(0.536893, -0.186164, 3.09086e-08, 0, -1.15081e-08, -1, 0.536893, 0.186164, -3.09086e-08, -1.14841, 1.07533, 1.13244)
+
+[node name="lobby_lamp3" parent="." instance=ExtResource("4_tvnwn")]
+transform = Transform3D(-0.536893, -0.186164, 3.09086e-08, 0, -1.15081e-08, -1, 0.536893, -0.186164, 3.09086e-08, 1.15142, 1.07533, 1.13244)
+
+[node name="lobby_lamp4" parent="." instance=ExtResource("4_tvnwn")]
+transform = Transform3D(-0.536893, -0.186164, 3.09086e-08, 0, -1.15081e-08, -1, 0.536893, -0.186164, 3.09086e-08, -1.13996, 1.07533, -1.13581)

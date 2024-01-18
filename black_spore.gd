@@ -72,7 +72,7 @@ func _ready():
 func deactivate():
 	mistries-=1
 	if mistries<=0:
-		next_eruption = 500.0
+		next_eruption = 1000.0
 
 func _process(delta):
 		if state == 1:
