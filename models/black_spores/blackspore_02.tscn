@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm83d03mhyu6y"]
+
+[ext_resource type="PackedScene" uid="uid://d2thirf81tyso" path="res://models/black_spores/blackspore02.glb" id="1_5sq4r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p1p5"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[node name="blackspore02" instance=ExtResource("1_5sq4r")]
+
+[node name="Spore01HP" parent="." index="0"]
+visible = false
+
+[node name="Spore01LP" parent="." index="1"]
+visible = false
+
+[node name="Spore02LP" parent="." index="2"]
+visible = false
+
+[node name="Spore03LP" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_3p1p5")
+
+[node name="Spore04LP" parent="." index="4"]
+visible = false

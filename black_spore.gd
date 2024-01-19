@@ -3,6 +3,7 @@ extends Node3D
 const sv_sideways = 2.0
 
 var shlong_scene = preload("res://shlong.tscn")
+const class_consumable = preload("res://spore_consumable.gd")
 
 var next_eruption = 1.0
 
@@ -24,6 +25,14 @@ var max_rad = 3.0
 var rate = 1.0
 var shlong_progress=0.1
 var shlong_midpoint = Vector3(0.0,0.0,0.0)
+
+func activate_spore():
+	var p = get_parent()
+	while p!=null:
+		var np = p.get_parent()
+		if p is class_consumable:
+			p.activate_spore()
+		p = np
 
 func update_scale():
 	$spore.scale = Vector3(1.0,1.0,1.0)*current_scale*Global.spore_scale

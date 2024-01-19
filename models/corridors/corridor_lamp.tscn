@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bc2aq7fagi26u"]
+[gd_scene load_steps=4 format=3 uid="uid://bc2aq7fagi26u"]
+
+[ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="1_73714"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_6twbt"]
 
@@ -15,3 +17,5 @@ transform = Transform3D(0.817003, 1.04902e-08, -6.98492e-08, -1.76283e-07, -13.1
 light_energy = 3.91
 spot_range = 6.9057
 spot_angle = 44.4008
+
+[node name="SporeDestructible" parent="." instance=ExtResource("1_73714")]

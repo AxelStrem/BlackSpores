@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://1lrfertbffmc"]
+[gd_scene load_steps=4 format=3 uid="uid://1lrfertbffmc"]
+
+[ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="1_dw1s6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8b6h5"]
 shading_mode = 0
@@ -13,3 +15,5 @@ mesh = SubResource("QuadMesh_hnj4n")
 [node name="SpotLight3D" type="SpotLight3D" parent="."]
 transform = Transform3D(0.423479, -0.115746, 4.28679e-08, -0.333811, -1.22131, -5.68607e-07, 7.08659e-08, 1.35822e-07, -0.333333, 0, 0, 0.0319364)
 spot_range = 8.05526
+
+[node name="SporeDestructible" parent="." instance=ExtResource("1_dw1s6")]

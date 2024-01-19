@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=9 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -8,96 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://ct5nwamfcsfuh" path="res://level_parts/corridors/lobby.tscn" id="6_khp80"]
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_xmucd"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_ej6e6"]
-size = Vector3(1, 0.047821, 1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_p760o"]
-size = Vector3(0.599487, 1.04959, 0.0776367)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_5752d"]
-size = Vector3(0.37915, 2.43707, 0.162598)
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 
 [node name="main" type="Node3D"]
 script = ExtResource("1_kjcn1")
-
-[node name="Room" type="CSGMesh3D" parent="."]
-transform = Transform3D(39.8783, 0, 0, 0, 6.54798, 0, 0, 0, 47.406, 0, 3.28706, 0)
-use_collision = true
-mesh = SubResource("BoxMesh_xmucd")
-
-[node name="Inside" type="CSGMesh3D" parent="Room"]
-transform = Transform3D(1.07809, 0, 0, 0, 1.17575, 0, 0, 0, 0.2673, 0.102972, 0.0959914, -0.308319)
-layers = 3
-operation = 2
-mesh = SubResource("BoxMesh_xmucd")
-
-[node name="Inside4" type="CSGMesh3D" parent="Room"]
-transform = Transform3D(0.325705, 0, 0, 0, 1.17575, 0, 0, 0, 0.2673, 0.264718, 0.0959914, -0.161416)
-layers = 3
-operation = 2
-mesh = SubResource("BoxMesh_xmucd")
-
-[node name="Inside5" type="CSGMesh3D" parent="Room"]
-transform = Transform3D(0.325705, 0, 0, 0, 1.17575, 0, 0, 0, 0.2673, -0.196316, 0.156344, 0.254761)
-layers = 3
-operation = 2
-mesh = SubResource("BoxMesh_xmucd")
-
-[node name="Inside2" type="CSGMesh3D" parent="Room"]
-transform = Transform3D(0.858843, 0, 0, 0, 1.17575, 0, 0, 0, 0.2673, 0, 0.0959914, 0.019023)
-layers = 3
-operation = 2
-mesh = SubResource("BoxMesh_xmucd")
-
-[node name="Inside3" type="CSGMesh3D" parent="Room"]
-transform = Transform3D(0.858843, 0, 0, 0, 1.17575, 0, 0, 0, 0.2673, 0.0925243, 0.0959914, 0.3261)
-layers = 3
-operation = 2
-mesh = SubResource("BoxMesh_xmucd")
-
-[node name="RoomCollider" type="Area3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00534024, -0.302451, 0)
-collision_layer = 2
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/RoomCollider"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0141355, -0.127694, 0)
-shape = SubResource("BoxShape3D_ej6e6")
-
-[node name="RoomCollider2" type="Area3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00534024, -0.302451, 0)
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/RoomCollider2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.186121, 0.321738, -0.145752)
-shape = SubResource("BoxShape3D_p760o")
-
-[node name="RoomCollider3" type="Area3D" parent="Room"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.456522, -0.302451, 0.30854)
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/RoomCollider3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.186121, 0.321738, -0.145752)
-shape = SubResource("BoxShape3D_p760o")
-
-[node name="RoomCollider4" type="Area3D" parent="Room"]
-transform = Transform3D(-0.0407248, 0, 0.999171, 0, 1, 0, -0.999171, 0, -0.0407248, 0.624401, -0.302451, -0.381521)
-collision_layer = 8
-collision_mask = 0
-monitoring = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Room/RoomCollider4"]
-transform = Transform3D(1.00001, 0, 3.72529e-09, 0, 1.00005, 0, 0, 0, 1, -0.391567, -0.0851689, -0.142577)
-shape = SubResource("BoxShape3D_5752d")
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9339, 1.11748, -13.7089)
@@ -119,7 +33,7 @@ ignore_occlusion_culling = true
 text = "60 FPS"
 
 [node name="player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.91636, 3.49116, -14.0626)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.91636, 1.49672, -14.0626)
 script = ExtResource("3_1xpxi")
 
 [node name="hitbox" type="CollisionShape3D" parent="player"]

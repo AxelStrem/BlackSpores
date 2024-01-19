@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://31svuo307e77"]
+[gd_scene load_steps=9 format=3 uid="uid://31svuo307e77"]
 
 [ext_resource type="Script" path="res://black_spore.gd" id="1_tr7qa"]
+[ext_resource type="PackedScene" uid="uid://bm83d03mhyu6y" path="res://models/black_spores/blackspore_02.tscn" id="2_jn7ft"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2u8f2"]
 radius = 0.25
@@ -74,3 +75,6 @@ monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spore/hitbox"]
 shape = SubResource("SphereShape3D_bq5d4")
+
+[node name="ballZ" parent="spore" instance=ExtResource("2_jn7ft")]
+visible = false
