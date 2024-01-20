@@ -113,6 +113,7 @@ func _physics_process(delta):
 		velocity.y -= gravity * delta
 		old_y_velocity = velocity.y
 	else: 
+		$Feet/step1.play()
 		if old_y_velocity<-20:
 			_player_dead()
 
