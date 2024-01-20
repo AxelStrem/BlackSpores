@@ -11,8 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
-radius = 0.50806
-height = 1.73756
+radius = 0.985279
+height = 2.87003
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
 size = Vector3(196.664, 4.61426, 267.326)
