@@ -191,3 +191,7 @@ func _player_dead():
 	remove_child(cam)
 	dead_body.add_child(cam)
 	queue_free()
+
+
+func _on_breath_finished():
+	$breath.play()
