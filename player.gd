@@ -18,6 +18,7 @@ var last_frame_on_ground = false
 var jumping = false
 var timer_paused = false
 
+var dead_player_scene = preload("res://dead_player.tscn")
 var crouch = 0.0
 
 var checkpoint = Vector3(0.0,0.0,0.0)
@@ -58,7 +59,6 @@ func _process(delta):
 		time_passed += delta
 	$Camera/LabelTime.text = format_time(time_passed)
 	$Camera/LabelEnergy.text = "{0}/{1}".format({0:current_energy, 1:max_energy})
-	$Camera/LabelDead.text = "dead/{0}".format({0:dead})
 	velocity += Vector3(0.0,-20.0,0.0)*delta
 	
 	#if is_on_floor():	
@@ -168,4 +168,12 @@ func _on_area_3d_area_entered(area):
 	_player_dead()
 
 func _player_dead():
-	dead = true
+	dead = true	
+	var dead_body = dead_player_scene.instantiate()
+	get_parent().add_child(dead_body)
+	dead_body.global_transform = self.global_transform
+	$Camera/LabelDead.text = "dead/{0}".format({0:dead})	
+	var cam = $Camera
+	remove_child(cam)
+	dead_body.add_child(cam)
+	queue_free()

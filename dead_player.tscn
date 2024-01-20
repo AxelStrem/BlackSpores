@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://baprb68ojwkel"]
+
+[ext_resource type="Script" path="res://dead_player.gd" id="1_ttkaw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8pi7u"]
+radius = 0.435152
+height = 1.69473
+
+[node name="DeadPlayer" type="RigidBody3D"]
+script = ExtResource("1_ttkaw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.997299, 0.0734471, 0, -0.0734471, 0.997299, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_8pi7u")
