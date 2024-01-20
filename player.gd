@@ -108,7 +108,7 @@ func _process(delta):
 	#if translation.y < -10.0:
 	#	kill_player()
 
-const SPEED = 5.0
+var SPEED = 5.0
 const JUMP_VELOCITY = 7.5
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.

@@ -13,6 +13,7 @@ func _process(delta):
 
 
 func _on_area_3d_body_entered(body):
+	body.SPEED*=2
 	queue_free()
 
 
