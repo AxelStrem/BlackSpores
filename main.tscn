@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=11 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bsx181u4v8naq" path="res://level_parts/corridors/corridor.tscn" id="5_tm6p1"]
 [ext_resource type="PackedScene" uid="uid://ct5nwamfcsfuh" path="res://level_parts/corridors/lobby.tscn" id="6_khp80"]
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
+[ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="8_dr2xd"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 
@@ -141,5 +142,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -55.3672, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.2917, -1.80713, 4.95517)
 shape = SubResource("BoxShape3D_yhqqv")
+
+[node name="pickup" parent="." instance=ExtResource("8_dr2xd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0823, 1.26014, -14.0086)
 
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
