@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var step_distance=0
 var max_energy=200
 var current_energy=200
 var dead = false;
@@ -107,24 +108,32 @@ const JUMP_VELOCITY = 7.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
-func _physics_process(delta):
+func _physics_process(delta):	
+	# Get the input direction and handle the movement/deceleration.
+	# As good practice, you should replace UI actions with custom gameplay actions.
+	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
+	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		old_y_velocity = velocity.y
-	else: 
-		$Feet/step1.play()
-		if old_y_velocity<-20:
+		step_distance = 0
+
+	else: 		
+		if direction:	
+			step_distance += delta
+			if step_distance>0.5:
+				$Feet/step1.play()
+				step_distance=0
+		if old_y_velocity < -20:
 			_player_dead()
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("player_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
-	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+
 	if direction:
 		if Input.is_action_pressed("player_run") && current_energy > 0:
 			direction*=1.5
