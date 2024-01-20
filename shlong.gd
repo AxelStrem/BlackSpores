@@ -6,8 +6,10 @@ func _ready():
 	pass # Replace with function body.
 
 func align_mesh(p1, p2, w):
-	$mesh.look_at_from_position((p1+p2)*0.5,p2)
-	$mesh.scale.z = (p2-p1).length()
+	var sz = (p2-p1).length()
+	if sz != 0.0:
+		$mesh.look_at_from_position((p1+p2)*0.5,p2)
+	$mesh.scale.z = sz
 	$mesh.scale.x = w
 	$mesh.scale.y = w
 	pass

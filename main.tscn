@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=12 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -8,8 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://ct5nwamfcsfuh" path="res://level_parts/corridors/lobby.tscn" id="6_khp80"]
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="8_dr2xd"]
+[ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
+radius = 0.50806
+height = 1.73756
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
 size = Vector3(196.664, 4.61426, 267.326)
@@ -141,5 +144,17 @@ shape = SubResource("BoxShape3D_yhqqv")
 
 [node name="pickup" parent="." instance=ExtResource("8_dr2xd")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0823, 1.26014, -14.0086)
+
+[node name="CircularStaircase" parent="." instance=ExtResource("9_5f2gx")]
+transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 48.2406, 2.39911, 38.3924)
+
+[node name="CircularStaircase2" parent="." instance=ExtResource("9_5f2gx")]
+transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 48.2406, 24.0965, 38.3924)
+
+[node name="CircularStaircase3" parent="." instance=ExtResource("9_5f2gx")]
+transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 2.0497, -16.0771)
+
+[node name="CircularStaircase4" parent="." instance=ExtResource("9_5f2gx")]
+transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 23.7471, -16.0771)
 
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]

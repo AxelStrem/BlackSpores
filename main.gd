@@ -53,7 +53,7 @@ func attempt_spawn(s):
 
 const attempts_per_frame = 20
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	var sproc = 0
 	if !spread_spores:
 		active_spores.clear()
