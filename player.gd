@@ -61,48 +61,36 @@ func _process(delta):
 	$Camera/LabelDead.text = "dead/{0}".format({0:dead})
 	velocity += Vector3(0.0,-20.0,0.0)*delta
 	
-	if is_on_floor():	
-		ground_close = true
-		last_frame_on_ground = true
-	else:
-		if last_frame_on_ground:
-			last_frame_on_ground = false
+	#if is_on_floor():	
+	#	ground_close = true
+	#	last_frame_on_ground = true
+	#else:
+	#	if last_frame_on_ground:
+	#		last_frame_on_ground = false
 			#$AirtimeDelay.start()		
 	
-	var air_coef = air_control
-	if is_on_floor():
-		air_coef = 1.0	
+	#var air_coef = air_control
+	#if is_on_floor():
+	#	air_coef = 1.0	
 	
-	var velocity_increment = Vector3(0.0,0.0,0.0)
-	var velocity_changing = false
+	#var velocity_increment = Vector3(0.0,0.0,0.0)
+	#var velocity_changing = false
 	
-	if Input.is_action_pressed("player_forward"):
-		velocity_increment += direction
-		velocity_changing = true
-	if Input.is_action_pressed("player_reverse"):
-		velocity_increment += -direction
-		velocity_changing = true		
-	if Input.is_action_pressed("player_strafe_left"):
-		velocity_increment += -ortho_dir
-		velocity_changing = true		
-	if Input.is_action_pressed("player_strafe_right"):
-		velocity_increment += ortho_dir
-		velocity_changing = true		
 	if Input.is_action_pressed("player_crouch"):
 		crouch+=crouch_speed*delta
 	else:
 		crouch-=crouch_speed*delta
 		
-	if velocity_changing:
-		velocity_increment = velocity_increment.normalized()
-		velocity += velocity_increment*delta*speed*air_coef
+	#if velocity_changing:
+	#	velocity_increment = velocity_increment.normalized()
+	#	velocity += velocity_increment*delta*speed*air_coef
 		
 	crouch = clamp(crouch, 0.0, 1.0)
 		
 	scale.y = 1.0 - crouch*0.5
 	
-	if is_on_floor():	
-		velocity*=pow(speed_decay,60.0*delta)
+	#if is_on_floor():	
+	#	velocity*=pow(speed_decay,60.0*delta)
 	
 	#if is_on_floor() and not jumping:
 	#	velocity = move_and_slide_with_snap(velocity, -vec_up, vec_up)
