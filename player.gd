@@ -2,6 +2,7 @@ extends CharacterBody3D
 
 var max_energy=200
 var current_energy=200
+var dead = false;
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -56,6 +57,7 @@ func _process(delta):
 		time_passed += delta
 	$Camera/LabelTime.text = format_time(time_passed)
 	$Camera/LabelEnergy.text = "{0}/{1}".format({0:current_energy, 1:max_energy})
+	$Camera/LabelDead.text = "dead/{0}".format({0:dead})
 	velocity += Vector3(0.0,-20.0,0.0)*delta
 	
 	if is_on_floor():	
@@ -167,3 +169,10 @@ func _on_AirtimeDelay_timeout():
 
 func _on_jump_delay_timeout():
 	jumping = false
+
+
+func _on_area_3d_area_entered(area):
+	_player_dead()
+
+func _player_dead():
+	dead = true
