@@ -24,7 +24,7 @@ func attempt_spawn(s):
 	var rad = 1.0*Global.spore_scale*s.current_scale
 	if rad < 3.0:
 		rad = 3.0
-	s.get_parent().add_child(spore)	
+	s.get_parent().add_child(spore)
 	spore.global_transform = s.global_transform
 	var shift_vec = Vector3(0.0,0.0,0.0)
 	if s.spawner == null:

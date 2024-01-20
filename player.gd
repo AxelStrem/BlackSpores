@@ -145,11 +145,11 @@ func _input(event):
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
 		$Camera.rotate_x(deg_to_rad(event.relative.y * -camera_sensitivity))
 		$Camera.rotation_degrees.x = clamp($Camera.rotation_degrees.x, -70, 70)
-	if event.is_action_pressed("player_jump") and ground_close and not jumping:
-		velocity += vec_up*jump_impulse
-		ground_close = false
-		jumping = true
-		$JumpDelay.start()
+	#if event.is_action_pressed("player_jump") and ground_close and not jumping:
+	#	velocity += vec_up*jump_impulse
+	#	ground_close = false
+	#	jumping = true
+	#	$JumpDelay.start()
 	#if event.is_action_pressed("player_save") and ground_close:
 		#checkpoint = translation
 		#checkpoint_time = time_passed
