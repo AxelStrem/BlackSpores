@@ -53,6 +53,14 @@ ignore_occlusion_culling = true
 no_depth_test = true
 text = "60 FPS"
 
+[node name="LabelEnergy" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 2.03879, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
 [node name="JumpDelay" type="Timer" parent="player"]
 
 [node name="Corridor" parent="." instance=ExtResource("5_tm6p1")]

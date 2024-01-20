@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
-
+var max_energy=200
+var current_energy=200
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -54,7 +55,7 @@ func _process(delta):
 	if not timer_paused:
 		time_passed += delta
 	$Camera/LabelTime.text = format_time(time_passed)
-	
+	$Camera/LabelEnergy.text = "{0}/{1}".format({0:current_energy, 1:max_energy})
 	velocity += Vector3(0.0,-20.0,0.0)*delta
 	
 	if is_on_floor():	
@@ -129,14 +130,18 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
-		if Input.is_action_pressed("player_run"):
+		if Input.is_action_pressed("player_run") && current_energy > 0:
 			direction*=1.5
+			current_energy-=delta*60
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
+		current_energy = min(max_energy,current_energy + delta * 60)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-
+		
+	if !Input.is_action_pressed("player_run"):
+		current_energy = min(max_energy,current_energy + delta * 60)
 	move_and_slide()
 
 func _input(event):
