@@ -2,7 +2,7 @@ extends CharacterBody3D
 
 var step_distance=0
 var max_energy=200
-var current_energy=200
+var current_energy=200.0
 var dead = false;
 var old_y_velocity = 0
 # Declare member variables here. Examples:
@@ -46,6 +46,10 @@ func format_time(time):
 	
 	return "%02d:%02d.%02d" % [m, s, ms]
 
+func pickup(pickup_type):
+	if pickup_type == 1:
+		SPEED*=2
+
 func kill_player():
 	#translation = checkpoint
 	velocity = Vector3(0.0,0.0,0.0)
@@ -54,12 +58,12 @@ func kill_player():
 func _process(delta):
 	
 	var direction = -get_transform().basis.z
-	var ortho_dir = get_transform().basis.x
+#	var ortho_dir = get_transform().basis.x
 	
 	if not timer_paused:
 		time_passed += delta
 	$Camera/LabelTime.text = format_time(time_passed)
-	$Camera/LabelEnergy.text = "{0}/{1}".format({0:current_energy, 1:max_energy})
+	$Camera/LabelEnergy.text = "{0}/{1}".format({0:int(current_energy), 1:max_energy})
 	velocity += Vector3(0.0,-20.0,0.0)*delta
 	
 	#if is_on_floor():	
@@ -124,7 +128,8 @@ func _physics_process(delta):
 		if direction:	
 			step_distance += delta
 			if step_distance>0.5:
-				$Feet/step1.play()
+				$Feet.position.x = -$Feet.position.x
+				$Feet.get_children().pick_random().play()
 				step_distance=0
 		if old_y_velocity < -20:
 			_player_dead()
@@ -141,12 +146,11 @@ func _physics_process(delta):
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:
-		current_energy = min(max_energy,current_energy + delta * 60)
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 		
-	if !Input.is_action_pressed("player_run"):
-		current_energy = min(max_energy,current_energy + delta * 60)
+	if !Input.is_action_pressed("player_run") or !direction:
+		current_energy = min(max_energy,current_energy + delta * 30)
 	move_and_slide()
 
 func _input(event):
@@ -174,7 +178,7 @@ func _on_jump_delay_timeout():
 	jumping = false
 
 
-func _on_area_3d_area_entered(area):
+func _on_area_3d_area_entered(_area):
 	_player_dead()
 
 func _player_dead():

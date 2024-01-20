@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://1mafv0umphbn"]
+
+[ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_bti1i"]
+[ext_resource type="PackedScene" uid="uid://cbe2ah416ixc4" path="res://models/pickups/spiral.tscn" id="2_k8e3b"]
+
+[node name="pickup" instance=ExtResource("1_bti1i")]
+
+[node name="model" parent="." index="1"]
+transform = Transform3D(0.795, 0, 0, 0, 0.795, 0, 0, 0, 0.795, 0, 0, 0)
+
+[node name="spiral" parent="model" index="0" instance=ExtResource("2_k8e3b")]
+transform = Transform3D(0.0961363, 0.0275285, 0, -0.0275285, 0.0961363, 0, 0, 0, 0.1, -0.124171, 0.490589, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="model" index="1"]
+transform = Transform3D(1.25786, 0, 0, 0, 1.25786, 0, 0, 0, 1.25786, 0, 0.943461, 0)
+light_color = Color(1, 1, 0.219608, 1)
+omni_range = 3.39317

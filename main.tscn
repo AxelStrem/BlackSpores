@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=16 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -10,9 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://ct5nwamfcsfuh" path="res://level_parts/corridors/lobby.tscn" id="6_khp80"]
 [ext_resource type="AudioStream" uid="uid://bpjkmior7t0yg" path="res://sound/step03.wav" id="7_es0kt"]
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
-[ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="8_dr2xd"]
 [ext_resource type="AudioStream" uid="uid://bbifl3qq1eks" path="res://sound/step04.wav" id="8_veibk"]
-[ext_resource type="PackedScene" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
+[ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 radius = 0.985279
@@ -26,6 +25,7 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
+spread_spores = false
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9339, 1.11748, -13.7089)
@@ -89,22 +89,18 @@ collision_mask = 4
 shape = SubResource("CapsuleShape3D_tjvjx")
 
 [node name="Feet" type="Node3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.13681, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419229, -1.13681, 0)
 
 [node name="step1" type="AudioStreamPlayer3D" parent="player/Feet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246461, 0, 0)
 stream = ExtResource("5_q4bjr")
 
 [node name="step2" type="AudioStreamPlayer3D" parent="player/Feet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202589, 0, 0)
 stream = ExtResource("6_33b08")
 
 [node name="step3" type="AudioStreamPlayer3D" parent="player/Feet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246461, 0, 0)
 stream = ExtResource("7_es0kt")
 
 [node name="step4" type="AudioStreamPlayer3D" parent="player/Feet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.202589, 0, 0)
 stream = ExtResource("8_veibk")
 
 [node name="Corridor" parent="." instance=ExtResource("5_tm6p1")]
@@ -182,9 +178,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -55.3672, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.2917, -1.80713, 4.95517)
 shape = SubResource("BoxShape3D_yhqqv")
-
-[node name="pickup" parent="." instance=ExtResource("8_dr2xd")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0823, 1.26014, -14.0086)
 
 [node name="CircularStaircase" parent="." instance=ExtResource("9_5f2gx")]
 transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 48.2406, 2.39911, 38.3924)

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cbe2ah416ixc4"]
+
+[ext_resource type="PackedScene" uid="uid://c70jt7dkaywhb" path="res://models/pickups/spiral.glb" id="1_wbl0h"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7cdei"]
+shading_mode = 2
+specular_mode = 2
+disable_ambient_light = true
+emission_enabled = true
+emission = Color(0.839216, 0.6, 0, 1)
+emission_energy_multiplier = 16.0
+
+[node name="spiral" instance=ExtResource("1_wbl0h")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7cdei")
