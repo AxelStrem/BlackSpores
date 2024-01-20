@@ -21,6 +21,7 @@ collision_mask = 2
 [node name="lobby_spore_shape" parent="spore_brush1" instance=ExtResource("2_q8hm0")]
 
 [node name="clip_brush" type="StaticBody3D" parent="."]
+disable_mode = 1
 collision_mask = 0
 
 [node name="lobby_clip_shape" parent="clip_brush" instance=ExtResource("3_5n5vr")]

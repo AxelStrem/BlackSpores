@@ -37,6 +37,7 @@ text = "60 FPS"
 
 [node name="player" type="CharacterBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.91636, 1.74696, -14.0626)
+collision_layer = 17
 script = ExtResource("3_1xpxi")
 
 [node name="hitbox" type="CollisionShape3D" parent="player"]
