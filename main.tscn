@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=13 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://ct5nwamfcsfuh" path="res://level_parts/corridors/lobby.tscn" id="6_khp80"]
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="8_dr2xd"]
-[ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
+[ext_resource type="PackedScene" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 radius = 0.985279
@@ -22,6 +22,7 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
+spread_spores = false
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9339, 1.11748, -13.7089)

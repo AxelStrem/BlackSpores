@@ -3,6 +3,7 @@ extends CharacterBody3D
 var max_energy=200
 var current_energy=200
 var dead = false;
+var old_y_velocity = 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -122,6 +123,10 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
+		old_y_velocity = velocity.y
+	else: 
+		if old_y_velocity<-20:
+			_player_dead()
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("player_jump") and is_on_floor():
