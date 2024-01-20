@@ -24,18 +24,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9339, 1.11748, -13.7089)
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, 25.056, -8.97102)
 visible = false
 
-[node name="CameraOverhead" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0531377, 0.998587, 0, -0.998587, -0.0531377, 9.0332, 57.1689, -0.575111)
-current = true
-script = ExtResource("4_nhh6l")
-
-[node name="LabelFPS" type="Label3D" parent="CameraOverhead"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.46943, 2.62333, -3.619)
-layers = 2
-sorting_offset = 5.0
-ignore_occlusion_culling = true
-text = "60 FPS"
-
 [node name="player" type="CharacterBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.91636, 1.74696, -14.0626)
 collision_layer = 17
