@@ -48,6 +48,8 @@ func format_time(time):
 	return "%02d:%02d.%02d" % [m, s, ms]
 
 func pickup(pickup_type):
+	$pickup_sound.play()
+	$pickup_sound.seek(0.3)	
 	if pickup_type == 1:
 		SPEED*=2
 
