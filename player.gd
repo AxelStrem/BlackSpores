@@ -53,7 +53,7 @@ func _process(delta):
 	
 	if not timer_paused:
 		time_passed += delta
-	#get_parent().get_node("Text").text = format_time(time_passed)
+	$Camera/LabelTime.text = format_time(time_passed)
 	
 	velocity += Vector3(0.0,-20.0,0.0)*delta
 	
@@ -129,6 +129,8 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
+		if Input.is_action_pressed("player_run"):
+			direction*=1.5
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 	else:

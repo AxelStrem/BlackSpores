@@ -5,19 +5,17 @@ const sv_sideways = 2.0
 var shlong_scene = preload("res://shlong.tscn")
 const class_consumable = preload("res://spore_consumable.gd")
 
-var next_eruption = 1.0
-
 var velocity = Vector3(-1.0, 3.0, 0.0)
 var accel = Vector3(0.0, -5.0, 0.0)
 var current_scale = 1.0
 
-var lifetime = 10.0
+var lifetime = 20.0
 var wait_init = 0
 
 var spawner = null
 var shlong = null
 
-var mistries = 5
+var mistries = 3
 
 var state = 0
 var type = 0
@@ -26,20 +24,37 @@ var rate = 1.0
 var shlong_progress=0.1
 var shlong_midpoint = Vector3(0.0,0.0,0.0)
 
+var b_active = false
+var attempts = 0
+
 func activate_spore():
+	b_active = true	
 	var p = get_parent()
 	while p!=null:
 		var np = p.get_parent()
-		if p is class_consumable:
-			p.activate_spore()
+		if p is class_consumable or p.is_in_group("game"):
+			p.activate_spore(self)
 		p = np
+
+func deactivate_spore():
+	if !b_active:
+		return
+	b_active = false
+	var p = get_parent()
+	while p!=null:
+		var np = p.get_parent()
+		if p is class_consumable or p.is_in_group("game"):
+			p.deactivate_spore(self)
+		p = np
+
 
 func update_scale():
 	$spore.scale = Vector3(1.0,1.0,1.0)*current_scale*Global.spore_scale
 
 func try_init():
 	#$hitbox_init_test.collision_mask = mask_allow_spawn
-	if !$hitbox_init_test_allowed.has_overlapping_areas():
+	var overlap = $hitbox_init_test_allowed.get_overlapping_areas()
+	if overlap.size()==0:
 		queue_free()
 		return 1
 	if $hitbox_init_test_rejected.has_overlapping_areas():
@@ -48,6 +63,12 @@ func try_init():
 	if $hitbox_init_overlapped.has_overlapping_areas():
 		queue_free()
 		return 2
+	
+	var gt = self.global_transform
+	get_parent().remove_child(self)
+	overlap[0].add_child(self)
+	self.global_transform = gt
+	call_deferred("activate_spore")
 	
 	$hitbox_init_test_allowed.monitoring = false
 	$hitbox_init_test_rejected.monitoring = false
@@ -58,8 +79,8 @@ func try_init():
 	current_scale = 0.01
 	update_scale()
 	max_rad = 1.5 + randf()*1.5
-	rate = 0.5+randf()
-	type = randi_range(0,4)
+	rate = 0.1+randf()
+	type = randi_range(0,2)
 	if type==0:
 		max_rad+=5.0
 	state = 5
@@ -81,28 +102,65 @@ func _ready():
 func deactivate():
 	mistries-=1
 	if mistries<=0:
-		next_eruption = 1000.0
+		deactivate_spore()
+		#next_eruption = 1000.0
+
+func get_game_root():
+	var p = get_parent()
+	while p!=null and !p.is_in_group("game"):
+		p = p.get_parent()
+	return p
+
+func _exit_tree():
+	deactivate_spore()
 
 func _process(delta):
+		
+		var cm_rad = max_rad*attempts/100
+	
+		if state==0:
+			lifetime-=delta
+			if lifetime <= 0.0:
+				deactivate_spore()
+				queue_free()	
 		if state == 1:
 			current_scale += delta*rate
+			if current_scale > cm_rad:
+				current_scale = cm_rad
 			update_scale()
+			$spore/ball.hide()
+			$spore/ball2.hide()
+			$spore/ball3.hide()
+			$spore/ball4.show()
 			if current_scale >= max_rad:
 				state = 2
 		if state==2 and type!=0:
+			$spore/ball.hide()
+			$spore/ball2.hide()
+			$spore/ball4.hide()
+			$spore/ball3.show()
 			current_scale -= delta*0.2
 			
 			if current_scale <= 0.1:
+				deactivate_spore()
 				queue_free()
 				return
 		if state==2 and type==0:
+			$spore/ball.hide()
+			$spore/ball3.hide()
+			$spore/ball4.hide()
+			$spore/ball2.show()
 			current_scale += delta*rate*0.3
 			update_scale()
-		if state != 2 and state != 5:
-			next_eruption -= delta
-			if next_eruption <= 0.0:
-				get_parent().add_active_spore(self)
-				next_eruption = randf()*0.1
+			if current_scale > 10.0:
+				deactivate_spore()
+				
+		#if state != 2 and state != 5:
+		#	next_eruption -= delta
+		#	if next_eruption <= 0.0:
+		#		get_game_root().add_active_spore(self)
+		#		next_eruption = randf()*0.05
+				
 		if state == 5:
 			shlong_progress+=delta*2.0
 			if shlong_progress >= 1.0:
@@ -120,6 +178,12 @@ func _process(delta):
 					w=0.4
 				shlong.align_mesh(p1,p2, w*Global.spore_scale)
 				shlong.visible = true
+		if !b_active:
+			$spore/ball.show()
+			$spore/ball2.hide()
+			$spore/ball3.hide()
+			$spore/ball4.hide()
+		
 				
 			
 func _physics_process(_delta):
@@ -131,7 +195,7 @@ func _physics_process(_delta):
 		var ti = try_init()
 		if spawner != null:
 			if ti == 0:
-				spawner.next_eruption = 0.0 + randf()*0.1
+				spawner.next_eruption = 0.0 + randf()*1.0
 			else:
 				spawner.next_eruption = 0.0 + randf()*0.0005
 			if ti==2:

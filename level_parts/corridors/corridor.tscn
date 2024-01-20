@@ -16,7 +16,6 @@ script = ExtResource("1_dawvw")
 [node name="corridor" parent="." instance=ExtResource("1_5iyar")]
 
 [node name="clip_brush1" type="StaticBody3D" parent="."]
-collision_mask = 0
 
 [node name="shape" type="CollisionShape3D" parent="clip_brush1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)
@@ -24,7 +23,6 @@ shape = SubResource("BoxShape3D_cmmsr")
 
 [node name="clip_brush4" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.49472, 0)
-collision_mask = 0
 
 [node name="shape" type="CollisionShape3D" parent="clip_brush4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)
@@ -32,7 +30,6 @@ shape = SubResource("BoxShape3D_cmmsr")
 
 [node name="clip_brush2" type="StaticBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.103094, -0.00425577, 0)
-collision_mask = 0
 
 [node name="shape" type="CollisionShape3D" parent="clip_brush2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)
@@ -40,7 +37,6 @@ shape = SubResource("BoxShape3D_cmmsr")
 
 [node name="clip_brush3" type="StaticBody3D" parent="."]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1.67501, -0.00425577, 0)
-collision_mask = 0
 
 [node name="shape" type="CollisionShape3D" parent="clip_brush3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0005126, -0.793255, 0.0106373)

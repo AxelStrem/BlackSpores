@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=10 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -10,7 +10,10 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 
-[node name="main" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
+size = Vector3(196.664, 4.61426, 267.326)
+
+[node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
@@ -33,7 +36,7 @@ ignore_occlusion_culling = true
 text = "60 FPS"
 
 [node name="player" type="CharacterBody3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.91636, 1.49672, -14.0626)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6.91636, 1.74696, -14.0626)
 script = ExtResource("3_1xpxi")
 
 [node name="hitbox" type="CollisionShape3D" parent="player"]
@@ -45,10 +48,19 @@ current = true
 script = ExtResource("4_nhh6l")
 
 [node name="LabelFPS" type="Label3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.46943, 2.62333, -3.619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54911, 2.57715, -3.619)
 layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true
+no_depth_test = true
+text = "60 FPS"
+
+[node name="LabelTime" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 2.29865, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
 text = "60 FPS"
 
 [node name="JumpDelay" type="Timer" parent="player"]
@@ -121,5 +133,12 @@ transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 93.771
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("7_q68py")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -55.3672, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.2917, -1.80713, 4.95517)
+shape = SubResource("BoxShape3D_yhqqv")
 
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]

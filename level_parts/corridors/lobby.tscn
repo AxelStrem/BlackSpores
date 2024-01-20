@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://ct5nwamfcsfuh"]
+[gd_scene load_steps=7 format=3 uid="uid://ct5nwamfcsfuh"]
 
 [ext_resource type="PackedScene" uid="uid://c5sej6o7kxvnv" path="res://models/corridors/lobby.glb" id="1_o3ega"]
+[ext_resource type="Script" path="res://spore_consumable.gd" id="1_t6myu"]
 [ext_resource type="PackedScene" uid="uid://c8tk54mx3baoi" path="res://models/corridors/cs_lobby_spore.tscn" id="2_q8hm0"]
 [ext_resource type="PackedScene" uid="uid://b6ln5lbl4lv05" path="res://models/corridors/cs_lobby_clip.tscn" id="3_5n5vr"]
 [ext_resource type="PackedScene" uid="uid://1lrfertbffmc" path="res://models/corridors/lobby_lamp.tscn" id="4_tvnwn"]
@@ -8,6 +9,7 @@
 
 [node name="Lobby" type="Node3D"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+script = ExtResource("1_t6myu")
 
 [node name="lobby" parent="." instance=ExtResource("1_o3ega")]
 
