@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=18 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://bbifl3qq1eks" path="res://sound/step04.wav" id="8_veibk"]
 [ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
+[ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 radius = 0.985279
@@ -107,6 +108,10 @@ stream = ExtResource("8_veibk")
 [node name="breath" type="AudioStreamPlayer" parent="player"]
 stream = ExtResource("9_eab5s")
 autoplay = true
+
+[node name="pickup_sound" type="AudioStreamPlayer" parent="player"]
+stream = ExtResource("10_1arfx")
+volume_db = 4.0
 
 [node name="Corridor" parent="." instance=ExtResource("5_tm6p1")]
 transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 22.5303, 2.37073, -13.8101)
