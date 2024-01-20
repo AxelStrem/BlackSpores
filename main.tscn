@@ -14,6 +14,9 @@
 radius = 0.985279
 height = 2.87003
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjvjx"]
+height = 2.04788
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
 size = Vector3(196.664, 4.61426, 267.326)
 
@@ -64,7 +67,22 @@ ignore_occlusion_culling = true
 no_depth_test = true
 text = "55555"
 
+[node name="LabelDead" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 1.81786, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
 [node name="JumpDelay" type="Timer" parent="player"]
+
+[node name="Area3D" type="Area3D" parent="player"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player/Area3D"]
+shape = SubResource("CapsuleShape3D_tjvjx")
 
 [node name="Corridor" parent="." instance=ExtResource("5_tm6p1")]
 transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 22.5303, 2.37073, -13.8101)
@@ -158,3 +176,4 @@ transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676,
 transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 23.7471, -16.0771)
 
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
+[connection signal="area_entered" from="player/Area3D" to="player" method="_on_area_3d_area_entered"]
