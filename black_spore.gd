@@ -119,10 +119,8 @@ func _process(delta):
 		var cm_rad = max_rad*attempts/100
 	
 		if state==0:
-			lifetime-=delta
-			if lifetime <= 0.0:
-				deactivate_spore()
-				queue_free()	
+			if !b_active:
+				activate_spore()
 		if state == 1:
 			current_scale += delta*rate
 			if current_scale > cm_rad:
@@ -194,9 +192,5 @@ func _physics_process(_delta):
 		wait_init = 0
 		var ti = try_init()
 		if spawner != null:
-			if ti == 0:
-				spawner.next_eruption = 0.0 + randf()*1.0
-			else:
-				spawner.next_eruption = 0.0 + randf()*0.0005
 			if ti==2:
 				spawner.deactivate()

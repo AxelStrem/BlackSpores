@@ -1,5 +1,7 @@
 extends Node3D
 
+@export var spread_spores = true
+
 var black_spore_scene = preload("res://black_spore.tscn")
 
 var active_spores = {}
@@ -28,9 +30,12 @@ func attempt_spawn(s):
 	if s.spawner == null:
 		shift_vec = Vector3((randf()*2.0-1.0),  (randf()*2.0-1.0), (randf()*2.0-1.0))*rad
 	else:
-		var or_dir = (s.global_position - s.spawner.global_position).normalized()
-		var d1 = or_dir.cross(Vector3(1.0,0.0,0.0)).normalized()
-		var d2 = or_dir.cross(d1).normalized()
+		var or_dir = (s.global_position - s.spawner.global_position)
+		if or_dir.length() == 0.0:
+			or_dir = Vector3((randf()*2.0-1.0),  (randf()*2.0-1.0), (randf()*2.0-1.0)) 
+		or_dir = or_dir.normalized()
+		var d1 = or_dir.cross(Vector3(1.0,0.0,0.0))
+		var d2 = or_dir.cross(d1)
 		var q = 0.25*or_dir
 		var d3 = -d1 - q
 		var d4 = -d2 - q
@@ -50,17 +55,20 @@ const attempts_per_frame = 20
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	var sproc = 0
+	if !spread_spores:
+		active_spores.clear()
 	if active_spores.size()<=attempts_per_frame:
 		while active_spores.size()>0:
 			for s in active_spores:
 				attempt_spawn(s)
 				sproc+=1
 				if sproc > attempts_per_frame:
-					active_spores.clear()
 					return
 	else:
-		active_spores.shuffle()
+		var asp = []
+		for s in active_spores:
+			asp.append(s)
+		asp.shuffle()
 		for i in range(0, attempts_per_frame):
-			
-			attempt_spawn(active_spores.back())
-			active_spores.pop_back()
+			attempt_spawn(asp.back())
+			asp.pop_back()
