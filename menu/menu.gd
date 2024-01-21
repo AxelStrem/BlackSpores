@@ -25,6 +25,7 @@ func _on_start_button_button_clicked():
 	main_instance.restart_signal.connect(on_restart)
 	main_instance.to_menu_signal.connect(return_to_menu)	
 	player.got_research_point_signal.connect(_add_research_point)
+	player.to_menu_signal.connect(return_to_menu)
 	
 func on_restart():
 	main_instance.queue_free()

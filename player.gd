@@ -1,6 +1,7 @@
 extends CharacterBody3D
 
 signal got_research_point_signal
+signal to_menu_signal
 var step_distance=0
 var max_energy=200
 var current_energy=200.0
@@ -76,7 +77,9 @@ func pickup(pickup_type):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	
+	if Input.is_action_pressed("exit_to_menu"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		to_menu_signal.emit()
 	var direction = -get_transform().basis.z
 #	var ortho_dir = get_transform().basis.x
 	
