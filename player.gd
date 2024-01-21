@@ -33,6 +33,7 @@ var time_passed = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$breath.set_volume_db(-1000)
 	#checkpoint = translation
 	
 func victory():
@@ -110,7 +111,9 @@ const JUMP_VELOCITY = 7.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
-func _physics_process(delta):	
+func _physics_process(delta):
+	
+	$breath.set_volume_db((tanh(current_energy-100)+1)*(-1000))
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
