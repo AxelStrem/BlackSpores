@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=19 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
 [ext_resource type="Script" path="res://player.gd" id="3_1xpxi"]
 [ext_resource type="Script" path="res://Camera.gd" id="4_nhh6l"]
+[ext_resource type="PackedScene" path="res://menu/button_3d.tscn" id="5_7jcy2"]
 [ext_resource type="AudioStream" uid="uid://deh1ywdmhvv1t" path="res://sound/step01.wav" id="5_q4bjr"]
 [ext_resource type="PackedScene" uid="uid://bsx181u4v8naq" path="res://level_parts/corridors/corridor.tscn" id="5_tm6p1"]
 [ext_resource type="AudioStream" uid="uid://cq6dojw3hv7fc" path="res://sound/step02.wav" id="6_33b08"]
@@ -27,7 +28,6 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
-spread_spores = false
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9339, 1.11748, -13.7089)
@@ -81,6 +81,16 @@ sorting_offset = 5.0
 ignore_occlusion_culling = true
 no_depth_test = true
 text = "55555"
+
+[node name="restartButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.252, -0.3)
+visible = false
+text = "restart"
+
+[node name="quitToMenuButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.02, -0.3)
+visible = false
+text = "menu"
 
 [node name="JumpDelay" type="Timer" parent="player"]
 
@@ -202,6 +212,8 @@ transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676,
 [node name="CircularStaircase4" parent="." instance=ExtResource("9_5f2gx")]
 transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 23.7471, -16.0771)
 
+[connection signal="button_clicked" from="player/Camera/restartButton" to="." method="_on_restart_button_button_clicked"]
+[connection signal="button_clicked" from="player/Camera/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
 [connection signal="area_entered" from="player/Area3D" to="player" method="_on_area_3d_area_entered"]
 [connection signal="finished" from="player/breath" to="player" method="_on_breath_finished"]
