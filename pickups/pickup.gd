@@ -16,8 +16,8 @@ func _process(delta):
 
 func _on_area_3d_body_entered(body):
 	#body.SPEED*=2
-	body.pickup(pickup_type)
-	queue_free()
+	if body.pickup(pickup_type):
+		queue_free()
 
 
 func _on_area_3d_area_entered(_area):
