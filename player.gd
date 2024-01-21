@@ -29,6 +29,13 @@ var speed = 50.0
 #var velocity = Vector3(0.0,0.0,0.0)
 var camera_sensitivity = 0.5
 
+var antigrav_charges = 0
+var antigrav_protection = false
+const antigrav_charges_max = 10
+const antigrav_charges_bonus = 3
+
+var research_points = 0
+
 var time_passed = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -50,8 +57,18 @@ func format_time(time):
 func pickup(pickup_type):
 	$pickup_sound.play()
 	$pickup_sound.seek(0.3)	
+	if pickup_type == 0:
+		research_points += 1
+		return true
 	if pickup_type == 1:
 		SPEED*=2
+		return true
+	if pickup_type == 2:
+		if antigrav_charges >= antigrav_charges_max:
+			return false
+		antigrav_charges = min(antigrav_charges_max, antigrav_charges + antigrav_charges_bonus)
+		return true
+	return true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -106,6 +123,7 @@ func _process(delta):
 
 var SPEED = 5.0
 const JUMP_VELOCITY = 7.5
+const JUMP_VELOCITY_ANTIGRAV = 20.0
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -122,9 +140,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		old_velocity = velocity
 		step_distance = 0
-
 	else: 		
 		if direction:	
 			step_distance += delta
@@ -133,12 +149,24 @@ func _physics_process(delta):
 				$Feet.get_children().pick_random().play()
 				step_distance=0
 		if old_velocity.y < -32.0:
-			$Camera/LabelDead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
-			_player_dead(old_velocity)
+			if antigrav_charges > 0:
+				antigrav_charges-=1
+				antigrav_protection=true
+			if not antigrav_protection:
+				$Camera/LabelDead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
+				_player_dead(old_velocity)
+		antigrav_protection = false
+	
+	old_velocity = velocity
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("player_jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		if antigrav_charges > 0:
+			velocity.y = JUMP_VELOCITY_ANTIGRAV
+			antigrav_charges -= 1
+			antigrav_protection = true
+			
 
 
 	if direction:

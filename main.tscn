@@ -27,6 +27,7 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
+spread_spores = false
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9339, 1.11748, -13.7089)
