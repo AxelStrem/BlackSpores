@@ -1,6 +1,8 @@
 extends Node3D
 
 @export var spread_spores = true
+signal to_menu_signal
+signal restart_signal
 
 var black_spore_scene = preload("res://black_spore.tscn")
 
@@ -72,3 +74,11 @@ func _physics_process(_delta):
 		for i in range(0, attempts_per_frame):
 			attempt_spawn(asp.back())
 			asp.pop_back()
+
+
+func _on_restart_button_button_clicked():
+	restart_signal.emit()
+
+
+func _on_quit_to_menu_button_clicked():
+	to_menu_signal.emit()
