@@ -1,40 +1,24 @@
-[gd_scene load_steps=5 format=3 uid="uid://ydtogkj0e4j0"]
+[gd_scene load_steps=4 format=3 uid="uid://dmweu27wvhqc3"]
 
-[ext_resource type="Script" path="res://pickups/pickup.gd" id="1_4mn0a"]
+[ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_e4f56"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_jdg7b"]
+[sub_resource type="BoxMesh" id="BoxMesh_f7w1e"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_eoo7i"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33h4s"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2duht"]
 emission_enabled = true
 emission = Color(0, 0.627451, 0, 1)
 emission_energy_multiplier = 6.55
 
-[node name="pickup" type="Node3D"]
-script = ExtResource("1_4mn0a")
+[node name="pickup" instance=ExtResource("1_e4f56")]
 pickup_type = 2
 
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 20
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0116572, 0.954207, 0)
-shape = SubResource("SphereShape3D_jdg7b")
-
-[node name="model" type="Node3D" parent="."]
-
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="model"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="model" index="0"]
 transform = Transform3D(0.365988, 0, 0, 0, 0.325396, 0.167525, 0, -0.167525, 0.325396, 0, 1, 0)
-mesh = SubResource("BoxMesh_eoo7i")
+mesh = SubResource("BoxMesh_f7w1e")
 skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_33h4s")
+surface_material_override/0 = SubResource("StandardMaterial3D_2duht")
 
-[node name="OmniLight3D" type="OmniLight3D" parent="model"]
+[node name="OmniLight3D" type="OmniLight3D" parent="model" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.782607, 0)
 light_color = Color(0.180392, 1, 0.192157, 1)
 omni_range = 3.71665
-
-[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
-[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
