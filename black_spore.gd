@@ -15,9 +15,9 @@ var wait_init = 0
 var spawner = null
 var shlong = null
 
-var mistries = 3
+var mistries = 5
 
-var state = 0
+@export var state = 0
 var type = 0
 var max_rad = 3.0
 var rate = 1.0
@@ -42,10 +42,11 @@ func activate_spore():
 			p.activate_spore(self)
 		p = np
 
-func deactivate_spore():
+func deactivate_spore(cs):
 	if !b_active:
 		return
 	b_active = false
+	print(cs)
 	var p = get_parent()
 	while p!=null:
 		var np = p.get_parent()
@@ -86,15 +87,13 @@ func try_init():
 	update_scale()
 	max_rad = 1.5 + randf()*1.5
 	rate = 0.1+randf()
-	type = randi_range(0,2)
+	type = randi_range(0,8)
 	if type==0:
 		max_rad+=5.0
 	state = 5
 	shlong = shlong_scene.instantiate()
 	shlong_midpoint = Vector3(randf()-0.5, randf()-0.5, randf()-0.5)*2.0
-	add_child(shlong)
-	#shlong.visible=false
-	
+	add_child(shlong)	
 	return 0
 	
 # Called when the node enters the scene tree for the first time.
@@ -108,7 +107,7 @@ func _ready():
 func deactivate():
 	mistries-=1
 	if mistries<=0:
-		deactivate_spore()
+		deactivate_spore(0)
 		#next_eruption = 1000.0
 
 func get_game_root():
@@ -118,13 +117,13 @@ func get_game_root():
 	return p
 
 func _exit_tree():
-	deactivate_spore()
+	deactivate_spore(1)
 
 func _process(delta):
 		
 		var cm_rad = max_rad*attempts/100
 	
-		if state==0:
+		if state==7:
 			if !b_active:
 				activate_spore()
 		if state == 1:
@@ -146,7 +145,7 @@ func _process(delta):
 			current_scale -= delta*0.2
 			
 			if current_scale <= 0.1:
-				deactivate_spore()
+				deactivate_spore(21)
 				queue_free()
 				return
 		if state==2 and type==0:
@@ -157,7 +156,7 @@ func _process(delta):
 			current_scale += delta*rate*0.3
 			update_scale()
 			if current_scale > 10.0:
-				deactivate_spore()
+				deactivate_spore(20)
 				
 		#if state != 2 and state != 5:
 		#	next_eruption -= delta
@@ -182,11 +181,11 @@ func _process(delta):
 					w=0.4
 				shlong.align_mesh(p1,p2, w*Global.spore_scale)
 				shlong.visible = true
-		if !b_active:
-			$spore/ball.show()
-			$spore/ball2.hide()
-			$spore/ball3.hide()
-			$spore/ball4.hide()
+		#if !b_active:
+		#	$spore/ball.show()
+		#	$spore/ball2.hide()
+		#	$spore/ball3.hide()
+		#	$spore/ball4.hide()
 		
 				
 			

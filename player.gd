@@ -4,7 +4,7 @@ var step_distance=0
 var max_energy=200
 var current_energy=200.0
 var dead = false;
-var old_y_velocity = 0
+var old_velocity = Vector3(0.0,0.0,0.0)
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -52,10 +52,6 @@ func pickup(pickup_type):
 	if pickup_type == 1:
 		SPEED*=2
 
-func kill_player():
-	#translation = checkpoint
-	velocity = Vector3(0.0,0.0,0.0)
-	time_passed = checkpoint_time
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
@@ -123,7 +119,7 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
-		old_y_velocity = velocity.y
+		old_velocity = velocity
 		step_distance = 0
 
 	else: 		
@@ -133,8 +129,9 @@ func _physics_process(delta):
 				$Feet.position.x = -$Feet.position.x
 				$Feet.get_children().pick_random().play()
 				step_distance=0
-		if old_y_velocity < -20:
-			_player_dead()
+		if old_velocity.y < -32.0:
+			$Camera/LabelDead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
+			_player_dead(old_velocity)
 
 	# Handle Jump.
 	if Input.is_action_just_pressed("player_jump") and is_on_floor():
@@ -181,14 +178,14 @@ func _on_jump_delay_timeout():
 
 
 func _on_area_3d_area_entered(_area):
-	_player_dead()
+	_player_dead(velocity)
 
-func _player_dead():
+func _player_dead(death_velocity):
 	dead = true	
 	var dead_body = dead_player_scene.instantiate()
 	get_parent().add_child(dead_body)
 	dead_body.global_transform = self.global_transform
-	$Camera/LabelDead.text = "dead/{0}".format({0:dead})	
+	dead_body.linear_velocity = death_velocity	
 	var cam = $Camera
 	remove_child(cam)
 	dead_body.add_child(cam)
