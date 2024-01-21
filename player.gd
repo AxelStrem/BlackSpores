@@ -213,13 +213,19 @@ func _on_area_3d_area_entered(_area):
 
 func _player_dead(death_velocity):
 	dead = true	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	var restart_button = $Camera/restartButton
+	restart_button.visible=true
+	var menu_button = $Camera/quitToMenuButton
+	menu_button.visible=true
+	
 	var dead_body = dead_player_scene.instantiate()
 	get_parent().add_child(dead_body)
 	dead_body.global_transform = self.global_transform
 	dead_body.linear_velocity = death_velocity	
 	var cam = $Camera
 	remove_child(cam)
-	dead_body.add_child(cam)
+	dead_body.add_child(cam)	
 	queue_free()
 
 
