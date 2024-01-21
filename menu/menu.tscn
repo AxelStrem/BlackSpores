@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccumm1cvr18n"]
+
+[ext_resource type="Script" path="res://menu/menu.gd" id="1_gxk3j"]
+[ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="2_t2xlb"]
+
+[node name="menu" type="Node3D"]
+script = ExtResource("1_gxk3j")
+
+[node name="startButton" parent="." instance=ExtResource("2_t2xlb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.565492, 0)
+text = "start"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.1723)
+
+[node name="closeButton" parent="." instance=ExtResource("2_t2xlb")]
+text = "exit"
+
+[connection signal="button_clicked" from="startButton" to="." method="_on_start_button_button_clicked"]
+[connection signal="button_clicked" from="closeButton" to="." method="_on_close_button_clicked"]

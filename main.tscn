@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
 [ext_resource type="Script" path="res://player.gd" id="3_1xpxi"]
 [ext_resource type="Script" path="res://Camera.gd" id="4_nhh6l"]
-[ext_resource type="PackedScene" path="res://menu/button_3d.tscn" id="5_7jcy2"]
+[ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="5_7jcy2"]
 [ext_resource type="AudioStream" uid="uid://deh1ywdmhvv1t" path="res://sound/step01.wav" id="5_q4bjr"]
 [ext_resource type="PackedScene" uid="uid://bsx181u4v8naq" path="res://level_parts/corridors/corridor.tscn" id="5_tm6p1"]
 [ext_resource type="AudioStream" uid="uid://cq6dojw3hv7fc" path="res://sound/step02.wav" id="6_33b08"]
@@ -12,7 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://bpjkmior7t0yg" path="res://sound/step03.wav" id="7_es0kt"]
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
 [ext_resource type="AudioStream" uid="uid://bbifl3qq1eks" path="res://sound/step04.wav" id="8_veibk"]
-[ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
+[ext_resource type="PackedScene" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
 
@@ -58,6 +58,14 @@ ignore_occlusion_culling = true
 no_depth_test = true
 text = "60 FPS"
 
+[node name="LabelPoints" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.59118, 2.57715, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "60 FPS"
+
 [node name="LabelTime" type="Label3D" parent="player/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 2.29865, -3.619)
 layers = 2
@@ -80,7 +88,17 @@ layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true
 no_depth_test = true
-text = "55555"
+text = "dead/false"
+
+[node name="restartButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.252, -0.3)
+visible = false
+text = "restart"
+
+[node name="quitToMenuButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.02, -0.3)
+visible = false
+text = "menu"
 
 [node name="restartButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.252, -0.3)

@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+signal got_research_point_signal
 var step_distance=0
 var max_energy=200
 var current_energy=200.0
@@ -41,6 +42,7 @@ var time_passed = 0.0
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$breath.set_volume_db(-1000)
+	$Camera/LabelPoints.text = "points/{0}".format({0:int(research_points)})
 	#checkpoint = translation
 	
 func victory():
@@ -59,6 +61,8 @@ func pickup(pickup_type):
 	$pickup_sound.seek(0.3)	
 	if pickup_type == 0:
 		research_points += 1
+		got_research_point_signal.emit()
+		$Camera/LabelPoints.text = "points/{0}".format({0:int(research_points)})
 		return true
 	if pickup_type == 1:
 		SPEED*=2
@@ -213,13 +217,19 @@ func _on_area_3d_area_entered(_area):
 
 func _player_dead(death_velocity):
 	dead = true	
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	var restart_button = $Camera/restartButton
+	restart_button.visible=true
+	var menu_button = $Camera/quitToMenuButton
+	menu_button.visible=true
+	
 	var dead_body = dead_player_scene.instantiate()
 	get_parent().add_child(dead_body)
 	dead_body.global_transform = self.global_transform
 	dead_body.linear_velocity = death_velocity	
 	var cam = $Camera
 	remove_child(cam)
-	dead_body.add_child(cam)
+	dead_body.add_child(cam)	
 	queue_free()
 
 
