@@ -28,7 +28,6 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
-spread_spores = false
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.9339, 1.11748, -13.7089)
@@ -52,7 +51,7 @@ current = true
 script = ExtResource("4_nhh6l")
 
 [node name="LabelFPS" type="Label3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54911, 2.57715, -3.619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54911, 2.47886, -3.619)
 layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true
@@ -60,7 +59,7 @@ no_depth_test = true
 text = "60 FPS"
 
 [node name="LabelTime" type="Label3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 2.29865, -3.619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.84939, 2.47174, -3.619)
 layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true
@@ -68,7 +67,7 @@ no_depth_test = true
 text = "60 FPS"
 
 [node name="LabelEnergy" type="Label3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 2.03879, -3.619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 2.28659, -3.619)
 layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true
@@ -76,7 +75,7 @@ no_depth_test = true
 text = "55555"
 
 [node name="LabelDead" type="Label3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 1.81786, -3.619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 2.12141, -3.619)
 layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true
@@ -84,7 +83,15 @@ no_depth_test = true
 text = "55555"
 
 [node name="LabelPoints" type="Label3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 1.52114, -3.619)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53748, 1.95932, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
+[node name="LabelConsumables" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86747, 2.68346, -3.619)
 layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true

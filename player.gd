@@ -35,6 +35,14 @@ var antigrav_protection = false
 const antigrav_charges_max = 10
 const antigrav_charges_bonus = 3
 
+var teleporter_charges = 0
+const teleporter_charges_max = 5
+const teleporter_charges_bonus = 1
+
+var ward_charges = 0
+const ward_charges_max = 3
+const ward_charges_bonus = 1
+
 var research_points = 0
 
 var time_passed = 0.0
@@ -43,6 +51,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$breath.set_volume_db(-1000)
 	$Camera/LabelPoints.text = "points/{0}".format({0:int(research_points)})
+	$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	#checkpoint = translation
 	
 func victory():
@@ -71,6 +80,19 @@ func pickup(pickup_type):
 		if antigrav_charges >= antigrav_charges_max:
 			return false
 		antigrav_charges = min(antigrav_charges_max, antigrav_charges + antigrav_charges_bonus)
+		$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})		
+		return true
+	if pickup_type == 3:
+		if teleporter_charges >= teleporter_charges_max:
+			return false
+		teleporter_charges = min(teleporter_charges_max, teleporter_charges + teleporter_charges_bonus)
+		$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
+		return true
+	if pickup_type == 4:
+		if ward_charges >= ward_charges_max:
+			return false
+		ward_charges = min(ward_charges_max, ward_charges + ward_charges_bonus)
+		$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 		return true
 	return true
 
@@ -134,6 +156,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _physics_process(delta):
+	$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	
 	$breath.set_volume_db((tanh(current_energy-100)+1)*(-1000))
 	# Get the input direction and handle the movement/deceleration.

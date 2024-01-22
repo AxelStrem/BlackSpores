@@ -30,9 +30,9 @@ var attempts = 0
 func activate_spore():
 	if b_active:
 		return
-	if randf()<0.12:
-		$AudioStreamPlayer3D.seek(randf()*20.0)
-		$AudioStreamPlayer3D.play()
+	#if randf()<0.12:
+	#	$AudioStreamPlayer3D.seek(randf()*20.0)
+	#	$AudioStreamPlayer3D.play()
 	
 	b_active = true	
 	var p = get_parent()
