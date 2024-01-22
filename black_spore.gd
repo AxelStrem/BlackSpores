@@ -47,7 +47,6 @@ func deactivate_spore(cs):
 	if !b_active:
 		return
 	b_active = false
-	print(cs)
 	var p = get_parent()
 	while p!=null:
 		var np = p.get_parent()

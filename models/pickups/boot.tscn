@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm2uhcegvry58"]
+
+[ext_resource type="PackedScene" uid="uid://c1mrpqxg8rv08" path="res://models/pickups/boot.glb" id="1_h6l3i"]
+[ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_h6603"]
+
+[node name="boot" instance=ExtResource("1_h6l3i")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_h6603")

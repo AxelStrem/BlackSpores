@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b2i3qwo1g2vxp"]
+
+[ext_resource type="Texture2D" uid="uid://dxis003rrab56" path="res://models/palette01.png" id="1_6bi2l"]
+
+[resource]
+cull_mode = 2
+albedo_texture = ExtResource("1_6bi2l")
+metallic = 0.25
+metallic_specular = 0.24

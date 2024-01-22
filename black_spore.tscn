@@ -8,6 +8,7 @@
 radius = 0.2
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_pqxde"]
+radius = 0.7
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_84r6q"]
 radius = 0.6
@@ -35,7 +36,6 @@ albedo_color = Color(1, 0.462745, 1, 1)
 radius = 0.504966
 
 [node name="black_spore" type="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.23457, 0.615766, 0)
 script = ExtResource("1_tr7qa")
 
 [node name="hitbox_init_test_allowed" type="Area3D" parent="."]

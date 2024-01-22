@@ -1,24 +1,19 @@
-[gd_scene load_steps=4 format=3 uid="uid://dmweu27wvhqc3"]
+[gd_scene load_steps=3 format=3 uid="uid://dfnhouwejhfij"]
 
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_e4f56"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_f7w1e"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2duht"]
-emission_enabled = true
-emission = Color(0, 0.627451, 0, 1)
-emission_energy_multiplier = 6.55
+[ext_resource type="PackedScene" uid="uid://dm2uhcegvry58" path="res://models/pickups/boot.tscn" id="2_up5lf"]
 
 [node name="pickup" instance=ExtResource("1_e4f56")]
 pickup_type = 2
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="model" index="0"]
-transform = Transform3D(0.365988, 0, 0, 0, 0.325396, 0.167525, 0, -0.167525, 0.325396, 0, 1, 0)
-mesh = SubResource("BoxMesh_f7w1e")
-skeleton = NodePath("../..")
-surface_material_override/0 = SubResource("StandardMaterial3D_2duht")
-
-[node name="OmniLight3D" type="OmniLight3D" parent="model" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.782607, 0)
+[node name="OmniLight3D" type="OmniLight3D" parent="model" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.69211, 0)
 light_color = Color(0.180392, 1, 0.192157, 1)
+light_energy = 0.275
 omni_range = 3.71665
+
+[node name="boot" parent="model" index="1" instance=ExtResource("2_up5lf")]
+transform = Transform3D(0.116778, 0, 0, 0, 0.116778, 0, 0, 0, 0.116778, -0.0982939, 0.768159, 0.0348604)
+
+[node name="boot2" parent="model" index="2" instance=ExtResource("2_up5lf")]
+transform = Transform3D(0.101774, -0.0113608, 0.0561269, 0.0200824, 0.114269, -0.0132854, -0.0536284, 0.0212305, 0.10154, 0.174991, 0.768159, -0.114828)

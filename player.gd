@@ -33,6 +33,7 @@ var camera_sensitivity = 0.5
 
 var antigrav_charges = 0
 var antigrav_protection = false
+var antigrav_jump_available = 0.0
 const antigrav_charges_max = 10
 const antigrav_charges_bonus = 3
 
@@ -211,12 +212,18 @@ func _physics_process(delta):
 	old_velocity = velocity
 
 	# Handle Jump.
-	if Input.is_action_just_pressed("player_jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-		if antigrav_charges > 0:
-			velocity.y = JUMP_VELOCITY_ANTIGRAV
-			antigrav_charges -= 1
-			antigrav_protection = true
+	antigrav_jump_available -= delta
+	if antigrav_jump_available < 0.0:
+		antigrav_jump_available = 0.0
+	if Input.is_action_just_pressed("player_jump"):
+		if is_on_floor():
+			velocity.y = JUMP_VELOCITY
+			antigrav_jump_available = 0.6
+		elif antigrav_jump_available > 0.0:
+			if antigrav_charges > 0:
+				velocity.y += JUMP_VELOCITY_ANTIGRAV
+				antigrav_charges -= 1
+				antigrav_protection = true
 			
 
 
