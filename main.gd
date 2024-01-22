@@ -42,11 +42,11 @@ func attempt_spawn(s):
 	spore.global_transform = s.global_transform
 	var shift_vec = Vector3(0.0,0.0,0.0)
 	if s.spawner == null:
-		shift_vec = Vector3((randf()*2.0-1.0),  (randf()*2.0-1.0), (randf()*2.0-1.0))*rad
+		shift_vec = Global.random_direction()*rad
 	else:
 		var or_dir = (s.global_position - s.spawner.global_position)
 		if or_dir.length() == 0.0:
-			or_dir = Vector3((randf()*2.0-1.0),  (randf()*2.0-1.0), (randf()*2.0-1.0)) 
+			or_dir = Global.random_direction()
 		or_dir = or_dir.normalized()
 		var d1 = or_dir.cross(Vector3(1.0,0.0,0.0))
 		var d2 = or_dir.cross(d1)
@@ -60,6 +60,7 @@ func attempt_spawn(s):
 		var r3 = randf()**2
 		var r4 = randf()**2
 		shift_vec = (or_dir + r1*d1 + r2*d2 + r3*d3 + r4*d4)*rad
+		shift_vec = Global.random_direction()*rad
 	spore.global_position += shift_vec
 	spore.spawner = s
 	spore.wait_init = 2

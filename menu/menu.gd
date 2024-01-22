@@ -9,11 +9,6 @@ func _ready():
 	config.load("user://scores.cfg")
 	research_points = config.get_value("player", "research_points",0)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
-
 func _on_start_button_button_clicked():	
 	main_instance = mainScene.instantiate()
 	var player = main_instance.find_child("player")

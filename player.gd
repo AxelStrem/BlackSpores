@@ -122,8 +122,6 @@ func _process(delta):
 	if Input.is_action_pressed("exit_to_menu"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		to_menu_signal.emit()
-	var direction = -get_transform().basis.z
-#	var ortho_dir = get_transform().basis.x
 	
 	if not timer_paused:
 		time_passed += delta

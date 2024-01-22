@@ -10,6 +10,7 @@ data = PackedVector3Array(-0.0948, -0.0322, 0.9437, -0.0948, 0.0322, -0.9439, -0
 [node name="circular_staircase" parent="." instance=ExtResource("1_54dvb")]
 
 [node name="clip_brush" type="StaticBody3D" parent="."]
+collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="clip_brush"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59586, -0.679301, 3.11485)
