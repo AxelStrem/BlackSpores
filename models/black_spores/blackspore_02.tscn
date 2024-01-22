@@ -1,10 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bm83d03mhyu6y"]
 
 [ext_resource type="PackedScene" uid="uid://d2thirf81tyso" path="res://models/black_spores/blackspore02.glb" id="1_5sq4r"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p1p5"]
-shading_mode = 0
-albedo_color = Color(0, 0, 0, 1)
+[ext_resource type="Material" uid="uid://cwurh4pr8vwy2" path="res://models/pitch_black.tres" id="2_1aruk"]
 
 [node name="blackspore02" instance=ExtResource("1_5sq4r")]
 
@@ -18,7 +15,7 @@ visible = false
 visible = false
 
 [node name="Spore03LP" parent="." index="3"]
-surface_material_override/0 = SubResource("StandardMaterial3D_3p1p5")
+surface_material_override/0 = ExtResource("2_1aruk")
 
 [node name="Spore04LP" parent="." index="4"]
 visible = false
