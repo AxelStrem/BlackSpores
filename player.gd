@@ -260,7 +260,9 @@ func _on_jump_delay_timeout():
 
 
 func _on_area_3d_area_entered(_area):
-	_player_dead(velocity)
+	var game = get_game_root()
+	if game and game.do_spores_kill():
+		_player_dead(velocity)
 
 func _player_dead(death_velocity):
 	dead = true	

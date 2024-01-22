@@ -16,6 +16,7 @@ var spawner = null
 var shlong = null
 
 var mistries = 5
+var decay = 1.0
 
 @export var state = 0
 var type = 0
@@ -87,7 +88,7 @@ func try_init():
 	update_scale()
 	max_rad = 1.5 + randf()*1.5
 	rate = 0.1+randf()
-	type = randi_range(0,8)
+	type = randi_range(0,2)
 	if type==0:
 		max_rad+=5.0
 	state = 5
@@ -106,12 +107,6 @@ func _ready():
 
 func _enter_tree():
 	get_game_root().add_spore()
-	
-func deactivate():
-	mistries-=1
-	if mistries<=0:
-		deactivate_spore(0)
-		#next_eruption = 1000.0
 
 func get_game_root():
 	var p = get_parent()
@@ -125,42 +120,43 @@ func _exit_tree():
 
 func _process(delta):
 		
-		var cm_rad = max_rad*attempts/100
+		#var cm_rad = max_rad*attempts/100
 	
 		if state==7:
 			if !b_active:
 				activate_spore()
 		if state == 1:
 			current_scale += delta*rate
-			if current_scale > cm_rad:
-				current_scale = cm_rad
+			#if current_scale > cm_rad:
+			#	current_scale = cm_rad
 			update_scale()
-			$spore/ball.hide()
-			$spore/ball2.hide()
-			$spore/ball3.hide()
-			$spore/ball4.show()
+			#$spore/ball.hide()
+			#$spore/ball2.hide()
+			#$spore/ball3.hide()
+			#$spore/ball4.show()
 			if current_scale >= max_rad:
 				state = 2
 		if state==2 and type!=0:
-			$spore/ball.hide()
-			$spore/ball2.hide()
-			$spore/ball4.hide()
-			$spore/ball3.show()
+			#$spore/ball.hide()
+			#$spore/ball2.hide()
+			#$spore/ball4.hide()
+			#$spore/ball3.show()
 			current_scale -= delta*0.2
-			
+			update_scale()
 			if current_scale <= 0.1:
 				deactivate_spore(21)
 				queue_free()
 				return
 		if state==2 and type==0:
-			$spore/ball.hide()
-			$spore/ball3.hide()
-			$spore/ball4.hide()
-			$spore/ball2.show()
-			current_scale += delta*rate*0.3
+			#$spore/ball.hide()
+			#$spore/ball3.hide()
+			#$spore/ball4.hide()
+			#$spore/ball2.show()
+			current_scale += delta*rate*2.3
 			update_scale()
 			if current_scale > 10.0:
 				deactivate_spore(20)
+				state = 9
 				
 		#if state != 2 and state != 5:
 		#	next_eruption -= delta
@@ -191,7 +187,15 @@ func _process(delta):
 		#	$spore/ball3.hide()
 		#	$spore/ball4.hide()
 		
-				
+func spawn_result(ti):
+	if ti==2:
+		decay-=0.2
+	if ti==1:
+		decay-=0.01
+	if ti==0:
+		decay=1.0
+	if decay<=0:
+		deactivate_spore(0)
 			
 func _physics_process(_delta):
 	if wait_init>1:
@@ -201,5 +205,4 @@ func _physics_process(_delta):
 		wait_init = 0
 		var ti = try_init()
 		if spawner != null:
-			if ti==2:
-				spawner.deactivate()
+			spawner.spawn_result(ti)

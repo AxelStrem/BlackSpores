@@ -1,6 +1,8 @@
 extends Node3D
 
 @export var spread_spores = true
+@export var spores_kill = true
+
 signal to_menu_signal
 signal restart_signal
 
@@ -30,12 +32,16 @@ func active_spore_count():
 	
 func total_spore_count():
 	return black_shit_count
+	
+func do_spores_kill():
+	return spores_kill
 
 func attempt_spawn(s):
 	if s == null:
 		return
 	var spore = black_spore_scene.instantiate()
-	var rad = 1.0*Global.spore_scale*s.current_scale
+	var rad = 2.0*Global.spore_scale*s.current_scale
+	rad*=randf_range(0.5,1.2)
 	if rad < 3.0:
 		rad = 3.0
 	s.get_parent().add_child(spore)
@@ -48,25 +54,19 @@ func attempt_spawn(s):
 		if or_dir.length() == 0.0:
 			or_dir = Global.random_direction()
 		or_dir = or_dir.normalized()
-		var d1 = or_dir.cross(Vector3(1.0,0.0,0.0))
-		var d2 = or_dir.cross(d1)
-		var q = 0.25*or_dir
-		var d3 = -d1 - q
-		var d4 = -d2 - q
-		d1 -= q
-		d2 -= q
-		var r1 = randf()**2
-		var r2 = randf()**2
-		var r3 = randf()**2
-		var r4 = randf()**2
-		shift_vec = (or_dir + r1*d1 + r2*d2 + r3*d3 + r4*d4)*rad
-		shift_vec = Global.random_direction()*rad
+		var d1 = or_dir.cross(Vector3(1.0,0.0,0.0)).normalized()
+		var d2 = or_dir.cross(d1).normalized()
+		var a = randf()*TAU
+		var d = d1*cos(a)+d2*sin(a)
+		var m = PI*(1.0-s.decay*0.8)
+		var b = randf_range(-m, m)
+		shift_vec = (cos(b)*or_dir + sin(b)*d)*rad
 	spore.global_position += shift_vec
 	spore.spawner = s
 	spore.wait_init = 2
 	s.attempts+=1
 
-const attempts_per_frame = 20
+const attempts_per_frame = 10
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	var sproc = 0
