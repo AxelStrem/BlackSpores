@@ -81,19 +81,16 @@ func pickup(pickup_type):
 		if antigrav_charges >= antigrav_charges_max:
 			return false
 		antigrav_charges = min(antigrav_charges_max, antigrav_charges + antigrav_charges_bonus)
-		$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})		
 		return true
 	if pickup_type == 3:
 		if teleporter_charges >= teleporter_charges_max:
 			return false
 		teleporter_charges = min(teleporter_charges_max, teleporter_charges + teleporter_charges_bonus)
-		$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 		return true
 	if pickup_type == 4:
 		if ward_charges >= ward_charges_max:
 			return false
 		ward_charges = min(ward_charges_max, ward_charges + ward_charges_bonus)
-		$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 		return true
 	return true
 
@@ -179,7 +176,7 @@ func _physics_process(delta):
 				$Feet.get_children().pick_random().play()
 				step_distance=0
 		if old_velocity.y < -32.0:
-			if antigrav_charges > 0:
+			if antigrav_charges > 0 and not antigrav_protection:
 				antigrav_charges-=1
 				antigrav_protection=true
 			if not antigrav_protection:
