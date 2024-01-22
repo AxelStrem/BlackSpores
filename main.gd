@@ -16,8 +16,20 @@ func _ready():
 func activate_spore(s):
 	active_spores[s]=null
 	
+func add_spore():
+	black_shit_count+=1
+
+func remove_spore():
+	black_shit_count-=1
+
 func deactivate_spore(s):
 	active_spores.erase(s)
+	
+func active_spore_count():
+	return active_spores.size()
+	
+func total_spore_count():
+	return black_shit_count
 
 func attempt_spawn(s):
 	if s == null:

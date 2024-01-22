@@ -104,6 +104,9 @@ func _ready():
 	#$hitbox_init_overlapped/CollisionShape3D.shape.radius = 0.5*Global.spore_scale
 	pass # Replace with function body.
 
+func _enter_tree():
+	get_game_root().add_spore()
+	
 func deactivate():
 	mistries-=1
 	if mistries<=0:
@@ -117,6 +120,7 @@ func get_game_root():
 	return p
 
 func _exit_tree():
+	get_game_root().remove_spore()
 	deactivate_spore(1)
 
 func _process(delta):

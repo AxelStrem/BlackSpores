@@ -47,12 +47,35 @@ const ward_charges_bonus = 1
 var research_points = 0
 
 var time_passed = 0.0
+var camera = null
+var label_time = null
+var label_points = null
+var label_consumables = null
+var label_debug = null
+var label_fps = null
+var label_energy = null
+var label_dead = null
+
+func get_game_root():
+	var p = get_parent()
+	while p!=null and !p.is_in_group("game"):
+		p = p.get_parent()
+	return p
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	camera = $Camera
+	label_time = $Camera/LabelTime
+	label_fps = $Camera/LabelFPS
+	label_debug = $Camera/LabelDebug
+	label_points = $Camera/LabelPoints
+	label_consumables = $Camera/LabelConsumables
+	label_energy = $Camera/LabelEnergy
+	label_dead = $Camera/LabelDead
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$breath.set_volume_db(-1000)
-	$Camera/LabelPoints.text = "points/{0}".format({0:int(research_points)})
-	$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
+	label_points.text = "points/{0}".format({0:int(research_points)})
+	label_energy.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	#checkpoint = translation
 	
 func victory():
@@ -72,7 +95,7 @@ func pickup(pickup_type):
 	if pickup_type == 0:
 		research_points += 1
 		got_research_point_signal.emit()
-		$Camera/LabelPoints.text = "points/{0}".format({0:int(research_points)})
+		label_points.text = "points/{0}".format({0:int(research_points)})
 		return true
 	if pickup_type == 1:
 		SPEED*=2
@@ -104,8 +127,8 @@ func _process(delta):
 	
 	if not timer_paused:
 		time_passed += delta
-	$Camera/LabelTime.text = format_time(time_passed)
-	$Camera/LabelEnergy.text = "{0}/{1}".format({0:int(current_energy), 1:max_energy})
+	label_time.text = format_time(time_passed)
+	label_energy.text = "{0}/{1}".format({0:int(current_energy), 1:max_energy})
 	velocity += Vector3(0.0,-20.0,0.0)*delta
 	
 	#if is_on_floor():	
@@ -156,7 +179,10 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _physics_process(delta):
-	$Camera/LabelConsumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
+	label_consumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
+	var game = get_game_root()
+	if game:
+		label_debug.text = "Spores {0}/{1}".format({0:game.active_spore_count(), 1:game.total_spore_count()})
 	
 	$breath.set_volume_db((tanh(current_energy-100)+1)*(-1000))
 	# Get the input direction and handle the movement/deceleration.
@@ -180,7 +206,7 @@ func _physics_process(delta):
 				antigrav_charges-=1
 				antigrav_protection=true
 			if not antigrav_protection:
-				$Camera/LabelDead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
+				label_dead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
 				_player_dead(old_velocity)
 		antigrav_protection = false
 	
@@ -214,8 +240,8 @@ func _input(event):
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
-		$Camera.rotate_x(deg_to_rad(event.relative.y * -camera_sensitivity))
-		$Camera.rotation_degrees.x = clamp($Camera.rotation_degrees.x, -70, 70)
+		camera.rotate_x(deg_to_rad(event.relative.y * -camera_sensitivity))
+		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -70, 70)
 	#if event.is_action_pressed("player_jump") and ground_close and not jumping:
 	#	velocity += vec_up*jump_impulse
 	#	ground_close = false
@@ -250,9 +276,8 @@ func _player_dead(death_velocity):
 	get_parent().add_child(dead_body)
 	dead_body.global_transform = self.global_transform
 	dead_body.linear_velocity = death_velocity	
-	var cam = $Camera
-	remove_child(cam)
-	dead_body.add_child(cam)	
+	remove_child(camera)
+	dead_body.add_child(camera)	
 	queue_free()
 
 
