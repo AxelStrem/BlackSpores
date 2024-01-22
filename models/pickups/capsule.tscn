@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxduh0g4bs5fb"]
+
+[ext_resource type="PackedScene" uid="uid://bso3f8iw8bko4" path="res://models/pickups/capsule.glb" id="1_lkx6w"]
+[ext_resource type="Material" uid="uid://xaretae214q7" path="res://models/palette01_emitting.tres" id="2_45v2u"]
+
+[node name="capsule" instance=ExtResource("1_lkx6w")]
+
+[node name="Capsule" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_45v2u")

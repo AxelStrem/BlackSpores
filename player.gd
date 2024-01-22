@@ -15,6 +15,7 @@ const jump_impulse = 10.0
 const air_control = 0.15
 const crouch_speed = 10.0
 const speed_decay = 0.85
+const energy_boost_duration = 15.0
 
 var ground_close = false
 var last_frame_on_ground = false
@@ -56,6 +57,8 @@ var label_debug = null
 var label_fps = null
 var label_energy = null
 var label_dead = null
+
+var energy_boost = 0.0
 
 func get_game_root():
 	var p = get_parent()
@@ -99,7 +102,7 @@ func pickup(pickup_type):
 		label_points.text = "points/{0}".format({0:int(research_points)})
 		return true
 	if pickup_type == 1:
-		SPEED*=2
+		energy_boost = energy_boost_duration
 		return true
 	if pickup_type == 2:
 		if antigrav_charges >= antigrav_charges_max:
@@ -224,6 +227,7 @@ func _physics_process(delta):
 				velocity.y += JUMP_VELOCITY_ANTIGRAV
 				antigrav_charges -= 1
 				antigrav_protection = true
+				antigrav_jump_available = 0.0
 			
 
 
@@ -239,6 +243,11 @@ func _physics_process(delta):
 		
 	if !Input.is_action_pressed("player_run") or !direction:
 		current_energy = min(max_energy,current_energy + delta * 30)
+		
+	if energy_boost > 0.0:
+		energy_boost-=delta
+		current_energy = max_energy
+	
 	move_and_slide()
 
 func _input(event):

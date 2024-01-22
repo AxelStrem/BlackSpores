@@ -43,7 +43,7 @@ func activate_spore():
 			p.activate_spore(self)
 		p = np
 
-func deactivate_spore(cs):
+func deactivate_spore(_cs):
 	if !b_active:
 		return
 	b_active = false
