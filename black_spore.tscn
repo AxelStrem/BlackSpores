@@ -74,7 +74,7 @@ shape = SubResource("SphereShape3D_84r6q")
 
 [node name="spore" type="Node3D" parent="."]
 
-[node name="ballX" type="MeshInstance3D" parent="spore"]
+[node name="ball" type="MeshInstance3D" parent="spore"]
 visible = false
 material_override = SubResource("StandardMaterial3D_piy1l")
 mesh = SubResource("SphereMesh_rywk1")
@@ -111,7 +111,7 @@ shape = SubResource("SphereShape3D_bq5d4")
 [node name="ballZ" parent="spore" instance=ExtResource("2_jn7ft")]
 visible = false
 
-[node name="ball" type="Sprite3D" parent="spore"]
+[node name="ballY" type="Sprite3D" parent="spore"]
 visible = false
 billboard = 1
 texture = ExtResource("3_ick30")

@@ -41,6 +41,8 @@ const antigrav_charges_bonus = 3
 var teleporter_charges = 0
 const teleporter_charges_max = 5
 const teleporter_charges_bonus = 1
+var teleporter = null
+var teleporter_scene = preload("res://entities/teleporter.tscn")
 
 var ward_charges = 0
 const ward_charges_max = 3
@@ -50,6 +52,7 @@ var research_points = 0
 
 var time_passed = 0.0
 var camera = null
+var item_spawn = null
 var label_time = null
 var label_points = null
 var label_consumables = null
@@ -58,7 +61,12 @@ var label_fps = null
 var label_energy = null
 var label_dead = null
 
+var info_message = null
+var info_timeout = 0.0
+
 var energy_boost = 0.0
+
+var controls_locked = false
 
 func get_game_root():
 	var p = get_parent()
@@ -69,6 +77,7 @@ func get_game_root():
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	camera = $Camera
+	item_spawn = $Camera/item_spawn
 	label_time = $Camera/LabelTime
 	label_fps = $Camera/LabelFPS
 	label_debug = $Camera/LabelDebug
@@ -76,12 +85,20 @@ func _ready():
 	label_consumables = $Camera/LabelConsumables
 	label_energy = $Camera/LabelEnergy
 	label_dead = $Camera/LabelDead
+	
+	info_message = $Camera/InfoMessage
+	info_message.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$breath.set_volume_db(-1000)
 	label_points.text = "points/{0}".format({0:int(research_points)})
 	label_energy.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	#checkpoint = translation
-	
+
+func display_info(text):
+	info_message.text = text
+	info_message.visible = true
+	info_timeout = 6.0
+
 func victory():
 	timer_paused = true
 
@@ -100,24 +117,32 @@ func pickup(pickup_type):
 		research_points += 1
 		got_research_point_signal.emit()
 		label_points.text = "points/{0}".format({0:int(research_points)})
+		display_info("Picked up a research datapoint")
 		return true
 	if pickup_type == 1:
 		energy_boost = energy_boost_duration
+		display_info("Picked up an energy boost")
 		return true
 	if pickup_type == 2:
 		if antigrav_charges >= antigrav_charges_max:
+			display_info("Antigrav charges full")
 			return false
 		antigrav_charges = min(antigrav_charges_max, antigrav_charges + antigrav_charges_bonus)
+		display_info("Picked up Anti-Gravity Boots. Press jump twice to engage")
 		return true
 	if pickup_type == 3:
 		if teleporter_charges >= teleporter_charges_max:
+			display_info("Teleporter charges full")
 			return false
 		teleporter_charges = min(teleporter_charges_max, teleporter_charges + teleporter_charges_bonus)
+		display_info("Picked up a Teleporter. Right click to deploy")		
 		return true
 	if pickup_type == 4:
 		if ward_charges >= ward_charges_max:
+			display_info("Ward charges full")
 			return false
 		ward_charges = min(ward_charges_max, ward_charges + ward_charges_bonus)
+		display_info("Picked up a Ward. Left click to deploy")
 		return true
 	return true
 
@@ -185,6 +210,11 @@ func _physics_process(delta):
 	var game = get_game_root()
 	if game:
 		label_debug.text = "Spores {0}/{1}".format({0:game.active_spore_count(), 1:game.total_spore_count()})
+		
+	if info_timeout > 0.0:
+		info_timeout -= delta
+		if info_timeout <= 0.0:
+			info_message.visible = false
 	
 	$breath.set_volume_db((tanh(current_energy-100)+1)*(-1000))
 	# Get the input direction and handle the movement/deceleration.
@@ -200,8 +230,8 @@ func _physics_process(delta):
 		if direction:	
 			step_distance += delta
 			if step_distance>0.5:
-				$Feet.position.x = -$Feet.position.x
-				$Feet.get_children().pick_random().play()
+				$Camera/Feet.position.x = -$Camera/Feet.position.x
+				$Camera/Feet.get_children().pick_random().play()
 				step_distance=0
 		if old_velocity.y < -32.0:
 			if antigrav_charges > 0 and not antigrav_protection:
@@ -251,11 +281,22 @@ func _physics_process(delta):
 	move_and_slide()
 
 func _input(event):
+	if controls_locked:
+		return
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
 		camera.rotate_x(deg_to_rad(event.relative.y * -camera_sensitivity))
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -70, 70)
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.pressed:
+				if teleporter == null or true:
+					teleporter = teleporter_scene.instantiate()
+					get_parent().add_child(teleporter)
+					teleporter.global_transform = item_spawn.global_transform
+					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*10.0
+					
 	#if event.is_action_pressed("player_jump") and ground_close and not jumping:
 	#	velocity += vec_up*jump_impulse
 	#	ground_close = false

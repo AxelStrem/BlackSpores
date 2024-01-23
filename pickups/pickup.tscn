@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://pickups/pickup.gd" id="1_k4sbn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_jdg7b"]
+radius = 0.18
 
 [node name="pickup" type="Node3D"]
 script = ExtResource("1_k4sbn")

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch5pmb4q6726c"]
+[gd_scene load_steps=5 format=3 uid="uid://doh4pk1bqte5n"]
 
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_kubej"]
+[ext_resource type="PackedScene" uid="uid://dblyx4u2lnw3" path="res://models/pickups/teleporter.tscn" id="2_soc7t"]
 
 [sub_resource type="PrismMesh" id="PrismMesh_63hca"]
 
@@ -15,10 +16,15 @@ pickup_type = 3
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="model" index="0"]
 transform = Transform3D(0.287534, -0.534924, 0.347807, 0.329181, 0.451167, 0.421756, -0.546583, -0.00968462, 0.436969, 0, 1.04374, 0)
+visible = false
 mesh = SubResource("PrismMesh_63hca")
 surface_material_override/0 = SubResource("StandardMaterial3D_ac4u0")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="model" index="1"]
-transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.947101, 0)
-light_color = Color(1, 0.266667, 0.372549, 1)
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0.0728735, 0.995612, -0.0320404)
+light_color = Color(0.0980392, 0.447059, 0.945098, 1)
+light_energy = 1.917
 omni_range = 2.09394
+
+[node name="teleporter" parent="model" index="2" instance=ExtResource("2_soc7t")]
+transform = Transform3D(0.0585097, 0.045535, 0.054924, -0.0605107, 0.0693025, 0.00700546, -0.037796, -0.0404621, 0.0738088, 0.0145479, 0.916582, 0.0287075)

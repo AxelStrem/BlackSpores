@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ct5nwamfcsfuh"]
+[gd_scene load_steps=9 format=3 uid="uid://ct5nwamfcsfuh"]
 
 [ext_resource type="PackedScene" uid="uid://c5sej6o7kxvnv" path="res://models/corridors/lobby.glb" id="1_o3ega"]
 [ext_resource type="Script" path="res://spore_consumable.gd" id="1_t6myu"]
@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://1lrfertbffmc" path="res://models/corridors/lobby_lamp.tscn" id="4_tvnwn"]
 [ext_resource type="PackedScene" uid="uid://b21lfcey82x68" path="res://models/corridors/ceiling_lamp.tscn" id="5_qhhq3"]
 [ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="7_jo0c6"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5qvj2"]
+size = Vector3(4.9303, 0.785278, 4.84152)
 
 [node name="Lobby" type="Node3D"]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
@@ -52,3 +55,10 @@ transform = Transform3D(0.707107, -0.707107, 3.09086e-08, 0, -4.37114e-08, -1, 0
 
 [node name="PickupSpawner" parent="." instance=ExtResource("7_jo0c6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.761013, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0381, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0285034, -0.107361, -0.00920105)
+shape = SubResource("BoxShape3D_5qvj2")

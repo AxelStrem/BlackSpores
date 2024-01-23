@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdgwjmh42lh3y"]
+
+[ext_resource type="PackedScene" uid="uid://d2onc2kta0ruw" path="res://models/pickups/teleporter.glb" id="1_prncn"]
+[ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_s0fy5"]
+
+[node name="teleporter" instance=ExtResource("1_prncn")]
+
+[node name="Teleporter" parent="." index="0"]
+transform = Transform3D(0.0666271, 0, 0, 0, 0.0666271, 0, 0, 0, 0.0666271, 0, 0, 0)
+surface_material_override/0 = ExtResource("2_s0fy5")
