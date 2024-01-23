@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://by31i66erq5ga"]
+
+[ext_resource type="PackedScene" uid="uid://cxge85rlxf34f" path="res://models/pickups/ward.glb" id="1_70okq"]
+[ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_wte5a"]
+[ext_resource type="Material" uid="uid://cxlvyrbx1uoq5" path="res://models/ward_red.tres" id="3_54ev8"]
+
+[node name="ward" instance=ExtResource("1_70okq")]
+
+[node name="WardHead" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_wte5a")
+
+[node name="WardBall" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_54ev8")
+
+[node name="WardProgressBar" parent="." index="2"]
+visible = false
+surface_material_override/0 = ExtResource("3_54ev8")
+
+[node name="WardStand" parent="." index="3"]
+visible = false
+surface_material_override/0 = ExtResource("2_wte5a")

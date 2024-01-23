@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://du3qurm43jlwi"]
+
+[ext_resource type="Script" path="res://entities/ward.gd" id="1_tuuwk"]
+[ext_resource type="PackedScene" uid="uid://by31i66erq5ga" path="res://models/pickups/ward_used.tscn" id="3_tmcx7"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_kppmw"]
+radius = 0.204211
+
+[node name="Teleporter" type="RigidBody3D"]
+script = ExtResource("1_tuuwk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000501037, 0.00734473, -0.00144923)
+shape = SubResource("SphereShape3D_kppmw")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0210572, 0)
+light_color = Color(1, 0.137255, 0, 1)
+light_energy = 2.26
+omni_range = 6.62619
+
+[node name="ward" parent="." instance=ExtResource("3_tmcx7")]
+transform = Transform3D(0.194236, 0, 0, 0, 0.194236, 0, 0, 0, 0.194236, 0, 0, 0)

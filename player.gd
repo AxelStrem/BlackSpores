@@ -47,6 +47,7 @@ var teleporter_scene = preload("res://entities/teleporter.tscn")
 var ward_charges = 0
 const ward_charges_max = 3
 const ward_charges_bonus = 1
+var ward_scene = preload("res://entities/ward.tscn")
 
 var research_points = 0
 
@@ -286,6 +287,15 @@ func _physics_process(delta):
 func _input(event):
 	if controls_locked:
 		return
+	if event is InputEventKey:
+		if event.pressed and event.keycode == KEY_Q:
+			if ward_charges > 0:
+					ward_charges -= 1
+					var ward = ward_scene.instantiate()
+					ward.lifetime = 10.0
+					get_parent().add_child(ward)
+					ward.global_transform = item_spawn.global_transform
+					ward.linear_velocity = -ward.global_transform.basis.z.normalized()*10.0
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
@@ -299,6 +309,7 @@ func _input(event):
 					if teleporter!=null:
 						teleporter.queue_free()
 					teleporter = teleporter_scene.instantiate()
+					teleporter.player = self
 					get_parent().add_child(teleporter)
 					teleporter.global_transform = item_spawn.global_transform
 					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*10.0
