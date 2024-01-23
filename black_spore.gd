@@ -28,6 +28,8 @@ var shlong_midpoint = Vector3(0.0,0.0,0.0)
 var b_active = false
 var attempts = 0
 
+var progress_paused = 0
+
 func activate_spore():
 	if b_active:
 		return
@@ -117,8 +119,24 @@ func _exit_tree():
 	get_game_root().remove_spore()
 	deactivate_spore(1)
 
+func pause_progress():
+	progress_paused += 1
+	var gg = get_game_root()
+	if gg!=null:
+		gg.deactivate_spore(self)
+	
+func unpause_progress():
+	progress_paused -= 1
+	if progress_paused <= 0:
+		progress_paused = 0
+		var gg = get_game_root()
+		if gg!=null:
+			gg.activate_spore(self)
+
+
 func _process(delta):
-		
+		if progress_paused:
+			return
 		#var cm_rad = max_rad*attempts/100
 	
 		if state==7:
@@ -197,6 +215,8 @@ func spawn_result(ti):
 		deactivate_spore(0)
 			
 func _physics_process(_delta):
+	if progress_paused:
+		return
 	if wait_init>1:
 		wait_init-=1
 		return
