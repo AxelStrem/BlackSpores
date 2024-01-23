@@ -142,7 +142,7 @@ func pickup(pickup_type):
 			display_info("Teleporter charges full")
 			return false
 		teleporter_charges = min(teleporter_charges_max, teleporter_charges + teleporter_charges_bonus)
-		display_info("Picked up a Teleporter. Left click to deploy, right click to teleport")		
+		display_info("Picked up a Teleporter. Left click to deploy, right click to teleport")
 		return true
 	if pickup_type == 4:
 		if ward_charges >= ward_charges_max:
@@ -230,6 +230,9 @@ func _physics_process(delta):
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	hud._set_energy_percent(current_energy/max_energy)
+	hud._set_grav_bonus(antigrav_charges)
+	hud._set_teleport_bonus(teleporter_charges)
+	hud._set_vard_bonus(ward_charges)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
