@@ -11,7 +11,7 @@ func _ready():
 func _process(delta):
 	rotate_y(delta*3)
 	time+=delta
-	$model.position.y = sin(time*5)*0.2
+	$model.position.y = sin(time*5)*0.1
 
 
 func _on_area_3d_body_entered(body):
