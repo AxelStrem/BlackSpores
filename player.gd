@@ -61,6 +61,7 @@ var label_debug = null
 var label_fps = null
 var label_energy = null
 var label_dead = null
+var hud = null
 
 var info_message = null
 var info_timeout = 0.0
@@ -86,6 +87,7 @@ func _ready():
 	label_consumables = $Camera/LabelConsumables
 	label_energy = $Camera/LabelEnergy
 	label_dead = $Camera/LabelDead
+	hud = $Camera/HUD
 	
 	$Camera/restartButton.deactivate()
 	$Camera/quitToMenuButton.deactivate()
@@ -126,6 +128,7 @@ func pickup(pickup_type):
 	if pickup_type == 1:
 		energy_boost = energy_boost_duration
 		display_info("Picked up an energy boost")
+		hud._set_infinit_energy(true)
 		return true
 	if pickup_type == 2:
 		if antigrav_charges >= antigrav_charges_max:
@@ -226,6 +229,7 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
+	hud._set_energy_percent(current_energy/max_energy)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -280,6 +284,8 @@ func _physics_process(delta):
 		
 	if energy_boost > 0.0:
 		energy_boost-=delta
+		if energy_boost < 0.0:
+			hud._set_infinit_energy(false)
 		current_energy = max_energy
 	
 	move_and_slide()

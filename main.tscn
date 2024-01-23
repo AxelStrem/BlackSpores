@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=20 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
+[ext_resource type="PackedScene" uid="uid://bcatx7a85rd1m" path="res://HUD/hud.tscn" id="10_hcik7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 radius = 0.985279
@@ -143,6 +144,9 @@ stream = ExtResource("8_veibk")
 
 [node name="item_spawn" type="Node3D" parent="player/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0709114, -1.59893)
+
+[node name="HUD" parent="player/Camera" instance=ExtResource("10_hcik7")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.523337, 0.21078, -0.537276)
 
 [node name="JumpDelay" type="Timer" parent="player"]
 
