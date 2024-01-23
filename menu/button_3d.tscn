@@ -6,6 +6,8 @@
 script = ExtResource("1_4i34r")
 
 [node name="Area3D" type="Area3D" parent="."]
+monitoring = false
+monitorable = false
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Area3D"]
 depth = 0.1

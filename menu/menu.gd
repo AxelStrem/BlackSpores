@@ -10,6 +10,8 @@ func _ready():
 	research_points = config.get_value("player", "research_points",0)
 
 func _on_start_button_button_clicked():	
+	$startButton.deactivate()
+	$closeButton.deactivate()
 	main_instance = mainScene.instantiate()
 	var player = main_instance.find_child("player")
 	player.research_points = research_points
@@ -27,6 +29,8 @@ func on_restart():
 	_on_start_button_button_clicked()
 
 func return_to_menu():
+	$startButton.activate()
+	$closeButton.activate()
 	main_instance.queue_free()
 
 func _on_close_button_clicked():

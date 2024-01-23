@@ -1,6 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://08qq67ww2sbo"]
+[gd_scene load_steps=6 format=3 uid="uid://08qq67ww2sbo"]
 
+[ext_resource type="Script" path="res://entities/teleporter.gd" id="1_8c84i"]
 [ext_resource type="PackedScene" uid="uid://bdgwjmh42lh3y" path="res://models/pickups/teleporter_used.tscn" id="1_o37rn"]
+[ext_resource type="PackedScene" uid="uid://cf3btfrqu3tdu" path="res://models/pickups/teleporter_net.tscn" id="2_1clin"]
+[ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="4_4hkox"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_20riv"]
 margin = 0.003
@@ -8,6 +11,7 @@ height = 0.107458
 radius = 0.219296
 
 [node name="Teleporter" type="RigidBody3D"]
+script = ExtResource("1_8c84i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000501037, 0.00734473, -0.00144923)
@@ -17,5 +21,11 @@ shape = SubResource("CylinderShape3D_20riv")
 transform = Transform3D(1.69579, 0, 0, 0, 1.69579, 0, 0, 0, 1.69579, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.147928, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375229, 0)
 visible = false
+light_color = Color(0.407843, 0.843137, 1, 1)
+
+[node name="teleporter_net" parent="." instance=ExtResource("2_1clin")]
+transform = Transform3D(0.0190713, 0, 0, 0, 0.0190713, 0, 0, 0, 0.0190713, 0, 0, 0)
+
+[node name="SporeDestructible" parent="." instance=ExtResource("4_4hkox")]

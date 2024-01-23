@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cf3btfrqu3tdu"]
+
+[ext_resource type="PackedScene" uid="uid://bn0erw7sfneo3" path="res://models/pickups/teleporter_net.glb" id="1_rl44i"]
+[ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_kv4cg"]
+
+[node name="teleporter_net" instance=ExtResource("1_rl44i")]
+
+[node name="TeleporterNet" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_kv4cg")

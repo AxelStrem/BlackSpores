@@ -86,6 +86,9 @@ func _ready():
 	label_energy = $Camera/LabelEnergy
 	label_dead = $Camera/LabelDead
 	
+	$Camera/restartButton.deactivate()
+	$Camera/quitToMenuButton.deactivate()
+	
 	info_message = $Camera/InfoMessage
 	info_message.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -135,14 +138,14 @@ func pickup(pickup_type):
 			display_info("Teleporter charges full")
 			return false
 		teleporter_charges = min(teleporter_charges_max, teleporter_charges + teleporter_charges_bonus)
-		display_info("Picked up a Teleporter. Right click to deploy")		
+		display_info("Picked up a Teleporter. Left click to deploy, right click to teleport")		
 		return true
 	if pickup_type == 4:
 		if ward_charges >= ward_charges_max:
 			display_info("Ward charges full")
 			return false
 		ward_charges = min(ward_charges_max, ward_charges + ward_charges_bonus)
-		display_info("Picked up a Ward. Left click to deploy")
+		display_info("Picked up a Ward. Press Q to deploy")
 		return true
 	return true
 
@@ -289,13 +292,26 @@ func _input(event):
 		camera.rotate_x(deg_to_rad(event.relative.y * -camera_sensitivity))
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -70, 70)
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_RIGHT:
+		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if teleporter == null or true:
+				if teleporter_charges > 0:
+					teleporter_charges -= 1
+					if teleporter!=null:
+						teleporter.queue_free()
 					teleporter = teleporter_scene.instantiate()
 					get_parent().add_child(teleporter)
 					teleporter.global_transform = item_spawn.global_transform
 					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*10.0
+		if event.button_index == MOUSE_BUTTON_RIGHT:
+			if event.pressed:
+				if teleporter!=null:
+					if teleporter.engaged:
+						var bs = basis
+						global_transform = teleporter.global_transform
+						translate_object_local(Vector3.UP*1.5)
+						basis = bs
+						teleporter.queue_free()
+						teleporter = null
 					
 	#if event.is_action_pressed("player_jump") and ground_close and not jumping:
 	#	velocity += vec_up*jump_impulse
@@ -326,8 +342,10 @@ func _player_dead(death_velocity):
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var restart_button = $Camera/restartButton
 	restart_button.visible=true
+	restart_button.activate()
 	var menu_button = $Camera/quitToMenuButton
 	menu_button.visible=true
+	menu_button.activate()
 	
 	var dead_body = dead_player_scene.instantiate()
 	get_parent().add_child(dead_body)
