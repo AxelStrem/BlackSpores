@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://duigbbx7qtld5"]
 
-[ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="1_5ojxv"]
+[ext_resource type="Material" uid="uid://dt7p6dr36ufpw" path="res://models/palette01_rough.tres" id="1_5nbpf"]
 [ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="2_3efnu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkp1v"]
@@ -60,7 +60,7 @@ shading_mode = 0
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_mhbli")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("1_5ojxv")
+surface_material_override/0 = ExtResource("1_5nbpf")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

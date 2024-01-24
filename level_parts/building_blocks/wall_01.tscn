@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bg13w8tx0i5e0"]
 
 [ext_resource type="Script" path="res://spore_consumable.gd" id="1_au80m"]
-[ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="1_c5np8"]
+[ext_resource type="Material" uid="uid://dt7p6dr36ufpw" path="res://models/palette01_rough.tres" id="2_b2iqy"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkp1v"]
 resource_name = "Material"
@@ -55,7 +55,7 @@ script = ExtResource("1_au80m")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("ArrayMesh_obaf5")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("1_c5np8")
+surface_material_override/0 = ExtResource("2_b2iqy")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 

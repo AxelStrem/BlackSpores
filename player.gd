@@ -37,6 +37,8 @@ var speed = 50.0
 #var velocity = Vector3(0.0,0.0,0.0)
 var camera_sensitivity = 0.5
 
+var lockpick_skill = 1.0
+
 var antigrav_charges = 0
 var antigrav_protection = false
 var antigrav_jump_available = 0.0

@@ -1,0 +1,76 @@
+[gd_scene load_steps=11 format=3 uid="uid://bk6ro78efnftv"]
+
+[ext_resource type="PackedScene" uid="uid://dgdkpjk4vtruw" path="res://models/building_blocks/digital_lock.glb" id="1_vmaam"]
+[ext_resource type="Script" path="res://digital_lock.gd" id="2_5uoq8"]
+[ext_resource type="Material" uid="uid://dt7p6dr36ufpw" path="res://models/palette01_rough.tres" id="3_6qp4y"]
+[ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="4_pkcwu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o15nx"]
+shading_mode = 0
+albedo_color = Color(1, 0.14902, 0.227451, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nkhea"]
+shading_mode = 0
+albedo_color = Color(0.301961, 1, 0.160784, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l4qay"]
+shading_mode = 0
+albedo_color = Color(0.92549, 0.796078, 0.121569, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_as2ss"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0dt7"]
+shading_mode = 0
+albedo_color = Color(0.780392, 0.466667, 0.0862745, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ac8aa"]
+size = Vector3(5.52551, 3.85989, 7.08447)
+
+[node name="digital_lock" instance=ExtResource("1_vmaam")]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 0, 0, 0)
+script = ExtResource("2_5uoq8")
+
+[node name="Lock" parent="." index="0"]
+surface_material_override/0 = ExtResource("3_6qp4y")
+
+[node name="ScreenLocked" parent="." index="1"]
+surface_material_override/0 = SubResource("StandardMaterial3D_o15nx")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="ScreenLocked" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441658, -0.25878)
+light_color = Color(1, 0.188235, 0.164706, 1)
+
+[node name="ScreenUnlocked" parent="." index="2"]
+visible = false
+surface_material_override/0 = SubResource("StandardMaterial3D_nkhea")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="ScreenUnlocked" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441658, -0.25878)
+light_color = Color(0.0509804, 0.952941, 0.164706, 1)
+
+[node name="ScreenProgress" parent="." index="3"]
+visible = false
+surface_material_override/0 = SubResource("StandardMaterial3D_l4qay")
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="ScreenProgress" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.441658, -0.25878)
+light_color = Color(0.780392, 0.717647, 0.164706, 1)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ScreenProgress" index="1"]
+transform = Transform3D(0.9457, 0, 0, 0, -8.59167e-09, 1.00026, 0, -0.196555, -4.37226e-08, 0, -0.0573173, -0.265082)
+mesh = SubResource("QuadMesh_as2ss")
+surface_material_override/0 = SubResource("StandardMaterial3D_r0dt7")
+
+[node name="player_detector" type="Area3D" parent="." index="4"]
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player_detector" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.176331, 2.13066, 0.654541)
+shape = SubResource("BoxShape3D_ac8aa")
+
+[node name="SporeDestructible" parent="." index="5" instance=ExtResource("4_pkcwu")]
+
+[connection signal="body_entered" from="player_detector" to="." method="_on_player_entered"]
+[connection signal="body_exited" from="player_detector" to="." method="_on_player_exited"]

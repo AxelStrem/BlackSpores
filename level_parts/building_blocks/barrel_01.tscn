@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bkj2in0p1fpi3"]
 
 [ext_resource type="Script" path="res://spore_consumable.gd" id="1_j81jm"]
-[ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_ulha8"]
+[ext_resource type="Material" uid="uid://dt7p6dr36ufpw" path="res://models/palette01_rough.tres" id="2_7nnne"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wju7y"]
 height = 0.671322
@@ -74,4 +74,4 @@ shape = SubResource("CylinderShape3D_gy4ms")
 [node name="Barrel" type="MeshInstance3D" parent="Scale2"]
 mesh = SubResource("ArrayMesh_8m3qi")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_ulha8")
+surface_material_override/0 = ExtResource("2_7nnne")

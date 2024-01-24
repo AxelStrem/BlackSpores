@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://cy7pct6fyxcjj"]
+
+[ext_resource type="Script" path="res://level_parts/building_blocks/auto_door.gd" id="1_q84vv"]
+[ext_resource type="PackedScene" uid="uid://xbxengdr8k64" path="res://level_parts/building_blocks/doorway.tscn" id="2_oxc7t"]
+[ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="3_ta1fj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_hqrkd"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hkp4a"]
+shading_mode = 0
+
+[node name="AutoDoor" type="Node3D"]
+script = ExtResource("1_q84vv")
+
+[node name="doorway" parent="." instance=ExtResource("2_oxc7t")]
+
+[node name="door" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.35, 0, 0, 0, -3.67176e-08, -0.35, 0, 0.84, -1.5299e-08, 1.7, 4.857, 0)
+mesh = SubResource("QuadMesh_hqrkd")
+surface_material_override/0 = SubResource("StandardMaterial3D_hkp4a")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D"]
+transform = Transform3D(2.85714, 0, 0, 0, 1.19048, 0, 0, 0, 2.85714, 0, 1.56112e-08, 0.857143)
+omni_range = 8.0
+
+[node name="SporeDestructible" parent="MeshInstance3D" instance=ExtResource("3_ta1fj")]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.35, 0, 0, 0, -3.67176e-08, -0.35, 0, 0.84, -1.5299e-08, 3.1, 4.857, 0)
+mesh = SubResource("QuadMesh_hqrkd")
+surface_material_override/0 = SubResource("StandardMaterial3D_hkp4a")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="MeshInstance3D2"]
+transform = Transform3D(2.85714, 0, 0, 0, 1.19048, 0, 0, 0, 2.85714, 0, 1.56112e-08, 0.857143)
+omni_range = 8.0
+
+[node name="SporeDestructible" parent="MeshInstance3D2" instance=ExtResource("3_ta1fj")]
