@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d0wujh5y5m33g"]
+[gd_scene load_steps=25 format=3 uid="uid://dr6jbq8gfeunq"]
 
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="1_uv686"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_xeb7s"]
@@ -699,19 +699,6 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -8, 7, -
 [node name="VentLong" parent="." instance=ExtResource("12_ysmic")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.94878, 3.83907, -15.0504)
 
-[node name="DoorV1" type="Node3D" parent="."]
-
-[node name="digital_lock" parent="DoorV1" node_paths=PackedStringArray("target") instance=ExtResource("13_1m2j0")]
-transform = Transform3D(-2.18557e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, -2.18557e-08, 9.55343e-16, 5.7, 1.8, -20.283)
-target = NodePath("../AutoDoor")
-
-[node name="digital_lock2" parent="DoorV1" node_paths=PackedStringArray("target") instance=ExtResource("13_1m2j0")]
-transform = Transform3D(-2.18557e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, -2.18557e-08, 9.55343e-16, 5.7, 1.8, -16.283)
-target = NodePath("../AutoDoor")
-
-[node name="AutoDoor" parent="DoorV1" instance=ExtResource("14_5d6ym")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, -21)
-
 [node name="one_of" parent="." instance=ExtResource("19_o878c")]
 
 [node name="Bezdna" type="Node3D" parent="one_of"]
@@ -967,5 +954,22 @@ transform = Transform3D(2.20014, 0, 0, 0, 2.20014, 0, 0, 0, 2.20014, 8.40247, 0,
 
 [node name="Floor04" parent="one_of2/CratesV4" instance=ExtResource("21_bcarw")]
 transform = Transform3D(0.173648, 0, 0.984808, 0, 1, 0, -0.984808, 0, 0.173648, -8.4, 0, 5)
+
+[node name="one_of3" parent="." instance=ExtResource("19_o878c")]
+
+[node name="Door" type="Node3D" parent="one_of3"]
+
+[node name="digital_lock" parent="one_of3/Door" node_paths=PackedStringArray("target") instance=ExtResource("13_1m2j0")]
+transform = Transform3D(-2.18557e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, -2.18557e-08, 9.55343e-16, 5.7, 1.8, -20.283)
+target = NodePath("../AutoDoor")
+
+[node name="digital_lock2" parent="one_of3/Door" node_paths=PackedStringArray("target") instance=ExtResource("13_1m2j0")]
+transform = Transform3D(-2.18557e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, -2.18557e-08, 9.55343e-16, 5.7, 1.8, -16.283)
+target = NodePath("../AutoDoor")
+
+[node name="AutoDoor" parent="one_of3/Door" instance=ExtResource("14_5d6ym")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4, 0, -21)
+
+[node name="Nothing" type="Node3D" parent="one_of3"]
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_entered"]

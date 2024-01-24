@@ -12,6 +12,8 @@ var current_scale = 1.0
 var lifetime = 20.0
 var wait_init = 0
 
+var age = 0.0
+
 var spawner = null
 var shlong = null
 
@@ -135,6 +137,7 @@ func unpause_progress():
 
 
 func _process(delta):
+		age += delta
 		if progress_paused:
 			return
 		#var cm_rad = max_rad*attempts/100

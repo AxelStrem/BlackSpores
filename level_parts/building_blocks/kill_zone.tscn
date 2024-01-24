@@ -5,8 +5,7 @@ size = Vector3(2, 2, 2)
 
 [node name="KillZone" type="Area3D"]
 collision_layer = 4
-collision_mask = 0
-monitoring = false
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_ist8r")

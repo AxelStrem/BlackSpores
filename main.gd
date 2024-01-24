@@ -11,12 +11,14 @@ var black_spore_scene = preload("res://black_spore.tscn")
 var active_spores = {}
 
 var black_shit_count = 0
+
+var total_timer = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
 func activate_spore(s):
-	active_spores[s]=null  
+	active_spores[s] = total_timer
 	
 func add_spore():
 	black_shit_count+=1
@@ -35,6 +37,9 @@ func total_spore_count():
 	
 func do_spores_kill():
 	return spores_kill
+	
+func bs_sort(a, b):
+	return a.age < b.age
 
 func attempt_spawn(s):
 	if s == null:
@@ -68,7 +73,9 @@ func attempt_spawn(s):
 
 const attempts_per_frame = 10
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
+func _physics_process(delta):
+	total_timer += delta
+	
 	var sproc = 0
 	if !spread_spores:
 		active_spores.clear()
@@ -84,9 +91,16 @@ func _physics_process(_delta):
 		for s in active_spores:
 			asp.append(s)
 		asp.shuffle()
-		for i in range(0, attempts_per_frame):
+		for i in range(0, attempts_per_frame/2):
 			attempt_spawn(asp.back())
 			asp.pop_back()
+		asp.sort_custom(bs_sort)
+		for i in range(0, attempts_per_frame/2):
+			attempt_spawn(asp.back())
+			asp.pop_back()
+		if asp.size()>0:
+			attempt_spawn(asp.front())	
+		
 
 
 func _on_restart_button_button_clicked():
