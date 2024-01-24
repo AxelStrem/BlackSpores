@@ -14,6 +14,11 @@ const vec_up = Vector3(0.0,1.0,0.0)
 const jump_impulse = 10.0
 const air_control = 0.15
 const crouch_speed = 10.0
+const full_height = 2.87
+const full_rad = 0.8
+const crouch_height = 1.5
+const crouch_rad = 0.5
+const crouch_slowdown = 0.4
 const speed_decay = 0.85
 const energy_boost_duration = 15.0
 
@@ -180,19 +185,6 @@ func _process(delta):
 	#var velocity_increment = Vector3(0.0,0.0,0.0)
 	#var velocity_changing = false
 	
-	if Input.is_action_pressed("player_crouch"):
-		crouch+=crouch_speed*delta
-	else:
-		crouch-=crouch_speed*delta
-		
-	#if velocity_changing:
-	#	velocity_increment = velocity_increment.normalized()
-	#	velocity += velocity_increment*delta*speed*air_coef
-		
-	crouch = clamp(crouch, 0.0, 1.0)
-		
-	scale.y = 1.0 - crouch*0.5
-	
 	#if is_on_floor():	
 	#	velocity*=pow(speed_decay,60.0*delta)
 	
@@ -205,8 +197,9 @@ func _process(delta):
 	#	kill_player()
 
 var SPEED = 5.0
-const JUMP_VELOCITY = 7.5
-const JUMP_VELOCITY_ANTIGRAV = 20.0
+const jump_velocity = 8.0
+const jump_velocity_antigrav = 20.0
+const jump_energy = 50.0
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -261,14 +254,34 @@ func _physics_process(delta):
 		antigrav_jump_available = 0.0
 	if Input.is_action_just_pressed("player_jump"):
 		if is_on_floor():
-			velocity.y = JUMP_VELOCITY
+			var je = current_energy
+			if je > jump_energy:
+				je = jump_energy
+			current_energy -= je
+			je/=jump_energy			
+			velocity.y = jump_velocity*je
 			antigrav_jump_available = 0.6
 		elif antigrav_jump_available > 0.0:
 			if antigrav_charges > 0:
-				velocity.y += JUMP_VELOCITY_ANTIGRAV
+				velocity.y += jump_velocity_antigrav
 				antigrav_charges -= 1
 				antigrav_protection = true
 				antigrav_jump_available = 0.0
+	
+	#Handle crouch
+	if Input.is_action_pressed("player_crouch"):
+		crouch+=crouch_speed*delta
+	else:
+		crouch-=crouch_speed*delta
+		
+	crouch = clamp(crouch, 0.0, 1.0)
+		
+	#scale.y = 1.0 - crouch*0.5
+	var rad = lerp(full_rad, crouch_rad, crouch)
+	var h = lerp(full_height, crouch_height, crouch)
+	$hitbox.shape.radius = rad
+	$hitbox.shape.height = h
+	var speed_coef = lerp(1.0, crouch_slowdown, crouch)
 			
 
 
@@ -276,8 +289,8 @@ func _physics_process(delta):
 		if Input.is_action_pressed("player_run") && current_energy > 0:
 			direction*=1.5
 			current_energy-=delta*60
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = direction.x * SPEED * speed_coef
+		velocity.z = direction.z * SPEED * speed_coef
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)

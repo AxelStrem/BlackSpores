@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=19 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -8,11 +8,9 @@
 [ext_resource type="AudioStream" uid="uid://deh1ywdmhvv1t" path="res://sound/step01.wav" id="5_q4bjr"]
 [ext_resource type="PackedScene" uid="uid://bsx181u4v8naq" path="res://level_parts/corridors/corridor.tscn" id="5_tm6p1"]
 [ext_resource type="AudioStream" uid="uid://cq6dojw3hv7fc" path="res://sound/step02.wav" id="6_33b08"]
-[ext_resource type="PackedScene" uid="uid://ct5nwamfcsfuh" path="res://level_parts/corridors/lobby.tscn" id="6_khp80"]
 [ext_resource type="AudioStream" uid="uid://bpjkmior7t0yg" path="res://sound/step03.wav" id="7_es0kt"]
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
 [ext_resource type="AudioStream" uid="uid://bbifl3qq1eks" path="res://sound/step04.wav" id="8_veibk"]
-[ext_resource type="PackedScene" uid="uid://bjopfx8b3h02r" path="res://level_parts/corridors/circular_staircase.tscn" id="9_5f2gx"]
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_mphlh"]
@@ -30,6 +28,7 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
+spread_spores = false
 spores_kill = false
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
@@ -49,7 +48,7 @@ script = ExtResource("3_1xpxi")
 shape = SubResource("CapsuleShape3D_k67sy")
 
 [node name="Camera" type="Camera3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533417, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533417, -0.285966)
 current = true
 script = ExtResource("4_nhh6l")
 
@@ -178,60 +177,6 @@ transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, -6.051
 [node name="Corridor2" parent="." instance=ExtResource("5_tm6p1")]
 transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 37.0827, 2.37073, -13.8101)
 
-[node name="Corridor4" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 65.6739, 2.37073, -13.8101)
-
-[node name="Corridor5" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 79.9633, 2.37073, -13.8101)
-
-[node name="Lobby" parent="." instance=ExtResource("6_khp80")]
-transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 51.5072, 2.39335, -13.7777)
-
-[node name="Corridor3" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 51.4203, 2.37073, 0.382469)
-
-[node name="Corridor6" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 51.4203, 2.37073, 14.9349)
-
-[node name="Corridor7" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 51.4203, 2.37073, 43.5261)
-
-[node name="Corridor8" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 51.4203, 2.37073, 57.8156)
-
-[node name="Lobby2" parent="." instance=ExtResource("6_khp80")]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 51.0761, 2.39335, 29.3594)
-
-[node name="Corridor9" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 122.868, 2.37073, 29.8833)
-
-[node name="Corridor10" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 108.315, 2.37073, 29.8833)
-
-[node name="Corridor11" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 79.724, 2.37073, 29.8833)
-
-[node name="Corridor12" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 65.4345, 2.37073, 29.8833)
-
-[node name="Lobby3" parent="." instance=ExtResource("6_khp80")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 93.8907, 2.39335, 29.5391)
-
-[node name="Corridor13" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 94.1152, 2.37073, -42.6781)
-
-[node name="Corridor14" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 94.1152, 2.37073, -28.1257)
-
-[node name="Corridor15" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 94.1152, 2.37073, 0.465539)
-
-[node name="Corridor16" parent="." instance=ExtResource("5_tm6p1")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 94.1152, 2.37073, 14.755)
-
-[node name="Lobby4" parent="." instance=ExtResource("6_khp80")]
-transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 93.771, 2.39335, -13.7012)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("7_q68py")
 
@@ -242,14 +187,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -55.3672, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.2917, -1.80713, 4.95517)
 shape = SubResource("BoxShape3D_yhqqv")
 
-[node name="CircularStaircase" parent="." instance=ExtResource("9_5f2gx")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 48.2406, 2.39911, 38.3924)
-
-[node name="CircularStaircase2" parent="." instance=ExtResource("9_5f2gx")]
-transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 48.2406, 24.0965, 38.3924)
-
 [node name="Chamber01" parent="." instance=ExtResource("17_aikl1")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 49.4113, 0, -34.9471)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 69.1003, 0, -11.3246)
 
 [connection signal="button_clicked" from="player/Camera/restartButton" to="." method="_on_restart_button_button_clicked"]
 [connection signal="button_clicked" from="player/Camera/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
