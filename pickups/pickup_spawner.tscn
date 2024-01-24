@@ -3,4 +3,5 @@
 [ext_resource type="Script" path="res://pickups/pickup_spawner.gd" id="1_rkh0r"]
 
 [node name="PickupSpawner" type="Node3D"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 script = ExtResource("1_rkh0r")

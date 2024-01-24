@@ -55,7 +55,8 @@ func _process(delta):
 			engaged = false
 			$spore_detector.monitoring = false
 			for sp in spores_delayed:
-				sp.unpause_progress()		
+				if sp!=null:
+					sp.unpause_progress()		
 			var sd = spore_destructible_scene.instantiate()
 			add_child(sd)
 			$ward/WardProgressBar.hide()

@@ -16,7 +16,7 @@ func _ready():
 	pass # Replace with function body.
 
 func activate_spore(s):
-	active_spores[s]=null
+	active_spores[s]=null  
 	
 func add_spore():
 	black_shit_count+=1
