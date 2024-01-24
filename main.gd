@@ -91,11 +91,11 @@ func _physics_process(delta):
 		for s in active_spores:
 			asp.append(s)
 		asp.shuffle()
-		for i in range(0, attempts_per_frame/2):
+		for i in range(0, attempts_per_frame>>1):
 			attempt_spawn(asp.back())
 			asp.pop_back()
 		asp.sort_custom(bs_sort)
-		for i in range(0, attempts_per_frame/2):
+		for i in range(0, attempts_per_frame>>1):
 			attempt_spawn(asp.back())
 			asp.pop_back()
 		if asp.size()>0:
