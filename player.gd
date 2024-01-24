@@ -51,7 +51,7 @@ const teleporter_charges_bonus = 1
 var teleporter = null
 var teleporter_scene = preload("res://entities/teleporter.tscn")
 
-var ward_charges = 10
+var ward_charges = 0
 const ward_charges_max = 3
 const ward_charges_bonus = 1
 var ward_scene = preload("res://entities/ward.tscn")

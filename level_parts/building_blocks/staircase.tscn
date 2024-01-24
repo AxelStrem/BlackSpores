@@ -41,7 +41,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dj526")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_03pf6"]
-size = Vector3(4.24943, 0.309387, 1.99878)
+size = Vector3(4.66172, 0.309387, 1.99878)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emb3b"]
 size = Vector3(3.89439, 0.0623169, 1.99878)
@@ -53,6 +53,7 @@ script = ExtResource("1_m1jyi")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
 [node name="Staircase" type="MeshInstance3D" parent="Scale2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.909121, 0, 0, 0)
 mesh = SubResource("ArrayMesh_16vi5")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_b6rte")
@@ -60,7 +61,7 @@ surface_material_override/0 = ExtResource("2_b6rte")
 [node name="StaticBody3D" type="StaticBody3D" parent="Scale2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scale2/StaticBody3D"]
-transform = Transform3D(0.92558, 0.378552, 0, -0.378552, 0.92558, 0, 0, 0, 1, -1.01133, 0.720144, -0.00280762)
+transform = Transform3D(0.92558, 0.378552, 0, -0.378552, 0.92558, 0, 0, 0, 1, -0.820528, 0.642107, -0.00280762)
 shape = SubResource("BoxShape3D_03pf6")
 
 [node name="Area3D" type="Area3D" parent="Scale2"]
