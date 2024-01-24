@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=21 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -20,8 +20,19 @@
 radius = 0.985279
 height = 2.87003
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_4g3m7"]
+viewport_path = NodePath("player/HUDViewport")
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjvjx"]
 height = 2.04788
+
+[sub_resource type="Environment" id="Environment_5pjpf"]
+ambient_light_source = 2
+ambient_light_color = Color(0.913725, 0.913725, 0.913725, 1)
+ambient_light_energy = 0.1
+glow_enabled = true
+glow_intensity = 1.25
+glow_strength = 0.95
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
 size = Vector3(196.664, 4.61426, 267.326)
@@ -46,7 +57,7 @@ script = ExtResource("3_1xpxi")
 shape = SubResource("CapsuleShape3D_k67sy")
 
 [node name="Camera" type="Camera3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533417, -0.285966)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533417, -0.285965)
 current = true
 script = ExtResource("4_nhh6l")
 
@@ -143,8 +154,12 @@ stream = ExtResource("8_veibk")
 [node name="item_spawn" type="Node3D" parent="player/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0709114, -1.59893)
 
-[node name="HUD" parent="player/Camera" instance=ExtResource("11_mphlh")]
-transform = Transform3D(0.2, 0, 0, 0, -8.74228e-09, -0.2, 0, 0.2, -8.74228e-09, 0.523, 0.211, -0.537)
+[node name="HUDSprite" type="Sprite3D" parent="player/Camera"]
+transform = Transform3D(0.63402, 0, 0, 0, 0.63402, 0, 0, 0, 0.63402, 8.08158, 3.0678, -8.32078)
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture = SubResource("ViewportTexture_4g3m7")
 
 [node name="JumpDelay" type="Timer" parent="player"]
 
@@ -162,6 +177,22 @@ autoplay = true
 [node name="pickup_sound" type="AudioStreamPlayer" parent="player"]
 stream = ExtResource("10_1arfx")
 volume_db = 4.0
+
+[node name="HUDViewport" type="SubViewport" parent="player"]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="player/HUDViewport"]
+projection = 1
+size = 2.268
+near = 0.01
+
+[node name="HUD" parent="player/HUDViewport/Camera3D" instance=ExtResource("11_mphlh")]
+transform = Transform3D(1, 1.33227e-14, -5.82353e-22, 0, -4.37114e-08, -1, -1.33227e-14, 1, -4.37114e-08, 0, 0, -0.56198)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="player/HUDViewport/Camera3D"]
+environment = SubResource("Environment_5pjpf")
 
 [node name="Corridor" parent="." instance=ExtResource("5_tm6p1")]
 transform = Transform3D(-1.31134e-07, 0, -3, 0, 3, 0, 3, 0, -1.31134e-07, 22.5303, 2.37073, -13.8101)

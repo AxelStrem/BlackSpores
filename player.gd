@@ -69,6 +69,7 @@ var label_fps = null
 var label_energy = null
 var label_dead = null
 var hud = null
+var hud_sprite = null
 
 var info_message = null
 var info_timeout = 0.0
@@ -94,7 +95,8 @@ func _ready():
 	label_consumables = $Camera/LabelConsumables
 	label_energy = $Camera/LabelEnergy
 	label_dead = $Camera/LabelDead
-	hud = $Camera/HUD
+	hud = $HUDViewport/Camera3D/HUD
+	hud_sprite = $Camera/HUDSprite
 	
 	$Camera/restartButton.deactivate()
 	$Camera/quitToMenuButton.deactivate()
@@ -373,7 +375,8 @@ func _on_area_3d_area_entered(_area):
 		_player_dead(velocity)
 
 func _player_dead(death_velocity):
-	dead = true	
+	dead = true
+	hud_sprite.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var restart_button = $Camera/restartButton
 	restart_button.visible=true

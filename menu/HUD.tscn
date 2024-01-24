@@ -137,69 +137,70 @@ surface_material_override/0 = SubResource("StandardMaterial3D_a52hx")
 [node name="BonusFrame" parent="." index="3"]
 surface_material_override/0 = ExtResource("2_m4wsy")
 
-[node name="boot" parent="BonusFrame" index="0" instance=ExtResource("3_c5xdj")]
-transform = Transform3D(0.00397734, -0.0110796, -0.0510546, 0.0493131, 0.0177023, 0, 0.0172497, -0.0480523, 0.0117719, 0.74792, 0.123727, -0.421335)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="BonusFrame/boot" index="1"]
-transform = Transform3D(19.0861, 0, 1.19209e-07, 0, 19.0861, -4.76837e-07, 0, 4.76837e-07, 19.0861, -0.282599, 0.78967, -0.869601)
+[node name="OmniLight3D" type="OmniLight3D" parent="BonusFrame" index="0"]
+transform = Transform3D(0.0759118, -0.211466, -0.974433, 0.941194, 0.337867, 1.91246e-07, 0.329229, -0.91713, 0.224679, 0.803107, 0.12377, -0.493258)
 light_color = Color(0, 0.756863, 0, 1)
-omni_range = 0.280968
+light_energy = 0.655
+omni_range = 0.261374
 
-[node name="Dot1" type="MeshInstance3D" parent="BonusFrame" index="1"]
+[node name="boot" parent="BonusFrame" index="1" instance=ExtResource("3_c5xdj")]
+transform = Transform3D(0.00397734, -0.0110796, -0.0510546, 0.0493131, 0.0177023, 0, 0.0172497, -0.0480523, 0.0117719, 0.768583, 0.123727, -0.440201)
+
+[node name="Dot1" type="MeshInstance3D" parent="BonusFrame" index="2"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, 0.521724, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot2" type="MeshInstance3D" parent="BonusFrame" index="2"]
+[node name="Dot2" type="MeshInstance3D" parent="BonusFrame" index="3"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, 0.391432, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot3" type="MeshInstance3D" parent="BonusFrame" index="3"]
+[node name="Dot3" type="MeshInstance3D" parent="BonusFrame" index="4"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, 0.264263, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot4" type="MeshInstance3D" parent="BonusFrame" index="4"]
+[node name="Dot4" type="MeshInstance3D" parent="BonusFrame" index="5"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, 0.133971, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot5" type="MeshInstance3D" parent="BonusFrame" index="5"]
+[node name="Dot5" type="MeshInstance3D" parent="BonusFrame" index="6"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, 0.00997204, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot6" type="MeshInstance3D" parent="BonusFrame" index="6"]
+[node name="Dot6" type="MeshInstance3D" parent="BonusFrame" index="7"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, -0.12032, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot7" type="MeshInstance3D" parent="BonusFrame" index="7"]
+[node name="Dot7" type="MeshInstance3D" parent="BonusFrame" index="8"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, -0.247489, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot8" type="MeshInstance3D" parent="BonusFrame" index="8"]
+[node name="Dot8" type="MeshInstance3D" parent="BonusFrame" index="9"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, -0.377781, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot9" type="MeshInstance3D" parent="BonusFrame" index="9"]
+[node name="Dot9" type="MeshInstance3D" parent="BonusFrame" index="10"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, -0.508892, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("4_7xewh")
 
-[node name="Dot10" type="MeshInstance3D" parent="BonusFrame" index="10"]
+[node name="Dot10" type="MeshInstance3D" parent="BonusFrame" index="11"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, -0.639184, -0.0447376, -0.0614834)
 mesh = SubResource("ArrayMesh_kyud8")
 skeleton = NodePath("")
@@ -212,12 +213,13 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_m4wsy")
 
 [node name="teleporter" parent="BonusFrame2" index="0" instance=ExtResource("4_qbjg6")]
-transform = Transform3D(0.0286831, -0.0354042, -0.0172018, 0.0310928, 0.033431, -0.0169612, 0.0241371, -0.000992773, 0.0422906, 0.789034, 0.102758, -0.499448)
+transform = Transform3D(0.0286831, -0.0354042, -0.0172018, 0.0310928, 0.033431, -0.0169612, 0.0241371, -0.000992773, 0.0422906, 0.809697, 0.102758, -0.494058)
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="BonusFrame2/teleporter" index="1"]
-transform = Transform3D(16.605, -7.46058, -9.49657, 11.994, 8.30182, 14.4498, -1.41071, -17.2334, 11.0721, 0.570601, 0.779262, -0.137367)
+transform = Transform3D(16.605, -7.46058, -9.49657, 11.994, 8.30183, 14.4498, -1.41071, -17.2334, 11.0721, 0.570601, 0.779263, -0.137368)
 light_color = Color(0.170716, 0.684931, 0.8445, 1)
-omni_range = 0.280968
+light_energy = 0.64
+omni_range = 0.270864
 
 [node name="Dot1" type="MeshInstance3D" parent="BonusFrame2" index="1"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, 0.521724, -0.0447376, -0.0614834)
@@ -286,12 +288,13 @@ skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_m4wsy")
 
 [node name="ward" parent="BonusFrame3" index="0" instance=ExtResource("6_w6525")]
-transform = Transform3D(-0.0141922, -0.0219304, -0.0564407, 0.044154, 0.0359212, -0.0250601, 0.0414358, -0.0457891, 0.00737249, 0.778404, 0.14007, -0.523096)
+transform = Transform3D(-0.0141922, -0.0219304, -0.0564407, 0.044154, 0.0359212, -0.0250601, 0.0414358, -0.0457891, 0.00737249, 0.788286, 0.14007, -0.505128)
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="BonusFrame3/ward" index="4"]
-transform = Transform3D(13.9925, -5.19211, 5.98232, 4.41296, 15.1939, 2.86508, -6.57814, -0.85141, 14.6472, 0.298484, -0.154098, -0.0465527)
+transform = Transform3D(13.9925, -5.19211, 5.98233, 4.41297, 15.1939, 2.86509, -6.57815, -0.851409, 14.6472, 0.298484, -0.154098, -0.0465517)
 light_color = Color(0.92549, 0.12549, 0.133333, 1)
-omni_range = 0.280968
+light_energy = 1.075
+omni_range = 0.277598
 
 [node name="Dot1" type="MeshInstance3D" parent="BonusFrame3" index="1"]
 transform = Transform3D(0.847746, 0, 0, 0, 1, 0, 0, 0, 1, 0.521724, -0.0447376, -0.0614834)
@@ -356,3 +359,7 @@ surface_material_override/0 = ExtResource("4_7xewh")
 [node name="BonusDot" parent="." index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.491793, 0, -0.0901732)
 visible = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." index="7"]
+transform = Transform3D(-0.765328, -0.293, -0.573083, -0.641087, 0.267779, 0.719237, -0.0572765, 0.917848, -0.392777, 0, 0, 0)
+light_energy = 0.635
