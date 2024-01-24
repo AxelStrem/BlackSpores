@@ -19,10 +19,6 @@ func _ready():
 	_lightDots(teleportDots,0)
 	_lightDots(vardDots,0)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-
 func _set_infinit_energy(value):
 	if value:
 		energyBar.visible = false

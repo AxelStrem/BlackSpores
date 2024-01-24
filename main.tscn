@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=24 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="1_lctiw"]
@@ -16,6 +16,10 @@
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_mphlh"]
+[ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="17_hh4og"]
+[ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="18_a5ojw"]
+[ext_resource type="PackedScene" uid="uid://duigbbx7qtld5" path="res://level_parts/building_blocks/railing.tscn" id="18_bnjoy"]
+[ext_resource type="PackedScene" uid="uid://bju0m06pn6kg6" path="res://level_parts/building_blocks/ceiling_01.tscn" id="19_tdvt8"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 radius = 0.985279
@@ -29,7 +33,6 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
-spread_spores = false
 spores_kill = false
 
 [node name="black_spore" parent="." instance=ExtResource("1_lctiw")]
@@ -249,10 +252,79 @@ transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 48.240
 transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, 48.2406, 24.0965, 38.3924)
 
 [node name="CircularStaircase3" parent="." instance=ExtResource("9_5f2gx")]
-transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 2.0497, -16.0771)
+transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 2.0497, -32.14)
 
 [node name="CircularStaircase4" parent="." instance=ExtResource("9_5f2gx")]
-transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 23.7471, -16.0771)
+transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, 42.5676, 23.7471, -32.14)
+
+[node name="Floor02" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -22.6716)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Floor02"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.86058, 2.07723, -6.28608)
+light_energy = 3.036
+omni_range = 7.34896
+
+[node name="Wall01" parent="Floor02" instance=ExtResource("18_a5ojw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Wall02" parent="Floor02" instance=ExtResource("18_a5ojw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -4)
+
+[node name="Wall03" parent="Floor02" instance=ExtResource("18_a5ojw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -8)
+
+[node name="Wall04" parent="Floor02" instance=ExtResource("18_a5ojw")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, -12)
+
+[node name="Ceiling01" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -22.6716)
+
+[node name="Ceiling02" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -26.6716)
+
+[node name="Ceiling03" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -22.6716)
+
+[node name="Ceiling04" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -26.6716)
+
+[node name="Ceiling05" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -30.6716)
+
+[node name="Ceiling06" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -34.6716)
+
+[node name="Ceiling07" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -30.6716)
+
+[node name="Ceiling08" parent="." instance=ExtResource("19_tdvt8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -34.6716)
+
+[node name="Floor01" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -22.6716)
+
+[node name="Railing" parent="Floor01" instance=ExtResource("18_bnjoy")]
+
+[node name="Floor03" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -26.672)
+
+[node name="Floor04" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -26.672)
+
+[node name="Railing" parent="Floor04" instance=ExtResource("18_bnjoy")]
+
+[node name="Floor05" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -30.6235)
+
+[node name="Floor06" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -30.6235)
+
+[node name="Floor07" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.1162, 0.129854, -34.6239)
+
+[node name="Floor08" parent="." instance=ExtResource("17_hh4og")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.1162, 0.129854, -34.6239)
 
 [connection signal="button_clicked" from="player/Camera/restartButton" to="." method="_on_restart_button_button_clicked"]
 [connection signal="button_clicked" from="player/Camera/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
