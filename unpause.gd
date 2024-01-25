@@ -6,7 +6,7 @@ func _ready():
 	player = get_parent().find_child("player")
 
 func _physics_process(delta):	
-	if Input.is_action_just_pressed("exit_to_menu"):
+	if Input.is_action_just_pressed("pause_game"):
 		if get_tree().is_paused():
 			get_tree().paused = false
 			player._hide_menu()
