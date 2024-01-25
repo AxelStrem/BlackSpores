@@ -362,6 +362,8 @@ func _on_jump_delay_timeout():
 func _on_area_3d_area_entered(area):
 	if area.get_collision_layer_value(20):
 		_player_dead(velocity, 2)
+	if area.get_collision_layer_value(25):
+		_player_dead(velocity, 10)
 	if area.get_collision_layer_value(3):
 		var game = get_game_root()
 		if game and game.do_spores_kill():
@@ -390,6 +392,11 @@ func _player_dead(death_velocity, cause):
 		death_screen.find_child("cause_crashed").show()
 	if cause==2:
 		death_screen.find_child("cause_fell").show()
+		
+	#victory
+	if cause==10:
+		death_screen.find_child("info").text = "You've cleared the facility in {0} ".format({0:format_time(time_passed)})
+		death_screen.find_child("cause_victory").show()
 
 	call_deferred("roll_head", death_velocity)
 

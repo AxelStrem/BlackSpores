@@ -14,8 +14,9 @@ func player_N_levels_away(N):
 	if N>=4:
 		return
 	if next_level == null:
-		next_level = Global.generate_level()
-		next_level.level_number = level_number+1
+		next_level = Global.generate_level(level_number+1)
+		if(next_level == null):
+			return
 		get_parent().add_child(next_level)
 		var nl_in = next_level.level_in
 		var nl_out = level_out
