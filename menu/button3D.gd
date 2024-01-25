@@ -4,10 +4,13 @@ var mouse_in = false
 var button_pressed = false
 @export var text = ""
 @export var active = false
+@export var color : Color = Color.WHITE
+@export var hover_color : Color = Color.RED
 signal button_clicked
 
 func _ready():
 	$Label3D.text=text
+	$Label3D.modulate = color
 
 func activate():
 	$Area3D.input_ray_pickable = true
@@ -31,7 +34,9 @@ func _input(event):
 
 func _on_area_3d_mouse_entered():
 	mouse_in = true
+	$Label3D.modulate = hover_color
 
 
 func _on_area_3d_mouse_exited():
 	mouse_in = false
+	$Label3D.modulate = color

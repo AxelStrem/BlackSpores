@@ -1,0 +1,184 @@
+[gd_scene load_steps=15 format=3 uid="uid://dko6syds2j81d"]
+
+[ext_resource type="Script" path="res://levels/level.gd" id="1_cklow"]
+[ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_mhbut"]
+[ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="3_x1tif"]
+[ext_resource type="PackedScene" uid="uid://dhp6yf0e27h62" path="res://level_parts/building_blocks/ceiling_02.tscn" id="4_ae155"]
+[ext_resource type="PackedScene" uid="uid://nbtpy06ouaab" path="res://level_parts/lab/lab_01.tscn" id="5_ayytd"]
+[ext_resource type="PackedScene" uid="uid://terq7ea5w6yt" path="res://level_parts/building_blocks/kill_zone.tscn" id="5_oysgp"]
+[ext_resource type="PackedScene" uid="uid://cy7pct6fyxcjj" path="res://level_parts/building_blocks/auto_door.tscn" id="7_ohxgk"]
+[ext_resource type="PackedScene" uid="uid://b21lfcey82x68" path="res://models/corridors/ceiling_lamp.tscn" id="8_lhlfp"]
+[ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="10_0ckhs"]
+[ext_resource type="PackedScene" uid="uid://cbpb8uge67xox" path="res://level_parts/lab/nutella.tscn" id="10_oe0q2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
+size = Vector3(44.643, 21.4832, 37.6189)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_cndy0"]
+size = Vector3(25, 0.6, 20)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3e3pc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8r0w"]
+emission_enabled = true
+emission = Color(0.211765, 0.211765, 0.211765, 1)
+
+[node name="Chamber" type="Node3D" node_paths=PackedStringArray("level_in", "level_out")]
+script = ExtResource("1_cklow")
+level_in = NodePath("LevelIn")
+level_out = NodePath("LevelOut")
+
+[node name="LevelIn" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9939, 0, 1.99227)
+
+[node name="Floor57" parent="LevelIn" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99392, 0, -1.99227)
+
+[node name="Floor58" parent="LevelIn" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99392, 0, 2.00773)
+
+[node name="Floor59" parent="LevelIn" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99392, 0, -1.99227)
+
+[node name="Floor60" parent="LevelIn" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99392, 0, 2.00773)
+
+[node name="Wall26" parent="LevelIn" instance=ExtResource("3_x1tif")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.99392, 0, 2.00773)
+
+[node name="Wall27" parent="LevelIn" instance=ExtResource("3_x1tif")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.99392, 0, 2.00773)
+
+[node name="Ceiling" parent="LevelIn/Wall27" instance=ExtResource("4_ae155")]
+
+[node name="Ceiling2" parent="LevelIn/Wall27" instance=ExtResource("4_ae155")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Ceiling3" parent="LevelIn/Wall27" instance=ExtResource("4_ae155")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.38419e-07, 0, 4)
+
+[node name="Ceiling4" parent="LevelIn/Wall27" instance=ExtResource("4_ae155")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
+
+[node name="Wall20" parent="LevelIn" instance=ExtResource("3_x1tif")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.98839, 0, -1.97798)
+
+[node name="Wall21" parent="LevelIn" instance=ExtResource("3_x1tif")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.98839, 0, -1.97798)
+
+[node name="LevelOut" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0061, 0, -26.7077)
+
+[node name="Wall34" parent="LevelOut" instance=ExtResource("3_x1tif")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.00608, 0, 1.93235)
+
+[node name="Wall35" parent="LevelOut" instance=ExtResource("3_x1tif")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.00608, 0, 1.93235)
+
+[node name="Wall36" parent="LevelOut" instance=ExtResource("3_x1tif")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.00608, 0, -2.06765)
+
+[node name="Wall37" parent="LevelOut" instance=ExtResource("3_x1tif")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 6.00608, 0, -2.06765)
+
+[node name="Floor75" parent="LevelOut" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00608, 0, 1.93177)
+
+[node name="Floor76" parent="LevelOut" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00608, 0, -2.06823)
+
+[node name="Floor77" parent="LevelOut" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00608, 0, 1.93177)
+
+[node name="Floor78" parent="LevelOut" instance=ExtResource("2_mhbut")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00608, 0, -2.06823)
+
+[node name="Ceiling5" parent="LevelOut" instance=ExtResource("4_ae155")]
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 6.00608, 0, -2.2001)
+
+[node name="Ceiling6" parent="LevelOut" instance=ExtResource("4_ae155")]
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 6.00608, 0, 1.7999)
+
+[node name="Ceiling7" parent="LevelOut" instance=ExtResource("4_ae155")]
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2.00608, 0, -2.2001)
+
+[node name="Ceiling8" parent="LevelOut" instance=ExtResource("4_ae155")]
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2.00608, 0, 1.7999)
+
+[node name="lab01" parent="LevelOut" instance=ExtResource("5_ayytd")]
+transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 6, 0, -2)
+
+[node name="PlayerDetector" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 512
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54752, 5.53725, -10.8112)
+shape = SubResource("BoxShape3D_i01np")
+
+[node name="KillZone" parent="." instance=ExtResource("5_oysgp")]
+transform = Transform3D(-25.5, 0, 0, 0, 2.4, 0, 0, 0, 17, -5, -15, -19)
+
+[node name="AutoDoor" parent="." instance=ExtResource("7_ohxgk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3, 0, -26.7)
+window_probability = 0.0
+
+[node name="CeilingLamp" parent="." instance=ExtResource("8_lhlfp")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -18.1, 5.73687, -26.9057)
+
+[node name="spore_floor" type="Area3D" parent="."]
+collision_layer = 2
+collision_mask = 0
+monitoring = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spore_floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.2, -26.5)
+shape = SubResource("BoxShape3D_cndy0")
+
+[node name="Screen1" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.89807e-07, 0, -3.9, 0, 3.9, 0, 6.63, 0, -1.70474e-07, 11, 4, -27)
+mesh = SubResource("QuadMesh_3e3pc")
+surface_material_override/0 = SubResource("StandardMaterial3D_o8r0w")
+
+[node name="button3D" parent="Screen1" instance=ExtResource("10_0ckhs")]
+transform = Transform3D(0.20475, 0, 1.59872e-14, 0, 0.315, 0, -1.24345e-14, 0, 0.315, -0.180995, -0.282051, 0.0256412)
+text = "I understand"
+active = true
+color = Color(0.94902, 0.470588, 0.188235, 1)
+hover_color = Color(1, 0.815686, 0.788235, 1)
+
+[node name="Label3D" type="Label3D" parent="Screen1"]
+transform = Transform3D(0.9, 0, 5.32907e-15, 0, 0.9, 0, -4.26326e-14, 0, 0.899999, 0, 0.358974, 0.0256412)
+text = "Black Spores"
+outline_size = 6
+
+[node name="Label3D3" type="Label3D" parent="Screen1"]
+transform = Transform3D(0.63, 0, 1.24345e-14, 0, 0.899999, 0, -7.10543e-14, 0, 0.899999, -0.196078, -0.358974, 0.0256412)
+visible = false
+modulate = Color(1, 0.447059, 0.231373, 1)
+text = "Start"
+font_size = 22
+outline_size = 6
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Screen1/Label3D3"]
+
+[node name="Label3D2" type="Label3D" parent="Screen1"]
+transform = Transform3D(0.495, 0, 2.30926e-14, 0, 0.899999, 0, -7.81597e-14, 0, 0.899999, -0.467571, 0, 0.0256412)
+text = "The sample is highly aggressive
+Keep the jar lid tightly closed at all times
+In case of containment breach
+ evacuate the facility at once!"
+font_size = 18
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="nutella_container" type="Node3D" parent="."]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 9.6, 1.4, -25.3)
+
+[node name="nutella" parent="nutella_container" node_paths=PackedStringArray("door") instance=ExtResource("10_oe0q2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+door = NodePath("../../AutoDoor")
+
+[connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_entered"]
+[connection signal="button_clicked" from="Screen1/button3D" to="nutella_container/nutella" method="_on_start_game"]

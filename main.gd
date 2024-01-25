@@ -3,6 +3,7 @@ extends Node3D
 @export var spread_spores = true
 @export var spores_kill = true
 @export var debug_items = true
+@export var show_info = true
 
 signal to_menu_signal
 signal restart_signal
@@ -13,14 +14,33 @@ var active_spores = {}
 
 var black_shit_count = 0
 
+var spore_delay = 1.0
+var spore_limit = 200
+
+
 var total_timer = 0.0
+
+var game_started = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	if debug_items:
 		$player.antigrav_charges = 10
 		$player.teleporter_charges = 10
 		$player.ward_charges = 10
+	if !show_info:
+		$player/Camera/LabelFPS.hide()
+		$player/Camera/LabelTime.hide()
+		$player/Camera/LabelEnergy.hide()
+		$player/Camera/LabelDead.hide()
+		$player/Camera/LabelPoints.hide()
+		$player/Camera/LabelConsumables.hide()
+		$player/Camera/LabelDebug.hide()
+	$player.lock_controls()
 	pass # Replace with function body.
+
+func start_game():
+	game_started = true
+	$player.unlock_controls()
 
 func activate_spore(s):
 	active_spores[s] = total_timer
@@ -79,31 +99,35 @@ func attempt_spawn(s):
 const attempts_per_frame = 10
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if !game_started:
+		return
 	total_timer += delta
 	
-	var sproc = 0
 	if !spread_spores:
 		active_spores.clear()
 	if active_spores.size()<=attempts_per_frame:
-		while active_spores.size()>0:
 			for s in active_spores:
-				attempt_spawn(s)
-				sproc+=1
-				if sproc > attempts_per_frame:
-					return
+				if s.age > spore_delay:
+					attempt_spawn(s)
 	else:
 		var asp = []
+		var rem = attempts_per_frame
 		for s in active_spores:
-			asp.append(s)
-		asp.shuffle()
-		for i in range(0, attempts_per_frame>>1):
-			attempt_spawn(asp.back())
-			asp.pop_back()
+			if s.age > spore_delay:
+				asp.append(s)
+		if black_shit_count < spore_limit:
+			asp.shuffle()
+			for i in range(0, attempts_per_frame>>1):
+				if asp.size()>0:
+					attempt_spawn(asp.back())
+					asp.pop_back()
+					rem-=1
 		asp.sort_custom(bs_sort)
-		for i in range(0, attempts_per_frame>>1):
-			attempt_spawn(asp.back())
-			asp.pop_back()
-		if asp.size()>0:
+		for i in range(0, rem):
+			if asp.size()>0:
+				attempt_spawn(asp.back())
+				asp.pop_back()
+		if asp.size()>0 and black_shit_count < 100:
 			attempt_spawn(asp.front())	
 		
 

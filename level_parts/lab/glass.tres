@@ -1,0 +1,15 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://bgrpg1kjy4gh"]
+
+[resource]
+transparency = 1
+cull_mode = 2
+depth_draw_mode = 1
+albedo_color = Color(1, 1, 1, 0.32549)
+metallic = 0.9
+metallic_specular = 0.94
+roughness = 0.11
+clearcoat_enabled = true
+clearcoat = 0.77
+clearcoat_roughness = 0.12
+refraction_enabled = true
+refraction_scale = 0.1

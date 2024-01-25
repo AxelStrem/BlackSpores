@@ -11,6 +11,6 @@ func _process(delta):
 	var bri = regress*0.2 + 0.8
 	if bri < 0.2:
 		bri = 0.2
-	var env = get_parent().find_child("WorldEnvironment")
-	env.environment.adjustment_saturation = sat
-	env.environment.adjustment_brightness = bri
+	#var env = get_parent().find_child("WorldEnvironment")
+	#env.environment.adjustment_saturation = sat
+	#env.environment.adjustment_brightness = bri

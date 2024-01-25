@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dr6jbq8gfeunq"]
+[gd_scene load_steps=26 format=3 uid="uid://dr6jbq8gfeunq"]
 
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="1_uv686"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_xeb7s"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://8sa582fprbad" path="res://one_of.tscn" id="19_o878c"]
 [ext_resource type="PackedScene" uid="uid://cjhcwo80trop0" path="res://level_parts/building_blocks/staircase.tscn" id="20_0ew1r"]
 [ext_resource type="PackedScene" uid="uid://bmma7o3subknk" path="res://level_parts/building_blocks/tree.tscn" id="21_bcarw"]
+[ext_resource type="PackedScene" uid="uid://bkj2in0p1fpi3" path="res://level_parts/building_blocks/barrel_01.tscn" id="21_lgdbt"]
 [ext_resource type="PackedScene" uid="uid://dycy4oyf2uoy4" path="res://level_parts/building_blocks/beam.tscn" id="23_awbtm"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
@@ -695,6 +696,9 @@ transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -8, 7, 2
 
 [node name="GiantWall9" parent="Walls1" instance=ExtResource("18_3o54h")]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, -8, 7, -5.4)
+
+[node name="Barrel01" parent="Walls1" instance=ExtResource("21_lgdbt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9, 0, -24.3)
 
 [node name="VentLong" parent="." instance=ExtResource("12_ysmic")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.94878, 3.83907, -15.0504)

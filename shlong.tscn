@@ -82,7 +82,7 @@ skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_2rqle")
 
 [node name="Plane" type="MeshInstance3D" parent="mesh"]
-transform = Transform3D(0.124446, 9.90341e-05, 0.000178357, -0.000177185, -0.000200877, 0.124445, 0.000268981, -0.0459509, -0.000543636, 0, 0.160349, 0)
+transform = Transform3D(0.178999, 9.9144e-05, 0.000177561, -0.000254631, -0.00020091, 0.123999, 0.000386909, -0.0459995, -0.000541202, 0, 0.160349, 0)
 mesh = SubResource("ArrayMesh_gtgf4")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_71is7")

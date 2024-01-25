@@ -50,6 +50,7 @@ const teleporter_charges_max = 10
 const teleporter_charges_bonus = 2
 var teleporter = null
 var teleporter_scene = preload("res://entities/teleporter.tscn")
+var teleporter_energy_boost = 3.0
 
 var ward_charges = 0
 const ward_charges_max = 10
@@ -77,6 +78,16 @@ var info_timeout = 0.0
 var energy_boost = 0.0
 
 var controls_locked = false
+
+func lock_controls():
+	$Camera/HUDSprite.hide()
+	controls_locked = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+
+func unlock_controls():
+	controls_locked = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	$Camera/HUDSprite.show()	
 
 func get_game_root():
 	var p = get_parent()
@@ -162,44 +173,6 @@ func pickup(pickup_type):
 		return true
 	return true
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_pressed("exit_to_menu"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		to_menu_signal.emit()
-	
-	if not timer_paused:
-		time_passed += delta
-	label_time.text = format_time(time_passed)
-	label_energy.text = "{0}/{1}".format({0:int(current_energy), 1:max_energy})
-	velocity += Vector3(0.0,-20.0,0.0)*delta
-	
-	#if is_on_floor():	
-	#	ground_close = true
-	#	last_frame_on_ground = true
-	#else:
-	#	if last_frame_on_ground:
-	#		last_frame_on_ground = false
-			#$AirtimeDelay.start()		
-	
-	#var air_coef = air_control
-	#if is_on_floor():
-	#	air_coef = 1.0	
-	
-	#var velocity_increment = Vector3(0.0,0.0,0.0)
-	#var velocity_changing = false
-	
-	#if is_on_floor():	
-	#	velocity*=pow(speed_decay,60.0*delta)
-	
-	#if is_on_floor() and not jumping:
-	#	velocity = move_and_slide_with_snap(velocity, -vec_up, vec_up)
-	#else:
-	#	velocity = move_and_slide(velocity, vec_up)	
-	#
-	#if translation.y < -10.0:
-	#	kill_player()
-
 var SPEED = 5.0
 const jump_velocity = 8.0
 const jump_velocity_antigrav = 20.0
@@ -210,6 +183,19 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 
 func _physics_process(delta):
+	if controls_locked:
+		return
+	
+	if Input.is_action_pressed("exit_to_menu"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		to_menu_signal.emit()
+	
+	if not timer_paused:
+		time_passed += delta
+	label_time.text = format_time(time_passed)
+	label_energy.text = "{0}/{1}".format({0:int(current_energy), 1:max_energy})
+	velocity += Vector3(0.0,-20.0,0.0)*delta
+		
 	label_consumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	var game = get_game_root()
 	if game:
@@ -345,6 +331,7 @@ func _input(event):
 					if teleporter.engaged:
 						var bs = basis
 						global_transform = teleporter.global_transform
+						energy_boost = teleporter_energy_boost
 						translate_object_local(Vector3.UP*1.5)
 						basis = bs
 						teleporter.queue_free()
