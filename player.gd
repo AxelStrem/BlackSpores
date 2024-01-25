@@ -118,6 +118,7 @@ func _ready():
 	$breath.set_volume_db(-1000)
 	label_points.text = "points/{0}".format({0:int(research_points)})
 	label_energy.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
+	get_tree().paused = false
 	#checkpoint = translation
 
 func display_info(text):
@@ -185,10 +186,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	if controls_locked:
 		return
-	
-	if Input.is_action_pressed("exit_to_menu"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		to_menu_signal.emit()
 	
 	if not timer_paused:
 		time_passed += delta
@@ -363,14 +360,7 @@ func _on_area_3d_area_entered(_area):
 
 func _player_dead(death_velocity):
 	dead = true
-	hud_sprite.hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	var restart_button = $Camera/restartButton
-	restart_button.visible=true
-	restart_button.activate()
-	var menu_button = $Camera/quitToMenuButton
-	menu_button.visible=true
-	menu_button.activate()
+	_show_menu()
 	
 	var dead_body = dead_player_scene.instantiate()
 	get_parent().add_child(dead_body)
@@ -383,3 +373,23 @@ func _player_dead(death_velocity):
 
 func _on_breath_finished():
 	$breath.play()
+	
+func _show_menu():	
+	hud_sprite.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	var restart_button = $Camera/restartButton
+	restart_button.visible=true
+	restart_button.activate()
+	var menu_button = $Camera/quitToMenuButton
+	menu_button.visible=true
+	menu_button.activate()
+	
+func _hide_menu():
+	hud_sprite.show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	var restart_button = $Camera/restartButton
+	restart_button.visible=false
+	restart_button.deactivate()
+	var menu_button = $Camera/quitToMenuButton
+	menu_button.visible=false
+	menu_button.deactivate()	

@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="2_t2xlb"]
 
 [node name="menu" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_gxk3j")
 
 [node name="startButton" parent="." instance=ExtResource("2_t2xlb")]
