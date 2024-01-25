@@ -2,6 +2,7 @@ extends Node3D
 
 @export var spread_spores = true
 @export var spores_kill = true
+@export var debug_items = true
 
 signal to_menu_signal
 signal restart_signal
@@ -15,6 +16,10 @@ var black_shit_count = 0
 var total_timer = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if debug_items:
+		$player.antigrav_charges = 10
+		$player.teleporter_charges = 10
+		$player.ward_charges = 10
 	pass # Replace with function body.
 
 func activate_spore(s):
