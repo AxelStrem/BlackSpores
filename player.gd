@@ -367,6 +367,16 @@ func _on_area_3d_area_entered(area):
 		if game and game.do_spores_kill():
 			_player_dead(velocity, 0)
 
+#only to be deferred called
+func roll_head(death_velocity):
+	var dead_body = dead_player_scene.instantiate()
+	get_parent().add_child(dead_body)
+	dead_body.global_transform = self.global_transform
+	dead_body.linear_velocity = death_velocity	
+	remove_child(camera)
+	dead_body.add_child(camera)	
+	queue_free()
+
 func _player_dead(death_velocity, cause):
 	dead = true
 	_show_menu()
@@ -380,15 +390,8 @@ func _player_dead(death_velocity, cause):
 		death_screen.find_child("cause_crashed").show()
 	if cause==2:
 		death_screen.find_child("cause_fell").show()
-	
-	var dead_body = dead_player_scene.instantiate()
-	get_parent().add_child(dead_body)
-	dead_body.global_transform = self.global_transform
-	dead_body.linear_velocity = death_velocity	
-	remove_child(camera)
-	dead_body.add_child(camera)	
-	queue_free()
 
+	call_deferred("roll_head", death_velocity)
 
 func _on_breath_finished():
 	$breath.play()
