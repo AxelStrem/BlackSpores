@@ -2,11 +2,14 @@ extends Node3D
 
 var spore_scene = preload("res://black_spore.tscn")
 @export var door : Node3D  =null
+@export var screen1 : Node3D  =null
+@export var screen2 : Node3D  =null
 
 var state = 0
 var jar_angle = 0.0
 
 var rot_speed = 1.5
+var timer = 1.0
 
 func _ready():
 	var nc : RigidBody3D = $nutella_cap
@@ -38,6 +41,12 @@ func _process(delta):
 			get_parent().get_parent().get_parent().add_child(nc)
 			nc.global_transform = gt
 			nc.linear_velocity = Vector3.LEFT*3.0
+	if state==2:
+		timer-=delta
+		if timer < 0.0:
+			state=3
+			screen1.hide()
+			screen2.show()
 			
 		
 

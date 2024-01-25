@@ -37,7 +37,6 @@ size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 script = ExtResource("1_kjcn1")
-spores_kill = false
 debug_items = false
 show_info = false
 
@@ -46,7 +45,7 @@ transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502
 visible = false
 
 [node name="player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, 2.25052, -26.6631)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, 1.46736, -26.6631)
 collision_layer = 529
 script = ExtResource("3_1xpxi")
 
@@ -54,7 +53,7 @@ script = ExtResource("3_1xpxi")
 shape = SubResource("CapsuleShape3D_k67sy")
 
 [node name="Camera" type="Camera3D" parent="player"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.533417, -0.285965)
+transform = Transform3D(1, -1.32405e-08, 6.7017e-10, 1.32405e-08, 0.99489, -0.100969, 6.70155e-10, 0.100969, 0.99489, 0, 0.533417, -0.285965)
 current = true
 script = ExtResource("4_nhh6l")
 
@@ -126,12 +125,12 @@ text = "55555"
 [node name="restartButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.252, -0.3)
 visible = false
-text = "restart"
+text = "Try again"
 
 [node name="quitToMenuButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.02, -0.3)
 visible = false
-text = "menu"
+text = "Menu"
 
 [node name="Feet" type="Node3D" parent="player/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419229, -1.67023, 0)

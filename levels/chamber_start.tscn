@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dko6syds2j81d"]
+[gd_scene load_steps=19 format=3 uid="uid://dko6syds2j81d"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_cklow"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_mhbut"]
@@ -10,6 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://b21lfcey82x68" path="res://models/corridors/ceiling_lamp.tscn" id="8_lhlfp"]
 [ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="10_0ckhs"]
 [ext_resource type="PackedScene" uid="uid://cbpb8uge67xox" path="res://level_parts/lab/nutella.tscn" id="10_oe0q2"]
+[ext_resource type="Script" path="res://levels/Spread.gd" id="10_rparp"]
+[ext_resource type="Script" path="res://levels/rotor.gd" id="11_eyt71"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
 size = Vector3(44.643, 21.4832, 37.6189)
@@ -22,6 +24,12 @@ size = Vector3(25, 0.6, 20)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8r0w"]
 emission_enabled = true
 emission = Color(0.211765, 0.211765, 0.211765, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx7ro"]
+shading_mode = 0
+albedo_color = Color(1, 0.305882, 0.239216, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_80gvr"]
 
 [node name="Chamber" type="Node3D" node_paths=PackedStringArray("level_in", "level_out")]
 script = ExtResource("1_cklow")
@@ -173,12 +181,86 @@ font_size = 18
 outline_size = 6
 horizontal_alignment = 0
 
+[node name="Screen2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-2.89807e-07, 0, -3.9, 0, 3.9, 0, 6.63, 0, -1.70474e-07, 11, 4, -27)
+visible = false
+mesh = SubResource("QuadMesh_3e3pc")
+surface_material_override/0 = SubResource("StandardMaterial3D_o8r0w")
+
+[node name="Label3D" type="Label3D" parent="Screen2"]
+transform = Transform3D(0.315, 0, 7.99361e-15, 0, 0.315, 0, -4.08562e-14, 0, 0.314999, -0.196078, 0.384615, 0.0256412)
+text = "Containment status: "
+outline_size = 6
+
+[node name="Spread" type="Label3D" parent="Screen2"]
+transform = Transform3D(0.315, 0, 9.76996e-15, 0, 0.315, 0, -4.44089e-14, 0, 0.314999, 0.271494, 0.384615, 0.0256412)
+modulate = Color(1, 0.341176, 0.262745, 1)
+text = "IT'S SPREADING"
+outline_size = 6
+script = ExtResource("10_rparp")
+
+[node name="Label3D3" type="Label3D" parent="Screen2"]
+transform = Transform3D(0.315, 0, 9.76996e-15, 0, 0.315, 0, -4.44089e-14, 0, 0.314999, -0.196078, -0.384615, 0.0256412)
+text = "Containment status: "
+outline_size = 6
+
+[node name="Spread2" type="Label3D" parent="Screen2"]
+transform = Transform3D(0.315, 0, 1.06581e-14, 0, 0.315, 0, -4.79616e-14, 0, 0.314999, 0.271494, -0.384615, 0.0256412)
+modulate = Color(1, 0.341176, 0.262745, 1)
+text = "IT'S SPREADING"
+outline_size = 6
+script = ExtResource("10_rparp")
+
+[node name="Label3D2" type="Label3D" parent="Screen2"]
+transform = Transform3D(0.495, 0, 3.19744e-14, 0, 0.899999, 0, -9.23706e-14, 0, 0.899998, -0.226244, 0.025641, 0.0256412)
+modulate = Color(1, 0.25098, 0.243137, 1)
+text = "RUN"
+font_size = 78
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Screen2"]
+transform = Transform3D(1.95654e-16, -4.47605e-09, 0.1024, -0.1024, -4.47605e-09, -1.79707e-23, 4.47605e-09, -0.1024, -4.47605e-09, 0.633484, 0.358974, 0)
+material_override = SubResource("StandardMaterial3D_bx7ro")
+mesh = SubResource("CapsuleMesh_80gvr")
+skeleton = NodePath("../..")
+script = ExtResource("11_eyt71")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Screen2/MeshInstance3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.200001, 0)
+light_color = Color(1, 0.239216, 0.137255, 1)
+light_energy = 1.849
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Screen2/MeshInstance3D"]
+transform = Transform3D(-1.96837, -0.354244, -0.00681088, -0.354244, 1.9669, 0.0762716, -0.00681122, 0.0762716, -1.99853, 0, -0.200001, 0)
+light_color = Color(1, 0.239216, 0.137255, 1)
+light_energy = 1.849
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Screen2"]
+transform = Transform3D(1.96801e-16, -4.50227e-09, 0.103, -0.103, -4.50227e-09, 4.51899e-23, 4.50227e-09, -0.103, -4.50227e-09, -0.633484, 0.358974, 0)
+material_override = SubResource("StandardMaterial3D_bx7ro")
+mesh = SubResource("CapsuleMesh_80gvr")
+skeleton = NodePath("../..")
+script = ExtResource("11_eyt71")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Screen2/MeshInstance3D2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -0.200001, 0)
+light_color = Color(1, 0.239216, 0.137255, 1)
+light_energy = 1.849
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Screen2/MeshInstance3D2"]
+transform = Transform3D(-1.96837, -0.354244, -0.00681088, -0.354244, 1.9669, 0.0762716, -0.00681122, 0.0762716, -1.99853, 0, -0.200001, 0)
+light_color = Color(1, 0.239216, 0.137255, 1)
+light_energy = 1.849
+
 [node name="nutella_container" type="Node3D" parent="."]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, 9.6, 1.4, -25.3)
 
-[node name="nutella" parent="nutella_container" node_paths=PackedStringArray("door") instance=ExtResource("10_oe0q2")]
+[node name="nutella" parent="nutella_container" node_paths=PackedStringArray("door", "screen1", "screen2") instance=ExtResource("10_oe0q2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 door = NodePath("../../AutoDoor")
+screen1 = NodePath("../../Screen1")
+screen2 = NodePath("../../Screen2")
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_entered"]
 [connection signal="button_clicked" from="Screen1/button3D" to="nutella_container/nutella" method="_on_start_game"]
