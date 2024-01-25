@@ -129,6 +129,7 @@ transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 6.00609,
 transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2.00609, 0, 5.7999)
 
 [node name="PlayerDetector" type="Area3D" parent="."]
+transform = Transform3D(1.6, 0, 0, 0, 1, 0, 0, 0, 1, 21, 0, 0)
 collision_layer = 0
 collision_mask = 512
 monitorable = false
@@ -139,8 +140,6 @@ shape = SubResource("BoxShape3D_i01np")
 
 [node name="KillZone" parent="." instance=ExtResource("5_7km7i")]
 transform = Transform3D(-35.7, 0, 0, 0, 3.36, 0, 0, 0, 23.8, -38, -15, -3)
-collision_layer = 524288
-collision_mask = 524288
 
 [node name="Walls" type="Node3D" parent="."]
 
