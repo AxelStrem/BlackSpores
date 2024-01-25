@@ -122,16 +122,6 @@ ignore_occlusion_culling = true
 no_depth_test = true
 text = "55555"
 
-[node name="restartButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.252, -0.3)
-visible = false
-text = "Try again"
-
-[node name="quitToMenuButton" parent="player/Camera" instance=ExtResource("5_7jcy2")]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.02, -0.3)
-visible = false
-text = "Menu"
-
 [node name="Feet" type="Node3D" parent="player/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419229, -1.67023, 0)
 
@@ -157,11 +147,73 @@ double_sided = false
 no_depth_test = true
 texture = SubResource("ViewportTexture_4g3m7")
 
+[node name="DeathScreen" type="Node3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="info" type="Label3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, -0.027055, -2.14555)
+no_depth_test = true
+text = "30 chambers away from the evacuation exit"
+
+[node name="cause_spores" type="Node3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_spores"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
+no_depth_test = true
+text = "You have succumbed to the"
+
+[node name="Label3D2" type="Label3D" parent="player/Camera/DeathScreen/cause_spores"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
+no_depth_test = true
+text = "Black Spores"
+font_size = 63
+
+[node name="cause_fell" type="Node3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_fell"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
+no_depth_test = true
+text = "You fell into a"
+
+[node name="Label3D4" type="Label3D" parent="player/Camera/DeathScreen/cause_fell"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
+no_depth_test = true
+text = "Bottomless Pit"
+font_size = 63
+
+[node name="cause_crashed" type="Node3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_crashed"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
+no_depth_test = true
+text = "You have collided with"
+
+[node name="Label3D4" type="Label3D" parent="player/Camera/DeathScreen/cause_crashed"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
+no_depth_test = true
+text = "Solid Ground"
+font_size = 63
+
+[node name="restartButton" parent="player/Camera/DeathScreen" instance=ExtResource("5_7jcy2")]
+transform = Transform3D(0.193266, -7.73411e-17, -1.77636e-14, 1.94801e-15, 0.193266, -1.11759e-08, -1.77636e-14, 1.11759e-08, 0.193266, -0.232458, -0.177809, -0.521931)
+text = "Try again"
+
+[node name="quitToMenuButton" parent="player/Camera/DeathScreen" instance=ExtResource("5_7jcy2")]
+transform = Transform3D(0.193, -5.97632e-16, -3.55271e-15, 3.058e-15, 0.193, -5.58794e-09, -5.32907e-15, 5.58794e-09, 0.193, 0.0539532, -0.17781, -0.521931)
+text = "Menu"
+
 [node name="JumpDelay" type="Timer" parent="player"]
 
 [node name="Area3D" type="Area3D" parent="player"]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 524292
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player/Area3D"]
 shape = SubResource("CapsuleShape3D_tjvjx")
@@ -202,8 +254,8 @@ shape = SubResource("BoxShape3D_yhqqv")
 
 [node name="Chamber" parent="." instance=ExtResource("14_suh5h")]
 
-[connection signal="button_clicked" from="player/Camera/restartButton" to="." method="_on_restart_button_button_clicked"]
-[connection signal="button_clicked" from="player/Camera/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
+[connection signal="button_clicked" from="player/Camera/DeathScreen/restartButton" to="." method="_on_restart_button_button_clicked"]
+[connection signal="button_clicked" from="player/Camera/DeathScreen/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
 [connection signal="area_entered" from="player/Area3D" to="player" method="_on_area_3d_area_entered"]
 [connection signal="finished" from="player/breath" to="player" method="_on_breath_finished"]

@@ -27,6 +27,8 @@ var last_frame_on_ground = false
 var jumping = false
 var timer_paused = false
 
+var current_chamber = 0
+
 var dead_player_scene = preload("res://dead_player.tscn")
 var crouch = 0.0
 
@@ -79,6 +81,10 @@ var energy_boost = 0.0
 
 var controls_locked = false
 
+@onready var death_screen = $Camera/DeathScreen
+@onready var restart_button = $Camera/DeathScreen/restartButton
+@onready var menu_button = $Camera/DeathScreen/quitToMenuButton
+
 func lock_controls():
 	$Camera/HUDSprite.hide()
 	controls_locked = true
@@ -109,8 +115,8 @@ func _ready():
 	hud = $HUDViewport/Camera3D/HUD
 	hud_sprite = $Camera/HUDSprite
 	
-	$Camera/restartButton.deactivate()
-	$Camera/quitToMenuButton.deactivate()
+	restart_button.deactivate()
+	menu_button.deactivate()
 	
 	info_message = $Camera/InfoMessage
 	info_message.visible = false
@@ -233,7 +239,7 @@ func _physics_process(delta):
 				antigrav_protection=true
 			if not antigrav_protection:
 				label_dead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
-				_player_dead(old_velocity)
+				_player_dead(old_velocity, 1)
 		antigrav_protection = false
 	
 	old_velocity = velocity
@@ -356,21 +362,32 @@ func _on_jump_delay_timeout():
 	jumping = false
 
 
-func _on_area_3d_area_entered(_area):
-	var game = get_game_root()
-	if game and game.do_spores_kill():
-		_player_dead(velocity)
+func _on_area_3d_area_entered(area):
+	if area.get_collision_layer_value(20):
+		_player_dead(velocity, 2)
+	if area.get_collision_layer_value(3):
+		var game = get_game_root()
+		if game and game.do_spores_kill():
+			_player_dead(velocity, 0)
 
-func _player_dead(death_velocity):
+func _player_dead(death_velocity, cause):
 	dead = true
 	hud_sprite.hide()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	var restart_button = $Camera/restartButton
-	restart_button.visible=true
+	
+	death_screen.show()
 	restart_button.activate()
-	var menu_button = $Camera/quitToMenuButton
-	menu_button.visible=true
 	menu_button.activate()
+	
+	var chambers_left = Global.total_chambers - current_chamber
+	death_screen.find_child("info").text = "{0} chambers away from the emergency exit".format({0:chambers_left})
+	
+	if cause==0:
+		death_screen.find_child("cause_spores").show()
+	if cause==1:
+		death_screen.find_child("cause_crashed").show()
+	if cause==2:
+		death_screen.find_child("cause_fell").show()
 	
 	var dead_body = dead_player_scene.instantiate()
 	get_parent().add_child(dead_body)
