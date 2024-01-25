@@ -18,7 +18,6 @@ margin = 0.001
 
 [node name="Label3D" type="Label3D" parent="."]
 transform = Transform3D(1.18783, 0, 0, 0, 1.18783, 0, 0, 0, 1.18783, 0, -0.25, 0)
-no_depth_test = true
 text = "start"
 font_size = 56
 outline_size = 7

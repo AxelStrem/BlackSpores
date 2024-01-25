@@ -124,6 +124,7 @@ func _ready():
 	$breath.set_volume_db(-1000)
 	label_points.text = "points/{0}".format({0:int(research_points)})
 	label_energy.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
+	get_tree().paused = false
 	#checkpoint = translation
 
 func display_info(text):
@@ -191,10 +192,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	if controls_locked:
 		return
-	
-	if Input.is_action_pressed("exit_to_menu"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		to_menu_signal.emit()
 	
 	if not timer_paused:
 		time_passed += delta
@@ -372,12 +369,7 @@ func _on_area_3d_area_entered(area):
 
 func _player_dead(death_velocity, cause):
 	dead = true
-	hud_sprite.hide()
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
-	death_screen.show()
-	restart_button.activate()
-	menu_button.activate()
+	_show_menu()
 	
 	var chambers_left = Global.total_chambers - current_chamber
 	death_screen.find_child("info").text = "{0} chambers away from the emergency exit".format({0:chambers_left})
@@ -400,3 +392,17 @@ func _player_dead(death_velocity, cause):
 
 func _on_breath_finished():
 	$breath.play()
+	
+func _show_menu():		
+	death_screen.show()
+	restart_button.activate()
+	menu_button.activate()
+	hud_sprite.hide()
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+func _hide_menu():
+	hud_sprite.show()
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	death_screen.hide
+	restart_button.deactivate()
+	menu_button.deactivate()	
