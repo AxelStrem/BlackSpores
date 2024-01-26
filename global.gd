@@ -8,7 +8,7 @@ var level_scenes = [
  	preload("res://levels/chamber_troll.tscn")
 ]
 var victory_scene = preload("res://levels/chamber_victory.tscn")
-var total_chambers = 30
+var total_chambers = 1
 
 func random_direction():
 	var a = randf_range(0, TAU)
