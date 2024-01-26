@@ -1,11 +1,13 @@
-extends DirectionalLight3D
+extends Node3D
 var paused = false
 var player
 
 func _ready():
 	player = get_parent().find_child("player")
 
-func _physics_process(delta):	
+func _physics_process(delta):
+	if player==null:
+		return
 	if Input.is_action_just_pressed("pause_game"):
 		if get_tree().is_paused():
 			get_tree().paused = false

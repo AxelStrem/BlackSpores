@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=22 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="Script" path="res://player.gd" id="3_1xpxi"]
@@ -12,6 +12,7 @@
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_mphlh"]
+[ext_resource type="Script" path="res://pause.gd" id="14_jwptw"]
 [ext_resource type="PackedScene" uid="uid://dko6syds2j81d" path="res://levels/chamber_start.tscn" id="14_suh5h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
@@ -41,6 +42,7 @@ glow_strength = 0.95
 size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
+process_mode = 1
 script = ExtResource("1_kjcn1")
 debug_items = false
 show_info = false
@@ -248,10 +250,12 @@ text = "Solid Ground"
 font_size = 63
 
 [node name="restartButton" parent="player/Camera/DeathScreen" instance=ExtResource("5_7jcy2")]
+process_mode = 3
 transform = Transform3D(0.193266, -7.73411e-17, -1.77636e-14, 1.94801e-15, 0.193266, -1.11759e-08, -1.77636e-14, 1.11759e-08, 0.193266, -0.232458, -0.177809, -0.521931)
 text = "Try again"
 
 [node name="quitToMenuButton" parent="player/Camera/DeathScreen" instance=ExtResource("5_7jcy2")]
+process_mode = 3
 transform = Transform3D(0.193, -5.97632e-16, -3.55271e-15, 3.058e-15, 0.193, -5.58794e-09, -5.32907e-15, 5.58794e-09, 0.193, 0.0539532, -0.17781, -0.521931)
 text = "Menu"
 
@@ -300,6 +304,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.2917, -1.80713, 4.95517)
 shape = SubResource("BoxShape3D_yhqqv")
 
 [node name="Chamber" parent="." instance=ExtResource("14_suh5h")]
+
+[node name="pause" type="Node3D" parent="."]
+process_mode = 3
+script = ExtResource("14_jwptw")
 
 [connection signal="button_clicked" from="player/Camera/DeathScreen/restartButton" to="." method="_on_restart_button_button_clicked"]
 [connection signal="button_clicked" from="player/Camera/DeathScreen/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
