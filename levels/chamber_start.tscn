@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dko6syds2j81d"]
+[gd_scene load_steps=20 format=3 uid="uid://dko6syds2j81d"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_cklow"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_mhbut"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cbpb8uge67xox" path="res://level_parts/lab/nutella.tscn" id="10_oe0q2"]
 [ext_resource type="Script" path="res://levels/Spread.gd" id="10_rparp"]
 [ext_resource type="Script" path="res://levels/rotor.gd" id="11_eyt71"]
+[ext_resource type="Texture2D" uid="uid://dst4v0htyn0kb" path="res://tutorial.png" id="13_y73h3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
 size = Vector3(44.643, 21.4832, 37.6189)
@@ -261,6 +262,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 door = NodePath("../../AutoDoor")
 screen1 = NodePath("../../Screen1")
 screen2 = NodePath("../../Screen2")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, -8.9182, 3.21839, -15.5928)
+modulate = Color(0.709804, 0.827451, 0.890196, 1)
+texture = ExtResource("13_y73h3")
+region_enabled = true
+region_rect = Rect2(0, 152.016, 1024, 742.239)
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_entered"]
 [connection signal="button_clicked" from="Screen1/button3D" to="nutella_container/nutella" method="_on_start_game"]

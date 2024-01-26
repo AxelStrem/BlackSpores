@@ -5,7 +5,7 @@ var player
 func _ready():
 	player = get_parent().find_child("player")
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	if player==null:
 		return
 	if Input.is_action_just_pressed("pause_game"):

@@ -44,15 +44,16 @@ size = Vector3(196.664, 4.61426, 267.326)
 [node name="main" type="Node3D" groups=["game"]]
 process_mode = 1
 script = ExtResource("1_kjcn1")
+spread_spores = false
 debug_items = false
 show_info = false
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, 25.056, -8.97102)
+transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
 visible = false
 
 [node name="player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, 1.46736, -26.6631)
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, -264.002, -26.6631)
 collision_layer = 529
 script = ExtResource("3_1xpxi")
 
@@ -306,16 +307,18 @@ environment = SubResource("Environment_5pjpf")
 environment = ExtResource("7_q68py")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -55.3672, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -320.836, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.2917, -1.80713, 4.95517)
 shape = SubResource("BoxShape3D_yhqqv")
 
 [node name="Chamber" parent="." instance=ExtResource("14_suh5h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -265.469, 0)
 
 [node name="pause" type="Node3D" parent="."]
 process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -265.469, 0)
 script = ExtResource("14_jwptw")
 
 [connection signal="button_clicked" from="player/Camera/DeathScreen/restartButton" to="." method="_on_restart_button_button_clicked"]
