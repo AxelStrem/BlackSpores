@@ -156,6 +156,7 @@ texture = SubResource("ViewportTexture_4g3m7")
 
 [node name="DeathScreen" type="Node3D" parent="player/Camera"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
 
 [node name="info" type="Label3D" parent="player/Camera/DeathScreen"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, -0.027055, -2.14555)
@@ -164,6 +165,7 @@ text = "30 chambers away from the evacuation exit"
 
 [node name="cause_victory" type="Node3D" parent="player/Camera/DeathScreen"]
 transform = Transform3D(1, -8.88165e-16, -1.42109e-14, 8.88182e-16, 1, -4.77529e-21, 0, -4.77528e-21, 1, 0, 0, 0)
+visible = false
 
 [node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_victory"]
 transform = Transform3D(1, 8.88256e-16, -4.26326e-14, -3.38813e-21, 1, -4.89176e-21, 0, -4.89175e-21, 1, -0.021574, 0.962291, -2.24596)
