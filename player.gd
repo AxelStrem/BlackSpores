@@ -406,6 +406,6 @@ func _show_menu():
 func _hide_menu():
 	hud_sprite.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	death_screen.hide
+	death_screen.hide()
 	restart_button.deactivate()
 	menu_button.deactivate()	

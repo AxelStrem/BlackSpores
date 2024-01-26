@@ -1,0 +1,289 @@
+[gd_scene load_steps=22 format=3 uid="uid://c7my0elpnx4qy"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_pd7yn"]
+[ext_resource type="Script" path="res://player.gd" id="2_4onvp"]
+[ext_resource type="Script" path="res://Camera.gd" id="3_xwyjf"]
+[ext_resource type="AudioStream" uid="uid://deh1ywdmhvv1t" path="res://sound/step01.wav" id="4_lai33"]
+[ext_resource type="AudioStream" uid="uid://cq6dojw3hv7fc" path="res://sound/step02.wav" id="5_gunrj"]
+[ext_resource type="AudioStream" uid="uid://bpjkmior7t0yg" path="res://sound/step03.wav" id="6_aywyb"]
+[ext_resource type="AudioStream" uid="uid://bbifl3qq1eks" path="res://sound/step04.wav" id="7_2e6b4"]
+[ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="8_2darn"]
+[ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_pkqiy"]
+[ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_mlnpi"]
+[ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_o5oo4"]
+[ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="13_kqq1d"]
+[ext_resource type="Script" path="res://logo.gd" id="14_prlko"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
+radius = 0.985279
+height = 2.87003
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4g3m7"]
+viewport_path = NodePath("player/HUDViewport")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjvjx"]
+height = 2.04788
+
+[sub_resource type="Environment" id="Environment_5pjpf"]
+ambient_light_source = 2
+ambient_light_color = Color(0.913725, 0.913725, 0.913725, 1)
+ambient_light_energy = 0.0
+glow_enabled = true
+glow_intensity = 1.25
+glow_strength = 0.95
+
+[sub_resource type="Environment" id="Environment_ec3yb"]
+background_energy_multiplier = 0.05
+ambient_light_energy = 0.0
+tonemap_mode = 2
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 1.45
+fog_density = 0.0251
+adjustment_enabled = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
+size = Vector3(196.664, 1.08728, 267.326)
+
+[sub_resource type="QuadMesh" id="QuadMesh_310om"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_akbdh"]
+shading_mode = 0
+
+[node name="main" type="Node3D" groups=["game"]]
+script = ExtResource("1_pd7yn")
+debug_items = false
+show_info = false
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, 25.056, -8.97102)
+visible = false
+
+[node name="player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, 1.46736, -26.6631)
+collision_layer = 529
+script = ExtResource("2_4onvp")
+
+[node name="hitbox" type="CollisionShape3D" parent="player"]
+shape = SubResource("CapsuleShape3D_k67sy")
+
+[node name="Camera" type="Camera3D" parent="player"]
+transform = Transform3D(1, -1.32405e-08, 6.7017e-10, 1.32405e-08, 0.99489, -0.100969, 6.70155e-10, 0.100969, 0.99489, 0, 0.533417, -0.285965)
+script = ExtResource("3_xwyjf")
+
+[node name="InfoMessage" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.84634, 2.59992, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "Picked up a steaming pile of shit"
+horizontal_alignment = 0
+
+[node name="LabelFPS" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.54911, 2.1149, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "60 FPS"
+
+[node name="LabelTime" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.84939, 2.10778, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "60 FPS"
+
+[node name="LabelEnergy" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 1.92263, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
+[node name="LabelDead" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53786, 1.75745, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
+[node name="LabelPoints" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.53748, 1.59536, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
+[node name="LabelConsumables" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.86747, 2.3195, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
+[node name="LabelDebug" type="Label3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.30056, 1.41274, -3.619)
+layers = 2
+sorting_offset = 5.0
+ignore_occlusion_culling = true
+no_depth_test = true
+text = "55555"
+
+[node name="Feet" type="Node3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.419229, -1.67023, 0)
+
+[node name="step1" type="AudioStreamPlayer3D" parent="player/Camera/Feet"]
+stream = ExtResource("4_lai33")
+
+[node name="step2" type="AudioStreamPlayer3D" parent="player/Camera/Feet"]
+stream = ExtResource("5_gunrj")
+
+[node name="step3" type="AudioStreamPlayer3D" parent="player/Camera/Feet"]
+stream = ExtResource("6_aywyb")
+
+[node name="step4" type="AudioStreamPlayer3D" parent="player/Camera/Feet"]
+stream = ExtResource("7_2e6b4")
+
+[node name="item_spawn" type="Node3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0709114, -1.59893)
+
+[node name="HUDSprite" type="Sprite3D" parent="player/Camera"]
+transform = Transform3D(0.63402, 0, 0, 0, 0.63402, 0, 0, 0, 0.63402, 8.08158, 3.0678, -8.32078)
+billboard = 1
+double_sided = false
+no_depth_test = true
+texture = SubResource("ViewportTexture_4g3m7")
+
+[node name="DeathScreen" type="Node3D" parent="player/Camera"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="info" type="Label3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, -0.027055, -2.14555)
+no_depth_test = true
+text = "30 chambers away from the evacuation exit"
+
+[node name="cause_spores" type="Node3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_spores"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
+no_depth_test = true
+text = "You have succumbed to the"
+
+[node name="Label3D2" type="Label3D" parent="player/Camera/DeathScreen/cause_spores"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
+no_depth_test = true
+text = "Black Spores"
+font_size = 63
+
+[node name="cause_fell" type="Node3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_fell"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
+no_depth_test = true
+text = "You fell into a"
+
+[node name="Label3D4" type="Label3D" parent="player/Camera/DeathScreen/cause_fell"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
+no_depth_test = true
+text = "Bottomless Pit"
+font_size = 63
+
+[node name="cause_crashed" type="Node3D" parent="player/Camera/DeathScreen"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
+visible = false
+
+[node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_crashed"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
+no_depth_test = true
+text = "You have collided with"
+
+[node name="Label3D4" type="Label3D" parent="player/Camera/DeathScreen/cause_crashed"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
+no_depth_test = true
+text = "Solid Ground"
+font_size = 63
+
+[node name="restartButton" parent="player/Camera/DeathScreen" instance=ExtResource("8_2darn")]
+transform = Transform3D(0.193266, -7.73411e-17, -1.77636e-14, 1.94801e-15, 0.193266, -1.11759e-08, -1.77636e-14, 1.11759e-08, 0.193266, -0.232458, -0.177809, -0.521931)
+text = "Try again"
+
+[node name="quitToMenuButton" parent="player/Camera/DeathScreen" instance=ExtResource("8_2darn")]
+transform = Transform3D(0.193, -5.97632e-16, -3.55271e-15, 3.058e-15, 0.193, -5.58794e-09, -5.32907e-15, 5.58794e-09, 0.193, 0.0539532, -0.17781, -0.521931)
+text = "Menu"
+
+[node name="JumpDelay" type="Timer" parent="player"]
+
+[node name="Area3D" type="Area3D" parent="player"]
+collision_layer = 0
+collision_mask = 524292
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player/Area3D"]
+shape = SubResource("CapsuleShape3D_tjvjx")
+
+[node name="breath" type="AudioStreamPlayer" parent="player"]
+stream = ExtResource("9_pkqiy")
+autoplay = true
+
+[node name="pickup_sound" type="AudioStreamPlayer" parent="player"]
+stream = ExtResource("10_mlnpi")
+volume_db = 4.0
+
+[node name="HUDViewport" type="SubViewport" parent="player"]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="Camera3D" type="Camera3D" parent="player/HUDViewport"]
+projection = 1
+current = true
+size = 2.268
+near = 0.01
+
+[node name="HUD" parent="player/HUDViewport/Camera3D" instance=ExtResource("11_o5oo4")]
+transform = Transform3D(1, 1.33227e-14, -5.82353e-22, 0, -4.37114e-08, -1, -1.33227e-14, 1, -4.37114e-08, 0, 0, -0.56198)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="player/HUDViewport/Camera3D"]
+environment = SubResource("Environment_5pjpf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ec3yb")
+
+[node name="black_spore" parent="." instance=ExtResource("13_kqq1d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -15.607, 0)
+state = 7
+
+[node name="StaticBody3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -24.0363, 0)
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("14_prlko")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 54.2917, 6.45031, 4.95517)
+shape = SubResource("BoxShape3D_yhqqv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(109.374, 0, 0, 0, -3.8147e-06, 43.0002, 0, 155.747, 0, 19.9666, 6.58265, -9.99199)
+mesh = SubResource("QuadMesh_310om")
+surface_material_override/0 = SubResource("StandardMaterial3D_akbdh")
+
+[node name="Camera3D" type="Camera3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 27.287, 0)
+current = true
+
+[connection signal="button_clicked" from="player/Camera/DeathScreen/restartButton" to="." method="_on_restart_button_button_clicked"]
+[connection signal="button_clicked" from="player/Camera/DeathScreen/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
+[connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
+[connection signal="area_entered" from="player/Area3D" to="player" method="_on_area_3d_area_entered"]
+[connection signal="finished" from="player/breath" to="player" method="_on_breath_finished"]
