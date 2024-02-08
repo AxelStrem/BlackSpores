@@ -10,7 +10,7 @@ size = Vector3(0.835098, 0.877836, 4.01636)
 size = Vector3(0.445591, 6.38228, 0.419801)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yae4d"]
-size = Vector3(0.420807, 5.38814, 3.94019)
+size = Vector3(0.325539, 5.38814, 3.94019)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ipone"]
 resource_name = "Material"
@@ -96,7 +96,7 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.39134, 3.10076, -0.00378418)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.40079, 3.10076, -0.00378418)
 shape = SubResource("BoxShape3D_yae4d")
 
 [node name="Bars01" type="MeshInstance3D" parent="."]

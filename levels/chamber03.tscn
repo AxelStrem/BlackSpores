@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://it56wxbfmclq"]
+[gd_scene load_steps=14 format=3 uid="uid://it56wxbfmclq"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_34spb"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_di7li"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b21lfcey82x68" path="res://models/corridors/ceiling_lamp.tscn" id="9_6mw8h"]
 [ext_resource type="PackedScene" uid="uid://cy7pct6fyxcjj" path="res://level_parts/building_blocks/auto_door.tscn" id="10_0p3cu"]
 [ext_resource type="PackedScene" uid="uid://bk6ro78efnftv" path="res://entities/digital_lock.tscn" id="11_fpo4c"]
+[ext_resource type="PackedScene" uid="uid://qhshaqrg0h50" path="res://levels/spore_placer.tscn" id="12_u5gk2"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
 size = Vector3(44.643, 21.4832, 37.6189)
@@ -324,5 +325,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5999, 0, -16.0163)
 [node name="digital_lock" parent="Node3D" node_paths=PackedStringArray("target") instance=ExtResource("11_fpo4c")]
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 12.073, 1.77888, -18.0199)
 target = NodePath("../AutoDoor")
+
+[node name="SporePlacer" parent="." instance=ExtResource("12_u5gk2")]
 
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_entered"]

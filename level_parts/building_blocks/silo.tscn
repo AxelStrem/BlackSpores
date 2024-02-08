@@ -62,15 +62,19 @@ top = true
 [node name="digital_lock" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_8b7tr")]
 transform = Transform3D(-2.18557e-08, 0.5, -2.18557e-08, 0, -2.18557e-08, -0.5, -0.5, -2.18557e-08, 9.55343e-16, -6.09652, 1.79868, -3.24035)
 target = NodePath("../LockDown")
+complexity = 3.0
 
 [node name="digital_lock2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_8b7tr")]
 transform = Transform3D(6.55671e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, 6.55671e-08, -2.86603e-15, 2.07023, 1.79868, -3.24035)
 target = NodePath("../LockUp")
+complexity = 3.0
 
 [node name="digital_lock3" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_8b7tr")]
 transform = Transform3D(-2.18557e-08, 0.5, -2.18557e-08, 0, -2.18557e-08, -0.5, -0.5, -2.18557e-08, 9.55343e-16, -6.09652, 1.79868, 3.19311)
 target = NodePath("../LockDown")
+complexity = 3.0
 
 [node name="digital_lock4" parent="." node_paths=PackedStringArray("target") instance=ExtResource("7_8b7tr")]
 transform = Transform3D(6.55671e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, 6.55671e-08, -2.86603e-15, 2.07023, 1.79868, 3.19311)
 target = NodePath("../LockUp")
+complexity = 3.0

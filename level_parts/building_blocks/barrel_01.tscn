@@ -7,9 +7,8 @@
 height = 0.671322
 radius = 0.364006
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_gy4ms"]
-height = 0.213773
-radius = 0.377985
+[sub_resource type="BoxShape3D" id="BoxShape3D_nnatx"]
+size = Vector3(0.741089, 0.162964, 0.753235)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qkp1v"]
 resource_name = "Material"
@@ -68,8 +67,8 @@ collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scale2/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0163936, 0.625229, -0.0194665)
-shape = SubResource("CylinderShape3D_gy4ms")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00864214, 0.68779, -0.00368891)
+shape = SubResource("BoxShape3D_nnatx")
 
 [node name="Barrel" type="MeshInstance3D" parent="Scale2"]
 mesh = SubResource("ArrayMesh_8m3qi")

@@ -1,18 +1,9 @@
-[gd_scene load_steps=15 format=3 uid="uid://31svuo307e77"]
+[gd_scene load_steps=12 format=3 uid="uid://cnlyphkkvonox"]
 
 [ext_resource type="Script" path="res://black_spore.gd" id="1_tr7qa"]
 [ext_resource type="PackedScene" uid="uid://bm83d03mhyu6y" path="res://models/black_spores/blackspore_02.tscn" id="2_jn7ft"]
 [ext_resource type="Texture2D" uid="uid://bkulakueqngn4" path="res://models/sprites/bs01.png" id="3_ick30"]
 [ext_resource type="AudioStream" uid="uid://b62rhr1qeiuai" path="res://sound/black_spores.wav" id="3_tn8wi"]
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_2u8f2"]
-radius = 0.2
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_pqxde"]
-radius = 0.7
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_84r6q"]
-radius = 0.6
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_piy1l"]
 shading_mode = 0
@@ -33,49 +24,16 @@ albedo_color = Color(0.12549, 0.454902, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1i777"]
 albedo_color = Color(1, 0.462745, 1, 1)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_bq5d4"]
-radius = 0.504966
+[sub_resource type="SphereShape3D" id="SphereShape3D_ggntj"]
+radius = 0.495
 
 [node name="black_spore" type="Node3D" groups=["spore"]]
 script = ExtResource("1_tr7qa")
 
-[node name="hitbox_init_test_allowed" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_init_test_allowed"]
-shape = SubResource("SphereShape3D_2u8f2")
-
-[node name="hitbox_init_test_rejected" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 8
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_init_test_rejected"]
-shape = SubResource("SphereShape3D_2u8f2")
-
-[node name="hitbox_init_overlapped" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 4
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox_init_overlapped"]
-shape = SubResource("SphereShape3D_pqxde")
-
-[node name="hitbox" type="Area3D" parent="."]
-collision_layer = 4
-collision_mask = 0
-monitoring = false
-monitorable = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
-shape = SubResource("SphereShape3D_84r6q")
-
 [node name="spore" type="Node3D" parent="."]
+visible = false
 
 [node name="ball" type="MeshInstance3D" parent="spore"]
-visible = false
 material_override = SubResource("StandardMaterial3D_piy1l")
 mesh = SubResource("SphereMesh_rywk1")
 skeleton = NodePath("../..")
@@ -106,7 +64,7 @@ monitoring = false
 monitorable = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="spore/hitbox"]
-shape = SubResource("SphereShape3D_bq5d4")
+shape = SubResource("SphereShape3D_ggntj")
 
 [node name="ballZ" parent="spore" instance=ExtResource("2_jn7ft")]
 visible = false

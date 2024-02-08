@@ -11,7 +11,7 @@
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_pkqiy"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_mlnpi"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_o5oo4"]
-[ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore.tscn" id="13_kqq1d"]
+[ext_resource type="PackedScene" uid="uid://31svuo307e77" path="res://black_spore_old.tscn" id="13_kqq1d"]
 [ext_resource type="Script" path="res://logo.gd" id="14_prlko"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]

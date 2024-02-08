@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://digvvc4qd6qr"]
+[gd_scene load_steps=8 format=3 uid="uid://digvvc4qd6qr"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_5apep"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_50kb8"]
 [ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="3_t6g6l"]
 [ext_resource type="PackedScene" uid="uid://dhp6yf0e27h62" path="res://level_parts/building_blocks/ceiling_02.tscn" id="4_6pj6d"]
+[ext_resource type="PackedScene" uid="uid://qhshaqrg0h50" path="res://levels/spore_placer.tscn" id="6_cqlam"]
 [ext_resource type="PackedScene" uid="uid://terq7ea5w6yt" path="res://level_parts/building_blocks/kill_zone.tscn" id="19_vn0aj"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
@@ -103,4 +104,11 @@ shape = SubResource("BoxShape3D_i01np")
 [node name="KillZone" parent="." instance=ExtResource("19_vn0aj")]
 transform = Transform3D(-25.5, 0, 0, 0, 2.4, 0, 0, 0, 17, -5, -15, -19)
 
+[node name="SporePlacer" parent="." instance=ExtResource("6_cqlam")]
+
+[node name="DestructTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_entered"]
+[connection signal="timeout" from="DestructTimer" to="." method="_on_destruct_timer_timeout"]

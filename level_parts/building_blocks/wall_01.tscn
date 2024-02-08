@@ -64,10 +64,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.18666, 3.12247, 0.0118408)
 shape = SubResource("BoxShape3D_cxjgs")
 
 [node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0981928, 0, 0)
 collision_layer = 2
 collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.79913, 2.99991, -0.00378418)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0827, 2.99991, -0.00378418)
 shape = SubResource("BoxShape3D_w31en")

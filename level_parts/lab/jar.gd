@@ -14,6 +14,13 @@ var timer = 1.0
 func _ready():
 	var nc : RigidBody3D = $nutella_cap
 	nc.freeze = true
+	call_deferred("render_spore_placement")
+
+func render_spore_placement():
+	var level = get_parent().get_parent()
+	var game = Global.get_game_root(self)
+	game.append_level(level)
+	game.activate_pos(self.global_position)
 
 func start_evac():
 	var sp = spore_scene.instantiate()
@@ -25,7 +32,8 @@ func start_evac():
 	door.unlock()
 
 func start_sequence():
-	state = 1
+	if state==0:
+		state = 1
 
 func _process(delta):
 	if state==1:

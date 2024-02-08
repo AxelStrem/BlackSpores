@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://557bp3dji6bp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hmk6x"]
+shading_mode = 0
+albedo_color = Color(1, 0.290196, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_rywk1"]
+radial_segments = 16
+rings = 8
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8y1eb"]
+
+[node name="black_spore" type="Node3D" groups=["spore"]]
+
+[node name="ball" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.275, 0, 0, 0, 0.275, 0, 0, 0, 0.275, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_hmk6x")
+mesh = SubResource("SphereMesh_rywk1")
+surface_material_override/0 = SubResource("StandardMaterial3D_8y1eb")

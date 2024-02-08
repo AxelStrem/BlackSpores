@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://qhshaqrg0h50"]
+
+[ext_resource type="Script" path="res://levels/SporePlacer.gd" id="1_83b67"]
+
+[node name="SporePlacer" type="Node3D"]
+script = ExtResource("1_83b67")
