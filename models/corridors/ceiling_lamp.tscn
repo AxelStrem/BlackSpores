@@ -14,9 +14,9 @@ mesh = SubResource("QuadMesh_w7hv2")
 surface_material_override/0 = SubResource("StandardMaterial3D_kanu2")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.0805197, 0.283337)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0805193, 2.8048)
 light_energy = 0.385
-omni_range = 1.58401
+omni_range = 4.27102
 
 [node name="SporeDestructible" parent="." instance=ExtResource("1_ue7kg")]
 transform = Transform3D(1, 0, 7.10543e-15, 0, 1, 0, 0, 0, 1, 0, 0, 0.0986359)

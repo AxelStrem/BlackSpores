@@ -8,7 +8,8 @@ func _ready():
 func align_mesh(p1, p2, w):
 	var sz = (p2-p1).length()
 	if sz != 0.0:
-		$mesh.look_at_from_position((p1+p2)*0.5,p2)
+		if(!Vector3.UP.cross(p2-p1).is_zero_approx()):
+			$mesh.look_at_from_position((p1+p2)*0.5,p2)
 	$mesh.scale.z = sz
 	$mesh.scale.x = w
 	$mesh.scale.y = w

@@ -155,7 +155,7 @@ func pickup(pickup_type):
 	if pickup_type == 1:
 		energy_boost = energy_boost_duration
 		display_info("Picked up an energy boost")
-		hud._set_infinit_energy(true)
+		hud.set_infinite_energy(true)
 		return true
 	if pickup_type == 2:
 		if antigrav_charges >= antigrav_charges_max:
@@ -215,10 +215,10 @@ func _physics_process(delta):
 	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
-	hud._set_energy_percent(current_energy/max_energy)
-	hud._set_grav_bonus(antigrav_charges)
-	hud._set_teleport_bonus(teleporter_charges)
-	hud._set_vard_bonus(ward_charges)
+	hud.set_energy_percent(current_energy/max_energy)
+	hud.set_grav_bonus(antigrav_charges)
+	hud.set_teleport_bonus(teleporter_charges)
+	hud.set_ward_bonus(ward_charges)
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -294,7 +294,7 @@ func _physics_process(delta):
 	if energy_boost > 0.0:
 		energy_boost-=delta
 		if energy_boost < 0.0:
-			hud._set_infinit_energy(false)
+			hud.set_infinite_energy(false)
 		current_energy = max_energy
 	
 	move_and_slide()
@@ -335,6 +335,7 @@ func _input(event):
 						var bs = basis
 						global_transform = teleporter.global_transform
 						energy_boost = teleporter_energy_boost
+						hud.set_infinite_energy(true)						
 						translate_object_local(Vector3.UP*1.5)
 						basis = bs
 						teleporter.queue_free()

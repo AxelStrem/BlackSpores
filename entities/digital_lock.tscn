@@ -74,3 +74,4 @@ shape = SubResource("BoxShape3D_ac8aa")
 
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_entered"]
 [connection signal="body_exited" from="player_detector" to="." method="_on_player_exited"]
+[connection signal="spore_hit" from="SporeDestructible" to="." method="_on_spore_destructible_spore_hit"]

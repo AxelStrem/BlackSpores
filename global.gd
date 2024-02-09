@@ -3,9 +3,12 @@ extends Node
 var spore_scale = 1.0
 
 var level_scenes = [
-	preload("res://levels/chamber01.tscn"),
- 	preload("res://levels/chamber02.tscn"),
- 	preload("res://levels/chamber_troll.tscn")
+	[preload("res://levels/chamber01.tscn"), 1.0],
+ 	[preload("res://levels/chamber02.tscn"), 1.0],
+ 	[preload("res://levels/chamber_troll.tscn"), 1.0],
+	[preload("res://levels/chamber04_reversed.tscn"),0.8],
+	[preload("res://levels/chamber04.tscn"),10.2],
+	[preload("res://levels/chamber05.tscn"), 1.0]
 ]
 var victory_scene = preload("res://levels/chamber_victory.tscn")
 var total_chambers = 15
@@ -18,9 +21,23 @@ func random_direction():
 func generate_level(number):
 	if number > total_chambers:
 		return null
+		
+	var prob_sum = 0.0
+	var prob_roll = []
+	for l in level_scenes:
+		prob_sum+=l[1]
+		prob_roll.append(prob_sum)
+		
+	var p = randf()*prob_sum
+	var picked = 0
+	for i in range(level_scenes.size()):
+		picked = i
+		if p < prob_roll[i]:
+			break
+		
 	var scene = victory_scene
 	if number < total_chambers:
-		scene = level_scenes.pick_random()
+		scene = level_scenes[picked][0]
 	var l = scene.instantiate()
 	l.level_number = number
 	return l

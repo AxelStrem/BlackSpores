@@ -39,11 +39,19 @@ var spore_active_layer = {}
 var spore_ref_dict = {}
 var spore_density = 0.1
 
+var ward_list = {}
+
 class SporeCell:
 	var position : Vector3
 	var spread_class : int
 	var callbacks : Array
 	var parent : Node3D
+
+func add_ward(w):
+	ward_list[w] = w.global_position
+	
+func remove_ward(w):
+	ward_list.erase(w)
 
 func hash_vec(pos : Vector3):
 	return Vector3i(pos * spore_res)
@@ -72,6 +80,15 @@ func get_nearby_spores(pos):
 			res.append(spore_ref_dict[r])
 	return res
 
+const ward_radius = 10.0
+func check_wards(vec):
+	var p1 = Vector3(vec)
+	for w in ward_list:
+		var p2 = ward_list[w]
+		if (p1-p2).length()<ward_radius:
+			return true
+	return false
+
 func expand_spores():
 	var new_active = []
 	var alst = spore_active_layer.keys()
@@ -82,6 +99,8 @@ func expand_spores():
 		rep = 1
 	for r in range(rep):
 		var sp = alst.pick_random()
+		if check_wards(sp):
+			continue
 		var vel = spore_active_layer[sp]
 		for nb in spore_outer_nbors[vel]:
 			var v = sp + nb
@@ -136,16 +155,16 @@ func spore_render_shape(s : CollisionShape3D, spore_velocity):
 					var pos = Vector3(x,y,z)/scc
 					pos = trans * pos
 					var vec = hash_vec(pos)
-					var cell = SporeCell.new()
-					if vec in spore_loc:
-						cell = spore_loc[vec]
-					cell.position = pos
-					cell.spread_class = spore_velocity
-					cell.parent = s
-					spore_loc[vec] = cell
-					#if(randf()>0.9):
-					#call_deferred("spawn_spore",s,pos)
-					#print(spore_loc.size())
+					if spore_velocity<0:
+						spore_loc.erase(vec)
+					else:
+						var cell = SporeCell.new()
+						if vec in spore_loc:
+							cell = spore_loc[vec]
+						cell.position = pos
+						cell.spread_class = spore_velocity
+						cell.parent = s
+						spore_loc[vec] = cell
 
 
 func spore_render_level_in(level : Node3D, level_in : Vector3):

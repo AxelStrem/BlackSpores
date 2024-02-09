@@ -248,4 +248,7 @@ collision_mask = 16777216
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.85, 2.65, 2)
 shape = SubResource("BoxShape3D_fpopv")
 
+[node name="InitTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="PlayerDetector" to="." method="_on_player_entered"]

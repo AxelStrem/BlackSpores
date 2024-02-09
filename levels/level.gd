@@ -27,6 +27,7 @@ func _ready():
 func init():
 	level_in_pos = level_in.global_position
 	level_out_pos = level_out.global_position
+	$InitTimer.start()
 
 func list_shapes():
 	var nodes = Global.list_children_recursive(self)
@@ -39,6 +40,8 @@ func list_shapes():
 					L+=1
 				if N.get_collision_layer_value(32):
 					L+=2
+				if N.get_collision_layer_value(4):
+					L=-1
 				var shapes = N.get_children()
 				if shapes.size() > 0:
 					full_node_list.append([shapes[0], L])
@@ -48,9 +51,15 @@ func render_spores(game_node):
 	call_deferred("list_shapes")
 	nl_semaphore.wait()
 	var nodes = full_node_list
+	var block_list = []
 	for N in nodes:
-		if N[0]!=null:
-			game_node.spore_render_shape(N[0], N[1])
+		if is_instance_valid(N[0]):
+			if N[1]!=-1:
+				game_node.spore_render_shape(N[0], N[1])
+			else:
+				block_list.append(N[0])
+	for N in block_list:
+		game_node.spore_render_shape(N,-1)
 	game_node.spore_render_level_in(self, level_in_pos)
 	game_node.spore_render_level_out(self, level_out_pos)
 	
@@ -82,9 +91,6 @@ func player_N_levels_away(N):
 		next_level.global_position += sh
 		next_level.init()
 		#next_level.call_deferred('spore_render_level')
-		var game = Global.get_game_root(self)
-		if game!=null:
-			game.call_deferred('append_level', next_level)
 		#print('LEVEL ADDED')
 	next_level.player_N_levels_away(N+1)
 		
@@ -98,3 +104,9 @@ func _on_player_entered(player):
 
 func _on_destruct_timer_timeout():
 	queue_free()
+
+
+func _on_init_timer_timeout():
+	var game = Global.get_game_root(self)
+	if game!=null:
+		game.call_deferred('append_level', self)

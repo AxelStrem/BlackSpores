@@ -6,8 +6,7 @@ var prog = 0.0
 var lifetime = 0.0
 var start_lifetime = 0.0
 var zscale = 1.0
-
-var spores_delayed = []
+var game = null
 
 var spore_destructible_scene = preload("res://spore_destructible.tscn")
 
@@ -16,7 +15,6 @@ var crot = Vector3(0.0,0.0,0.0)
 func _ready():
 	angular_damp = 1.0
 	linear_damp = 1.0
-	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -44,7 +42,9 @@ func _process(delta):
 		if prog >= 1.0:
 			deploying = 3
 			engaged = true
-			$spore_detector.monitoring = true
+			game = Global.get_game_root(self)
+			if game!=null:
+				game.add_ward(self)
 			start_lifetime = lifetime
 			zscale = $ward/WardProgressBar.scale.y			
 	if deploying == 3:
@@ -53,7 +53,8 @@ func _process(delta):
 		if lifetime < 0:
 			deploying = 4
 			engaged = false
-			$spore_detector.monitoring = false
+			if game!=null:
+				game.remove_ward(self)
 			#for sp in spores_delayed:
 			#	if sp!=null:
 			#		sp.unpause_progress()		
@@ -63,13 +64,6 @@ func _process(delta):
 			$ward/WardBall.hide()
 			$OmniLight3D.hide()
 
-
-func _on_spore_detector_area_entered(area):
-	if !engaged:
-		return
-	var sp = area.get_parent()
-	if sp!=null and !sp.is_in_group("spore"):
-		sp = sp.get_parent()
-	if sp!=null:
-		spores_delayed.append(sp)
-		#sp.pause_progress()
+func _exit_tree():
+	if game!=null:
+		game.remove_ward(self)

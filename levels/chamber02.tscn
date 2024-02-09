@@ -1020,22 +1020,23 @@ transform = Transform3D(1, 1.16415e-10, 1.7053e-13, 0, 1, 8.9447e-11, -5.68434e-
 [node name="one_of2" parent="one_of4/Hooks4" index="1" instance=ExtResource("11_rj73q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0, 0)
 
-[node name="hooked_crate" parent="one_of4/Hooks4/one_of2" index="0" instance=ExtResource("13_7k70q")]
-transform = Transform3D(1, 1.16415e-10, 1.7053e-13, 0, 1, 8.9447e-11, -5.68434e-14, 3.12393e-11, 1, -15, -1.50037, 0.5)
+[node name="H1" type="Node3D" parent="one_of4/Hooks4/one_of2" index="0"]
 
-[node name="hooked_crate3" parent="one_of4/Hooks4/one_of2" index="1" instance=ExtResource("13_7k70q")]
-transform = Transform3D(1, 1.16415e-10, 1.7053e-13, 0, 1, 8.9447e-11, -5.68434e-14, 3.12393e-11, 1, -15, -1.4997, -3.4)
+[node name="hooked_crate" parent="one_of4/Hooks4/one_of2/H1" index="0" instance=ExtResource("13_7k70q")]
+transform = Transform3D(1, 1.74623e-10, 2.84217e-13, 0, 1, 8.94471e-11, -5.68434e-14, 8.94465e-11, 1, -15, -1.50037, 0.500004)
 
-[node name="one_of3" parent="one_of4/Hooks4" index="2" instance=ExtResource("11_rj73q")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2, 0, 0)
+[node name="hooked_crate4" parent="one_of4/Hooks4/one_of2/H1" index="1" instance=ExtResource("13_7k70q")]
+transform = Transform3D(1, 2.91038e-10, 5.11591e-13, 0, 1, 8.94469e-11, -5.68434e-14, 2.05862e-10, 1, -18.4, -1.49683, -3.4)
 
-[node name="hooked_crate" parent="one_of4/Hooks4/one_of3" index="0" instance=ExtResource("13_7k70q")]
-transform = Transform3D(1, 1.16415e-10, 1.7053e-13, 0, 1, 8.9447e-11, -5.68434e-14, 3.12393e-11, 1, -15, -1.50037, 0.5)
+[node name="H2" type="Node3D" parent="one_of4/Hooks4/one_of2" index="1"]
 
-[node name="hooked_crate3" parent="one_of4/Hooks4/one_of3" index="1" instance=ExtResource("13_7k70q")]
-transform = Transform3D(1, 1.16415e-10, 1.7053e-13, 0, 1, 8.9447e-11, -5.68434e-14, 3.12393e-11, 1, -15, -1.4997, -3.40001)
+[node name="hooked_crate3" parent="one_of4/Hooks4/one_of2/H2" index="0" instance=ExtResource("13_7k70q")]
+transform = Transform3D(1, 1.74623e-10, 2.84217e-13, 0, 1, 8.94471e-11, -5.68434e-14, 8.94465e-11, 1, -15, -1.4997, -3.4)
 
-[node name="one_of4" parent="one_of4/Hooks4" index="3" instance=ExtResource("11_rj73q")]
+[node name="hooked_crate2" parent="one_of4/Hooks4/one_of2/H2" index="1" instance=ExtResource("13_7k70q")]
+transform = Transform3D(1, 2.91038e-10, 5.11591e-13, 0, 1, 8.94469e-11, -5.68434e-14, 2.05862e-10, 1, -18.4, -1.4975, 0.500004)
+
+[node name="one_of4" parent="one_of4/Hooks4" index="2" instance=ExtResource("11_rj73q")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7, 0, 0)
 
 [node name="hooked_crate" parent="one_of4/Hooks4/one_of4" index="0" instance=ExtResource("13_7k70q")]

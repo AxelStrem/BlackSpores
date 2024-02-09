@@ -48,7 +48,7 @@ size = Vector3(2.00043, 0.260071, 0.227722)
 [sub_resource type="BoxShape3D" id="BoxShape3D_emb3b"]
 size = Vector3(2.00043, 0.14151, 0.288971)
 
-[node name="Floor01" type="Node3D"]
+[node name="Beam01" type="Node3D"]
 script = ExtResource("1_2neps")
 
 [node name="Scale2" type="Node3D" parent="."]

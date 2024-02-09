@@ -21,10 +21,6 @@ func _process(delta):
 			if target!=null:
 				target.unlock()
 				
-func _exit_tree():
-	if target!=null:
-		target.unlock()
-
 func update_state():
 	if state == 0:
 		$ScreenLocked.show()
@@ -50,3 +46,8 @@ func _on_player_exited(_body):
 	if state==1:
 		state = 0
 		update_state()
+
+
+func _on_spore_destructible_spore_hit():
+	if target!=null:
+		target.unlock()
