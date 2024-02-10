@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://beutvw1yk14gm"]
+
+[ext_resource type="PackedScene" uid="uid://cy7pct6fyxcjj" path="res://level_parts/building_blocks/auto_door.tscn" id="1_5ja4b"]
+[ext_resource type="PackedScene" uid="uid://bk6ro78efnftv" path="res://entities/digital_lock.tscn" id="1_a2l3q"]
+[ext_resource type="PackedScene" uid="uid://cwilf18gx4s3i" path="res://level_parts/building_blocks/cube_rounded.tscn" id="2_tstfo"]
+
+[node name="CorridorDoor" type="Node3D"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 2.151, -0.112, 2)
+
+[node name="digital_lock" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_a2l3q")]
+transform = Transform3D(0.353553, -0.353553, 1.54543e-08, 0, -2.18557e-08, -0.5, 0.353553, 0.353553, -1.54543e-08, 0.86, 1.5, -2.06)
+target = NodePath("../AutoDoor")
+
+[node name="digital_lock2" parent="." node_paths=PackedStringArray("target") instance=ExtResource("1_a2l3q")]
+transform = Transform3D(-0.353553, 0.353553, -1.54543e-08, 0, -2.18557e-08, -0.5, -0.353553, -0.353553, 1.54543e-08, 4.319, 1.5, 2.077)
+target = NodePath("../AutoDoor")
+
+[node name="AutoDoor" parent="." instance=ExtResource("1_5ja4b")]
+
+[node name="Crate01" parent="." instance=ExtResource("2_tstfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.6, -3.8)
+
+[node name="Crate02" parent="." instance=ExtResource("2_tstfo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 1.6, 3.8)

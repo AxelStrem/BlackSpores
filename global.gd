@@ -7,8 +7,10 @@ var level_scenes = [
  	[preload("res://levels/chamber02.tscn"), 1.0],
  	[preload("res://levels/chamber_troll.tscn"), 1.0],
 	[preload("res://levels/chamber04_reversed.tscn"),0.8],
-	[preload("res://levels/chamber04.tscn"),10.2],
-	[preload("res://levels/chamber05.tscn"), 1.0]
+	[preload("res://levels/chamber04.tscn"), 0.2],
+	[preload("res://levels/chamber05.tscn"), 1.0],
+	[preload("res://levels/chamber06.tscn"), 0.5],
+	[preload("res://levels/chamber06_alt.tscn"), 0.5]
 ]
 var victory_scene = preload("res://levels/chamber_victory.tscn")
 var total_chambers = 15

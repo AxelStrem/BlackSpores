@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxcvw1k0dwd1v"]
+
+[ext_resource type="PackedScene" uid="uid://cwy4x0c8kwufp" path="res://levels/chamber06.tscn" id="1_r5h45"]
+
+[node name="Chamber" instance=ExtResource("1_r5h45")]
+
+[node name="LevelOut" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.206, 0, 87.8923)
+
+[node name="Lobby10" parent="Base" index="3"]
+transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, -60.8546, 2.2, 87.6891)
+
+[node name="Corridor19" parent="Base" index="4"]
+transform = Transform3D(3, 0, -5.24536e-07, 0, 3, 0, 5.24536e-07, 0, 3, -60.8552, 2.188, 59.0051)
+
+[node name="Corridor20" parent="Base" index="5"]
+transform = Transform3D(3, 0, -5.24536e-07, 0, 3, 0, 5.24536e-07, 0, 3, -60.8552, 2.188, 73.3051)
+
+[node name="Corridor21" parent="Base" index="7"]
+transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, -89.4052, 2.188, 87.7551)
+
+[node name="Corridor22" parent="Base" index="8"]
+transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, -75.1052, 2.188, 87.7551)
+
+[node name="LobbyStub2" parent="Base" index="16"]
+transform = Transform3D(1, 0, -1.74845e-07, 0, 1, 0, 1.74845e-07, 0, 1, -60.7951, 2.2, -40.9097)

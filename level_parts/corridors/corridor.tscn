@@ -2,13 +2,15 @@
 
 [ext_resource type="PackedScene" uid="uid://c6pqnckdiwoa7" path="res://models/corridors/corridor.glb" id="1_5iyar"]
 [ext_resource type="Script" path="res://spore_consumable.gd" id="1_dawvw"]
-[ext_resource type="PackedScene" uid="uid://il4xvjrrddkt" path="res://models/corridors/cs_corridor_spore.tscn" id="2_rthtl"]
 [ext_resource type="PackedScene" uid="uid://bc2aq7fagi26u" path="res://models/corridors/corridor_lamp.tscn" id="3_ei3vd"]
 [ext_resource type="PackedScene" uid="uid://b21lfcey82x68" path="res://models/corridors/ceiling_lamp.tscn" id="4_gt0ah"]
 [ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="6_7raea"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_cmmsr"]
 size = Vector3(1.62476, 0.167572, 4.77075)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pn86r"]
+size = Vector3(1.71582, 0.204102, 4.75906)
 
 [node name="Corridor" type="Node3D"]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -54,29 +56,37 @@ collision_layer = 2
 collision_mask = 0
 monitoring = false
 
-[node name="shape" parent="spore_brush1" instance=ExtResource("2_rthtl")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="spore_brush1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000488279, -0.703613, 0.0287933)
+shape = SubResource("BoxShape3D_pn86r")
 
 [node name="CorridorLamp" parent="." instance=ExtResource("3_ei3vd")]
+visible = false
 
 [node name="CorridorLamp2" parent="." instance=ExtResource("3_ei3vd")]
 transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, 1.16085)
 
 [node name="CorridorLamp3" parent="." instance=ExtResource("3_ei3vd")]
 transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, 1.96908)
+visible = false
 
 [node name="CorridorLamp4" parent="." instance=ExtResource("3_ei3vd")]
 transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, -0.335801)
+visible = false
 
 [node name="CorridorLamp5" parent="." instance=ExtResource("3_ei3vd")]
 transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, -1.15595)
 
 [node name="CorridorLamp6" parent="." instance=ExtResource("3_ei3vd")]
 transform = Transform3D(-2.67511e-08, 0, -1, 0, 0.0364181, 0, 0.611993, 0, -4.37114e-08, 0.790738, -0.665742, -1.9705)
+visible = false
 
 [node name="CeilingLamp" parent="." instance=ExtResource("4_gt0ah")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -0.185932, 0, 1, -8.12733e-09, 0, 0.836868, 1.09426)
 
 [node name="CeilingLamp2" parent="." instance=ExtResource("4_gt0ah")]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.836868, -1.16147)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -0.185932, 0, 1, -8.12733e-09, 0, 0.836868, -1.16147)
 
 [node name="PickupSpawner" parent="." instance=ExtResource("6_7raea")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.711622, 0)
+spawn_probability = 0.0
