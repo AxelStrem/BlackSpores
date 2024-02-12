@@ -190,18 +190,44 @@ var SPEED = 5.0
 const jump_velocity = 8.0
 const jump_velocity_antigrav = 20.0
 const jump_energy = 50.0
-const dodge_energy = 1.0
+const dodge_energy = 50.0
 const dodge_velocity_vertical = 4.0
 const dodge_velocity_horizontal = 10.0
 var dodge_buffer = Vector3(0.0,0.0,0.0)
+var jump_energy_built = 0.0
+var jump_energy_limit = 0.0
+
+const jump_type = 3 # 0 - usual jump
+					# 1 - jump on release
+					# 2 - jump on release after build up
+					# 3 - usual jump with build up after
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+func jump_ex(je):
+	if is_on_floor() and je>0.0:
+		velocity.y = jump_velocity*(je/jump_energy)
+		antigrav_jump_available = 0.6
+
+func regular_jump():
+	if is_on_floor():
+		var je = current_energy
+		if je > jump_energy:
+			je = jump_energy
+		current_energy -= je
+		je/=jump_energy			
+		velocity.y = jump_velocity*je
+		antigrav_jump_available = 0.6
+
+func pitiful_jump():
+	jump_ex(20.0)
 
 func _physics_process(delta):
 	if controls_locked:
 		return
+		
+	var energy_restoring = true
 		
 	dodge_timeout-=delta
 	if dodge_timeout<0.0:
@@ -239,6 +265,8 @@ func _physics_process(delta):
 	hud.set_ward_bonus(ward_charges)
 	# Add the gravity.
 	if not is_on_floor():
+		energy_restoring = false
+		jump_energy_built=0.0
 		velocity.y -= gravity * delta
 		step_distance = 0
 		if dodge_buffer:
@@ -266,16 +294,51 @@ func _physics_process(delta):
 	antigrav_jump_available -= delta
 	if antigrav_jump_available < 0.0:
 		antigrav_jump_available = 0.0
-	if Input.is_action_just_pressed("player_jump"):
-		if is_on_floor():
-			var je = current_energy
-			if je > jump_energy:
-				je = jump_energy
-			current_energy -= je
-			je/=jump_energy			
-			velocity.y = jump_velocity*je
-			antigrav_jump_available = 0.6
-		elif antigrav_jump_available > 0.0:
+		
+	if jump_type == 1:
+		if Input.is_action_just_released("player_jump"):
+			regular_jump()
+				
+	if jump_type == 0:
+		if Input.is_action_just_pressed("player_jump"):
+			regular_jump()
+			
+	if jump_type == 2:
+		if Input.is_action_pressed("player_jump"):
+			var ed = 300.0*delta
+			if ed > current_energy:
+				ed = current_energy
+			jump_energy_built += ed
+			if jump_energy_built > jump_energy:
+				ed -= (jump_energy_built - jump_energy)
+				jump_energy_built = jump_energy
+			current_energy-=ed
+			energy_restoring = false
+		if Input.is_action_just_released("player_jump"):
+			jump_ex(jump_energy_built)
+			jump_energy_built = 0.0
+			
+	if jump_type == 3:
+		if Input.is_action_pressed("player_jump") and jump_energy_limit>0.0:
+			var ed = 400.0*delta
+			if ed > current_energy:
+				ed = current_energy
+			jump_energy_limit -= ed
+			if jump_energy_limit < 0.0:
+				ed += jump_energy_limit
+				jump_energy_limit = 0.0
+			current_energy -= ed
+			velocity.y += jump_velocity * 0.6 * ed/jump_energy
+		if Input.is_action_just_pressed("player_jump"):
+			if is_on_floor():
+				pitiful_jump()
+				jump_energy_limit = jump_energy
+		if Input.is_action_just_released("player_jump"):
+			jump_energy_limit = 0.0
+			
+			
+	if Input.is_action_just_pressed("player_jump") and !is_on_floor():
+		if antigrav_jump_available > 0.0:
 			if antigrav_charges > 0:
 				velocity.y += jump_velocity_antigrav
 				antigrav_charges -= 1
@@ -301,9 +364,11 @@ func _physics_process(delta):
 	
 	if is_on_floor(): 
 		if direction:
-			if Input.is_action_pressed("player_run") && current_energy > 0:
-				direction*=1.5
-				current_energy-=delta*60
+			if Input.is_action_pressed("player_run"):
+				energy_restoring = false
+				if current_energy > 0:
+					direction*=1.5
+					current_energy-=delta*60
 			velocity.x = direction.x * SPEED * speed_coef
 			velocity.z = direction.z * SPEED * speed_coef
 		else:
@@ -318,7 +383,7 @@ func _physics_process(delta):
 		velocity.z += direction.z * dv * delta
 		
 		
-	if (!Input.is_action_pressed("player_run") or !direction) and is_on_floor():
+	if energy_restoring:
 		current_energy = min(max_energy,current_energy + delta * 30)
 		
 	if energy_boost > 0.0 or infinite_energy_cheat:
@@ -353,8 +418,8 @@ func _input(event):
 					je = dodge_energy
 				current_energy -= je
 				je /= dodge_energy			
-				velocity.y += dodge_velocity_vertical
-				dodge_buffer = Vector3(act.x, 0.0, act.y)*dodge_velocity_horizontal
+				velocity.y += dodge_velocity_vertical*je
+				dodge_buffer = Vector3(act.x, 0.0, act.y)*dodge_velocity_horizontal*je
 				antigrav_jump_available = 0.6
 				last_strafe = Vector2i(0,0)
 				dodge_timeout = 0.0
