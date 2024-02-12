@@ -3,7 +3,7 @@ extends CharacterBody3D
 signal got_research_point_signal
 signal to_menu_signal
 var step_distance=0
-var max_energy=200
+var max_energy=200.0
 var current_energy=200.0
 var dead = false;
 var old_velocity = Vector3(0.0,0.0,0.0)
@@ -12,7 +12,9 @@ var old_velocity = Vector3(0.0,0.0,0.0)
 # var b = "text"
 const vec_up = Vector3(0.0,1.0,0.0)
 const jump_impulse = 10.0
-const air_control = 0.15
+const air_control = 8.0
+const aircontrol_limit = 1.0
+const aircontrol_damp = 1.0
 const crouch_speed = 10.0
 const full_height = 2.87
 const full_rad = 0.8
@@ -28,6 +30,7 @@ var jumping = false
 var timer_paused = false
 
 var current_chamber = 0
+var infinite_energy_cheat = false
 
 var dead_player_scene = preload("res://dead_player.tscn")
 var crouch = 0.0
@@ -277,21 +280,30 @@ func _physics_process(delta):
 	var speed_coef = lerp(1.0, crouch_slowdown, crouch)
 			
 
-
-	if direction:
-		if Input.is_action_pressed("player_run") && current_energy > 0:
-			direction*=1.5
-			current_energy-=delta*60
-		velocity.x = direction.x * SPEED * speed_coef
-		velocity.z = direction.z * SPEED * speed_coef
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
+	
+	if is_on_floor(): 
+		if direction:
+			if Input.is_action_pressed("player_run") && current_energy > 0:
+				direction*=1.5
+				current_energy-=delta*60
+			velocity.x = direction.x * SPEED * speed_coef
+			velocity.z = direction.z * SPEED * speed_coef
+		else:
+			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.z = move_toward(velocity.z, 0, SPEED)
+	elif direction:
+		var vair = Vector3(velocity.x, 0.0, velocity.z)
+		var d = vair.dot(direction)
+		var dv = clamp(exp(-d*aircontrol_damp),0.0, aircontrol_limit)
+		dv *= SPEED * air_control
+		velocity.x += direction.x * dv * delta
+		velocity.z += direction.z * dv * delta
 		
-	if !Input.is_action_pressed("player_run") or !direction:
+		
+	if (!Input.is_action_pressed("player_run") or !direction) and is_on_floor():
 		current_energy = min(max_energy,current_energy + delta * 30)
 		
-	if energy_boost > 0.0:
+	if energy_boost > 0.0 or infinite_energy_cheat:
 		energy_boost-=delta
 		if energy_boost < 0.0:
 			hud.set_infinite_energy(false)

@@ -5,6 +5,7 @@ extends Node3D
 @export var debug_items = false
 @export var show_info = false
 @export var show_spore_zone = false
+@export var infinite_stamina = false
 
 signal to_menu_signal
 signal restart_signal
@@ -90,6 +91,9 @@ func check_wards(vec):
 	return false
 
 func expand_spores():
+	if(!spread_spores):
+		return
+	
 	var new_active = []
 	var alst = spore_active_layer.keys()
 	if alst.is_empty():
@@ -236,6 +240,7 @@ func _ready():
 	append_nbors(8, 10)
 	append_nbors(3, 5)
 			
+	$player.infinite_energy_cheat = infinite_stamina
 	
 	if debug_items:
 		$player.antigrav_charges = 10

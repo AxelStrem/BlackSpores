@@ -98,7 +98,7 @@ func player_N_levels_away(N):
 func _on_player_entered(player):
 	player.current_chamber = level_number
 	if level_number!=0:
-		player.display_info("Entering chamber #{0}, T{1}".format({0:level_number, 1:level_test}))
+		player.display_info("Entering chamber #{0}".format({0:level_number, 1:level_test}))
 	player_N_levels_away(0)
 
 
