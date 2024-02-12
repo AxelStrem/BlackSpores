@@ -28,6 +28,9 @@ var ground_close = false
 var last_frame_on_ground = false
 var jumping = false
 var timer_paused = false
+var last_strafe = Vector2i(0,0)
+var dodge_timeout = 0.0
+var dodge_cooldown = 0.0
 
 var current_chamber = 0
 var infinite_energy_cheat = false
@@ -187,6 +190,10 @@ var SPEED = 5.0
 const jump_velocity = 8.0
 const jump_velocity_antigrav = 20.0
 const jump_energy = 50.0
+const dodge_energy = 1.0
+const dodge_velocity_vertical = 4.0
+const dodge_velocity_horizontal = 10.0
+var dodge_buffer = Vector3(0.0,0.0,0.0)
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -195,6 +202,14 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 func _physics_process(delta):
 	if controls_locked:
 		return
+		
+	dodge_timeout-=delta
+	if dodge_timeout<0.0:
+		dodge_timeout=0.0
+		
+	dodge_cooldown-=delta
+	if dodge_cooldown<0.0:
+		dodge_cooldown=0.0
 	
 	if not timer_paused:
 		time_passed += delta
@@ -226,6 +241,9 @@ func _physics_process(delta):
 	if not is_on_floor():
 		velocity.y -= gravity * delta
 		step_distance = 0
+		if dodge_buffer:
+			velocity += transform.basis * dodge_buffer
+			dodge_buffer = Vector3(0.0,0.0,0.0)
 	else: 		
 		if direction:	
 			step_distance += delta
@@ -314,6 +332,34 @@ func _physics_process(delta):
 func _input(event):
 	if controls_locked:
 		return
+	var act = Vector2i(0,0)
+	if event.is_action_pressed("player_strafe_left"):
+		act = Vector2i(-1,0)
+	if event.is_action_pressed("player_strafe_right"):
+		act = Vector2i(1,0)
+	if event.is_action_pressed("player_forward"):
+		act = Vector2i(0,-1)
+	if event.is_action_pressed("player_reverse"):
+		act = Vector2i(0,1)
+	
+	if not act==Vector2i(0,0):
+		if act != last_strafe or dodge_timeout <= 0.0 or dodge_cooldown > 0.0:
+			last_strafe = act
+			dodge_timeout = 0.2
+		else:
+			if is_on_floor():
+				var je = current_energy
+				if je > dodge_energy:
+					je = dodge_energy
+				current_energy -= je
+				je /= dodge_energy			
+				velocity.y += dodge_velocity_vertical
+				dodge_buffer = Vector3(act.x, 0.0, act.y)*dodge_velocity_horizontal
+				antigrav_jump_available = 0.6
+				last_strafe = Vector2i(0,0)
+				dodge_timeout = 0.0
+				dodge_cooldown = 0.6
+			
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_Q:
 			if ward_charges > 0:
