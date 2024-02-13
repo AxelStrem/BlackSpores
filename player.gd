@@ -16,10 +16,12 @@ const air_control = 8.0
 const aircontrol_limit = 1.0
 const aircontrol_damp = 1.0
 const crouch_speed = 10.0
-const full_height = 2.87
-const full_rad = 0.8
+
+const full_height = 2.7
+const full_rad = 0.7
 const crouch_height = 1.5
-const crouch_rad = 0.5
+const crouch_rad = 0.7
+
 const crouch_slowdown = 0.4
 const speed_decay = 0.85
 const energy_boost_duration = 15.0
@@ -369,7 +371,7 @@ func _physics_process(delta):
 			acc_vector = -Vector3(velocity.x,0.0,velocity.z).normalized() 
 		var max_speed = SPEED*speed_coef
 		
-		if Input.is_action_pressed("player_run"):
+		if Input.is_action_pressed("player_run") and direction:
 			energy_restoring = false
 			if current_energy > 0:
 				max_speed *= 1.5

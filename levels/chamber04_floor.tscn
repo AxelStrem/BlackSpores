@@ -260,6 +260,7 @@ spawn_probability = 0.3
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5.6, 6.5, -1.1)
 
 [node name="Walkway" type="Node3D" parent="."]
+visible = false
 
 [node name="Floor07" parent="Walkway" instance=ExtResource("2_5qfes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 6.6, -1)

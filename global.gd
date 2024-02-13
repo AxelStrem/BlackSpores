@@ -12,8 +12,11 @@ var level_scenes = [
 	[preload("res://levels/chamber06.tscn"), 0.5],
 	[preload("res://levels/chamber06_alt.tscn"), 0.5]
 ]
+var test_chamber_scene = preload("res://levels/test_chamber.tscn")
+
 var victory_scene = preload("res://levels/chamber_victory.tscn")
 var total_chambers = 15
+var test_chamber = false
 
 func random_direction():
 	var a = randf_range(0, TAU)
@@ -40,6 +43,9 @@ func generate_level(number):
 	var scene = victory_scene
 	if number < total_chambers:
 		scene = level_scenes[picked][0]
+	if test_chamber:
+		scene = test_chamber_scene	
+	
 	var l = scene.instantiate()
 	l.level_number = number
 	return l

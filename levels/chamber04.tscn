@@ -14,33 +14,6 @@
 [node name="LevelIn" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.994, 26.4, -10.773)
 
-[node name="Floor57" parent="LevelIn" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99392, 0, -1.99227)
-
-[node name="Floor58" parent="LevelIn" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.99392, 0, 2.00773)
-
-[node name="Floor59" parent="LevelIn" index="2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99392, 0, -1.99227)
-
-[node name="Floor60" parent="LevelIn" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99392, 0, 2.00773)
-
-[node name="Wall26" parent="LevelIn" index="4"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.99392, 0, 2.00773)
-
-[node name="Wall27" parent="LevelIn" index="5"]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.99392, 0, 2.00773)
-
-[node name="Ceiling4" parent="LevelIn/Wall27" index="6"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 4)
-
-[node name="Wall20" parent="LevelIn" index="6"]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -5.98839, 0, -1.97798)
-
-[node name="Wall21" parent="LevelIn" index="7"]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.98839, 0, -1.97798)
-
 [node name="Wall34" parent="LevelOut" index="0"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.00608, 0, 1.93235)
 

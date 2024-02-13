@@ -57,40 +57,40 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.98839
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0061, 0, -26.7077)
 
 [node name="Wall34" parent="LevelOut" instance=ExtResource("3_t6g6l")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6.00608, 0, 1.93235)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 6, 0, 2)
 
 [node name="Wall35" parent="LevelOut" instance=ExtResource("3_t6g6l")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2.00608, 0, 1.93235)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 2, 0, 2)
 
 [node name="Wall36" parent="LevelOut" instance=ExtResource("3_t6g6l")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2.00608, 0, -2.06765)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 2, 0, -2)
 
 [node name="Wall37" parent="LevelOut" instance=ExtResource("3_t6g6l")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 6.00608, 0, -2.06765)
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 6, 0, -2)
 
 [node name="Floor75" parent="LevelOut" instance=ExtResource("2_50kb8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00608, 0, 1.93177)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2)
 
 [node name="Floor76" parent="LevelOut" instance=ExtResource("2_50kb8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.00608, 0, -2.06823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2)
 
 [node name="Floor77" parent="LevelOut" instance=ExtResource("2_50kb8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00608, 0, 1.93177)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 2)
 
 [node name="Floor78" parent="LevelOut" instance=ExtResource("2_50kb8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.00608, 0, -2.06823)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -2)
 
 [node name="Ceiling5" parent="LevelOut" instance=ExtResource("4_6pj6d")]
-transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 6.00608, 0, -2.2001)
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 6, 0, -2)
 
 [node name="Ceiling6" parent="LevelOut" instance=ExtResource("4_6pj6d")]
-transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 6.00608, 0, 1.7999)
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 6, 0, 2)
 
 [node name="Ceiling7" parent="LevelOut" instance=ExtResource("4_6pj6d")]
-transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2.00608, 0, -2.2001)
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2, 0, -2)
 
 [node name="Ceiling8" parent="LevelOut" instance=ExtResource("4_6pj6d")]
-transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2.00608, 0, 1.7999)
+transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2, 0, 2)
 
 [node name="PlayerDetector" type="Area3D" parent="."]
 collision_layer = 0

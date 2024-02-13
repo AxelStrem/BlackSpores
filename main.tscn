@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://dko6syds2j81d" path="res://levels/chamber_start.tscn" id="14_suh5h"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
-radius = 0.985279
+radius = 0.7
 height = 2.87003
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4g3m7"]
@@ -45,6 +45,10 @@ size = Vector3(196.664, 4.61426, 267.326)
 [node name="main" type="Node3D" groups=["game"]]
 process_mode = 1
 script = ExtResource("1_kjcn1")
+spread_spores = false
+spores_kill = false
+debug_items = true
+test_chamber = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
@@ -148,7 +152,7 @@ stream = ExtResource("8_veibk")
 bus = &"SFX"
 
 [node name="item_spawn" type="Node3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0709114, -1.59893)
+transform = Transform3D(1, -4.44082e-15, -5.68434e-14, 3.55272e-15, 1, -4.77528e-21, 0, -5.12469e-21, 1, 7.62939e-06, -0.00466919, -0.945402)
 
 [node name="HUDSprite" type="Sprite3D" parent="player/Camera"]
 transform = Transform3D(0.63402, 0, 0, 0, 0.63402, 0, 0, 0, 0.63402, 8.08158, 3.0678, -8.32078)

@@ -29,7 +29,7 @@ func set_infinite_energy(value):
 		
 
 func set_energy_percent(value):
-	energyBar.position.x=1.8*(1-value)
+	energyBar.position.x = 1.85*(1.0 - value)
 	
 func lightDots(dots, number):
 	for n in 10:

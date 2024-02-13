@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://befp0jx24ak1r"]
+[gd_scene load_steps=22 format=3 uid="uid://befp0jx24ak1r"]
 
 [ext_resource type="PackedScene" uid="uid://c63mndp5wwhtp" path="res://models/UI/hud_basics.glb" id="1_0rqud"]
 [ext_resource type="Script" path="res://menu/HUD.gd" id="2_c8gp7"]
@@ -6,13 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://dm2uhcegvry58" path="res://models/pickups/boot.tscn" id="3_c5xdj"]
 [ext_resource type="Material" uid="uid://bk7eqb3dixeij" path="res://models/UI/boot_dots.tres" id="4_7xewh"]
 [ext_resource type="PackedScene" uid="uid://dblyx4u2lnw3" path="res://models/pickups/teleporter.tscn" id="4_qbjg6"]
+[ext_resource type="Shader" path="res://menu/HUD_energy.gdshader" id="4_t5rok"]
 [ext_resource type="PackedScene" uid="uid://eqm5r5650gxk" path="res://models/pickups/ward_head.tscn" id="6_w6525"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wyj0k"]
-albedo_color = Color(0.772549, 0.807843, 0, 1)
-emission_enabled = true
-emission = Color(0.85098, 0.733333, 0, 1)
-emission_energy_multiplier = 13.69
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mpgn4"]
+render_priority = 0
+shader = ExtResource("4_t5rok")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xjysx"]
 
@@ -138,7 +137,13 @@ script = ExtResource("2_c8gp7")
 surface_material_override/0 = ExtResource("2_m4wsy")
 
 [node name="EnergyBar" parent="." index="1"]
-surface_material_override/0 = SubResource("StandardMaterial3D_wyj0k")
+transform = Transform3D(1.05, 0, 0, 0, 1, 0, 0, 0, 1, 0.00218284, 0, 0.00233365)
+surface_material_override/0 = SubResource("ShaderMaterial_mpgn4")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="EnergyBar" index="0"]
+transform = Transform3D(0.952381, 0, 0, 0, 1, 2.13163e-14, 0, -2.13163e-14, 1, -0.651732, 0.205747, -0.868507)
+light_color = Color(1, 1, 0.313726, 1)
+light_energy = 0.125
 
 [node name="InfiniteBar" type="MeshInstance3D" parent="." index="2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00218284, 0, 0.00233365)

@@ -6,6 +6,7 @@ extends Node3D
 @export var show_info = false
 @export var show_spore_zone = false
 @export var infinite_stamina = false
+@export var test_chamber = false
 
 signal to_menu_signal
 signal restart_signal
@@ -239,6 +240,8 @@ func _ready():
 	append_nbors(5, 10)
 	append_nbors(8, 10)
 	append_nbors(3, 5)
+	
+	Global.test_chamber = test_chamber
 			
 	$player.infinite_energy_cheat = infinite_stamina
 	
