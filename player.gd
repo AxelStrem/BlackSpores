@@ -187,6 +187,7 @@ func pickup(pickup_type):
 	return true
 
 var SPEED = 5.0
+const acceleration = 60.0
 const jump_velocity = 8.0
 const jump_velocity_antigrav = 20.0
 const jump_energy = 50.0
@@ -328,7 +329,7 @@ func _physics_process(delta):
 				ed += jump_energy_limit
 				jump_energy_limit = 0.0
 			current_energy -= ed
-			velocity.y += jump_velocity * 0.6 * ed/jump_energy
+			velocity.y += jump_velocity * 0.8 * ed/jump_energy
 		if Input.is_action_just_pressed("player_jump"):
 			if is_on_floor():
 				pitiful_jump()
@@ -362,18 +363,28 @@ func _physics_process(delta):
 			
 
 	
-	if is_on_floor(): 
-		if direction:
-			if Input.is_action_pressed("player_run"):
-				energy_restoring = false
-				if current_energy > 0:
-					direction*=1.5
-					current_energy-=delta*60
-			velocity.x = direction.x * SPEED * speed_coef
-			velocity.z = direction.z * SPEED * speed_coef
+	if is_on_floor():
+		var acc_vector = direction
+		if !direction:
+			acc_vector = -Vector3(velocity.x,0.0,velocity.z).normalized() 
+		var max_speed = SPEED*speed_coef
+		
+		if Input.is_action_pressed("player_run"):
+			energy_restoring = false
+			if current_energy > 0:
+				max_speed *= 1.5
+				current_energy-=delta*60
+		var nv = Vector3(velocity.x, 0.0, velocity.z)
+		var na = acc_vector * acceleration * delta
+		if !direction and na.length_squared() > nv.length_squared():
+			nv = Vector3(0.0,0.0,0.0)
 		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
-			velocity.z = move_toward(velocity.z, 0, SPEED)
+			nv += na
+		var spd = nv.length()
+		if spd > max_speed:
+			nv = max_speed*nv.normalized()
+		velocity.x = nv.x
+		velocity.z = nv.z
 	elif direction:
 		var vair = Vector3(velocity.x, 0.0, velocity.z)
 		var d = vair.dot(direction)
