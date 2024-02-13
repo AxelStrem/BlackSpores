@@ -249,7 +249,8 @@ func _physics_process(delta):
 	label_consumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	var game = get_game_root()
 	if game:
-		label_debug.text = "Spores {0}/{1}".format({0:game.active_spore_count(), 1:game.total_spore_count()})
+		label_debug.text = "Spores in chamber {0}, spread period {1}".format({0:game.current_chamber_spore, 1:int(game.spore_timer_adjusted()*10000.0)})
+		label_dead.text = "Chamber {0}".format({0:current_chamber})
 		
 	if info_timeout > 0.0:
 		info_timeout -= delta

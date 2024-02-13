@@ -1,6 +1,7 @@
 extends Node3D
 
 var energyBar
+var energyLight
 var infiniteBar
 var antigravDots
 var teleportDots
@@ -9,6 +10,7 @@ var vardDots
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	energyBar = $EnergyBar
+	energyLight = $EnergyBar/light
 	infiniteBar = $InfiniteBar	
 	energyBar.visible = true
 	infiniteBar.visible = false
@@ -30,6 +32,7 @@ func set_infinite_energy(value):
 
 func set_energy_percent(value):
 	energyBar.position.x = 1.85*(1.0 - value)
+	energyLight.light_energy = 0.125*value
 	
 func lightDots(dots, number):
 	for n in 10:

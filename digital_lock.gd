@@ -10,16 +10,19 @@ var init_comp = 0.0
 func _ready():
 	target_scale = $ScreenProgress/MeshInstance3D.scale.x
 	init_comp = complexity
+	target.register_lock(self)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if state==1:
 		complexity -= speed*delta
 		$ScreenProgress/MeshInstance3D.scale.x = lerp(target_scale, 0.0, complexity/init_comp)
 		if complexity < 0.0:
-			state = 2
-			update_state()
 			if target!=null:
 				target.unlock()
+				
+func force_unlock():
+	state = 2
+	update_state()
 				
 func update_state():
 	if state == 0:

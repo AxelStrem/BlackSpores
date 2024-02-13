@@ -7,6 +7,7 @@ extends Node3D
 @export var show_spore_zone = false
 @export var infinite_stamina = false
 @export var test_chamber = false
+@export var soundtrack = false
 
 signal to_menu_signal
 signal restart_signal
@@ -43,11 +44,18 @@ var spore_density = 0.1
 
 var ward_list = {}
 
+var current_chamber_player = 0
+var current_chamber_spore = 0
+
 class SporeCell:
 	var position : Vector3
 	var spread_class : int
 	var callbacks : Array
 	var parent : Node3D
+
+func spores_at_chamber(c):
+	if current_chamber_spore < c:
+		current_chamber_spore = c
 
 func add_ward(w):
 	ward_list[w] = w.global_position
@@ -236,6 +244,9 @@ func _ready():
 	spore_thread = Thread.new()
 	spore_thread.start(_spore_thread_body)
 	
+	if soundtrack:
+		$player/Camera/Soundtrack/Bass01.play()
+	
 	#set up nbors sets
 	append_nbors(5, 10)
 	append_nbors(8, 10)
@@ -333,6 +344,20 @@ var spore_timer = 0.5
 var spore_timer_goal = 0.2
 var spore_timer_sp = 0.3/60
 
+func spore_timer_adjusted():
+	var spore_speedup = 0.001*current_chamber_spore
+	var spore_catchup = 1.0
+	var dp = current_chamber_player - current_chamber_spore
+	if dp >= 2:
+		spore_catchup = 0.9
+	if dp >= 3:
+		spore_catchup = 0.8
+	if dp >= 4:
+		spore_catchup = 0.7
+	if dp >= 5:
+		spore_catchup = 0.5
+	return spore_catchup * (spore_timer)# - spore_speedup)
+
 func _physics_process(delta):	
 	if !game_started:
 		return
@@ -341,10 +366,10 @@ func _physics_process(delta):
 	if spore_timer < spore_timer_goal:
 		spore_timer = spore_timer_goal
 		
-	dd+=delta
-	if dd > spore_timer:
+	dd-=delta
+	if dd < 0.0:
 		expand_spores()
-		dd-=spore_timer
+		dd += spore_timer_adjusted()
 		
 	total_timer += delta
 	

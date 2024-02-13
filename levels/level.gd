@@ -66,6 +66,9 @@ func render_spores(game_node):
 func spores_in(_p):
 	if !b_spores_in:
 		b_spores_in = true
+		var game = Global.get_game_root(self)
+		if game!=null:
+			game.spores_at_chamber(level_number)
 	
 func spores_out(_p):
 	if !b_spores_out:
@@ -96,7 +99,9 @@ func player_N_levels_away(N):
 		
 
 func _on_player_entered(player):
+	var game = Global.get_game_root(self)
 	player.current_chamber = level_number
+	game.current_chamber_player = level_number
 	if level_number!=0:
 		player.display_info("Entering chamber #{0}".format({0:level_number, 1:level_test}))
 	player_N_levels_away(0)

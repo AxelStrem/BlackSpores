@@ -8,6 +8,7 @@ var dw_scene = preload("res://level_parts/building_blocks/door_w.tscn")
 @export var gap = 4.0
 
 var state = 0
+var locks = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var dr = null
@@ -19,6 +20,12 @@ func _ready():
 	
 func unlock():
 	state = 1
+	for l in locks:
+		if l != null:
+			l.force_unlock()
+
+func register_lock(l):
+	locks.append(l)
 
 func _process(delta):
 	if state == 1:

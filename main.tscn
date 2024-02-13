@@ -45,10 +45,7 @@ size = Vector3(196.664, 4.61426, 267.326)
 [node name="main" type="Node3D" groups=["game"]]
 process_mode = 1
 script = ExtResource("1_kjcn1")
-spread_spores = false
-spores_kill = false
-debug_items = true
-test_chamber = true
+show_info = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
@@ -125,7 +122,7 @@ no_depth_test = true
 text = "55555"
 
 [node name="LabelDebug" type="Label3D" parent="player/Camera"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.30056, 1.41274, -3.619)
+transform = Transform3D(1, -1.77633e-15, -2.84217e-14, 1.77636e-15, 1, -4.77528e-21, 0, -4.89175e-21, 1, -3.76381, 1.41275, -3.619)
 layers = 2
 sorting_offset = 5.0
 ignore_occlusion_culling = true
@@ -279,7 +276,6 @@ text = "Menu"
 
 [node name="Bass01" type="AudioStreamPlayer" parent="player/Camera/Soundtrack"]
 stream = ExtResource("9_xoloe")
-autoplay = true
 bus = &"Music"
 
 [node name="JumpDelay" type="Timer" parent="player"]
