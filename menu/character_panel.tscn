@@ -1,0 +1,50 @@
+[gd_scene load_steps=3 format=3 uid="uid://de2c0xkpcenxk"]
+
+[ext_resource type="Script" path="res://menu/character_panel.gd" id="1_qoh2x"]
+[ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="2_h7w5p"]
+
+[node name="CharacterPanel" type="Node3D"]
+transform = Transform3D(1, 0, -1.42109e-14, 0, 1, 0, 0, 0, 1, 0, 0.333333, 0)
+script = ExtResource("1_qoh2x")
+
+[node name="LabelName" type="Label3D" parent="."]
+transform = Transform3D(0.495, 0, 2.30926e-14, 0, 0.899999, 0, -7.81597e-14, 0, 0.899999, -0.467571, 0, 0.0256412)
+text = "Speed"
+font_size = 18
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="Colon" type="Label3D" parent="."]
+transform = Transform3D(0.495, 0, 1.42109e-14, 0, 0.899999, 0, -9.23706e-14, 0, 0.899999, -0.165912, 0, 0.0256414)
+text = ":"
+font_size = 18
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="LabelLevel" type="Label3D" parent="."]
+transform = Transform3D(0.495, 0, 3.55271e-15, 0, 0.899999, 0, -1.06581e-13, 0, 0.899999, -0.0150822, 0, 0.0256414)
+text = "Level 1"
+font_size = 18
+outline_size = 6
+horizontal_alignment = 0
+
+[node name="button3D" parent="." instance=ExtResource("2_h7w5p")]
+transform = Transform3D(0.101351, 0, 7.10543e-15, 0, 0.181439, 0, -3.37508e-14, 0, 0.2835, 0.302566, 0.0464987, 0.0487199)
+text = "+ (1 RP)"
+active = true
+color = Color(0.898039, 0.784314, 0.482353, 1)
+hover_color = Color(0.556863, 0.905882, 0.658824, 1)
+background = true
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(0.6, 0, 0, 0, 0.2592, 0, 0, 0, 0.6, 0.0499326, 0.054746, 0)
+monitoring = false
+monitorable = false
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Area3D"]
+depth = 0.01
+polygon = PackedVector2Array(-1, 0, 1, 0, 1, -0.5, -1, -0.5)
+margin = 0.001
+
+[connection signal="button_clicked" from="button3D" to="." method="_on_button_3d_button_clicked"]
+[connection signal="mouse_entered" from="Area3D" to="." method="_on_bg_mouse_entered"]

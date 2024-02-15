@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://ciln5pqvgnlar"]
+[gd_scene load_steps=12 format=3 uid="uid://ciln5pqvgnlar"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_te0bf"]
 [ext_resource type="PackedScene" uid="uid://cjhcwo80trop0" path="res://level_parts/building_blocks/staircase.tscn" id="2_54ygd"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dr3v0h7tldtsh" path="res://level_parts/building_blocks/crate_01.tscn" id="8_l1ws8"]
 [ext_resource type="PackedScene" uid="uid://dipfxw78owbfx" path="res://level_parts/building_blocks/railing.tscn" id="9_5gk5c"]
 [ext_resource type="PackedScene" uid="uid://dmxh3xf17kspj" path="res://level_parts/building_blocks/vent_long.tscn" id="10_gahpg"]
+[ext_resource type="PackedScene" uid="uid://cdxpw6f3thxlr" path="res://level_parts/building_blocks/hooked_crate.tscn" id="11_cmhyy"]
 
 [node name="Chamber" instance=ExtResource("1_te0bf")]
 
@@ -460,3 +461,75 @@ omni_range = 28.0
 
 [node name="VentLong" parent="OmniLight3D" index="0" instance=ExtResource("10_gahpg")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4.84878, -10.0609, -11.9504)
+
+[node name="Beams2" type="Node3D" parent="." index="22"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.4, 7, 0)
+
+[node name="Floor01" parent="Beams2" index="0" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.3, 0, 2)
+
+[node name="Floor02" parent="Beams2" index="1" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.3, 0, 6)
+
+[node name="Floor03" parent="Beams2" index="2" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.3, 0, -2)
+
+[node name="Floor04" parent="Beams2" index="3" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 7.3, 0, -6)
+
+[node name="Floor05" parent="Beams2" index="4" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.3, 0, 2)
+
+[node name="Floor06" parent="Beams2" index="5" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.3, 0, 6)
+
+[node name="Floor07" parent="Beams2" index="6" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.3, 0, -2)
+
+[node name="Floor08" parent="Beams2" index="7" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.3, 0, -6)
+
+[node name="Floor09" parent="Beams2" index="8" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.700001, 0, 2)
+
+[node name="Floor10" parent="Beams2" index="9" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.700001, 0, 6)
+
+[node name="Floor11" parent="Beams2" index="10" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.700001, 0, -2)
+
+[node name="Floor12" parent="Beams2" index="11" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.700001, 0, -6)
+
+[node name="Floor13" parent="Beams2" index="12" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5.3, 0, -6)
+
+[node name="Floor14" parent="Beams2" index="13" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 5.3, 0, 6)
+
+[node name="Floor15" parent="Beams2" index="14" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.3, 0, -2)
+
+[node name="Floor16" parent="Beams2" index="15" instance=ExtResource("5_0hb6s")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.3, 0, 6)
+
+[node name="Hooks3" type="Node3D" parent="." index="23"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.5, 7, 5)
+
+[node name="hooked_crate4" parent="Hooks3" index="0" instance=ExtResource("11_cmhyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.6, -1.5, -3)
+
+[node name="hooked_crate" parent="Hooks3" index="1" instance=ExtResource("11_cmhyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.2, -1.5, 0)
+
+[node name="hooked_crate5" parent="Hooks3" index="2" instance=ExtResource("11_cmhyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7, -1.5, 3)
+
+[node name="hooked_crate6" parent="Hooks3" index="3" instance=ExtResource("11_cmhyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -25.7, -1.5, -3)
+
+[node name="hooked_crate2" parent="Hooks3" index="4" instance=ExtResource("11_cmhyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1.5, 3)
+
+[node name="hooked_crate3" parent="Hooks3" index="5" instance=ExtResource("11_cmhyy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1.5, -3)

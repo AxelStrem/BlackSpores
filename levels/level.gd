@@ -20,6 +20,7 @@ var b_spores_out = false
 
 var full_node_list = []
 var nl_semaphore : Semaphore
+var player = null
 
 func _ready():
 	nl_semaphore = Semaphore.new()
@@ -28,6 +29,7 @@ func init():
 	level_in_pos = level_in.global_position
 	level_out_pos = level_out.global_position
 	$InitTimer.start()
+
 
 func list_shapes():
 	var nodes = Global.list_children_recursive(self)
@@ -98,7 +100,8 @@ func player_N_levels_away(N):
 	next_level.player_N_levels_away(N+1)
 		
 
-func _on_player_entered(player):
+func _on_player_entered(player_):
+	player = player_
 	var game = Global.get_game_root(self)
 	player.current_chamber = level_number
 	game.current_chamber_player = level_number
@@ -115,3 +118,4 @@ func _on_init_timer_timeout():
 	var game = Global.get_game_root(self)
 	if game!=null:
 		game.call_deferred('append_level', self)
+

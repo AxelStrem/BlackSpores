@@ -26,6 +26,12 @@ const crouch_slowdown = 0.4
 const speed_decay = 0.85
 const energy_boost_duration = 15.0
 
+var level_speed = 0
+var level_stamina = 0
+var level_hacking = 0
+var level_teleport = 0
+var level_ward = 0
+
 var ground_close = false
 var last_frame_on_ground = false
 var jumping = false
@@ -89,9 +95,41 @@ var energy_boost = 0.0
 
 var controls_locked = false
 
+var SPEED = 4.0
+var acceleration = 60.0
+const jump_velocity = 8.0
+const jump_velocity_antigrav = 20.0
+const jump_energy = 50.0
+const dodge_energy = 50.0
+const dodge_velocity_vertical = 5.0
+const dodge_velocity_horizontal = 10.0
+var dodge_buffer = Vector3(0.0,0.0,0.0)
+var jump_energy_built = 0.0
+var jump_energy_limit = 0.0
+
+const jump_type = 3 # 0 - usual jump
+					# 1 - jump on release
+					# 2 - jump on release after build up
+					# 3 - usual jump with build up after
+
 @onready var death_screen = $Camera/DeathScreen
 @onready var restart_button = $Camera/DeathScreen/restartButton
 @onready var menu_button = $Camera/DeathScreen/quitToMenuButton
+
+func update_profile(skills):
+	level_speed = skills[0]
+	level_stamina = skills[1]
+	level_hacking = skills[2]
+	level_teleport = skills[3]
+	level_ward = skills[4]
+	
+	SPEED = 5.0 + level_speed*0.15
+	acceleration = 60.0 + level_speed*1.8
+	
+	max_energy = 200 + 5*level_stamina
+	
+	lockpick_skill = 1.0+0.1*level_hacking
+	
 
 func lock_controls():
 	$Camera/HUDSprite.hide()
@@ -187,23 +225,6 @@ func pickup(pickup_type):
 		display_info("Picked up a Ward. Press Q to deploy")
 		return true
 	return true
-
-var SPEED = 5.0
-const acceleration = 60.0
-const jump_velocity = 8.0
-const jump_velocity_antigrav = 20.0
-const jump_energy = 50.0
-const dodge_energy = 50.0
-const dodge_velocity_vertical = 4.0
-const dodge_velocity_horizontal = 10.0
-var dodge_buffer = Vector3(0.0,0.0,0.0)
-var jump_energy_built = 0.0
-var jump_energy_limit = 0.0
-
-const jump_type = 3 # 0 - usual jump
-					# 1 - jump on release
-					# 2 - jump on release after build up
-					# 3 - usual jump with build up after
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -444,7 +465,7 @@ func _input(event):
 			if ward_charges > 0:
 					ward_charges -= 1
 					var ward = ward_scene.instantiate()
-					ward.lifetime = 10.0
+					ward.lifetime = 10.0 + level_ward*0.5
 					get_parent().add_child(ward)
 					ward.global_transform = item_spawn.global_transform
 					ward.linear_velocity = -ward.global_transform.basis.z.normalized()*10.0
@@ -461,6 +482,7 @@ func _input(event):
 					if teleporter!=null:
 						teleporter.queue_free()
 					teleporter = teleporter_scene.instantiate()
+					teleporter.deploy_speed = 0.5 + level_teleport*0.2
 					teleporter.player = self
 					get_parent().add_child(teleporter)
 					teleporter.global_transform = item_spawn.global_transform

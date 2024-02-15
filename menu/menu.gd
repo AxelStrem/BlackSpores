@@ -1,6 +1,7 @@
 extends Node3D
 
 var research_points = 0
+var levels = [0,0,0,0,0]
 var config = ConfigFile.new()
 var mainScene = preload("res://main.tscn")
 var main_instance
@@ -8,11 +9,19 @@ var main_instance
 func _ready():
 	config.load("user://scores.cfg")
 	research_points = config.get_value("player", "research_points",0)
+	for i in range(levels.size()):
+		levels[i] = config.get_value("player", "level{0}".format({0:i}), 0)
+
+func update_config(rp, lvs):
+	research_points = rp
+	levels = lvs
+	save_config()
 
 func _on_start_button_button_clicked():	
 	$startButton.deactivate()
 	$closeButton.deactivate()
 	main_instance = mainScene.instantiate()
+	main_instance.load_config(research_points, levels)	
 	var player = main_instance.find_child("player")
 	player.research_points = research_points
 	var env = main_instance.find_child("WorldEnvironment")
@@ -20,7 +29,9 @@ func _on_start_button_button_clicked():
 	env.environment.adjustment_brightness = 1
 	self.add_child(main_instance)
 	main_instance.restart_signal.connect(on_restart)
-	main_instance.to_menu_signal.connect(return_to_menu)	
+	main_instance.to_menu_signal.connect(return_to_menu)
+	main_instance.update_config.connect(update_config)
+	main_instance.load_config(research_points, levels)
 	player.got_research_point_signal.connect(_add_research_point)
 	player.to_menu_signal.connect(return_to_menu)
 	
@@ -33,10 +44,15 @@ func return_to_menu():
 	$closeButton.activate()
 	main_instance.queue_free()
 
-func _on_close_button_clicked():
+func save_config():
 	config.set_value("player","research_points", research_points)
+	for i in range(levels.size()):
+		config.set_value("player", "level{0}".format({0:i}), levels[i])
 	config.save("user://scores.cfg")
+
+func _on_close_button_clicked():
 	get_tree().quit()
 
 func _add_research_point():
 	research_points+=1
+	save_config()

@@ -28,11 +28,12 @@ func start_evac():
 	add_child(sp)
 	sp.global_transform = $Jar.global_transform
 	sp.global_basis = Basis.IDENTITY
-	
 	door.unlock()
 
 func start_sequence():
 	if state==0:
+		$"../../button_character".hide()
+		$"../../button_back".hide()
 		state = 1
 
 func _process(delta):

@@ -8,9 +8,11 @@ extends Node3D
 @export var infinite_stamina = false
 @export var test_chamber = false
 @export var soundtrack = false
+@export var reset_points = false
 
 signal to_menu_signal
 signal restart_signal
+signal update_config
 
 var black_spore_scene = preload("res://black_spore.tscn")
 var black_ball_scene = preload("res://black_ball.tscn")
@@ -46,6 +48,31 @@ var ward_list = {}
 
 var current_chamber_player = 0
 var current_chamber_spore = 0
+
+var character_menu = null
+var research_points = 0
+var plevels = []
+
+func save_character(rp, lv_dist):
+	research_points = rp
+	plevels = lv_dist
+	emit_signal("update_config", rp, lv_dist)
+	$player.update_profile(lv_dist)
+	
+func load_character(pnode):
+	character_menu = pnode
+	pnode.set_points(research_points, plevels)
+	$player.update_profile(plevels)	
+	
+func load_config(research_points_, levels):
+	if reset_points:
+		research_points_ = 300
+		levels = [0,0,0,0,0]
+	research_points = research_points_
+	plevels = levels
+	if character_menu:
+		character_menu.set_points(research_points_, plevels)
+	$player.update_profile(plevels)	
 
 class SporeCell:
 	var position : Vector3
@@ -345,7 +372,7 @@ var spore_timer_goal = 0.2
 var spore_timer_sp = 0.3/60
 
 func spore_timer_adjusted():
-	var spore_speedup = 0.001*current_chamber_spore
+	var spore_speedup = 0.0015*current_chamber_spore
 	var spore_catchup = 1.0
 	var dp = current_chamber_player - current_chamber_spore
 	if dp >= 2:
@@ -356,7 +383,10 @@ func spore_timer_adjusted():
 		spore_catchup = 0.7
 	if dp >= 5:
 		spore_catchup = 0.5
-	return spore_catchup * (spore_timer)# - spore_speedup)
+	return spore_catchup * (spore_timer - spore_speedup)
+
+func get_player():
+	return $player
 
 func _physics_process(delta):	
 	if !game_started:
