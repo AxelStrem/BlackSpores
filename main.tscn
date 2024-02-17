@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=32 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="Script" path="res://player.gd" id="3_1xpxi"]
@@ -12,7 +12,9 @@
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
 [ext_resource type="AudioStream" uid="uid://ngvg27qxh4jr" path="res://sound/soundtrack_bass.mp3" id="9_xoloe"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
+[ext_resource type="Material" uid="uid://bxga3rye2w2pr" path="res://yoba/overlay_mat.tres" id="10_wywuy"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_mphlh"]
+[ext_resource type="Script" path="res://yoba/SporesOverlay.gd" id="12_dpwtj"]
 [ext_resource type="Script" path="res://yoba/fx_teleport.gd" id="13_grani"]
 [ext_resource type="Script" path="res://pause.gd" id="14_jwptw"]
 [ext_resource type="PackedScene" uid="uid://dko6syds2j81d" path="res://levels/chamber_start.tscn" id="14_suh5h"]
@@ -28,6 +30,9 @@ viewport_path = NodePath("player/HUDViewport")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7a10"]
 shading_mode = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ul6yr"]
+material = ExtResource("10_wywuy")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjvjx"]
 height = 2.04788
@@ -80,6 +85,8 @@ size = Vector3(196.664, 4.61426, 267.326)
 process_mode = 1
 script = ExtResource("1_kjcn1")
 show_info = true
+test_chamber = true
+soundtrack = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
@@ -312,6 +319,12 @@ text = "Menu"
 stream = ExtResource("9_xoloe")
 bus = &"Music"
 
+[node name="SporesOverlay" type="MeshInstance3D" parent="player/Camera"]
+transform = Transform3D(1, -4.43312e-15, -9.9476e-14, 6.21725e-15, 0.624901, -1.49012e-08, 0, -3.49309e-21, 1.03807, 3.8147e-06, -0.0352783, -0.347668)
+visible = false
+mesh = SubResource("QuadMesh_ul6yr")
+script = ExtResource("12_dpwtj")
+
 [node name="JumpDelay" type="Timer" parent="player"]
 
 [node name="Area3D" type="Area3D" parent="player"]
@@ -386,5 +399,6 @@ script = ExtResource("14_jwptw")
 [connection signal="button_clicked" from="player/Camera/DeathScreen/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
 [connection signal="area_entered" from="player/Area3D" to="player" method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="player/Area3D" to="player" method="_on_area_3d_area_exited"]
 [connection signal="finished" from="player/breath" to="player" method="_on_breath_finished"]
 [connection signal="timeout" from="player/FX/Teleport/Timer" to="player/FX/Teleport" method="_on_timer_timeout"]

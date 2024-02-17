@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://efdij6qskdlt"]
+
+[ext_resource type="Script" path="res://menu/character_perk.gd" id="1_xxg2l"]
+[ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="2_84rq2"]
+
+[node name="CharacterPerk" type="Node3D"]
+script = ExtResource("1_xxg2l")
+
+[node name="button3D" parent="." instance=ExtResource("2_84rq2")]
+transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, -1.42109e-14, 0, 0.21, 0.723982, 0.461538, 0)
+text = "Enhanced Boots (10 RP)"
+background = true
+background_width = 2.0
+
+[connection signal="button_clicked" from="button3D" to="." method="_on_button_3d_button_clicked"]
+[connection signal="button_mouse_in" from="button3D" to="." method="_on_button_3d_button_mouse_in"]

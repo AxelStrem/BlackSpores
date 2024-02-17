@@ -10,7 +10,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
 size = Vector3(44.643, 21.4832, 37.6189)
 
-[node name="Chamber" type="Node3D" node_paths=PackedStringArray("level_in", "level_out")]
+[node name="Chamber" type="Node3D" node_paths=PackedStringArray("level_in", "level_out") groups=["level"]]
 script = ExtResource("1_5apep")
 level_in = NodePath("LevelIn")
 level_out = NodePath("LevelOut")

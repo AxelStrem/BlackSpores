@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://y3jm0voud3mo"]
+[gd_scene load_steps=9 format=3 uid="uid://y3jm0voud3mo"]
 
 [ext_resource type="PackedScene" uid="uid://bye4t8i6ojctc" path="res://level_parts/building_blocks/silo_doorway.tscn" id="1_8leia"]
+[ext_resource type="Script" path="res://level_parts/building_blocks/silo.gd" id="1_cav4h"]
 [ext_resource type="PackedScene" uid="uid://8o43ofhcf47k" path="res://level_parts/building_blocks/silo_door.tscn" id="2_dkhwu"]
 [ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="3_emki0"]
 [ext_resource type="PackedScene" uid="uid://bju0m06pn6kg6" path="res://level_parts/building_blocks/ceiling_01.tscn" id="4_qejxd"]
@@ -9,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bk6ro78efnftv" path="res://entities/digital_lock.tscn" id="7_8b7tr"]
 
 [node name="Silo" type="Node3D"]
+script = ExtResource("1_cav4h")
 
 [node name="silo_doorway" parent="." instance=ExtResource("1_8leia")]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
@@ -78,3 +80,4 @@ complexity = 3.0
 transform = Transform3D(6.55671e-08, -0.5, 2.18557e-08, 0, -2.18557e-08, -0.5, 0.5, 6.55671e-08, -2.86603e-15, 2.07023, 1.79868, 3.19311)
 target = NodePath("../LockUp")
 complexity = 3.0
+metadata/_edit_pinned_properties_ = [&"complexity"]

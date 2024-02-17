@@ -48,6 +48,7 @@ func generate_level(number):
 	
 	var l = scene.instantiate()
 	l.level_number = number
+	l.level_difficulty = 10.0 + number
 	return l
 
 func get_game_root(node):
@@ -55,6 +56,13 @@ func get_game_root(node):
 	while p!=null and !p.is_in_group("game"):
 		p = p.get_parent()
 	return p
+	
+func get_level_root(node):
+	var p = node.get_parent()
+	while p!=null and !p.is_in_group("level"):
+		p = p.get_parent()
+	return p
+
 
 func list_children_recursive(node):
 	var nodes : Array = []

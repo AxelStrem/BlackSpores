@@ -22,6 +22,8 @@ var full_node_list = []
 var nl_semaphore : Semaphore
 var player = null
 
+var level_difficulty = 0.0
+
 func _ready():
 	nl_semaphore = Semaphore.new()
 	

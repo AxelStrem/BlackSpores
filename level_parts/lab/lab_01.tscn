@@ -144,22 +144,22 @@ shape = SubResource("BoxShape3D_i12wx")
 surface_material_override/0 = ExtResource("2_ajp65")
 
 [node name="CeilingLamp01" parent="LabCeiling" index="0" instance=ExtResource("3_ed0m8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246652, 1.04936, 10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246652, 1.04936, 9.5)
 
 [node name="CeilingLamp02" parent="LabCeiling" index="1" instance=ExtResource("3_ed0m8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24665, 1.04936, 10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.24665, 1.04936, 9.5)
 
 [node name="CeilingLamp03" parent="LabCeiling" index="2" instance=ExtResource("3_ed0m8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.24665, 1.04936, 10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.24665, 1.04936, 9.5)
 
 [node name="CeilingLamp04" parent="LabCeiling" index="3" instance=ExtResource("3_ed0m8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.24665, 1.04936, 10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.24665, 1.04936, 9.5)
 
 [node name="CeilingLamp05" parent="LabCeiling" index="4" instance=ExtResource("3_ed0m8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75335, 1.04936, 10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75335, 1.04936, 9.5)
 
 [node name="CeilingLamp06" parent="LabCeiling" index="5" instance=ExtResource("3_ed0m8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75335, 1.04936, 10.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.75335, 1.04936, 9.5)
 
 [node name="CeilingLamp07" parent="LabCeiling" index="6" instance=ExtResource("3_ed0m8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.246652, 1.04936, 3.5)

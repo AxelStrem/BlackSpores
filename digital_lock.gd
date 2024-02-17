@@ -7,6 +7,11 @@ var speed = 0.0
 var target_scale = 0.0
 var init_comp = 0.0
 
+func init():
+	var level = Global.get_level_root(self)
+	init_comp *= (level.level_difficulty / 10.0)
+	complexity = init_comp 
+
 func _ready():
 	target_scale = $ScreenProgress/MeshInstance3D.scale.x
 	init_comp = complexity

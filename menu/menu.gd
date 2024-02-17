@@ -1,7 +1,8 @@
 extends Node3D
 
 var research_points = 0
-var levels = [0,0,0,0,0]
+var levels = [0,0,0,0,0,0]
+var perks = [0]
 var config = ConfigFile.new()
 var mainScene = preload("res://main.tscn")
 var main_instance
@@ -11,17 +12,20 @@ func _ready():
 	research_points = config.get_value("player", "research_points",0)
 	for i in range(levels.size()):
 		levels[i] = config.get_value("player", "level{0}".format({0:i}), 0)
+	for i in range(perks.size()):
+		perks[i] = config.get_value("player", "perk{0}".format({0:i}), 0)
 
-func update_config(rp, lvs):
+func update_config(rp, lvs, prks):
 	research_points = rp
 	levels = lvs
+	perks = prks
 	save_config()
 
 func _on_start_button_button_clicked():	
 	$startButton.deactivate()
 	$closeButton.deactivate()
 	main_instance = mainScene.instantiate()
-	main_instance.load_config(research_points, levels)	
+	main_instance.load_config(research_points, levels, perks)	
 	var player = main_instance.find_child("player")
 	player.research_points = research_points
 	var env = main_instance.find_child("WorldEnvironment")
@@ -31,7 +35,7 @@ func _on_start_button_button_clicked():
 	main_instance.restart_signal.connect(on_restart)
 	main_instance.to_menu_signal.connect(return_to_menu)
 	main_instance.update_config.connect(update_config)
-	main_instance.load_config(research_points, levels)
+	main_instance.load_config(research_points, levels, perks)
 	player.got_research_point_signal.connect(_add_research_point)
 	player.to_menu_signal.connect(return_to_menu)
 	
@@ -48,6 +52,8 @@ func save_config():
 	config.set_value("player","research_points", research_points)
 	for i in range(levels.size()):
 		config.set_value("player", "level{0}".format({0:i}), levels[i])
+	for i in range(perks.size()):
+		config.set_value("player", "perk{0}".format({0:i}), perks[i])
 	config.save("user://scores.cfg")
 
 func _on_close_button_clicked():

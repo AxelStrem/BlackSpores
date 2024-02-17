@@ -72,6 +72,12 @@ shape = SubResource("BoxShape3D_ac8aa")
 
 [node name="SporeDestructible" parent="." index="5" instance=ExtResource("4_pkcwu")]
 
+[node name="init_delay" type="Timer" parent="." index="6"]
+wait_time = 0.2
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="player_detector" to="." method="_on_player_entered"]
 [connection signal="body_exited" from="player_detector" to="." method="_on_player_exited"]
 [connection signal="spore_hit" from="SporeDestructible" to="." method="_on_spore_destructible_spore_hit"]
+[connection signal="timeout" from="init_delay" to="." method="init"]

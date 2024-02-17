@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://bxga3rye2w2pr"]
+
+[ext_resource type="Shader" path="res://yoba/overlay.gdshader" id="1_3c38r"]
+[ext_resource type="Texture2D" uid="uid://c2vbbleacs013" path="res://yoba/bsmap.bmp" id="2_5hk76"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3c38r")
+shader_parameter/progress = 0.415
+shader_parameter/map = ExtResource("2_5hk76")

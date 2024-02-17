@@ -16,13 +16,15 @@ var button_pressed = false
 var background_material = null
 
 signal button_clicked
+signal button_mouse_in
+signal button_mouse_out
 
 func set_text(txt):
 	text = txt
 	$Label3D.text=txt
 	
 
-func _ready():
+func update():
 	$Label3D.text=text
 	$Label3D.modulate = color
 	if background:
@@ -32,6 +34,11 @@ func _ready():
 		background_material.albedo_color = background_color
 		$Background.scale.x = background_width
 		$Area3D.scale.x = background_width
+	else:
+		$Background.hide()
+
+func _ready():
+	update()
 
 func activate():
 	$Area3D.input_ray_pickable = true
@@ -71,6 +78,7 @@ func _on_area_3d_mouse_entered():
 		$Label3D.modulate = hover_color
 		if background:
 			background_material.albedo_color = background_hover
+	emit_signal("button_mouse_in")
 
 
 func _on_area_3d_mouse_exited():
@@ -79,3 +87,4 @@ func _on_area_3d_mouse_exited():
 		$Label3D.modulate = color
 		if background:
 			background_material.albedo_color = background_color
+	emit_signal("button_mouse_out")

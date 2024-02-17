@@ -52,27 +52,31 @@ var current_chamber_spore = 0
 var character_menu = null
 var research_points = 0
 var plevels = []
+var klevels = []
 
-func save_character(rp, lv_dist):
+func save_character(rp, lv_dist, pk_list):
 	research_points = rp
 	plevels = lv_dist
-	emit_signal("update_config", rp, lv_dist)
-	$player.update_profile(lv_dist)
+	klevels = pk_list
+	emit_signal("update_config", rp, lv_dist, pk_list)
+	$player.update_profile(lv_dist, pk_list)
 	
 func load_character(pnode):
 	character_menu = pnode
-	pnode.set_points(research_points, plevels)
-	$player.update_profile(plevels)	
+	pnode.set_points(research_points, plevels, klevels)
+	$player.update_profile(plevels, klevels)	
 	
-func load_config(research_points_, levels):
+func load_config(research_points_, levels, perks):
 	if reset_points:
 		research_points_ = 300
-		levels = [0,0,0,0,0]
+		levels = [0,0,0,0,0,0]
+		perks = [0]
 	research_points = research_points_
 	plevels = levels
+	klevels = perks
 	if character_menu:
-		character_menu.set_points(research_points_, plevels)
-	$player.update_profile(plevels)	
+		character_menu.set_points(research_points_, plevels, klevels)
+	$player.update_profile(plevels, klevels)	
 
 class SporeCell:
 	var position : Vector3
@@ -372,7 +376,7 @@ var spore_timer_goal = 0.2
 var spore_timer_sp = 0.3/60
 
 func spore_timer_adjusted():
-	var spore_speedup = 0.006*current_chamber_spore
+	var spore_speedup = 0.005*current_chamber_spore
 	var spore_catchup = 1.0
 	var dp = current_chamber_player - current_chamber_spore
 	if dp >= 2:

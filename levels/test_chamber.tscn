@@ -310,13 +310,25 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 20)
 [node name="Floor77" parent="floor" index="77" instance=ExtResource("2_cns8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0, 20)
 
-[node name="Floor78" parent="floor" index="78" instance=ExtResource("2_cns8c")]
+[node name="Floor82" parent="floor" index="78" instance=ExtResource("2_cns8c")]
+transform = Transform3D(1, 0, 0, 0, 0.34202, 0.939692, 0, -0.939692, 0.34202, 4, 1.7, 22.7)
+
+[node name="Floor83" parent="floor" index="79" instance=ExtResource("2_cns8c")]
+transform = Transform3D(1, 0, 0, 0, 0.422618, 0.906308, 0, -0.906308, 0.422618, 0, 1.7, 22.8)
+
+[node name="Floor84" parent="floor" index="80" instance=ExtResource("2_cns8c")]
+transform = Transform3D(1, 0, 0, 0, 0.573576, 0.819152, 0, -0.819152, 0.573576, -4, 1.7, 23.1)
+
+[node name="Floor85" parent="floor" index="81" instance=ExtResource("2_cns8c")]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, -8, 1.7, 23.3)
+
+[node name="Floor78" parent="floor" index="82" instance=ExtResource("2_cns8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 0, 20)
 
-[node name="Floor79" parent="floor" index="79" instance=ExtResource("2_cns8c")]
+[node name="Floor79" parent="floor" index="83" instance=ExtResource("2_cns8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 0, 20)
 
-[node name="Floor80" parent="floor" index="80" instance=ExtResource("2_cns8c")]
+[node name="Floor80" parent="floor" index="84" instance=ExtResource("2_cns8c")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0, 20)
 
 [node name="Staircase_Destroyed" type="Node3D" parent="." index="9"]

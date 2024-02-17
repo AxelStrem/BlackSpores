@@ -32,6 +32,9 @@ var level_stamina = 0
 var level_hacking = 0
 var level_teleport = 0
 var level_ward = 0
+var level_strength = 0
+
+var perk_boots1 = false
 
 var ground_close = false
 var last_frame_on_ground = false
@@ -104,6 +107,7 @@ const jump_energy = 50.0
 const dodge_energy = 50.0
 const dodge_velocity_vertical = 5.0
 const dodge_velocity_horizontal = 10.0
+const fatal_velocity = 25.0
 var dodge_buffer = Vector3(0.0,0.0,0.0)
 var jump_energy_built = 0.0
 var jump_energy_limit = 0.0
@@ -112,17 +116,24 @@ const jump_type = 3 # 0 - usual jump
 					# 1 - jump on release
 					# 2 - jump on release after build up
 					# 3 - usual jump with build up after
+					
+var spores_on_player = 0.0
+var spore_resistance = 2.0
+var touching_spores = 0
 
 @onready var death_screen = $Camera/DeathScreen
 @onready var restart_button = $Camera/DeathScreen/restartButton
 @onready var menu_button = $Camera/DeathScreen/quitToMenuButton
 
-func update_profile(skills):
+func update_profile(skills, perks):
 	level_speed = skills[0]
 	level_stamina = skills[1]
 	level_hacking = skills[2]
 	level_teleport = skills[3]
 	level_ward = skills[4]
+	level_strength = skills[5]
+	
+	perk_boots1 = (perks[0]!=0)
 	
 	SPEED = 5.0 + level_speed*0.15
 	acceleration = 60.0 + level_speed*1.8
@@ -262,6 +273,18 @@ func _physics_process(delta):
 	dodge_cooldown-=delta
 	if dodge_cooldown<0.0:
 		dodge_cooldown=0.0
+		
+	if touching_spores > 0:
+		spores_on_player += delta/(spore_resistance + 0.3*level_strength)
+		if spores_on_player >= 1.0:
+			_player_dead(velocity, 0)
+	else:
+		spores_on_player -= delta
+		if spores_on_player < 0.0:
+			spores_on_player = 0.0
+	
+	$Camera/SporesOverlay.set_progress(spores_on_player*0.99)
+	
 	
 	if not timer_paused:
 		time_passed += delta
@@ -306,10 +329,11 @@ func _physics_process(delta):
 				$Camera/Feet.position.x = -$Camera/Feet.position.x
 				$Camera/Feet.get_children().pick_random().play()
 				step_distance=0
-		if old_velocity.y < -32.0:
+		if old_velocity.y < -(fatal_velocity + level_strength*1.0):
 			if antigrav_charges > 0 and not antigrav_protection:
-				antigrav_charges-=1
-				antigrav_protection=true
+				if perk_boots1:
+					antigrav_charges-=1
+					antigrav_protection=true
 			if not antigrav_protection:
 				label_dead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
 				_player_dead(old_velocity, 1)
@@ -393,7 +417,7 @@ func _physics_process(delta):
 		var acc_vector = direction
 		if !direction:
 			acc_vector = -Vector3(velocity.x,0.0,velocity.z).normalized() 
-		var max_speed = SPEED*speed_coef
+		var max_speed = SPEED*speed_coef*(1.0-spores_on_player)
 		
 		if Input.is_action_pressed("player_run") and direction:
 			energy_restoring = false
@@ -527,7 +551,13 @@ func _on_area_3d_area_entered(area):
 	if area.get_collision_layer_value(3):
 		var game = get_game_root()
 		if game and game.do_spores_kill():
-			_player_dead(velocity, 0)
+			touching_spores+=1
+
+func _on_area_3d_area_exited(area):
+	if area.get_collision_layer_value(3):
+		var game = get_game_root()
+		if game and game.do_spores_kill():
+			touching_spores-=1
 
 #only to be deferred called
 func roll_head(death_velocity):
@@ -576,3 +606,4 @@ func _hide_menu():
 	death_screen.hide()
 	restart_button.deactivate()
 	menu_button.deactivate()	
+
