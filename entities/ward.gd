@@ -35,13 +35,15 @@ func _process(delta):
 			rotation = Vector3(0.0,0.0,0.0)
 			$ward/WardStand.show()
 			$ward/WardProgressBar.show()
-			$OmniLight3D.show()
+			$ward_light.show()
 	if deploying == 2:
 		prog+=delta/1.5
 		translate_object_local(Vector3.UP*delta)
 		if prog >= 1.0:
 			deploying = 3
 			engaged = true
+			$particles.emitting = true
+			$ward_light.light_energy = 100.0
 			game = Global.get_game_root(self)
 			if game!=null:
 				game.add_ward(self)
@@ -53,6 +55,7 @@ func _process(delta):
 		if lifetime < 0:
 			deploying = 4
 			engaged = false
+			$particles.emitting = false
 			if game!=null:
 				game.remove_ward(self)
 			#for sp in spores_delayed:
@@ -62,7 +65,7 @@ func _process(delta):
 			add_child(sd)
 			$ward/WardProgressBar.hide()
 			$ward/WardBall.hide()
-			$OmniLight3D.hide()
+			$ward_light.hide()
 
 func _exit_tree():
 	if game!=null:

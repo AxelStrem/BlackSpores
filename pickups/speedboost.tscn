@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsw3r6wsmjg8c"]
+[gd_scene load_steps=5 format=3 uid="uid://dsw3r6wsmjg8c"]
 
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_ytfbx"]
 [ext_resource type="PackedScene" uid="uid://cxduh0g4bs5fb" path="res://models/pickups/capsule.tscn" id="2_q4liy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7lrng"]
+shading_mode = 0
+albedo_color = Color(1, 0.462745, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_834ct"]
+material = SubResource("StandardMaterial3D_7lrng")
 
 [node name="pickup" instance=ExtResource("1_ytfbx")]
 pickup_type = 1
@@ -14,3 +21,6 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0.670772, 0)
 light_color = Color(1, 0.152941, 1, 1)
 light_energy = 0.21
 omni_range = 2.8695
+
+[node name="GPUParticles3D" parent="." index="2"]
+draw_pass_1 = SubResource("QuadMesh_834ct")

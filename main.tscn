@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=29 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="Script" path="res://player.gd" id="3_1xpxi"]
@@ -13,6 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://ngvg27qxh4jr" path="res://sound/soundtrack_bass.mp3" id="9_xoloe"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_mphlh"]
+[ext_resource type="Script" path="res://yoba/fx_teleport.gd" id="13_grani"]
 [ext_resource type="Script" path="res://pause.gd" id="14_jwptw"]
 [ext_resource type="PackedScene" uid="uid://dko6syds2j81d" path="res://levels/chamber_start.tscn" id="14_suh5h"]
 
@@ -39,13 +40,46 @@ glow_enabled = true
 glow_intensity = 1.25
 glow_strength = 0.95
 
+[sub_resource type="Curve" id="Curve_s23l4"]
+_data = [Vector2(0.0326594, 0), 0.0, 0.0, 0, 0, Vector2(0.18196, 0.573345), 0.0, 0.0, 0, 0, Vector2(0.679627, 0.806709), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_p8us2"]
+curve = SubResource("Curve_s23l4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_y0v6h"]
+emission_shape_offset = Vector3(0, -1, 0)
+direction = Vector3(0, 1, 0)
+spread = 0.0
+initial_velocity_min = 6.0
+initial_velocity_max = 7.0
+scale_min = 0.8
+scale_max = 1.1
+alpha_curve = SubResource("CurveTexture_p8us2")
+hue_variation_min = -0.09
+hue_variation_max = 0.18
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t5ny6"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0, 0.72549, 0.811765, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_lsobw"]
+material = SubResource("StandardMaterial3D_t5ny6")
+inner_radius = 1.1
+outer_radius = 1.2
+rings = 40
+ring_segments = 9
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
 size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 process_mode = 1
 script = ExtResource("1_kjcn1")
-soundtrack = true
+show_info = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
@@ -314,6 +348,22 @@ transform = Transform3D(1, 1.33227e-14, -5.82353e-22, 0, -4.37114e-08, -1, -1.33
 [node name="WorldEnvironment" type="WorldEnvironment" parent="player/HUDViewport/Camera3D"]
 environment = SubResource("Environment_5pjpf")
 
+[node name="FX" type="Node3D" parent="player"]
+
+[node name="Teleport" type="Node3D" parent="player/FX"]
+script = ExtResource("13_grani")
+
+[node name="rings" type="GPUParticles3D" parent="player/FX/Teleport"]
+emitting = false
+amount = 50
+lifetime = 2.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_y0v6h")
+draw_pass_1 = SubResource("TorusMesh_lsobw")
+
+[node name="Timer" type="Timer" parent="player/FX/Teleport"]
+wait_time = 0.5
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("7_q68py")
 
@@ -337,3 +387,4 @@ script = ExtResource("14_jwptw")
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
 [connection signal="area_entered" from="player/Area3D" to="player" method="_on_area_3d_area_entered"]
 [connection signal="finished" from="player/breath" to="player" method="_on_breath_finished"]
+[connection signal="timeout" from="player/FX/Teleport/Timer" to="player/FX/Teleport" method="_on_timer_timeout"]

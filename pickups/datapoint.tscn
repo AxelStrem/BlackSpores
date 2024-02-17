@@ -1,9 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://1mafv0umphbn"]
+[gd_scene load_steps=6 format=3 uid="uid://1mafv0umphbn"]
 
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_bti1i"]
 [ext_resource type="PackedScene" uid="uid://cbe2ah416ixc4" path="res://models/pickups/spiral.tscn" id="2_k8e3b"]
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ooiww"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fcbl7"]
+shading_mode = 0
+albedo_color = Color(1, 1, 0.439216, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_ofa50"]
+material = SubResource("StandardMaterial3D_fcbl7")
 
 [node name="pickup" instance=ExtResource("1_bti1i")]
 
@@ -23,3 +30,6 @@ billboard = 1
 transparent = false
 shaded = true
 texture = SubResource("NoiseTexture2D_ooiww")
+
+[node name="GPUParticles3D" parent="." index="2"]
+draw_pass_1 = SubResource("QuadMesh_ofa50")

@@ -15,6 +15,10 @@ var shlong_progress=0.1
 var shlong_time = 1.0
 var shlong_midpoint = Vector3(0.0,0.0,0.0)
 
+var mat_ward = preload("res://entities/ward_spore.tres")
+var mat_black = preload("res://black_spore.tres")
+var ward_close = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	time = randf()*0.5
@@ -81,9 +85,24 @@ func _physics_process(delta):
 			shlong.align_mesh(p1,p2, w*2.0)
 			shlong.visible = true
 	if state == 2:
-		radius += delta*speed
+		if ward_close:
+			if radius > 0.25:
+				radius -= delta*2.0
+		else:
+			radius += delta*speed
 		$spore.scale = Vector3.ONE*radius
 		if radius > 2.0 and shlong != null:
 			remove_child(shlong)
 			shlong = null
 		
+
+
+func _on_ward_check_timeout():
+	var game = Global.get_game_root(self)
+	if game:
+		if game.check_wards(global_position, radius*0.5) != ward_close:
+			ward_close = !ward_close
+			if ward_close:
+				$spore/ball.material_override = mat_ward
+			else:
+				$spore/ball.material_override = mat_black

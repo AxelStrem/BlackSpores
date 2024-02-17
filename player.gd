@@ -5,6 +5,7 @@ signal to_menu_signal
 var step_distance=0
 var max_energy=200.0
 var current_energy=200.0
+var energy_regain_speed = 30.0
 var dead = false;
 var old_velocity = Vector3(0.0,0.0,0.0)
 # Declare member variables here. Examples:
@@ -62,14 +63,14 @@ const antigrav_charges_max = 10
 const antigrav_charges_bonus = 3
 
 var teleporter_charges = 0
-const teleporter_charges_max = 10
+const teleporter_charges_max = 7
 const teleporter_charges_bonus = 2
 var teleporter = null
 var teleporter_scene = preload("res://entities/teleporter.tscn")
 var teleporter_energy_boost = 3.0
 
 var ward_charges = 0
-const ward_charges_max = 10
+const ward_charges_max = 5
 const ward_charges_bonus = 1
 var ward_scene = preload("res://entities/ward.tscn")
 
@@ -200,7 +201,8 @@ func pickup(pickup_type):
 		return true
 	if pickup_type == 1:
 		energy_boost = energy_boost_duration
-		display_info("Picked up an energy boost")
+		energy_regain_speed += 2.0
+		display_info("Picked up an energy boost. Energy recovery rate at {0}%".format({0:int(energy_regain_speed/0.3)}))
 		hud.set_infinite_energy(true)
 		return true
 	if pickup_type == 2:
@@ -419,7 +421,7 @@ func _physics_process(delta):
 		
 		
 	if energy_restoring:
-		current_energy = min(max_energy,current_energy + delta * 30)
+		current_energy = min(max_energy,current_energy + delta * energy_regain_speed)
 		
 	if energy_boost > 0.0 or infinite_energy_cheat:
 		energy_boost-=delta
@@ -479,7 +481,9 @@ func _input(event):
 			if event.pressed:
 				if teleporter_charges > 0:
 					teleporter_charges -= 1
+					hud.tele_created()
 					if teleporter!=null:
+						teleporter.player = null
 						teleporter.queue_free()
 					teleporter = teleporter_scene.instantiate()
 					teleporter.deploy_speed = 0.5 + level_teleport*0.2
@@ -492,12 +496,8 @@ func _input(event):
 				if teleporter!=null:
 					if teleporter.engaged:
 						var bs = basis
-						global_transform = teleporter.global_transform
-						energy_boost = teleporter_energy_boost
-						hud.set_infinite_energy(true)						
-						translate_object_local(Vector3.UP*1.5)
-						basis = bs
-						teleporter.queue_free()
+						teleporter.activate(bs)
+						$FX/Teleport.run()
 						teleporter = null
 					
 	#if event.is_action_pressed("player_jump") and ground_close and not jumping:

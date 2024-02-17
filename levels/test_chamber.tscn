@@ -533,3 +533,27 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1.5, 3)
 
 [node name="hooked_crate3" parent="Hooks3" index="5" instance=ExtResource("11_cmhyy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -15, -1.5, -3)
+
+[node name="PickupSpawner" parent="." index="24" instance=ExtResource("6_xrs4k")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 6, 0, 20)
+spawn_probability = 1.0
+
+[node name="PickupSpawner2" parent="." index="25" instance=ExtResource("6_xrs4k")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 0, 20)
+spawn_probability = 1.0
+
+[node name="PickupSpawner3" parent="." index="26" instance=ExtResource("6_xrs4k")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 20)
+spawn_probability = 1.0
+
+[node name="PickupSpawner4" parent="." index="27" instance=ExtResource("6_xrs4k")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -3, 0, 20)
+spawn_probability = 1.0
+
+[node name="PickupSpawner5" parent="." index="28" instance=ExtResource("6_xrs4k")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6, 0, 20)
+spawn_probability = 1.0
+
+[node name="PickupSpawner6" parent="." index="29" instance=ExtResource("6_xrs4k")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9, 0, 20)
+spawn_probability = 1.0

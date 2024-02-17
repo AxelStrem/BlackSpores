@@ -118,11 +118,11 @@ func get_nearby_spores(pos):
 	return res
 
 const ward_radius = 10.0
-func check_wards(vec):
+func check_wards(vec, extra_radius):
 	var p1 = Vector3(vec)
 	for w in ward_list:
 		var p2 = ward_list[w]
-		if (p1-p2).length()<ward_radius:
+		if (p1-p2).length()<(ward_radius + extra_radius):
 			return true
 	return false
 
@@ -139,7 +139,7 @@ func expand_spores():
 		rep = 1
 	for r in range(rep):
 		var sp = alst.pick_random()
-		if check_wards(sp):
+		if check_wards(sp, 0.0):
 			continue
 		var vel = spore_active_layer[sp]
 		for nb in spore_outer_nbors[vel]:
@@ -285,8 +285,8 @@ func _ready():
 	
 	if debug_items:
 		$player.antigrav_charges = 10
-		$player.teleporter_charges = 10
-		$player.ward_charges = 10
+		$player.teleporter_charges = 7
+		$player.ward_charges = 5
 	if !show_info:
 		$player/Camera/LabelFPS.hide()
 		$player/Camera/LabelTime.hide()
@@ -372,7 +372,7 @@ var spore_timer_goal = 0.2
 var spore_timer_sp = 0.3/60
 
 func spore_timer_adjusted():
-	var spore_speedup = 0.0015*current_chamber_spore
+	var spore_speedup = 0.006*current_chamber_spore
 	var spore_catchup = 1.0
 	var dp = current_chamber_player - current_chamber_spore
 	if dp >= 2:

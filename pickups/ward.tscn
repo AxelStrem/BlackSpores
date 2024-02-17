@@ -1,7 +1,14 @@
-[gd_scene load_steps=3 format=3 uid="uid://i567wqelop1r"]
+[gd_scene load_steps=5 format=3 uid="uid://i567wqelop1r"]
 
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_ktbu2"]
 [ext_resource type="PackedScene" uid="uid://eqm5r5650gxk" path="res://models/pickups/ward_head.tscn" id="2_8b7gg"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n4e4a"]
+shading_mode = 0
+albedo_color = Color(1, 0.470588, 0.427451, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_2d2s8"]
+material = SubResource("StandardMaterial3D_n4e4a")
 
 [node name="pickup" instance=ExtResource("1_ktbu2")]
 pickup_type = 4
@@ -13,3 +20,6 @@ omni_range = 2.44761
 
 [node name="ward" parent="model" index="1" instance=ExtResource("2_8b7gg")]
 transform = Transform3D(0.159312, 0.120911, 0, -0.120911, 0.159312, 0, 0, 0, 0.2, 0, 1.05341, 0)
+
+[node name="GPUParticles3D" parent="." index="2"]
+draw_pass_1 = SubResource("QuadMesh_2d2s8")

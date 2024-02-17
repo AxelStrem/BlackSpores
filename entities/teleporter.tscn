@@ -29,3 +29,8 @@ light_color = Color(0.407843, 0.843137, 1, 1)
 transform = Transform3D(0.0190713, 0, 0, 0, 0.0190713, 0, 0, 0, 0.0190713, 0, 0, 0)
 
 [node name="SporeDestructible" parent="." instance=ExtResource("4_4hkox")]
+
+[node name="activate_timer" type="Timer" parent="."]
+wait_time = 0.6
+
+[connection signal="timeout" from="activate_timer" to="." method="_on_activate_timer_timeout"]

@@ -1,13 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cnlyphkkvonox"]
+[gd_scene load_steps=17 format=3 uid="uid://cnlyphkkvonox"]
 
 [ext_resource type="Script" path="res://black_spore.gd" id="1_tr7qa"]
+[ext_resource type="Material" uid="uid://ctpv8pm58ov2j" path="res://black_spore.tres" id="2_i07c2"]
 [ext_resource type="PackedScene" uid="uid://bm83d03mhyu6y" path="res://models/black_spores/blackspore_02.tscn" id="2_jn7ft"]
 [ext_resource type="Texture2D" uid="uid://bkulakueqngn4" path="res://models/sprites/bs01.png" id="3_ick30"]
 [ext_resource type="AudioStream" uid="uid://b62rhr1qeiuai" path="res://sound/black_spores.wav" id="3_tn8wi"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_piy1l"]
-shading_mode = 0
-albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_rywk1"]
 radial_segments = 16
@@ -27,6 +24,32 @@ albedo_color = Color(1, 0.462745, 1, 1)
 [sub_resource type="SphereShape3D" id="SphereShape3D_ggntj"]
 radius = 0.495
 
+[sub_resource type="Curve" id="Curve_2gjjc"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.178849, 0.846782), 0.0, 0.0, 0, 0, Vector2(0.488336, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_4373o"]
+curve = SubResource("Curve_2gjjc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pergp"]
+emission_shape = 1
+emission_sphere_radius = 21.15
+gravity = Vector3(0, 0, 0)
+radial_accel_min = -7.0
+radial_accel_max = 8.58
+scale_min = 0.1
+scale_max = 0.5
+scale_curve = SubResource("CurveTexture_4373o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g3qg7"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_10ldl"]
+material = SubResource("StandardMaterial3D_g3qg7")
+radial_segments = 5
+rings = 5
+
 [node name="black_spore" type="Node3D" groups=["spore"]]
 script = ExtResource("1_tr7qa")
 
@@ -34,7 +57,7 @@ script = ExtResource("1_tr7qa")
 visible = false
 
 [node name="ball" type="MeshInstance3D" parent="spore"]
-material_override = SubResource("StandardMaterial3D_piy1l")
+material_override = ExtResource("2_i07c2")
 mesh = SubResource("SphereMesh_rywk1")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_6aeqc")
@@ -79,3 +102,14 @@ stream = ExtResource("3_tn8wi")
 attenuation_model = 1
 volume_db = 4.819
 max_distance = 5.0
+
+[node name="ward_check" type="Timer" parent="."]
+wait_time = 0.2
+autostart = true
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+amount = 4
+process_material = SubResource("ParticleProcessMaterial_pergp")
+draw_pass_1 = SubResource("SphereMesh_10ldl")
+
+[connection signal="timeout" from="ward_check" to="." method="_on_ward_check_timeout"]

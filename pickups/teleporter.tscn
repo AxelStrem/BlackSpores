@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://doh4pk1bqte5n"]
+[gd_scene load_steps=7 format=3 uid="uid://doh4pk1bqte5n"]
 
 [ext_resource type="PackedScene" uid="uid://bmpsce348cvfj" path="res://pickups/pickup.tscn" id="1_kubej"]
 [ext_resource type="PackedScene" uid="uid://dblyx4u2lnw3" path="res://models/pickups/teleporter.tscn" id="2_soc7t"]
@@ -10,6 +10,13 @@ albedo_color = Color(1, 0.337255, 0.454902, 1)
 emission_enabled = true
 emission = Color(1, 0.341176, 0.27451, 1)
 emission_energy_multiplier = 3.15
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a42nq"]
+shading_mode = 0
+albedo_color = Color(0.368627, 0.921569, 1, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_u421h"]
+material = SubResource("StandardMaterial3D_a42nq")
 
 [node name="pickup" instance=ExtResource("1_kubej")]
 pickup_type = 3
@@ -28,3 +35,6 @@ omni_range = 2.09394
 
 [node name="teleporter" parent="model" index="2" instance=ExtResource("2_soc7t")]
 transform = Transform3D(0.0585097, 0.045535, 0.054924, -0.0605107, 0.0693025, 0.00700546, -0.037796, -0.0404621, 0.0738088, 0.0145479, 0.916582, 0.0287075)
+
+[node name="GPUParticles3D" parent="." index="2"]
+draw_pass_1 = SubResource("QuadMesh_u421h")
