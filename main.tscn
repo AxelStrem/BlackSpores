@@ -85,8 +85,6 @@ size = Vector3(196.664, 4.61426, 267.326)
 process_mode = 1
 script = ExtResource("1_kjcn1")
 show_info = true
-test_chamber = true
-soundtrack = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
@@ -94,7 +92,7 @@ visible = false
 
 [node name="player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, -264.002, -26.6631)
-collision_layer = 529
+collision_layer = 1553
 script = ExtResource("3_1xpxi")
 
 [node name="hitbox" type="CollisionShape3D" parent="player"]

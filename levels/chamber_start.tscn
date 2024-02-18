@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dko6syds2j81d"]
+[gd_scene load_steps=26 format=3 uid="uid://dko6syds2j81d"]
 
 [ext_resource type="Script" path="res://levels/level.gd" id="1_cklow"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_mhbut"]
@@ -25,11 +25,14 @@ size = Vector3(44.643, 21.4832, 37.6189)
 [sub_resource type="BoxShape3D" id="BoxShape3D_cndy0"]
 size = Vector3(25, 0.6, 20)
 
-[sub_resource type="QuadMesh" id="QuadMesh_3e3pc"]
+[sub_resource type="QuadMesh" id="QuadMesh_4o0op"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8r0w"]
 emission_enabled = true
 emission = Color(0.211765, 0.211765, 0.211765, 1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_3e3pc"]
+size = Vector2(1.675, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bx7ro"]
 shading_mode = 0
@@ -172,7 +175,7 @@ background_color = Color(0.305882, 0.305882, 0.305882, 1)
 
 [node name="Screen1" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.89807e-07, 0, -3.9, 0, 3.9, 0, 6.63, 0, -1.70474e-07, 11, 4, -27)
-mesh = SubResource("QuadMesh_3e3pc")
+mesh = SubResource("QuadMesh_4o0op")
 surface_material_override/0 = SubResource("StandardMaterial3D_o8r0w")
 
 [node name="button3D" parent="Screen1" instance=ExtResource("10_0ckhs")]
@@ -208,52 +211,52 @@ outline_size = 6
 horizontal_alignment = 0
 
 [node name="ScreenCharacter" type="MeshInstance3D" parent="."]
-transform = Transform3D(-6.63, 0, 3.40948e-07, 0, 3.9, 0, -5.79613e-07, 0, -3.9, 4.5, 4, -15.7)
+transform = Transform3D(-6.63, 0, 3.40948e-07, 0, 3.9, 0, -5.79613e-07, 0, -3.9, 2, 4, -15.7)
 mesh = SubResource("QuadMesh_3e3pc")
 surface_material_override/0 = SubResource("StandardMaterial3D_o8r0w")
 script = ExtResource("10_pyh85")
 
 [node name="PanelSpeed" parent="ScreenCharacter" instance=ExtResource("10_sxlsf")]
-transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, -5.68434e-14, 0, 1, 0.015083, 0.410256, 0)
+transform = Transform3D(1, 0, -3.90799e-14, 0, 1, 0, -1.13687e-13, 0, 1, -0.301659, 0.410256, 0)
 
 [node name="PanelStamina" parent="ScreenCharacter" instance=ExtResource("10_sxlsf")]
-transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, -5.68434e-14, 0, 1, 0.015083, 0.282051, 0)
+transform = Transform3D(1, 0, -3.90799e-14, 0, 1, 0, -1.13687e-13, 0, 1, -0.301659, 0.282051, 0)
 index = 1
 trait_name = "Stamina"
 alt = "Each level increases max stamina by 5%"
 
 [node name="PanelHacking" parent="ScreenCharacter" instance=ExtResource("10_sxlsf")]
-transform = Transform3D(1, 0, -3.90799e-14, 0, 1, 0, -8.52651e-14, 0, 1, 0.015083, 0.0256406, 0)
+transform = Transform3D(1, 0, -4.61853e-14, 0, 1, 0, -1.42109e-13, 0, 1, -0.301659, 0.0256406, 0)
 index = 2
 trait_name = "Hacking"
 alt = "Each level increases lock picking speed by 10%"
 
 [node name="PanelTeleporter" parent="ScreenCharacter" instance=ExtResource("10_sxlsf")]
-transform = Transform3D(1, 0, -3.90799e-14, 0, 1, 0, -8.52651e-14, 0, 1, 0.015083, -0.102565, 0)
+transform = Transform3D(1, 0, -4.61853e-14, 0, 1, 0, -1.42109e-13, 0, 1, -0.301659, -0.102565, 0)
 index = 3
 trait_name = "Teleporter"
 alt = "Each level increases teleporter deploy speed by 10%"
 
 [node name="PanelWard" parent="ScreenCharacter" instance=ExtResource("10_sxlsf")]
-transform = Transform3D(1, 0, -3.90799e-14, 0, 1, 0, -8.52651e-14, 0, 1, 0.015083, -0.23077, 0)
+transform = Transform3D(1, 0, -4.61853e-14, 0, 1, 0, -1.42109e-13, 0, 1, -0.301659, -0.23077, 0)
 index = 4
 trait_name = "Ward"
 alt = "Each level increases ward lifetime by 0.25 seconds"
 
 [node name="PanelStrength" parent="ScreenCharacter" instance=ExtResource("10_sxlsf")]
-transform = Transform3D(1, 0, -3.90799e-14, 0, 1, 0, -8.52651e-14, 0, 1, 0.015083, 0.153845, 0)
+transform = Transform3D(1, 0, -4.61853e-14, 0, 1, 0, -1.42109e-13, 0, 1, -0.301659, 0.153845, 0)
 index = 5
 trait_name = "Strength"
 alt = "Each level increases resistance to spore and fall damage"
 
 [node name="Label3D" type="Label3D" parent="ScreenCharacter"]
-transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, -8.52651e-14, 0, 0.899999, 0.015083, 0.358974, 0.0256405)
+transform = Transform3D(0.9, 0, -1.06581e-14, 0, 0.9, 0, -1.42109e-13, 0, 0.899999, -0.301659, 0.358974, 0.0256386)
 visible = false
 text = "Black Spores"
 outline_size = 6
 
 [node name="Label3D3" type="Label3D" parent="ScreenCharacter"]
-transform = Transform3D(0.63, 0, 1.06581e-14, 0, 0.899999, 0, -7.10543e-14, 0, 0.899999, -0.180995, -0.358974, 0.0256405)
+transform = Transform3D(0.63, 0, -3.55271e-15, 0, 0.899999, 0, -7.10543e-14, 0, 0.899999, -0.497737, -0.358974, 0.0256386)
 visible = false
 modulate = Color(1, 0.447059, 0.231373, 1)
 text = "Start"
@@ -263,23 +266,49 @@ outline_size = 6
 [node name="MeshInstance3D" type="MeshInstance3D" parent="ScreenCharacter/Label3D3"]
 
 [node name="RP" type="Label3D" parent="ScreenCharacter"]
-transform = Transform3D(0.272, 0, 5.93303e-13, 0, 0.782, 0, -2.0961e-13, 0, 0.782, 0.254225, -0.359999, 0.039382)
+transform = Transform3D(0.272, 0, 5.93303e-13, 0, 0.782, 0, -2.16716e-13, 0, 0.782, -0.0625171, -0.359999, 0.0393815)
 text = "999 Research Points"
 font_size = 18
 outline_size = 6
 horizontal_alignment = 0
 
 [node name="tip" type="Label3D" parent="ScreenCharacter"]
-transform = Transform3D(0.295, 0, 1.01252e-13, 0, 0.536, 0, -6.75016e-14, 0, 0.536, -0.452488, -0.384615, 0.0256395)
+transform = Transform3D(0.295, 0, 1.01252e-13, 0, 0.536, 0, -8.52651e-14, 0, 0.536, -0.76923, -0.384615, 0.0256376)
 text = "Each level increases character base speed by 3%"
 font_size = 18
 outline_size = 6
 horizontal_alignment = 0
 
 [node name="PerkBoots1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
-transform = Transform3D(0.7, 0, -3.55271e-15, 0, 0.7, 0, -9.9476e-14, 0, 0.7, 0.30019, 0.128205, 0)
-tag = "Enhanced Boots"
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.42109e-13, 0, 0.7, -0.0165521, 0.128205, 0.0422201)
+tag = "Enhanced Boots "
 tip = "Antigrav Boots prevent death from fall damage"
+
+[node name="PerkStamina1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.016552, 0.0172499, 0.0422201)
+index = 1
+tag = "Cumulative Effect "
+tip = "Energy Boost powerups increase stamina recovery rate"
+price = 15
+
+[node name="PerkHacking1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.016552, -0.0943434, 0.0422201)
+index = 2
+tag = "Bruteforce Boost "
+tip = "Lockpicking is 2x faster under energy boost effects"
+price = 15
+
+[node name="PerkTele1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.203788, 0.0422201)
+index = 3
+tag = "Energy Shift "
+tip = "Teleporting provides a short time energy boost"
+
+[node name="PerkWard1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.309737, 0.0422201)
+index = 4
+tag = "Smart Wards "
+tip = "Wards can hack digital locks"
 
 [node name="Screen2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.89807e-07, 0, -3.9, 0, 3.9, 0, 6.63, 0, -1.70474e-07, 11, 4, -27)

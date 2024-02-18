@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://du3qurm43jlwi"]
+[gd_scene load_steps=15 format=3 uid="uid://du3qurm43jlwi"]
 
 [ext_resource type="Script" path="res://entities/ward.gd" id="1_tuuwk"]
+[ext_resource type="Script" path="res://entities/ward_lock_opener.gd" id="3_61mkm"]
 [ext_resource type="PackedScene" uid="uid://by31i66erq5ga" path="res://models/pickups/ward_used.tscn" id="3_tmcx7"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_kppmw"]
@@ -63,6 +64,9 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_v74sy")
 size = Vector2(0.01, 0.01)
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_rfxbe"]
+radius = 1.51808
+
 [node name="Ward" type="RigidBody3D"]
 script = ExtResource("1_tuuwk")
 
@@ -89,3 +93,11 @@ emitting = false
 amount = 300
 process_material = SubResource("ParticleProcessMaterial_43t35")
 draw_pass_1 = SubResource("QuadMesh_uhnp2")
+
+[node name="lock_opener" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_61mkm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="lock_opener"]
+shape = SubResource("SphereShape3D_rfxbe")

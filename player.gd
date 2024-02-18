@@ -35,6 +35,10 @@ var level_ward = 0
 var level_strength = 0
 
 var perk_boots1 = false
+var perk_cumulative = false
+var perk_hacking1 = false
+var perk_tele1 = false
+var perk_ward1 = false
 
 var ground_close = false
 var last_frame_on_ground = false
@@ -134,6 +138,10 @@ func update_profile(skills, perks):
 	level_strength = skills[5]
 	
 	perk_boots1 = (perks[0]!=0)
+	perk_cumulative = (perks[1]!=0)
+	perk_hacking1 = (perks[2]!=0)
+	perk_tele1 = (perks[3]!=0)
+	perk_ward1 = (perks[4]!=0)
 	
 	SPEED = 5.0 + level_speed*0.15
 	acceleration = 60.0 + level_speed*1.8
@@ -142,6 +150,11 @@ func update_profile(skills, perks):
 	
 	lockpick_skill = 1.0+0.1*level_hacking
 	
+
+func get_lockpick_skill():
+	if perk_hacking1 and energy_boost > 0.0:
+		return lockpick_skill*2.0
+	return lockpick_skill
 
 func lock_controls():
 	$Camera/HUDSprite.hide()
@@ -175,7 +188,7 @@ func _ready():
 	
 	restart_button.deactivate()
 	menu_button.deactivate()
-	
+		
 	info_message = $Camera/InfoMessage
 	info_message.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -212,8 +225,11 @@ func pickup(pickup_type):
 		return true
 	if pickup_type == 1:
 		energy_boost = energy_boost_duration
-		energy_regain_speed += 2.0
-		display_info("Picked up an energy boost. Energy recovery rate at {0}%".format({0:int(energy_regain_speed/0.3)}))
+		if perk_cumulative:
+			energy_regain_speed += 2.0
+			display_info("Picked up an energy boost. Energy recovery rate at {0}%".format({0:int(energy_regain_speed/0.3)}))
+		else:
+			display_info("Picked up an energy boost")
 		hud.set_infinite_energy(true)
 		return true
 	if pickup_type == 2:
@@ -491,6 +507,8 @@ func _input(event):
 			if ward_charges > 0:
 					ward_charges -= 1
 					var ward = ward_scene.instantiate()
+					if perk_ward1:
+						ward.lockpick = true
 					ward.lifetime = 10.0 + level_ward*0.5
 					get_parent().add_child(ward)
 					ward.global_transform = item_spawn.global_transform

@@ -25,8 +25,9 @@ func activate(bs):
 	
 func _on_activate_timer_timeout():
 	player.global_transform = global_transform
-	player.energy_boost = player.teleporter_energy_boost
-	player.hud.set_infinite_energy(true)						
+	if player.perk_tele1:
+		player.energy_boost = player.teleporter_energy_boost
+		player.hud.set_infinite_energy(true)						
 	player.translate_object_local(Vector3.UP*1.5)
 	player.basis = player_basis
 	queue_free()

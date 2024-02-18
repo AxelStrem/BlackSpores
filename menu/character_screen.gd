@@ -16,6 +16,10 @@ func _ready():
 	entries.append($PanelStrength)
 
 	perks.append($PerkBoots1)
+	perks.append($PerkStamina1)
+	perks.append($PerkHacking1)
+	perks.append($PerkTele1)
+	perks.append($PerkWard1)
 	
 	var game = Global.get_game_root(self)
 	if game != null:
@@ -39,6 +43,11 @@ func update_points():
 	for i in range(lv_dist.size()):
 		entries[i].set_points(lv_dist[i], research_points, get_price(lv_dist[i]))
 	for i in range(perk_dist.size()):
+		var p = perk_dist[i]
+		if p >= 1:
+			perks[i].enable()
+			if p == 1:
+				perks[i].disengage()
 		perks[i].update_rp(research_points)
 	$RP.text = "{0} Researh Points".format({0:research_points})
 

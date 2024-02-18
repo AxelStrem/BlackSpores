@@ -53,7 +53,7 @@ func activate():
 			background_material.albedo_color = background_color
 
 func deactivate():
-	$Area3D.input_ray_pickable = false
+	$Area3D.input_ray_pickable = true
 	active = false
 	$Label3D.modulate = inactive_color
 	if background:

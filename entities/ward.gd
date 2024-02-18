@@ -7,6 +7,7 @@ var lifetime = 0.0
 var start_lifetime = 0.0
 var zscale = 1.0
 var game = null
+var lockpick = false
 
 var spore_destructible_scene = preload("res://spore_destructible.tscn")
 
@@ -15,7 +16,6 @@ var crot = Vector3(0.0,0.0,0.0)
 func _ready():
 	angular_damp = 1.0
 	linear_damp = 1.0
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -42,6 +42,8 @@ func _process(delta):
 		if prog >= 1.0:
 			deploying = 3
 			engaged = true
+			if lockpick:
+				$lock_opener.set_collision_layer_value(11,true)
 			$particles.emitting = true
 			$ward_light.light_energy = 100.0
 			game = Global.get_game_root(self)
@@ -55,6 +57,7 @@ func _process(delta):
 		if lifetime < 0:
 			deploying = 4
 			engaged = false
+			$lock_opener.set_collision_layer_value(11,false)
 			$particles.emitting = false
 			if game!=null:
 				game.remove_ward(self)

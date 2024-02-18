@@ -70,7 +70,7 @@ func load_config(research_points_, levels, perks):
 	if reset_points:
 		research_points_ = 300
 		levels = [0,0,0,0,0,0]
-		perks = [0]
+		perks = [0,0,0,0,0]
 	research_points = research_points_
 	plevels = levels
 	klevels = perks

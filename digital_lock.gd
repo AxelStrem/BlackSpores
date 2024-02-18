@@ -2,10 +2,12 @@ extends Node3D
 
 var state = 0
 var speed = 0.0
+var openers = 0
 @export var target : Node3D = null
 @export var complexity = 5.0
 var target_scale = 0.0
 var init_comp = 0.0
+
 
 func init():
 	var level = Global.get_level_root(self)
@@ -44,16 +46,21 @@ func update_state():
 		$ScreenProgress.hide()
 
 func _on_player_entered(body):
+	openers+=1
+	speed += body.get_lockpick_skill()
 	if state!=2:
 		state = 1
-		speed = body.lockpick_skill
 		update_state()
 
 
-func _on_player_exited(_body):
-	if state==1:
-		state = 0
-		update_state()
+func _on_player_exited(body):
+	openers-=1
+	speed -= body.get_lockpick_skill()
+	if openers == 0:
+		if state==1:
+			state = 0
+			speed = 0.0
+			update_state()
 
 
 func _on_spore_destructible_spore_hit():
