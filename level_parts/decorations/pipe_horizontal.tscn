@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://c24e45ohyvnro"]
+
+[ext_resource type="PackedScene" uid="uid://dyh23x07jki4f" path="res://level_parts/decorations/pipe_vertical.tscn" id="1_s0xrq"]
+[ext_resource type="PackedScene" uid="uid://j4gckxfd3gen" path="res://level_parts/building_blocks/pipe.tscn" id="2_gyq7u"]
+
+[node name="PipeHorizontal" type="Node3D"]
+
+[node name="PipeVertical" parent="." instance=ExtResource("1_s0xrq")]
+
+[node name="Pipe04" parent="." instance=ExtResource("2_gyq7u")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.329302, 4.54041, 6.18003)
+
+[node name="PipeVertical2" parent="." instance=ExtResource("1_s0xrq")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.64325, 0, 12.3545)

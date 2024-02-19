@@ -8,3 +8,4 @@ albedo_texture = ExtResource("1_6bi2l")
 metallic = 0.53
 metallic_specular = 0.24
 roughness = 0.69
+texture_filter = 0

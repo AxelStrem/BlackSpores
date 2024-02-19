@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://bbcfj6nufotlm"]
+[gd_scene load_steps=14 format=3 uid="uid://bbcfj6nufotlm"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_lou1f"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_2etuv"]
 [ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="3_5361b"]
+[ext_resource type="PackedScene" uid="uid://b7qncxv63yfqn" path="res://level_parts/decorations/vending_machine.tscn" id="3_u4vfe"]
 [ext_resource type="PackedScene" uid="uid://dhp6yf0e27h62" path="res://level_parts/building_blocks/ceiling_02.tscn" id="4_p163a"]
 [ext_resource type="PackedScene" uid="uid://d3bu6smhbag6i" path="res://level_parts/building_blocks/quarter_pipe.tscn" id="6_nj3o5"]
 [ext_resource type="PackedScene" uid="uid://cvq0jnrp64bv5" path="res://level_parts/building_blocks/CeilingLamp01.tscn" id="7_kii6f"]
@@ -38,6 +39,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -5.993
 
 [node name="Ceiling6" parent="LevelIn" index="15" instance=ExtResource("4_p163a")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.99392, 0, -5.99227)
+
+[node name="VendingMachine" parent="LevelIn" index="16" instance=ExtResource("3_u4vfe")]
+transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, -11, 0, -2.5)
 
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.0061, 0, 2.08015)

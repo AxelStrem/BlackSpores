@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://spore_consumable.gd" id="1_ytexi"]
 [ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_2ed8l"]
-[ext_resource type="PackedScene" uid="uid://dr3v0h7tldtsh" path="res://level_parts/building_blocks/crate_01.tscn" id="3_n8wjx"]
+[ext_resource type="PackedScene" uid="uid://dolck6iq5o3yq" path="res://level_parts/building_blocks/crate_02.tscn" id="3_grojh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i8mus"]
 resource_name = "Material"
@@ -62,5 +62,5 @@ surface_material_override/0 = ExtResource("2_2ed8l")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18315, 3.62553, 0.000123922)
 shape = SubResource("BoxShape3D_03pf6")
 
-[node name="Crate01" parent="Scale2" instance=ExtResource("3_n8wjx")]
+[node name="Crate02" parent="Scale2" instance=ExtResource("3_grojh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.18894, -0.684972, 0)

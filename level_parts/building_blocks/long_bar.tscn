@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://y8y08ymsnfuy"]
+
+[ext_resource type="PackedScene" uid="uid://8sa582fprbad" path="res://one_of.tscn" id="1_bvwrk"]
+[ext_resource type="PackedScene" uid="uid://dycy4oyf2uoy4" path="res://level_parts/building_blocks/beam.tscn" id="1_q31si"]
+[ext_resource type="PackedScene" uid="uid://j4gckxfd3gen" path="res://level_parts/building_blocks/pipe.tscn" id="3_f5l1f"]
+
+[node name="LongBar" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="one_of" parent="." instance=ExtResource("1_bvwrk")]
+
+[node name="beam" type="Node3D" parent="one_of"]
+
+[node name="Floor01" parent="one_of/beam" instance=ExtResource("1_q31si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 1.74846e-07)
+
+[node name="Floor02" parent="one_of/beam" instance=ExtResource("1_q31si")]
+
+[node name="Floor03" parent="one_of/beam" instance=ExtResource("1_q31si")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -1.74846e-07)
+
+[node name="pipe" type="Node3D" parent="one_of"]
+transform = Transform3D(1.046, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="Pipe01" parent="one_of/pipe" instance=ExtResource("3_f5l1f")]
+
+[node name="Pipe02" parent="one_of/pipe" instance=ExtResource("3_f5l1f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.83525, 0, -1.67644e-07)
+
+[node name="Pipe03" parent="one_of/pipe" instance=ExtResource("3_f5l1f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8409, 0, 1.67891e-07)

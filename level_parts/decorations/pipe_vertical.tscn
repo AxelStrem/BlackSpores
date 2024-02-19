@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyh23x07jki4f"]
+
+[ext_resource type="PackedScene" uid="uid://j4gckxfd3gen" path="res://level_parts/building_blocks/pipe.tscn" id="1_t7mpc"]
+[ext_resource type="PackedScene" uid="uid://do12ud3nab1jw" path="res://level_parts/building_blocks/pipe90B.tscn" id="2_sdf85"]
+[ext_resource type="PackedScene" uid="uid://fbag8h6j0g1t" path="res://level_parts/decorations/valve.tscn" id="3_mmt13"]
+
+[node name="PipeVertical" type="Node3D"]
+
+[node name="Pipe03" parent="." instance=ExtResource("1_t7mpc")]
+transform = Transform3D(-4.37114e-08, 1, 0, 4.37114e-08, 0, -1, -1, -4.37114e-08, -4.37114e-08, -7.10543e-15, 4.22131, 2.33046)
+
+[node name="Pipe01" parent="." instance=ExtResource("1_t7mpc")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 1.68238, -0.196387)
+
+[node name="Pipe02" parent="." instance=ExtResource("2_sdf85")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 1.85345, -0.0790424)
+
+[node name="Valve" parent="." instance=ExtResource("3_mmt13")]
+transform = Transform3D(-2.47219, 0, -2.16126e-07, 0, 2.47219, 0, 2.16126e-07, 0, -2.47219, -0.307999, 3.14658, -0.129134)
