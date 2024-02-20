@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dmxh3xf17kspj"]
 
 [ext_resource type="PackedScene" uid="uid://osh8wc3m8vs8" path="res://level_parts/building_blocks/vent_light.tscn" id="1_kn45m"]
-[ext_resource type="PackedScene" uid="uid://do0bm37j30rv0" path="res://level_parts/building_blocks/vent.tscn" id="2_ia4c0"]
+[ext_resource type="PackedScene" uid="uid://do0bm37j30rv0" path="res://level_parts/building_blocks/vents/vent.tscn" id="2_ia4c0"]
 
 [node name="VentLong" type="Node3D"]
 

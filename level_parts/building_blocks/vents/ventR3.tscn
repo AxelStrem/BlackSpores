@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpxdfllqfe228"]
+
+[ext_resource type="PackedScene" uid="uid://brakbsj31yo7m" path="res://level_parts/building_blocks/vents/vent22.tscn" id="1_bps14"]
+[ext_resource type="PackedScene" uid="uid://d0ja84tfbh3jj" path="res://level_parts/building_blocks/vents/vent90.tscn" id="2_h7brw"]
+
+[node name="VentR1" type="Node3D"]
+
+[node name="Vent" parent="." instance=ExtResource("1_bps14")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+
+[node name="Vent3" parent="." instance=ExtResource("1_bps14")]
+transform = Transform3D(-4.37114e-08, -1, 4.37114e-08, 0, -4.37114e-08, -1, 1, -4.37114e-08, 1.91069e-15, -0.829681, 0.098632, 0.817543)
+
+[node name="Vent2" parent="." instance=ExtResource("2_h7brw")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.8293, -0.904691, -0.959361)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.87953, 0, -0.814627)
+light_color = Color(1, 0.0901961, 0.141176, 1)
+light_energy = 0.695
+omni_range = 1.59457

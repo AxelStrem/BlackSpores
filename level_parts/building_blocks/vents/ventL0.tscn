@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://dh742xkxhcisn"]
+
+[ext_resource type="PackedScene" uid="uid://cdy1bvfxfg7jy" path="res://level_parts/building_blocks/vents/ventB.tscn" id="1_u6iyv"]
+[ext_resource type="PackedScene" uid="uid://dm3eowohtpjf7" path="res://level_parts/building_blocks/vents/ventA.tscn" id="2_ym27p"]
+
+[node name="VentL1" type="Node3D"]
+
+[node name="Vent" parent="." instance=ExtResource("1_u6iyv")]
+
+[node name="Vent2" parent="." instance=ExtResource("2_ym27p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7652, 0, -0.0536119)

@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh52fmrohsquw"]
+
+[ext_resource type="PackedScene" uid="uid://8sa582fprbad" path="res://one_of.tscn" id="1_tqojn"]
+[ext_resource type="PackedScene" uid="uid://ftgguj2m6lpo" path="res://level_parts/obstacles/obstacle1A.tscn" id="2_t2ns0"]
+[ext_resource type="PackedScene" uid="uid://b355o4i7tl2xj" path="res://level_parts/obstacles/obstacle1B.tscn" id="3_ob71t"]
+
+[node name="Obstacle1" type="Node3D"]
+
+[node name="one_of" parent="." instance=ExtResource("1_tqojn")]
+
+[node name="Obstacle1a" parent="one_of" instance=ExtResource("2_t2ns0")]
+
+[node name="Obstacle1a2" parent="one_of" instance=ExtResource("3_ob71t")]

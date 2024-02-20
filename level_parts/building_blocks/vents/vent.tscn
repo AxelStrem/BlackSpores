@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://do0bm37j30rv0"]
 
-[ext_resource type="Script" path="res://spore_consumable.gd" id="1_o312m"]
-[ext_resource type="Material" uid="uid://4psf70uffr4l" path="res://level_parts/building_blocks/vent_metal.tres" id="2_3eubv"]
+[ext_resource type="Script" path="res://spore_consumable.gd" id="1_hg5hp"]
+[ext_resource type="Material" uid="uid://4psf70uffr4l" path="res://level_parts/building_blocks/vent_metal.tres" id="2_nr7pw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wyimt"]
 size = Vector3(2.14617, 0.451288, 2.17499)
@@ -50,7 +50,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k720p")
 
 [node name="Vent" type="Node3D"]
-script = ExtResource("1_o312m")
+script = ExtResource("1_hg5hp")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 6.02716, 0)
@@ -93,4 +93,4 @@ shape = SubResource("BoxShape3D_akjcm")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, -3.06155, -0.217291, 0)
 mesh = SubResource("ArrayMesh_x05g5")
 skeleton = NodePath("")
-surface_material_override/0 = ExtResource("2_3eubv")
+surface_material_override/0 = ExtResource("2_nr7pw")
