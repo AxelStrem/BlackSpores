@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cslfny4i27pgb"]
+
+[ext_resource type="Script" path="res://utility/OneOf3D.gd" id="1_33if8"]
+
+[node name="OneOf3D" type="Node3D"]
+script = ExtResource("1_33if8")

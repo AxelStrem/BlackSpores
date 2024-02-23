@@ -8,6 +8,7 @@ var current_energy=200.0
 var energy_regain_speed = 30.0
 var dead = false;
 var old_velocity = Vector3(0.0,0.0,0.0)
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -165,6 +166,7 @@ func unlock_controls():
 	controls_locked = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	$Camera/HUDSprite.show()	
+	$Camera/Soundtrack.set_state("run")
 
 func get_game_root():
 	var p = get_parent()
@@ -311,7 +313,7 @@ func _physics_process(delta):
 	label_consumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	var game = get_game_root()
 	if game:
-		label_debug.text = "Spores in chamber {0}, spread period {1}".format({0:game.current_chamber_spore, 1:int(game.spore_timer_adjusted()*10000.0)})
+		label_debug.text = "Spores in chamber {0}, spread period {1}, total {2}".format({0:game.current_chamber_spore, 1:int(game.spore_timer_adjusted()*10000.0), 2:get_parent().total_spores})
 		label_dead.text = "Chamber {0}".format({0:current_chamber})
 		
 	if info_timeout > 0.0:
@@ -512,7 +514,7 @@ func _input(event):
 					ward.lifetime = 10.0 + level_ward*0.5
 					get_parent().add_child(ward)
 					ward.global_transform = item_spawn.global_transform
-					ward.linear_velocity = -ward.global_transform.basis.z.normalized()*10.0
+					ward.linear_velocity = -ward.global_transform.basis.z.normalized()*5.0 + velocity
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
@@ -532,7 +534,7 @@ func _input(event):
 					teleporter.player = self
 					get_parent().add_child(teleporter)
 					teleporter.global_transform = item_spawn.global_transform
-					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*10.0
+					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*5.0 + velocity
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				if teleporter!=null:
@@ -593,6 +595,7 @@ func _player_dead(death_velocity, cause):
 	
 	var chambers_left = Global.total_chambers - current_chamber
 	death_screen.find_child("info").text = "{0} chambers away from the emergency exit".format({0:chambers_left})
+	$Camera/Soundtrack.set_state("dead")
 	
 	if cause==0:
 		death_screen.find_child("cause_spores").show()

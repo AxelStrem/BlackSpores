@@ -12,5 +12,4 @@ func set_progress(p):
 
 func _ready():
 	material = self.get_active_material(0)
-	print(material)
 

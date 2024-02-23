@@ -1,0 +1,146 @@
+[gd_scene load_steps=14 format=3 uid="uid://3qkd1k17snq1"]
+
+[ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="1_rg72e"]
+[ext_resource type="PackedScene" uid="uid://bju0m06pn6kg6" path="res://level_parts/building_blocks/ceiling_01.tscn" id="2_7npi8"]
+[ext_resource type="PackedScene" uid="uid://vp5oimxvdd4a" path="res://level_parts/building_blocks/wall_hatch_high.tscn" id="2_vpmvl"]
+[ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="3_matgw"]
+[ext_resource type="PackedScene" uid="uid://dr3v0h7tldtsh" path="res://level_parts/building_blocks/crate_01.tscn" id="4_26nyb"]
+[ext_resource type="PackedScene" uid="uid://b7qncxv63yfqn" path="res://level_parts/decorations/vending_machine.tscn" id="4_cw37t"]
+[ext_resource type="PackedScene" uid="uid://cvq0jnrp64bv5" path="res://level_parts/building_blocks/CeilingLamp01.tscn" id="5_6tr1h"]
+[ext_resource type="PackedScene" uid="uid://er2bgdquia33" path="res://level_parts/building_blocks/vents/ventF.tscn" id="5_orgyk"]
+[ext_resource type="PackedScene" uid="uid://dm3eowohtpjf7" path="res://level_parts/building_blocks/vents/ventA.tscn" id="6_5xdpq"]
+[ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="7_ifklj"]
+[ext_resource type="PackedScene" uid="uid://bxrrksrtocu38" path="res://level_parts/building_blocks/vents/cover.tscn" id="8_sy68n"]
+[ext_resource type="PackedScene" uid="uid://8sa582fprbad" path="res://one_of.tscn" id="9_7l4gl"]
+[ext_resource type="PackedScene" uid="uid://bmma7o3subknk" path="res://level_parts/building_blocks/tree.tscn" id="10_ssph7"]
+
+[node name="Obstacle1a" type="Node3D"]
+
+[node name="Walls" type="Node3D" parent="."]
+
+[node name="Wall01" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Wall02" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 4)
+
+[node name="Wall03" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 8)
+
+[node name="Wall04" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 12)
+
+[node name="Wall05" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12)
+
+[node name="Wall06" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="WallHatchHigh" parent="Walls/Wall06" instance=ExtResource("2_vpmvl")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="VendingMachine" parent="Walls/Wall06/WallHatchHigh" instance=ExtResource("4_cw37t")]
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3, 0, 0.320946)
+
+[node name="Crate01" parent="Walls/Wall06/WallHatchHigh" instance=ExtResource("4_26nyb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24742, 0, -1.34604)
+
+[node name="Vent" parent="Walls/Wall06/WallHatchHigh" instance=ExtResource("5_orgyk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.83276, 3.87379, -0.0349989)
+
+[node name="Vent2" parent="Walls/Wall06/WallHatchHigh/Vent" instance=ExtResource("6_5xdpq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.72926, 0, -1.90735e-06)
+
+[node name="PickupSpawner" parent="Walls/Wall06/WallHatchHigh/Vent/Vent2" instance=ExtResource("7_ifklj")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.352023, 0)
+spawn_probability = 1.0
+
+[node name="Cover" parent="Walls/Wall06/WallHatchHigh/Vent/Vent2" instance=ExtResource("8_sy68n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.80026, 0.38328, 0)
+
+[node name="one_of" parent="Walls/Wall06/WallHatchHigh/Vent/Vent2" instance=ExtResource("9_7l4gl")]
+
+[node name="Cover2" parent="Walls/Wall06/WallHatchHigh/Vent/Vent2/one_of" instance=ExtResource("8_sy68n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7326, 0.38328, 2.86102e-06)
+
+[node name="Cover3" parent="Walls/Wall06/WallHatchHigh/Vent/Vent2/one_of" instance=ExtResource("8_sy68n")]
+transform = Transform3D(0.517967, -7.83189e-09, 0.8554, -0.18068, 0.977438, 0.109406, -0.836101, -0.211222, 0.506281, -2.84197, -3.64961, 1.26211)
+
+[node name="Wall07" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="Wall09" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 0, 4)
+
+[node name="Floor01" parent="Walls/Wall09" instance=ExtResource("10_ssph7")]
+transform = Transform3D(0.178974, 0, -0.983854, 0, 1, 0, 0.983854, 0, 0.178974, 1.32908, 0, 1.38869)
+
+[node name="Wall08" parent="Walls" instance=ExtResource("1_rg72e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Ceiling" parent="Walls" instance=ExtResource("2_7npi8")]
+
+[node name="Ceiling2" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Ceiling3" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="Ceiling4" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Ceiling5" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Ceiling6" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+
+[node name="Ceiling9" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="Ceiling10" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="Ceiling7" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12)
+
+[node name="Ceiling8" parent="Walls" instance=ExtResource("2_7npi8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="Floor01" parent="Walls" instance=ExtResource("3_matgw")]
+
+[node name="Floor02" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="Floor03" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="Floor04" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)
+
+[node name="Floor05" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 8)
+
+[node name="Floor06" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
+
+[node name="Floor09" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 4)
+
+[node name="Floor10" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 8)
+
+[node name="Floor07" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 12)
+
+[node name="Floor08" parent="Walls" instance=ExtResource("3_matgw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 12)
+
+[node name="CeilingLamp01" parent="." instance=ExtResource("5_6tr1h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99741, 2.75605, 1.7342)
+
+[node name="CeilingLamp03" parent="." instance=ExtResource("5_6tr1h")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 5.99741, 2.75605, 6.01104)
+
+[node name="CeilingLamp02" parent="." instance=ExtResource("5_6tr1h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.99741, 2.75605, 9.93715)

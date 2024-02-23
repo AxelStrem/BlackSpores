@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cnu76vigll10m"]
+[gd_scene load_steps=11 format=3 uid="uid://cnu76vigll10m"]
 
 [ext_resource type="PackedScene" uid="uid://8sa582fprbad" path="res://one_of.tscn" id="1_exf73"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_5qfes"]
@@ -7,7 +7,9 @@
 [ext_resource type="PackedScene" uid="uid://duigbbx7qtld5" path="res://level_parts/building_blocks/railing_light.tscn" id="5_eh5bu"]
 [ext_resource type="PackedScene" uid="uid://dycy4oyf2uoy4" path="res://level_parts/building_blocks/beam.tscn" id="6_2jp0w"]
 [ext_resource type="PackedScene" uid="uid://c1syd6jkfchcw" path="res://level_parts/building_blocks/wall_02.tscn" id="7_aqkiw"]
+[ext_resource type="PackedScene" uid="uid://eqy0cp0yciyj" path="res://level_parts/decorations/struct01.tscn" id="7_jby26"]
 [ext_resource type="PackedScene" uid="uid://db68p6kkn34gm" path="res://level_parts/building_blocks/column.tscn" id="7_oj52j"]
+[ext_resource type="PackedScene" uid="uid://cvq0jnrp64bv5" path="res://level_parts/building_blocks/CeilingLamp01.tscn" id="8_ejlip"]
 
 [node name="Floor01A" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -7.775)
@@ -225,20 +227,41 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -2, 3.
 [node name="Railing3" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("5_eh5bu")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 3.3, -5)
 
-[node name="connector_beam" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("6_2jp0w")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 3.25031, -5.77268)
+[node name="Struct01" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -7.77268)
 
-[node name="connector_beam2" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("6_2jp0w")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 3.25031, -9.77268)
+[node name="Struct10" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -5.77268)
 
-[node name="connector_beam3" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("6_2jp0w")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 3.25031, -13.7727)
+[node name="Struct11" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -3.77268)
 
-[node name="connector_beam4" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("6_2jp0w")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 3.25031, -17.7727)
+[node name="Struct02" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -9.77268)
 
-[node name="connector_beam5" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("6_2jp0w")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.2, 3.25031, -21.7727)
+[node name="Struct03" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -11.7727)
+
+[node name="CeilingLamp01" parent="one_of_staircases/Staircase_Reversed/Struct03" instance=ExtResource("8_ejlip")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.5, 0.800001)
+
+[node name="Struct04" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -13.7727)
+
+[node name="Struct05" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -15.7727)
+
+[node name="Struct06" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -17.7727)
+
+[node name="Struct07" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -19.7727)
+
+[node name="Struct08" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -21.7727)
+
+[node name="Struct09" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_jby26")]
+transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 0.599999, 3.25031, -23.7727)
 
 [node name="Beam01" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("6_2jp0w")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 6.6, -7.1)

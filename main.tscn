@@ -10,7 +10,7 @@
 [ext_resource type="Environment" uid="uid://b8k4w0fvjilmp" path="res://env.tres" id="7_q68py"]
 [ext_resource type="AudioStream" uid="uid://bbifl3qq1eks" path="res://sound/step04.wav" id="8_veibk"]
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
-[ext_resource type="AudioStream" uid="uid://ngvg27qxh4jr" path="res://sound/soundtrack_bass.mp3" id="9_xoloe"]
+[ext_resource type="PackedScene" uid="uid://cmqd3fasniv4k" path="res://sound/soundtrack/soundtrack.tscn" id="9_vwiiy"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
 [ext_resource type="Material" uid="uid://bxga3rye2w2pr" path="res://yoba/overlay_mat.tres" id="10_wywuy"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_mphlh"]
@@ -84,10 +84,8 @@ size = Vector3(196.664, 4.61426, 267.326)
 [node name="main" type="Node3D" groups=["game"]]
 process_mode = 1
 script = ExtResource("1_kjcn1")
-spread_spores = false
-spores_kill = false
-debug_items = true
 show_info = true
+soundtrack = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
@@ -314,11 +312,7 @@ process_mode = 3
 transform = Transform3D(0.193, -5.97632e-16, -3.55271e-15, 3.058e-15, 0.193, -5.58794e-09, -5.32907e-15, 5.58794e-09, 0.193, 0.0539532, -0.17781, -0.521931)
 text = "Menu"
 
-[node name="Soundtrack" type="Node3D" parent="player/Camera"]
-
-[node name="Bass01" type="AudioStreamPlayer" parent="player/Camera/Soundtrack"]
-stream = ExtResource("9_xoloe")
-bus = &"Music"
+[node name="Soundtrack" parent="player/Camera" instance=ExtResource("9_vwiiy")]
 
 [node name="SporesOverlay" type="MeshInstance3D" parent="player/Camera"]
 transform = Transform3D(1, -4.43312e-15, -9.9476e-14, 6.21725e-15, 0.624901, -1.49012e-08, 0, -3.49309e-21, 1.03807, 3.8147e-06, -0.0352783, -0.347668)
@@ -396,6 +390,9 @@ process_mode = 3
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -265.469, 0)
 script = ExtResource("14_jwptw")
 
+[node name="every_second" type="Timer" parent="."]
+autostart = true
+
 [connection signal="button_clicked" from="player/Camera/DeathScreen/restartButton" to="." method="_on_restart_button_button_clicked"]
 [connection signal="button_clicked" from="player/Camera/DeathScreen/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]
 [connection signal="timeout" from="player/JumpDelay" to="player" method="_on_jump_delay_timeout"]
@@ -403,3 +400,4 @@ script = ExtResource("14_jwptw")
 [connection signal="area_exited" from="player/Area3D" to="player" method="_on_area_3d_area_exited"]
 [connection signal="finished" from="player/breath" to="player" method="_on_breath_finished"]
 [connection signal="timeout" from="player/FX/Teleport/Timer" to="player/FX/Teleport" method="_on_timer_timeout"]
+[connection signal="timeout" from="every_second" to="." method="_every_second"]

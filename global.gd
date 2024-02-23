@@ -10,7 +10,11 @@ var level_scenes = [
 	[preload("res://levels/chamber04.tscn"), 0.2],
 	[preload("res://levels/chamber05.tscn"), 1.0],
 	[preload("res://levels/chamber06.tscn"), 0.5],
-	[preload("res://levels/chamber06_alt.tscn"), 0.5]
+	[preload("res://levels/chamber06_alt.tscn"), 0.5],
+	[preload("res://levels/chamber07.tscn"), 1.0],
+	[preload("res://levels/chamber08.tscn"), 0.5],
+	[preload("res://levels/chamber08_alt.tscn"), 0.5],
+	[preload("res://levels/chamber09.tscn"), 1.0]
 ]
 var test_chamber_scene = preload("res://levels/test_chamber.tscn")
 
@@ -39,6 +43,7 @@ func generate_level(number):
 		picked = i
 		if p < prob_roll[i]:
 			break
+	print(p,' ', picked)
 		
 	var scene = victory_scene
 	if number < total_chambers:

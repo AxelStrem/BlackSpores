@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://brakbsj31yo7m" path="res://level_parts/building_blocks/vents/vent22.tscn" id="1_bps14"]
 [ext_resource type="PackedScene" uid="uid://d0ja84tfbh3jj" path="res://level_parts/building_blocks/vents/vent90.tscn" id="2_h7brw"]
 
-[node name="VentR1" type="Node3D"]
+[node name="VentR3" type="Node3D"]
 
 [node name="Vent" parent="." instance=ExtResource("1_bps14")]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)

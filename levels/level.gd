@@ -23,6 +23,7 @@ var nl_semaphore : Semaphore
 var player = null
 
 var level_difficulty = 0.0
+var destruct_ready = false
 
 func _ready():
 	nl_semaphore = Semaphore.new()
@@ -31,6 +32,8 @@ func init():
 	level_in_pos = level_in.global_position
 	level_out_pos = level_out.global_position
 	$InitTimer.start()
+	var game = Global.get_game_root(self)
+	game.add_level(self)
 
 
 func list_shapes():
@@ -84,7 +87,6 @@ func player_N_levels_away(N):
 		return
 	if next_level == null:
 		next_level = Global.generate_level(level_number+1)
-		#print('LEVEL CREATED')
 		if(next_level == null):
 			return
 		get_parent().add_child(next_level)
@@ -97,8 +99,8 @@ func player_N_levels_away(N):
 		var sh = nl_out.global_position - nl_in.global_position
 		next_level.global_position += sh
 		next_level.init()
+		
 		#next_level.call_deferred('spore_render_level')
-		#print('LEVEL ADDED')
 	next_level.player_N_levels_away(N+1)
 		
 
@@ -113,7 +115,7 @@ func _on_player_entered(player_):
 
 
 func _on_destruct_timer_timeout():
-	queue_free()
+	destruct_ready = true
 
 
 func _on_init_timer_timeout():

@@ -17,7 +17,8 @@ func init():
 func _ready():
 	target_scale = $ScreenProgress/MeshInstance3D.scale.x
 	init_comp = complexity
-	target.register_lock(self)
+	if target:
+		target.register_lock(self)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if state==1:

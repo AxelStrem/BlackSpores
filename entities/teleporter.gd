@@ -30,6 +30,7 @@ func _on_activate_timer_timeout():
 		player.hud.set_infinite_energy(true)						
 	player.translate_object_local(Vector3.UP*1.5)
 	player.basis = player_basis
+	player.crouch = 1.0
 	queue_free()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

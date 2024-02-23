@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cvq0jnrp64bv5"]
+[gd_scene load_steps=9 format=3 uid="uid://cvq0jnrp64bv5"]
 
 [ext_resource type="Material" uid="uid://dt7p6dr36ufpw" path="res://models/palette01_rough.tres" id="1_qswsm"]
 [ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="2_msgb3"]
@@ -45,6 +45,9 @@ shadow_mesh = SubResource("ArrayMesh_gcn52")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6fp7p"]
 shading_mode = 0
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_u2kj6"]
+size = Vector3(0.755249, 0.174622, 3.27722)
+
 [node name="CeilingLamp01" type="Node3D"]
 
 [node name="Lamp01" type="MeshInstance3D" parent="."]
@@ -72,3 +75,9 @@ transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 3.0
 light_energy = 2.075
 spot_range = 12.2896
 spot_angle = 56.0947
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000183105, 3.14053, 0.0194702)
+shape = SubResource("BoxShape3D_u2kj6")

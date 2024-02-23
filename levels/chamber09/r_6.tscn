@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8aynse18qjay"]
+
+[ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="1_pvn4m"]
+[ext_resource type="PackedScene" uid="uid://cvq0jnrp64bv5" path="res://level_parts/building_blocks/CeilingLamp01.tscn" id="2_1g0u5"]
+[ext_resource type="PackedScene" uid="uid://dycy4oyf2uoy4" path="res://level_parts/building_blocks/beam.tscn" id="3_uud1t"]
+[ext_resource type="PackedScene" uid="uid://eqy0cp0yciyj" path="res://level_parts/decorations/struct01.tscn" id="4_nat7s"]
+
+[node name="r6" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
+
+[node name="Wall01" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 2)
+
+[node name="Wall02" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, 2)
+
+[node name="Wall03" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, -7, 2)
+
+[node name="Wall04" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, -7, 2)
+
+[node name="CeilingLamp01" parent="." instance=ExtResource("2_1g0u5")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 1.8)
+
+[node name="Beam04" parent="." instance=ExtResource("3_uud1t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 2)
+
+[node name="Wall05" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 2)
+
+[node name="Wall06" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 2)
+
+[node name="Wall09" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 7, 2)
+
+[node name="Wall10" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 7, 2)
+
+[node name="Wall11" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 7, 2)
+
+[node name="Struct01" parent="Wall11" instance=ExtResource("4_nat7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.8, -4)
+
+[node name="Struct02" parent="Wall11" instance=ExtResource("4_nat7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.8, -2)
+
+[node name="Struct03" parent="Wall11" instance=ExtResource("4_nat7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.8, 0)
+
+[node name="Struct04" parent="Wall11" instance=ExtResource("4_nat7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.8, 2)
+
+[node name="Struct05" parent="Wall11" instance=ExtResource("4_nat7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.72205e-06, -6.8, 4)
+
+[node name="Struct06" parent="Wall11" instance=ExtResource("4_nat7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.72205e-06, -6.8, 6)
+
+[node name="Struct07" parent="Wall11" instance=ExtResource("4_nat7s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.62939e-06, -6.8, 8)
+
+[node name="Wall12" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 7, 2)
+
+[node name="Wall07" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, -7, 2)
+
+[node name="Wall08" parent="." instance=ExtResource("1_pvn4m")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, -7, 2)
+
+[node name="CeilingLamp02" parent="." instance=ExtResource("2_1g0u5")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -8, 3, 1.8)
+
+[node name="CeilingLamp03" parent="." instance=ExtResource("2_1g0u5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 10, 0.400001)
+
+[node name="Beam01" parent="." instance=ExtResource("3_uud1t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 2)

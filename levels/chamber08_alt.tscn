@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://2rpio02kfwi1"]
+
+[ext_resource type="PackedScene" uid="uid://bvxeftj70k1et" path="res://levels/chamber08.tscn" id="1_1383e"]
+
+[node name="Chamber" instance=ExtResource("1_1383e")]
+
+[node name="LevelOut" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0061, -6.6, 13.9923)
+
+[node name="Wall05" parent="P2/Floor38" index="4"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 4)
+
+[node name="Wall06" parent="P2/Floor38" index="5"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 8)

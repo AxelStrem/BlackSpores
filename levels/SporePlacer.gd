@@ -6,9 +6,7 @@ func _ready():
 	pass
 	
 func _physics_process(_delta):
-	#print('X')
 	pass
 
 func _build():
-	print('building level Z')
 	return true

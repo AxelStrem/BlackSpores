@@ -15,5 +15,4 @@ func _run():
 	#CollisionShape3D
 	#RayCast3D
 	
-	print("done")
 	pass

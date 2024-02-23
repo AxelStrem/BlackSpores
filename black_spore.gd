@@ -4,6 +4,7 @@ var state = -3
 
 var time = 0.0
 var speed = 0.3
+var lifetime = 0.0
 
 var parent_spore = null
 var children_spores = []
@@ -19,21 +20,41 @@ var mat_ward = preload("res://entities/ward_spore.tres")
 var mat_black = preload("res://black_spore.tres")
 var ward_close = false
 
+var type = 0
+
+var game = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	time = randf()*0.5
 	speed = 0.15+randf()*0.35
+	type = randi_range(0,12)
+	game = Global.get_game_root(self)
 
-
+func _exit_tree():
+	if game:
+		game.total_spores -= 1
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
 func _physics_process(delta):
+	lifetime+=delta
+	if type != 0:
+		if (type > 5 and lifetime > 15.0) or lifetime > 30.0:
+			state = 3
+			if shlong:
+				remove_child(shlong)
+				shlong = null
+	elif lifetime > 30.0:
+		speed=7.0
+	if lifetime > 10.0:
+		$GPUParticles3D.emitting = false
+	if radius > 50.0:
+		return
 	if state < 0:
 		state+=1
 		if state==0:
-			var game = Global.get_game_root(self)
 			var overlaps = []
 			if game!=null:
 				overlaps = game.get_nearby_spores(self.global_position)#$parent_search.get_overlapping_areas()
@@ -60,7 +81,6 @@ func _physics_process(delta):
 			$spore.scale = Vector3.ONE*radius			
 			$spore.visible = true
 			$spore/hitbox.monitorable = true
-			var game = Global.get_game_root(self)
 			if game!=null:
 				game.register_spore(self)
 			time = 0.0
@@ -94,11 +114,15 @@ func _physics_process(delta):
 		if radius > 2.0 and shlong != null:
 			remove_child(shlong)
 			shlong = null
+	if state == 3:
+		radius -= delta*2.0
+		$spore.scale = Vector3.ONE*radius
+		if radius < 0.25:
+			queue_free()
 		
 
 
 func _on_ward_check_timeout():
-	var game = Global.get_game_root(self)
 	if game:
 		if game.check_wards(global_position, radius*0.5) != ward_close:
 			ward_close = !ward_close

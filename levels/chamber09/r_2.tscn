@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://py3ythubh8h5"]
+
+[ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="1_b1uea"]
+[ext_resource type="PackedScene" uid="uid://cvq0jnrp64bv5" path="res://level_parts/building_blocks/CeilingLamp01.tscn" id="2_6s3od"]
+[ext_resource type="PackedScene" uid="uid://c24e45ohyvnro" path="res://level_parts/decorations/pipe_horizontal.tscn" id="3_1vycq"]
+
+[node name="r2" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 10)
+
+[node name="Wall01" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 2)
+
+[node name="Wall02" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 0, 2)
+
+[node name="Wall03" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, -7, 2)
+
+[node name="Wall04" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, -7, 2)
+
+[node name="CeilingLamp01" parent="." instance=ExtResource("2_6s3od")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 3, 1.8)
+
+[node name="Wall05" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 2)
+
+[node name="Wall06" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 0, 2)
+
+[node name="Wall09" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 7, 2)
+
+[node name="Wall10" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -2, 7, 2)
+
+[node name="Wall11" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 7, 2)
+
+[node name="Wall12" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 7, 2)
+
+[node name="Wall07" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, -7, 2)
+
+[node name="Wall08" parent="." instance=ExtResource("1_b1uea")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, -7, 2)
+
+[node name="CeilingLamp02" parent="." instance=ExtResource("2_6s3od")]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, -8, 3, 1.8)
+
+[node name="CeilingLamp03" parent="." instance=ExtResource("2_6s3od")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 10, 0.400001)
+
+[node name="PipeHorizontal" parent="." instance=ExtResource("3_1vycq")]
+transform = Transform3D(-0.573576, -6.08781e-08, -0.819152, -0.819152, -1.07344e-08, 0.573576, -4.37114e-08, 1, -4.37114e-08, 3.3, -1.6, -2)

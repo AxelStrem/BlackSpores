@@ -42,7 +42,7 @@ var spore_inner_nbors = []
 var spore_outer_nbors = []
 var spore_active_layer = {}
 var spore_ref_dict = {}
-var spore_density = 0.1
+var spore_density = 0.3
 
 var ward_list = {}
 
@@ -53,6 +53,15 @@ var character_menu = null
 var research_points = 0
 var plevels = []
 var klevels = []
+
+var total_spores = 0
+
+var spawned_levels = {}
+
+func add_level(l):
+	spawned_levels[l] = l.level_number
+
+
 
 func save_character(rp, lv_dist, pk_list):
 	research_points = rp
@@ -103,7 +112,15 @@ func vec_to_pos(vec : Vector3i):
 func roll_spawn_spore(parent, location):
 	if show_spore_zone:
 		call_deferred("spawn_pink",parent,location)
-	if randf()<spore_density:
+	var ldest = spore_density
+	if total_spores > 100:
+		ldest*=0.5
+		if total_spores > 200:
+			ldest*=0.5
+			if total_spores > 300:
+				ldest*=0.5
+	if randf() < ldest:
+		total_spores += 1
 		call_deferred("spawn_spore",parent,location)
 		
 func activate_spore_cell(cell):
@@ -214,9 +231,9 @@ func spore_render_shape(s : CollisionShape3D, spore_velocity):
 func spore_render_level_in(level : Node3D, level_in : Vector3):
 	var pos = level_in
 	var vec = hash_vec(pos)
-	for x in range(-9,10):
-		for y in range(-9,10):
-			for z in range(-9,10):
+	for x in range(-5,6):
+		for y in range(-5,6):
+			for z in range(-5,6):
 				var v = Vector3i(x,y,z)+vec
 				if v in spore_loc:
 					spore_loc[v].callbacks.append([level, "spores_in", null])
@@ -224,9 +241,9 @@ func spore_render_level_in(level : Node3D, level_in : Vector3):
 func spore_render_level_out(level : Node3D, level_out : Vector3):
 	var pos = level_out
 	var vec = hash_vec(pos)
-	for x in range(-9,10):
-		for y in range(-9,10):
-			for z in range(-9,10):
+	for x in range(-5,6):
+		for y in range(-5,6):
+			for z in range(-5,6):
 				var v = Vector3i(x,y,z)+vec
 				if v in spore_loc:
 					spore_loc[v].callbacks.append([level, "spores_out", null])
@@ -276,7 +293,7 @@ func _ready():
 	spore_thread.start(_spore_thread_body)
 	
 	if soundtrack:
-		$player/Camera/Soundtrack/Bass01.play()
+		$player/Camera/Soundtrack.play()
 	
 	#set up nbors sets
 	append_nbors(5, 10)
@@ -442,3 +459,11 @@ func _on_restart_button_button_clicked():
 
 func _on_quit_to_menu_button_clicked():
 	to_menu_signal.emit()
+
+
+func _every_second():
+	for l in spawned_levels:
+		if l.destruct_ready and l.level_number < current_chamber_player:
+			l.queue_free()
+			spawned_levels.erase(l)
+			return

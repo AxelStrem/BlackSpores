@@ -1,0 +1,16 @@
+[gd_scene load_steps=10 format=3 uid="uid://clp5psok5hubs"]
+
+[ext_resource type="PackedScene" uid="uid://dxlju57pkimil" path="res://levels/chamber09/r_1.tscn" id="2_s0csy"]
+[ext_resource type="PackedScene" uid="uid://ctnccymieigjj" path="res://levels/chamber09/r_8.tscn" id="3_pecoq"]
+[ext_resource type="PackedScene" uid="uid://b8aynse18qjay" path="res://levels/chamber09/r_6.tscn" id="4_21wtd"]
+[ext_resource type="PackedScene" uid="uid://bjpjkv7f5ltjf" path="res://levels/chamber09/r_7.tscn" id="5_dfcts"]
+[ext_resource type="PackedScene" uid="uid://py3ythubh8h5" path="res://levels/chamber09/r_2.tscn" id="6_ulhpv"]
+[ext_resource type="PackedScene" uid="uid://vmj2pwkm5bmg" path="res://levels/chamber09/r_5.tscn" id="7_ene1a"]
+[ext_resource type="PackedScene" uid="uid://wjvr03srf0uh" path="res://levels/chamber09/r_4.tscn" id="8_efhwa"]
+[ext_resource type="PackedScene" uid="uid://b34it6emfntwi" path="res://levels/chamber09/r_3.tscn" id="9_50wxa"]
+[ext_resource type="PackedScene" uid="uid://cslfny4i27pgb" path="res://utility/OneOf3D.tscn" id="10_a7lot"]
+
+[node name="Chamber09_segment" type="Node3D"]
+
+[node name="OneOf3D" parent="." instance=ExtResource("10_a7lot")]
+scenes = Array[PackedScene]([ExtResource("2_s0csy"), ExtResource("6_ulhpv"), ExtResource("9_50wxa"), ExtResource("8_efhwa"), ExtResource("7_ene1a"), ExtResource("4_21wtd"), ExtResource("5_dfcts"), ExtResource("3_pecoq")])
