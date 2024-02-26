@@ -6,6 +6,7 @@ uniform sampler2D map;
 
 void fragment() {
 	float v = texture(map, UV).r;
+	v*=1.5;
 	if (v < 0.01)
 		discard;
 	v -= progress;

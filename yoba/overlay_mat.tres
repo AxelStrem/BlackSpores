@@ -6,5 +6,5 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_3c38r")
-shader_parameter/progress = 0.415
+shader_parameter/progress = 0.985
 shader_parameter/map = ExtResource("2_5hk76")

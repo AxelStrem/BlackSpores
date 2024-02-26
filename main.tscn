@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=38 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="Script" path="res://player.gd" id="3_1xpxi"]
@@ -12,7 +12,8 @@
 [ext_resource type="AudioStream" uid="uid://cb0c7nlsxlt0d" path="res://sound/breath.wav" id="9_eab5s"]
 [ext_resource type="PackedScene" uid="uid://cmqd3fasniv4k" path="res://sound/soundtrack/soundtrack.tscn" id="9_vwiiy"]
 [ext_resource type="AudioStream" uid="uid://db2f3wtpf7xr6" path="res://sound/pickup2.wav" id="10_1arfx"]
-[ext_resource type="Material" uid="uid://bxga3rye2w2pr" path="res://yoba/overlay_mat.tres" id="10_wywuy"]
+[ext_resource type="Shader" path="res://yoba/overlay.gdshader" id="10_uh8hn"]
+[ext_resource type="Texture2D" uid="uid://c2vbbleacs013" path="res://yoba/bsmap.bmp" id="11_e17ce"]
 [ext_resource type="PackedScene" uid="uid://befp0jx24ak1r" path="res://menu/HUD.tscn" id="11_mphlh"]
 [ext_resource type="Script" path="res://yoba/SporesOverlay.gd" id="12_dpwtj"]
 [ext_resource type="Script" path="res://yoba/fx_teleport.gd" id="13_grani"]
@@ -29,10 +30,22 @@ viewport_path = NodePath("player/HUDViewport")
 [sub_resource type="QuadMesh" id="QuadMesh_2s2q5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_k7a10"]
+render_priority = 1
+no_depth_test = true
 shading_mode = 0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qevcf"]
+render_priority = 0
+shader = ExtResource("10_uh8hn")
+shader_parameter/progress = 0.415
+shader_parameter/map = ExtResource("11_e17ce")
+
 [sub_resource type="QuadMesh" id="QuadMesh_ul6yr"]
-material = ExtResource("10_wywuy")
+material = SubResource("ShaderMaterial_qevcf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e5xgj"]
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tjvjx"]
 height = 2.04788
@@ -78,14 +91,75 @@ outer_radius = 1.2
 rings = 40
 ring_segments = 9
 
+[sub_resource type="Animation" id="Animation_cqnox"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/SporesOverlay:mesh:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.415]
+}
+
+[sub_resource type="Animation" id="Animation_ck8xl"]
+resource_name = "title_fade"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/SporesOverlay:mesh:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 6),
+"transitions": PackedFloat32Array(0.707107, 1, 1),
+"update": 0,
+"values": [0.6, 1.1, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/SplashOverlay:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera/SporesOverlay:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 5.9),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s8k04"]
+_data = {
+"RESET": SubResource("Animation_cqnox"),
+"title_fade": SubResource("Animation_ck8xl")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_yhqqv"]
 size = Vector3(196.664, 4.61426, 267.326)
 
 [node name="main" type="Node3D" groups=["game"]]
 process_mode = 1
 script = ExtResource("1_kjcn1")
+debug_items = true
 show_info = true
-soundtrack = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502442, 0, -0.525754, -0.850637, 0, -240.413, -8.97102)
@@ -199,12 +273,14 @@ no_depth_test = true
 texture = SubResource("ViewportTexture_4g3m7")
 
 [node name="DeathScreen" type="Node3D" parent="player/Camera"]
+process_priority = 1
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, 0, 0, 0)
 visible = false
 
 [node name="info" type="Label3D" parent="player/Camera/DeathScreen"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, -0.027055, -2.14555)
 no_depth_test = true
+render_priority = 1
 text = "30 chambers away from the evacuation exit"
 
 [node name="cause_victory" type="Node3D" parent="player/Camera/DeathScreen"]
@@ -213,7 +289,9 @@ visible = false
 
 [node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_victory"]
 transform = Transform3D(1, 8.88256e-16, -4.26326e-14, -3.38813e-21, 1, -4.89176e-21, 0, -4.89175e-21, 1, -0.021574, 0.962291, -2.24596)
+billboard = 1
 no_depth_test = true
+render_priority = 1
 modulate = Color(0, 0, 0, 1)
 text = "You have successfully"
 outline_size = 1
@@ -221,6 +299,7 @@ outline_size = 1
 [node name="Label3D3" type="Label3D" parent="player/Camera/DeathScreen/cause_victory"]
 transform = Transform3D(1, 7.37175e-15, -1.84741e-13, -3.38813e-21, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0.244387, 0.261273, -2.18583)
 no_depth_test = true
+render_priority = 1
 modulate = Color(0, 0, 0, 1)
 text = "Please enjoy your remaining time before the entire planet is consumed by the black spores"
 font_size = 18
@@ -229,6 +308,7 @@ outline_size = 1
 [node name="Label3D4" type="Label3D" parent="player/Camera/DeathScreen/cause_victory"]
 transform = Transform3D(1, 1.44763e-14, -3.2685e-13, -3.38813e-21, 1, 2.23517e-08, 0, -2.23517e-08, 1, -0.488853, -0.35334, -2.12345)
 no_depth_test = true
+render_priority = 1
 modulate = Color(0, 0, 0, 1)
 text = "Made by Ap31$!N and Ipekakuan for a Pirate Software Game Jam 14"
 font_size = 18
@@ -238,6 +318,7 @@ horizontal_alignment = 0
 [node name="Label3D5" type="Label3D" parent="player/Camera/DeathScreen/cause_victory"]
 transform = Transform3D(1, 1.19891e-14, -3.83693e-13, 5.32907e-15, 1, 2.23517e-08, 0, -2.23517e-08, 1, -0.0177708, -0.473, -2.116)
 no_depth_test = true
+render_priority = 1
 modulate = Color(0, 0, 0, 1)
 text = "Instant Regret Games Studio"
 font_size = 14
@@ -247,6 +328,7 @@ horizontal_alignment = 0
 [node name="Label3D2" type="Label3D" parent="player/Camera/DeathScreen/cause_victory"]
 transform = Transform3D(1, 8.88256e-16, -4.26326e-14, -3.38813e-21, 1, -4.89176e-21, 0, -4.89175e-21, 1, -0.021574, 0.598226, -2.20901)
 no_depth_test = true
+render_priority = 1
 modulate = Color(0, 0, 0, 1)
 text = "Escaped"
 font_size = 63
@@ -264,11 +346,13 @@ visible = false
 [node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_spores"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
 no_depth_test = true
+render_priority = 1
 text = "You have succumbed to the"
 
 [node name="Label3D2" type="Label3D" parent="player/Camera/DeathScreen/cause_spores"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
 no_depth_test = true
+render_priority = 1
 text = "Black Spores"
 font_size = 63
 
@@ -279,11 +363,13 @@ visible = false
 [node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_fell"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
 no_depth_test = true
+render_priority = 1
 text = "You fell into a"
 
 [node name="Label3D4" type="Label3D" parent="player/Camera/DeathScreen/cause_fell"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
 no_depth_test = true
+render_priority = 1
 text = "Bottomless Pit"
 font_size = 63
 
@@ -294,11 +380,13 @@ visible = false
 [node name="Label3D" type="Label3D" parent="player/Camera/DeathScreen/cause_crashed"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.797279, -2.22921)
 no_depth_test = true
+render_priority = 1
 text = "You have collided with"
 
 [node name="Label3D4" type="Label3D" parent="player/Camera/DeathScreen/cause_crashed"]
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, 0.433214, -2.19226)
 no_depth_test = true
+render_priority = 1
 text = "Solid Ground"
 font_size = 63
 
@@ -310,15 +398,26 @@ text = "Try again"
 [node name="quitToMenuButton" parent="player/Camera/DeathScreen" instance=ExtResource("5_7jcy2")]
 process_mode = 3
 transform = Transform3D(0.193, -5.97632e-16, -3.55271e-15, 3.058e-15, 0.193, -5.58794e-09, -5.32907e-15, 5.58794e-09, 0.193, 0.0539532, -0.17781, -0.521931)
-text = "Menu"
+text = "Quit"
 
 [node name="Soundtrack" parent="player/Camera" instance=ExtResource("9_vwiiy")]
 
 [node name="SporesOverlay" type="MeshInstance3D" parent="player/Camera"]
 transform = Transform3D(1, -4.43312e-15, -9.9476e-14, 6.21725e-15, 0.624901, -1.49012e-08, 0, -3.49309e-21, 1.03807, 3.8147e-06, -0.0352783, -0.347668)
-visible = false
 mesh = SubResource("QuadMesh_ul6yr")
 script = ExtResource("12_dpwtj")
+
+[node name="SplashOverlay" type="MeshInstance3D" parent="player/Camera"]
+transform = Transform3D(1, -6.63911e-15, -1.42109e-13, 9.76997e-15, 0.624901, -2.98023e-08, 0, -3.78237e-21, 1.03807, 3.8147e-06, -0.00271606, -0.363985)
+visible = false
+mesh = SubResource("QuadMesh_ul6yr")
+surface_material_override/0 = SubResource("StandardMaterial3D_e5xgj")
+
+[node name="Title" type="Label3D" parent="player/Camera/SplashOverlay"]
+transform = Transform3D(0.156151, -8.77293e-16, -3.55271e-15, 4.12269e-16, 0.26752, -1.86265e-08, -3.55271e-15, -1.06452e-21, 0.26752, -0.00865746, 0.0503235, 0.00936699)
+text = "BLACK SPORES"
+font_size = 72
+uppercase = true
 
 [node name="JumpDelay" type="Timer" parent="player"]
 
@@ -372,6 +471,14 @@ draw_pass_1 = SubResource("TorusMesh_lsobw")
 [node name="Timer" type="Timer" parent="player/FX/Teleport"]
 wait_time = 0.5
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="player"]
+libraries = {
+"": SubResource("AnimationLibrary_s8k04")
+}
+
+[node name="EverySec" type="Timer" parent="player"]
+autostart = true
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("7_q68py")
 
@@ -400,4 +507,5 @@ autostart = true
 [connection signal="area_exited" from="player/Area3D" to="player" method="_on_area_3d_area_exited"]
 [connection signal="finished" from="player/breath" to="player" method="_on_breath_finished"]
 [connection signal="timeout" from="player/FX/Teleport/Timer" to="player/FX/Teleport" method="_on_timer_timeout"]
+[connection signal="timeout" from="player/EverySec" to="player" method="_on_every_sec_timeout"]
 [connection signal="timeout" from="every_second" to="." method="_every_second"]

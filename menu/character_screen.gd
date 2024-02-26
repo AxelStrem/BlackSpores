@@ -21,6 +21,8 @@ func _ready():
 	perks.append($PerkTele1)
 	perks.append($PerkWard1)
 	
+	$"../button_character".visible = !Global.first_run
+	
 	var game = Global.get_game_root(self)
 	if game != null:
 		game.load_character(self)

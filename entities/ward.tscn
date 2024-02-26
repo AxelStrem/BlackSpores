@@ -7,6 +7,9 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_kppmw"]
 radius = 0.204211
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_rfxbe"]
+radius = 1.51808
+
 [sub_resource type="Curve" id="Curve_kljso"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.673406, 1), 0.0, 0.0, 0, 0, Vector2(0.793157, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -64,9 +67,6 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_v74sy")
 size = Vector2(0.01, 0.01)
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_rfxbe"]
-radius = 1.51808
-
 [node name="Ward" type="RigidBody3D"]
 script = ExtResource("1_tuuwk")
 
@@ -87,17 +87,20 @@ omni_attenuation = 1.37519e-05
 [node name="ward" parent="." instance=ExtResource("3_tmcx7")]
 transform = Transform3D(0.194236, 0, 0, 0, 0.194236, 0, 0, 0, 0.194236, 0, 0, 0)
 
+[node name="lock_opener" type="Area3D" parent="ward"]
+transform = Transform3D(3.868, 0, 0, 0, 3.868, 0, 0, 0, 3.868, 0, 0, 0)
+collision_layer = 1024
+collision_mask = 0
+monitoring = false
+monitorable = false
+script = ExtResource("3_61mkm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ward/lock_opener"]
+shape = SubResource("SphereShape3D_rfxbe")
+
 [node name="particles" type="GPUParticles3D" parent="."]
 cast_shadow = 0
 emitting = false
 amount = 300
 process_material = SubResource("ParticleProcessMaterial_43t35")
 draw_pass_1 = SubResource("QuadMesh_uhnp2")
-
-[node name="lock_opener" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("3_61mkm")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="lock_opener"]
-shape = SubResource("SphereShape3D_rfxbe")

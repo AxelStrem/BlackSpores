@@ -11,6 +11,8 @@ var lockpick = false
 
 var spore_destructible_scene = preload("res://spore_destructible.tscn")
 
+@export var radius = 10.0
+
 var crot = Vector3(0.0,0.0,0.0)
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,7 +45,7 @@ func _process(delta):
 			deploying = 3
 			engaged = true
 			if lockpick:
-				$lock_opener.set_collision_layer_value(11,true)
+				$ward/lock_opener.monitorable = true
 			$particles.emitting = true
 			$ward_light.light_energy = 100.0
 			game = Global.get_game_root(self)
@@ -57,7 +59,7 @@ func _process(delta):
 		if lifetime < 0:
 			deploying = 4
 			engaged = false
-			$lock_opener.set_collision_layer_value(11,false)
+			$ward/lock_opener.monitorable = false
 			$particles.emitting = false
 			if game!=null:
 				game.remove_ward(self)

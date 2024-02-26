@@ -1,10 +1,18 @@
-[gd_scene load_steps=13 format=3 uid="uid://nbtpy06ouaab"]
+[gd_scene load_steps=15 format=3 uid="uid://nbtpy06ouaab"]
 
 [ext_resource type="PackedScene" uid="uid://dfxp2kymhpwkv" path="res://models/building_blocks/lab01.glb" id="1_ipgtm"]
 [ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_ajp65"]
+[ext_resource type="Texture2D" uid="uid://dxis003rrab56" path="res://models/palette01.png" id="2_fryks"]
 [ext_resource type="PackedScene" uid="uid://cvq0jnrp64bv5" path="res://level_parts/building_blocks/CeilingLamp01.tscn" id="3_ed0m8"]
 [ext_resource type="PackedScene" uid="uid://bkj2in0p1fpi3" path="res://level_parts/building_blocks/barrel_01.tscn" id="4_s56uc"]
 [ext_resource type="PackedScene" uid="uid://bmma7o3subknk" path="res://level_parts/building_blocks/tree.tscn" id="5_2ak8a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sap7e"]
+albedo_texture = ExtResource("2_fryks")
+metallic = 0.53
+metallic_specular = 0.24
+roughness = 0.69
+texture_filter = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_slgbj"]
 size = Vector3(13, 0.5, 16)
@@ -58,7 +66,7 @@ shadow_mesh = SubResource("ArrayMesh_vxphb")
 [node name="lab01" instance=ExtResource("1_ipgtm")]
 
 [node name="LabWalls" parent="." index="0"]
-surface_material_override/0 = ExtResource("2_ajp65")
+surface_material_override/0 = SubResource("StandardMaterial3D_sap7e")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="LabWalls" index="0"]
 

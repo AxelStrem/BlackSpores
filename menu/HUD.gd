@@ -20,9 +20,9 @@ func _ready():
 	infiniteBar = $InfiniteBar	
 	energyBar.visible = true
 	infiniteBar.visible = false
-	antigravDots = [$BonusFrame/Dot1,$BonusFrame/Dot2,$BonusFrame/Dot3,$BonusFrame/Dot4,$BonusFrame/Dot5,$BonusFrame/Dot6,$BonusFrame/Dot7,$BonusFrame/Dot8,$BonusFrame/Dot9,$BonusFrame/Dot10]
-	teleportDots  = [$BonusFrame2/Dot1,$BonusFrame2/Dot2,$BonusFrame2/Dot3,$BonusFrame2/Dot4,$BonusFrame2/Dot5,$BonusFrame2/Dot6,$BonusFrame2/Dot7]
-	wardDots  = [$BonusFrame3/Dot1,$BonusFrame3/Dot2,$BonusFrame3/Dot3,$BonusFrame3/Dot4,$BonusFrame3/Dot5]
+	antigravDots = $BonusFrame/D1.get_children()
+	teleportDots  = $BonusFrame2/D1.get_children()
+	wardDots  = $BonusFrame3/D1.get_children()
 	lightDots(antigravDots,0)
 	lightDots(teleportDots,0)
 	lightDots(wardDots,0)
@@ -46,6 +46,25 @@ func lightDots(dots, number):
 			dots[n].visible = true
 		else:
 			dots[n].visible = false
+
+func set_frame_style(frame, s):
+	var dn = null		
+	var do = null
+	if s==1:
+		dn = frame.find_child("D1")
+		do = frame.find_child("D2")
+	else:
+		dn = frame.find_child("D2")
+		do = frame.find_child("D1")
+	do.hide()
+	dn.show()
+	return dn.get_children()
+		
+
+func set_style(s):
+	antigravDots = set_frame_style($BonusFrame, s)
+	teleportDots = set_frame_style($BonusFrame2, s)
+	wardDots = set_frame_style($BonusFrame3, s)		
 
 func update_hud():
 	var pos_z = 0.0

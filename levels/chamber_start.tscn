@@ -155,6 +155,7 @@ shape = SubResource("BoxShape3D_cndy0")
 
 [node name="button_character" parent="." instance=ExtResource("10_0ckhs")]
 transform = Transform3D(-5.93379e-08, 0, -1.2285, 0, 1.2285, 0, 1.35749, 0, -5.36992e-08, 10.9, 5.9, -21.1)
+visible = false
 text = "Research Desk >"
 active = true
 color = Color(0.313726, 0.694118, 0.713726, 1)

@@ -40,6 +40,10 @@ var perk_cumulative = false
 var perk_hacking1 = false
 var perk_tele1 = false
 var perk_ward1 = false
+var perk_tele2 = false
+var perk_inventory = false
+var perk_ward2 = false
+var perk_throw = true
 
 var ground_close = false
 var last_frame_on_ground = false
@@ -67,20 +71,25 @@ var lockpick_skill = 1.0
 var antigrav_charges = 0
 var antigrav_protection = false
 var antigrav_jump_available = 0.0
-const antigrav_charges_max = 10
+var antigrav_charges_base = 10
+var antigrav_charges_max = 10
 const antigrav_charges_bonus = 3
 
 var teleporter_charges = 0
-const teleporter_charges_max = 7
+var teleporter_charges_max = 7
+const teleporter_charges_base = 7
 const teleporter_charges_bonus = 2
 var teleporter = null
 var teleporter_scene = preload("res://entities/teleporter.tscn")
 var teleporter_energy_boost = 3.0
+var teleporter_locstack = []
 
 var ward_charges = 0
-const ward_charges_max = 5
+const ward_charges_base = 5
+var ward_charges_max = 5
 const ward_charges_bonus = 1
 var ward_scene = preload("res://entities/ward.tscn")
+var exward_scene = preload("res://entities/super_ward.tscn")
 
 var research_points = 0
 
@@ -116,6 +125,7 @@ const fatal_velocity = 25.0
 var dodge_buffer = Vector3(0.0,0.0,0.0)
 var jump_energy_built = 0.0
 var jump_energy_limit = 0.0
+var throw_speed = 5.0
 
 const jump_type = 3 # 0 - usual jump
 					# 1 - jump on release
@@ -144,12 +154,29 @@ func update_profile(skills, perks):
 	perk_tele1 = (perks[3]!=0)
 	perk_ward1 = (perks[4]!=0)
 	
+	perk_inventory = true
+	
+	if perk_inventory:
+		antigrav_charges_max = antigrav_charges_base*2
+		ward_charges_max = ward_charges_base*2
+		teleporter_charges_max = teleporter_charges_base*2
+	else:
+		antigrav_charges_max = antigrav_charges_base
+		ward_charges_max = ward_charges_base
+		teleporter_charges_max = teleporter_charges_base
+	
+	if hud:
+		hud.set_style(2 if perk_inventory else 1)
+	
 	SPEED = 5.0 + level_speed*0.15
 	acceleration = 60.0 + level_speed*1.8
 	
 	max_energy = 200 + 5*level_stamina
 	
 	lockpick_skill = 1.0+0.1*level_hacking
+	
+	if perk_throw:
+		throw_speed = 10.0
 	
 
 func get_lockpick_skill():
@@ -199,6 +226,8 @@ func _ready():
 	label_energy.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	get_tree().paused = false
 	#checkpoint = translation
+	if Global.first_run:
+		$AnimationPlayer.play("title_fade")	
 
 func display_info(text):
 	info_message.text = text
@@ -508,13 +537,17 @@ func _input(event):
 		if event.pressed and event.keycode == KEY_Q:
 			if ward_charges > 0:
 					ward_charges -= 1
-					var ward = ward_scene.instantiate()
+					var ward = null
+					if perk_ward2:
+						ward = exward_scene.instantiate()
+					else:
+						ward = ward_scene.instantiate()
 					if perk_ward1:
 						ward.lockpick = true
 					ward.lifetime = 10.0 + level_ward*0.5
 					get_parent().add_child(ward)
 					ward.global_transform = item_spawn.global_transform
-					ward.linear_velocity = -ward.global_transform.basis.z.normalized()*5.0 + velocity
+					ward.linear_velocity = -ward.global_transform.basis.z.normalized()*throw_speed + velocity
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
@@ -534,7 +567,7 @@ func _input(event):
 					teleporter.player = self
 					get_parent().add_child(teleporter)
 					teleporter.global_transform = item_spawn.global_transform
-					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*5.0 + velocity
+					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*throw_speed + velocity
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				if teleporter!=null:
@@ -543,6 +576,16 @@ func _input(event):
 						teleporter.activate(bs)
 						$FX/Teleport.run()
 						teleporter = null
+				elif perk_tele2 and teleporter_locstack.size()>0 and teleporter_charges >= 2:
+					var bs = basis
+					$FX/Teleport.run()
+					teleporter_charges -= 2
+					await get_tree().create_timer(1.0).timeout
+					global_position = teleporter_locstack.front()
+					velocity = Vector3.ZERO
+					basis = bs
+					
+					
 					
 	#if event.is_action_pressed("player_jump") and ground_close and not jumping:
 	#	velocity += vec_up*jump_impulse
@@ -628,3 +671,10 @@ func _hide_menu():
 	restart_button.deactivate()
 	menu_button.deactivate()	
 
+
+
+func _on_every_sec_timeout():
+	if is_on_floor():
+		teleporter_locstack.push_back(global_position)
+		if teleporter_locstack.size() > 5:
+			teleporter_locstack.pop_front()

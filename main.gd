@@ -98,7 +98,7 @@ func spores_at_chamber(c):
 		current_chamber_spore = c
 
 func add_ward(w):
-	ward_list[w] = w.global_position
+	ward_list[w] = w
 	
 func remove_ward(w):
 	ward_list.erase(w)
@@ -138,12 +138,12 @@ func get_nearby_spores(pos):
 			res.append(spore_ref_dict[r])
 	return res
 
-const ward_radius = 10.0
 func check_wards(vec, extra_radius):
 	var p1 = Vector3(vec)
 	for w in ward_list:
-		var p2 = ward_list[w]
-		if (p1-p2).length()<(ward_radius + extra_radius):
+		var p2 = w.global_position
+		var rad = w.radius
+		if (p1-p2).length()<(rad + extra_radius):
 			return true
 	return false
 
@@ -305,9 +305,9 @@ func _ready():
 	$player.infinite_energy_cheat = infinite_stamina
 	
 	if debug_items:
-		$player.antigrav_charges = 10
-		$player.teleporter_charges = 7
-		$player.ward_charges = 5
+		$player.antigrav_charges = 20
+		$player.teleporter_charges = 14
+		$player.ward_charges = 10
 	if !show_info:
 		$player/Camera/LabelFPS.hide()
 		$player/Camera/LabelTime.hide()

@@ -1,6 +1,7 @@
 extends Node
 
 var spore_scale = 1.0
+var first_run = true
 
 var level_scenes = [
 	[preload("res://levels/chamber01.tscn"), 1.0],
@@ -16,6 +17,7 @@ var level_scenes = [
 	[preload("res://levels/chamber08_alt.tscn"), 0.5],
 	[preload("res://levels/chamber09.tscn"), 1.0]
 ]
+
 var test_chamber_scene = preload("res://levels/test_chamber.tscn")
 
 var victory_scene = preload("res://levels/chamber_victory.tscn")
