@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy7pct6fyxcjj"]
+[gd_scene load_steps=7 format=3 uid="uid://cy7pct6fyxcjj"]
 
 [ext_resource type="Script" path="res://level_parts/building_blocks/auto_door.gd" id="1_q84vv"]
 [ext_resource type="PackedScene" uid="uid://xbxengdr8k64" path="res://level_parts/building_blocks/doorway.tscn" id="2_oxc7t"]
+[ext_resource type="AudioStream" uid="uid://ckgh2o1maqpcb" path="res://sound/door01.wav" id="3_883wh"]
 [ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="3_ta1fj"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_hqrkd"]
@@ -15,6 +16,12 @@ script = ExtResource("1_q84vv")
 [node name="doorway" parent="." instance=ExtResource("2_oxc7t")]
 
 [node name="door" type="Node3D" parent="."]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 2, 0)
+stream = ExtResource("3_883wh")
+max_db = 6.0
+bus = &"SFX-Room"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.35, 0, 0, 0, -3.67176e-08, -0.35, 0, 0.84, -1.5299e-08, 1.7, 4.857, 0)

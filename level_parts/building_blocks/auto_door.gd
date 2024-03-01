@@ -20,6 +20,7 @@ func _ready():
 	
 func unlock():
 	state = 1
+	$door/AudioStreamPlayer3D.play()
 	for l in locks:
 		if l != null:
 			l.force_unlock()

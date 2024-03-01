@@ -8,7 +8,11 @@ var engaged = false
 @export var tip = ""
 @export var price = 10
 
+@export var condition_node : Node3D = null
+@export var condition_level = 5
+
 var research_points = 0
+var tip_tag = ""
 
 func enable():
 	enabled = true
@@ -23,12 +27,18 @@ func disengage():
 	update()
 	
 func update():
+	tip_tag = tip
 	if not enabled:
 		$button3D.text = tag + "({0} RP)".format({0:price})		
 		$button3D.background_color = Color(0.4,0.4,0.4)
 		$button3D.background_hover = Color(0.6,0.6,0.6)
 		$button3D.background_inactive = Color(0.2,0.2,0.2)
-		if price <= research_points:
+		var force_disable = false
+		if condition_node != null:
+			if condition_node.current_level < condition_level:
+				force_disable = true
+				tip_tag = "{0} level {1} required".format({0:condition_node.trait_name, 1:condition_level})
+		if price <= research_points and not force_disable:
 			$button3D.activate()
 		else:
 			$button3D.deactivate()
@@ -62,4 +72,4 @@ func _on_button_3d_button_clicked():
 
 
 func _on_button_3d_button_mouse_in():
-	get_parent().update_tip(tip)
+	get_parent().update_tip(tip_tag)

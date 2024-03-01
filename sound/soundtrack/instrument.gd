@@ -2,7 +2,9 @@ extends Node
 
 
 const bpm = 88.0
-const bar = 8.0*60.0/bpm
+@export var bar = 8.0*60.0/bpm
+@export var start = 0.0
+@export var no_offset = true
 const eps = 0.05
 
 const bar_death = [[0,1]]
@@ -32,7 +34,7 @@ var beat_timer = 0.0
 signal beat
 
 func get_pos(b):
-	return b*bar
+	return b*bar + start
 
 func bass_get_int():
 	if bar_counter >= 12:
@@ -53,19 +55,22 @@ func set_state(s):
 		state = 0
 
 func select_bar():
-	if state == 0:
-		bar_next = bar_now + 1
-		bar_counter += 1
-		if bar_next >= int_now[1]:
-			int_now = bass_get_int()
-			bar_next = int_now[0]
-	if state == 1:
-		bar_next = 0
-		state = 2
-		return
-	if state == 2:
-		bar_next = 1
-		return
+	bar_next = 0
+	return
+	
+	#if state == 0:
+	#	bar_next = bar_now + 1
+	#	bar_counter += 1
+	#	if bar_next >= int_now[1]:
+	#		int_now = bass_get_int()
+	#		bar_next = int_now[0]
+	#if state == 1:
+	#	bar_next = 0
+	#	state = 2
+	#	return
+	#if state == 2:
+	#	bar_next = 1
+	#	return
 		
 
 func reset_players():
@@ -97,36 +102,37 @@ func _process(delta):
 		if beat_timer < 0.0:
 			emit_signal("beat", -beat_timer)
 			beat_timer += bar/32.0
-	if t > -eps and not trans:
-		trans = true
-		select_bar()
-		if bar_next == 0:
-			zbar = true
-		else:
-			var t_start2 = get_pos(bar_next)+t
-			t_target2 = t_start2 + bar
-			p2.play(t_start2)
-			p2.volume_db = -99999.0
-	if zbar and trans and t>=0.0:
-			var t_start2 = t
-			t_target2 = t_start2 + bar
-			p2.play(t_start2)
-			p2.volume_db = -99999.0
-			zbar = false
-	if t > eps and trans:
-		if beat_timer < bar/128.0:
-			emit_signal("beat", t)
-		beat_timer = bar/32.0 - t
-		trans = false
-		p1.stop()
-		p1.volume_db = -99999.0
-		var pt = p1
-		p1 = p2
-		p2 = pt
-		t -= bar
-		t_target = t_target2
-	if trans and not zbar:
-		var dt = (t + eps)/(2.0*eps)
-		p1.volume_db = log(1.0 - dt) + volume
-		p2.volume_db = log(dt) + volume
-		bar_now = bar_next
+			
+		if t > -eps and not trans:
+			trans = true
+			select_bar()
+			if bar_next == 0 and no_offset:
+				zbar = true
+			else:
+				var t_start2 = get_pos(bar_next)+t
+				t_target2 = t_start2 + bar
+				p2.play(t_start2)
+				p2.volume_db = -99999.0
+		if zbar and trans and t>=0.0:
+				var t_start2 = t
+				t_target2 = t_start2 + bar
+				p2.play(t_start2)
+				p2.volume_db = -99999.0
+				zbar = false
+		if t > eps and trans:
+			if beat_timer < bar/128.0:
+				emit_signal("beat", t)
+			beat_timer = bar/32.0 - t
+			trans = false
+			p1.stop()
+			p1.volume_db = -99999.0
+			var pt = p1
+			p1 = p2
+			p2 = pt
+			t -= bar
+			t_target = t_target2
+		if trans and not zbar:
+			var dt = (t + eps)/(2.0*eps)
+			p1.volume_db = log(1.0 - dt) + volume
+			p2.volume_db = log(dt) + volume
+			bar_now = bar_next

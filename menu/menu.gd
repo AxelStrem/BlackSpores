@@ -2,7 +2,7 @@ extends Node3D
 
 var research_points = 0
 var levels = [0,0,0,0,0,0]
-var perks = [0,0,0,0,0]
+var perks = Global.perks_array.duplicate()
 var config = ConfigFile.new()
 var mainScene = preload("res://main.tscn")
 var main_instance

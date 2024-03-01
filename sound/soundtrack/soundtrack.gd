@@ -3,7 +3,8 @@ extends Node3D
 var instruments = []
 
 func _ready():
-	instruments = [$Bass]
+	#instruments = [$Bass]
+	instruments = [$Ambient01]
 
 func play():
 	for i in instruments:

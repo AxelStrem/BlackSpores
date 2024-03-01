@@ -56,5 +56,12 @@ func _process(delta):
 			engaged = true
 			if player:
 				player.hud.tele_online()
+				player.tele_online()
 			$OmniLight3D.show()
 
+
+
+func _on_body_entered(_body):
+	$thump.pitch_scale = 0.8 + randf()*0.3
+	$thump.volume_db = -10.0-randf()*5.0
+	$thump.play()

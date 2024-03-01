@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://8o43ofhcf47k"]
+[gd_scene load_steps=13 format=3 uid="uid://8o43ofhcf47k"]
 
 [ext_resource type="PackedScene" uid="uid://b3l6ldhrhdr6d" path="res://models/building_blocks/silo_door.glb" id="1_cc38d"]
 [ext_resource type="Script" path="res://level_parts/building_blocks/silo_door.gd" id="2_nlc5b"]
 [ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="3_pxsqb"]
+[ext_resource type="AudioStream" uid="uid://ckgh2o1maqpcb" path="res://sound/door01.wav" id="4_noa23"]
+[ext_resource type="AudioStream" uid="uid://1k7b6a42jw6w" path="res://sound/door02.wav" id="5_wnt45"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ai0m5"]
 size = Vector3(3.52936, 1.22791, 0.275635)
@@ -89,7 +91,13 @@ script = ExtResource("2_nlc5b")
 [node name="SiloDoorU" parent="." index="0"]
 surface_material_override/0 = ExtResource("3_pxsqb")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="SiloDoorU" index="0"]
+[node name="sound" type="AudioStreamPlayer3D" parent="SiloDoorU" index="0"]
+transform = Transform3D(1, 0, 0, 0, 3.05754e-07, -1.7099, 0, 1, 1.78814e-07, -1.16215, 0.942784, 0.806089)
+stream = ExtResource("4_noa23")
+volume_db = 4.987
+bus = &"SFX-Room"
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="SiloDoorU" index="1"]
 transform = Transform3D(1, 0, 0, 0, 3.05754e-07, -1.7099, 0, 1, 1.78814e-07, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SiloDoorU/StaticBody3D2" index="0"]
@@ -99,7 +107,13 @@ shape = SubResource("BoxShape3D_ai0m5")
 [node name="SiloDoorD" parent="." index="1"]
 surface_material_override/0 = ExtResource("3_pxsqb")
 
-[node name="StaticBody3D3" type="StaticBody3D" parent="SiloDoorD" index="0"]
+[node name="sound" type="AudioStreamPlayer3D" parent="SiloDoorD" index="0"]
+transform = Transform3D(1, 0, 0, 0, 3.05754e-07, -1.7099, 0, 1, 1.78814e-07, -1.16215, 0.942784, 0.806089)
+stream = ExtResource("4_noa23")
+volume_db = -0.831
+bus = &"SFX-Room"
+
+[node name="StaticBody3D3" type="StaticBody3D" parent="SiloDoorD" index="1"]
 transform = Transform3D(1, 0, 0, 0, 3.05754e-07, -1.7099, 0, 1, 1.78814e-07, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SiloDoorD/StaticBody3D3" index="0"]
@@ -109,13 +123,19 @@ shape = SubResource("BoxShape3D_ai0m5")
 [node name="SiloSlider" parent="." index="2"]
 surface_material_override/0 = ExtResource("3_pxsqb")
 
-[node name="SiloSlider2" type="MeshInstance3D" parent="SiloSlider" index="0"]
+[node name="sound" type="AudioStreamPlayer3D" parent="SiloSlider" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.551368)
+stream = ExtResource("5_wnt45")
+volume_db = -12.052
+bus = &"SFX-Room"
+
+[node name="SiloSlider2" type="MeshInstance3D" parent="SiloSlider" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.551368)
 mesh = SubResource("ArrayMesh_aud23")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_pxsqb")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="SiloSlider" index="1"]
+[node name="StaticBody3D" type="StaticBody3D" parent="SiloSlider" index="2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SiloSlider/StaticBody3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0686, 0.526123, -0.00537109)
@@ -127,13 +147,19 @@ mesh = SubResource("ArrayMesh_aud23")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_pxsqb")
 
-[node name="SiloSlider2" type="MeshInstance3D" parent="SiloSliderU" index="0"]
+[node name="sound" type="AudioStreamPlayer3D" parent="SiloSliderU" index="0"]
+transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, -2.05556, 2.47506, -0.551368)
+stream = ExtResource("5_wnt45")
+volume_db = -12.052
+bus = &"SFX-Room"
+
+[node name="SiloSlider2" type="MeshInstance3D" parent="SiloSliderU" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.551368)
 mesh = SubResource("ArrayMesh_aud23")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("3_pxsqb")
 
-[node name="StaticBody3D2" type="StaticBody3D" parent="SiloSliderU" index="1"]
+[node name="StaticBody3D2" type="StaticBody3D" parent="SiloSliderU" index="2"]
 transform = Transform3D(-1, -8.74228e-08, 0, 8.74228e-08, -1, 0, 0, 0, 1, -2.05556, 1.02167, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SiloSliderU/StaticBody3D2" index="0"]

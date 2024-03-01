@@ -1,4 +1,12 @@
-[gd_resource type="AudioBusLayout" format=3 uid="uid://bek1niw74x7ds"]
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://bek1niw74x7ds"]
+
+[sub_resource type="AudioEffectReverb" id="AudioEffectReverb_b4dpe"]
+resource_name = "Reverb"
+room_size = 0.69
+damping = 0.58
+spread = 0.67
+dry = 0.72
+wet = 0.38
 
 [resource]
 bus/0/volume_db = 4.23351
@@ -14,3 +22,11 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = -24.6756
 bus/2/send = &"Master"
+bus/3/name = &"SFX-Room"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"SFX"
+bus/3/effect/0/effect = SubResource("AudioEffectReverb_b4dpe")
+bus/3/effect/0/enabled = false

@@ -5,6 +5,7 @@ var speed = 0.0
 var openers = 0
 @export var target : Node3D = null
 @export var complexity = 5.0
+var beep_interval = 0.0
 var target_scale = 0.0
 var init_comp = 0.0
 
@@ -23,10 +24,15 @@ func _ready():
 func _process(delta):
 	if state==1:
 		complexity -= speed*delta
+		beep_interval -= speed*delta
+		if beep_interval < 0.0:
+			beep_interval = 0.2
+			$beeps.get_children().pick_random().play()
 		$ScreenProgress/MeshInstance3D.scale.x = lerp(target_scale, 0.0, complexity/init_comp)
 		if complexity < 0.0:
 			if target!=null:
 				target.unlock()
+			$lock_open.play()
 				
 func force_unlock():
 	state = 2

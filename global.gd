@@ -3,6 +3,10 @@ extends Node
 var spore_scale = 1.0
 var first_run = true
 
+var perks_array = [0,0,0,0,0,0,0,0,0,0]
+
+var picked_nums = [-1, -1, -1]
+
 var level_scenes = [
 	[preload("res://levels/chamber01.tscn"), 1.0],
  	[preload("res://levels/chamber02.tscn"), 1.0],
@@ -29,23 +33,31 @@ func random_direction():
 	var z = randf_range(-1.0,1.0)
 	return Vector3(cos(a),sin(a),z)
 
-func generate_level(number):
-	if number > total_chambers:
-		return null
-		
+func roll_num():
 	var prob_sum = 0.0
 	var prob_roll = []
 	for l in level_scenes:
 		prob_sum+=l[1]
 		prob_roll.append(prob_sum)
+	
+	var picked = picked_nums.back()
+	while picked_nums.find(picked)!=-1:
+		var p = randf()*prob_sum
+		for i in range(level_scenes.size()):
+			picked = i
+			if p < prob_roll[i]:
+				break
+	
+	picked_nums.pop_front()
+	picked_nums.append(picked)
+	
+	return picked
+
+func generate_level(number):
+	if number > total_chambers:
+		return null
 		
-	var p = randf()*prob_sum
-	var picked = 0
-	for i in range(level_scenes.size()):
-		picked = i
-		if p < prob_roll[i]:
-			break
-	print(p,' ', picked)
+	var picked = roll_num()
 		
 	var scene = victory_scene
 	if number < total_chambers:

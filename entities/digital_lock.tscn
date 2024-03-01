@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://bk6ro78efnftv"]
+[gd_scene load_steps=13 format=3 uid="uid://bk6ro78efnftv"]
 
 [ext_resource type="PackedScene" uid="uid://dgdkpjk4vtruw" path="res://models/building_blocks/digital_lock.glb" id="1_vmaam"]
 [ext_resource type="Script" path="res://digital_lock.gd" id="2_5uoq8"]
 [ext_resource type="Material" uid="uid://dt7p6dr36ufpw" path="res://models/palette01_rough.tres" id="3_6qp4y"]
 [ext_resource type="PackedScene" uid="uid://bdxwe5m33r4ll" path="res://spore_destructible.tscn" id="4_pkcwu"]
+[ext_resource type="AudioStream" uid="uid://cofbec20si0nk" path="res://sound/digilock_beep.wav" id="5_6226k"]
+[ext_resource type="AudioStream" uid="uid://f7xhsbls5fjp" path="res://sound/digilock_open.wav" id="5_eplu8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o15nx"]
 shading_mode = 0
@@ -76,6 +78,76 @@ shape = SubResource("BoxShape3D_ac8aa")
 wait_time = 0.2
 one_shot = true
 autostart = true
+
+[node name="lock_open" type="AudioStreamPlayer3D" parent="." index="7"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+stream = ExtResource("5_eplu8")
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beeps" type="Node3D" parent="." index="8"]
+
+[node name="beep1" type="AudioStreamPlayer3D" parent="beeps" index="0"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep2" type="AudioStreamPlayer3D" parent="beeps" index="1"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 0.5
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep3" type="AudioStreamPlayer3D" parent="beeps" index="2"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 0.75
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep4" type="AudioStreamPlayer3D" parent="beeps" index="3"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 0.25
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep5" type="AudioStreamPlayer3D" parent="beeps" index="4"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 1.5
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep6" type="AudioStreamPlayer3D" parent="beeps" index="5"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 1.25
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep7" type="AudioStreamPlayer3D" parent="beeps" index="6"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 1.75
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep8" type="AudioStreamPlayer3D" parent="beeps" index="7"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 2.0
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep9" type="AudioStreamPlayer3D" parent="beeps" index="8"]
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 2.5
+max_polyphony = 4
+bus = &"SFX-Room"
 
 [connection signal="area_entered" from="player_detector" to="." method="_on_player_entered"]
 [connection signal="area_exited" from="player_detector" to="." method="_on_player_exited"]

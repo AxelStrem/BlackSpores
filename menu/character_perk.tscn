@@ -9,6 +9,7 @@ script = ExtResource("1_xxg2l")
 [node name="button3D" parent="." instance=ExtResource("2_84rq2")]
 transform = Transform3D(0.21, 0, 0, 0, 0.21, 0, -1.42109e-14, 0, 0.21, 0.723982, 0.461538, 0)
 text = "Enhanced Boots (10 RP)"
+color = Color(0.54902, 0.741176, 0.482353, 1)
 background = true
 background_width = 2.0
 

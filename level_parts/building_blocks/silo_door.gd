@@ -12,12 +12,18 @@ var slide_u = 2.5
 
 func unlock():
 	state = 1
+	$SiloDoorD/sound.pitch_scale = 0.95 + randf()*0.1
+	$SiloDoorD/sound.play()
+	$SiloDoorU/sound.pitch_scale = 0.95 + randf()*0.1
+	$SiloDoorU/sound.play()
 
 func unlock_u():
 	state_u = 1
+	$SiloSliderU/sound.play()
 	
 func unlock_l():
 	state_l = 1
+	$SiloSlider/sound.play()
 
 func _process(delta):
 	if state_l == 1:
@@ -27,7 +33,7 @@ func _process(delta):
 		if slide_l < 0.0:
 			state_l = 2
 			if state_u == 2:
-				state = 1
+				unlock()
 	if state_u == 1:
 		$SiloSliderU.translate_object_local(Vector3.LEFT*delta*slide_speed)
 		$SiloRollerU.rotate_z(delta*slide_speed)
@@ -35,7 +41,7 @@ func _process(delta):
 		if slide_u < 0.0:
 			state_u = 2
 			if state_l == 2:
-				state = 1
+				unlock()
 	
 	if state == 1:
 		$SiloDoorU.translate_object_local(Vector3.BACK*delta*speed)

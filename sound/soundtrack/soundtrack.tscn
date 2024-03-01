@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cmqd3fasniv4k"]
+[gd_scene load_steps=8 format=3 uid="uid://cmqd3fasniv4k"]
 
 [ext_resource type="Script" path="res://sound/soundtrack/soundtrack.gd" id="1_s8bwh"]
 [ext_resource type="Script" path="res://sound/soundtrack/instrument.gd" id="2_g4lbq"]
 [ext_resource type="AudioStream" uid="uid://ngvg27qxh4jr" path="res://sound/soundtrack/soundtrack_bass.mp3" id="2_ypvuj"]
 [ext_resource type="Script" path="res://sound/soundtrack/drums.gd" id="4_cd12y"]
+[ext_resource type="AudioStream" uid="uid://chpjb07k4h37p" path="res://sound/ambient01.wav" id="4_hwe5k"]
 [ext_resource type="AudioStream" uid="uid://bp0qtdegsmw5j" path="res://sound/soundtrack/soundtrack_drums.wav" id="5_sa4b6"]
 [ext_resource type="Script" path="res://sound/soundtrack/drum_player.gd" id="5_sshyf"]
 
@@ -21,6 +22,21 @@ bus = &"Music"
 [node name="Player02" type="AudioStreamPlayer" parent="Bass"]
 stream = ExtResource("2_ypvuj")
 bus = &"Music"
+
+[node name="Ambient01" type="Node" parent="."]
+script = ExtResource("2_g4lbq")
+bar = 20.0
+start = 5.0
+no_offset = false
+volume = -10.0
+
+[node name="Player01" type="AudioStreamPlayer" parent="Ambient01"]
+stream = ExtResource("4_hwe5k")
+bus = &"SFX"
+
+[node name="Player02" type="AudioStreamPlayer" parent="Ambient01"]
+stream = ExtResource("4_hwe5k")
+bus = &"SFX"
 
 [node name="Drums" type="Node" parent="."]
 script = ExtResource("4_cd12y")
@@ -76,3 +92,4 @@ bus = &"Music"
 script = ExtResource("5_sshyf")
 
 [connection signal="beat" from="Bass" to="." method="_on_bass_beat"]
+[connection signal="beat" from="Ambient01" to="." method="_on_bass_beat"]

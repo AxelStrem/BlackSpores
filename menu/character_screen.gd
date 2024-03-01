@@ -20,6 +20,11 @@ func _ready():
 	perks.append($PerkHacking1)
 	perks.append($PerkTele1)
 	perks.append($PerkWard1)
+	perks.append($PerkTele2)
+	perks.append($PerkInventory)
+	perks.append($PerkWard2)
+	perks.append($PerkThrow)
+	perks.append($PerkFall)
 	
 	$"../button_character".visible = !Global.first_run
 	

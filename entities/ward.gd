@@ -75,3 +75,9 @@ func _process(delta):
 func _exit_tree():
 	if game!=null:
 		game.remove_ward(self)
+
+
+func _on_body_entered(_body):
+	$thump.pitch_scale = 0.8 + randf()*0.3
+	$thump.volume_db = -10.0-randf()*5.0
+	$thump.play()

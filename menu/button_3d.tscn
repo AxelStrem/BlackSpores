@@ -11,6 +11,7 @@ size = Vector2(2.025, 0.505)
 
 [node name="button3D" type="Node3D"]
 script = ExtResource("1_4i34r")
+render_priority = 1
 color = Color(0.752941, 0.623529, 0.8, 1)
 hover_color = Color(0.870588, 0.913725, 0.894118, 1)
 

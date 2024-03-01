@@ -4,6 +4,7 @@ var mouse_in = false
 var button_pressed = false
 @export var text = ""
 @export var active = false
+@export var render_priority = 0
 @export var color : Color = Color.WHITE
 @export var hover_color : Color = Color.RED
 @export var inactive_color : Color = Color.DIM_GRAY
@@ -26,7 +27,10 @@ func set_text(txt):
 
 func update():
 	$Label3D.text=text
-	$Label3D.modulate = color
+	if active:
+		$Label3D.modulate = color
+	else:
+		$Label3D.modulate = inactive_color
 	if background:
 		$Background.show()
 		background_material = $Background.get_active_material(0).duplicate()
@@ -38,6 +42,7 @@ func update():
 		$Background.hide()
 
 func _ready():
+	$Label3D.render_priority = render_priority
 	update()
 
 func activate():

@@ -111,6 +111,7 @@ func _on_player_entered(player_):
 	game.current_chamber_player = level_number
 	if level_number!=0:
 		player.display_info("Entering chamber #{0}".format({0:level_number, 1:level_test}))
+		player.chamber_bottom = min(level_in.global_position.y, level_out.global_position.y)
 	player_N_levels_away(0)
 
 

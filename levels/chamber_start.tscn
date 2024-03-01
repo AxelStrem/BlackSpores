@@ -285,31 +285,78 @@ transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.42109e-13, 0, 0.7, -
 tag = "Enhanced Boots "
 tip = "Antigrav Boots prevent death from fall damage"
 
-[node name="PerkStamina1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
-transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.016552, 0.0172499, 0.0422201)
+[node name="PerkStamina1" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.016552, 0.0324222, 0.0422201)
 index = 1
 tag = "Cumulative Effect "
 tip = "Energy Boost powerups increase stamina recovery rate"
 price = 15
+condition_node = NodePath("../PanelStamina")
 
-[node name="PerkHacking1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
-transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.016552, -0.0943434, 0.0422201)
+[node name="PerkHacking1" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.016552, -0.0587872, 0.0422201)
 index = 2
 tag = "Bruteforce Boost "
 tip = "Lockpicking is 2x faster under energy boost effects"
 price = 15
+condition_node = NodePath("../PanelHacking")
 
-[node name="PerkTele1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
-transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.203788, 0.0422201)
+[node name="PerkTele1" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.145502, 0.0422201)
 index = 3
 tag = "Energy Shift "
 tip = "Teleporting provides a short time energy boost"
+condition_node = NodePath("../PanelTeleporter")
 
-[node name="PerkWard1" parent="ScreenCharacter" instance=ExtResource("12_elfhs")]
-transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.309737, 0.0422201)
+[node name="PerkWard1" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.236093, 0.0422201)
 index = 4
 tag = "Smart Wards "
 tip = "Wards can hack digital locks"
+price = 15
+condition_node = NodePath("../PanelWard")
+
+[node name="PerkTele2" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.327908, 0.0422201)
+index = 5
+tag = "Rollback Teleporter"
+tip = "For 2 charges teleport 5 seconds back in time"
+price = 20
+condition_node = NodePath("../PanelTeleporter")
+condition_level = 10
+
+[node name="PerkInventory" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.506226, 0.0422201)
+index = 6
+tag = "Extra Inventory"
+tip = "You can carry twice as much of each powerup"
+price = 15
+condition_node = NodePath("../PanelStrength")
+condition_level = 10
+
+[node name="PerkWard2" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.415596, 0.0422201)
+index = 7
+tag = "Extended Wards"
+tip = "Wards have larger area of effect"
+condition_node = NodePath("../PanelWard")
+condition_level = 10
+
+[node name="PerkThrow" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.590357, 0.0422201)
+index = 8
+tag = "Upper Body Strength"
+tip = "Increased throw force for teleporters and wards"
+condition_node = NodePath("../PanelStrength")
+
+[node name="PerkFall" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
+transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.681241, 0.0422201)
+index = 9
+tag = "Energy Shield"
+tip = "No fall damage during Energy Boost"
+price = 5
+condition_node = NodePath("../PanelStamina")
+condition_level = 3
 
 [node name="Screen2" type="MeshInstance3D" parent="."]
 transform = Transform3D(-2.89807e-07, 0, -3.9, 0, 3.9, 0, 6.63, 0, -1.70474e-07, 11, 4, -27)

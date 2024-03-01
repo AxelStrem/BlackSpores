@@ -35,6 +35,8 @@ var level_teleport = 0
 var level_ward = 0
 var level_strength = 0
 
+var chamber_bottom = -999999.0
+
 var perk_boots1 = false
 var perk_cumulative = false
 var perk_hacking1 = false
@@ -44,6 +46,7 @@ var perk_tele2 = false
 var perk_inventory = false
 var perk_ward2 = false
 var perk_throw = true
+var perk_fall1 = true
 
 var ground_close = false
 var last_frame_on_ground = false
@@ -153,8 +156,11 @@ func update_profile(skills, perks):
 	perk_hacking1 = (perks[2]!=0)
 	perk_tele1 = (perks[3]!=0)
 	perk_ward1 = (perks[4]!=0)
-	
-	perk_inventory = true
+	perk_tele2 = (perks[5]!=0)
+	perk_inventory = (perks[6]!=0)
+	perk_ward2 = (perks[7]!=0)
+	perk_throw = (perks[8]!=0)
+	perk_fall1 = (perks[9]!=0)
 	
 	if perk_inventory:
 		antigrav_charges_max = antigrav_charges_base*2
@@ -178,6 +184,9 @@ func update_profile(skills, perks):
 	if perk_throw:
 		throw_speed = 10.0
 	
+
+func tele_online():
+	$sounds/tele_ready.play()
 
 func get_lockpick_skill():
 	if perk_hacking1 and energy_boost > 0.0:
@@ -221,7 +230,7 @@ func _ready():
 	info_message = $Camera/InfoMessage
 	info_message.visible = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	$breath.set_volume_db(-1000)
+	$sounds/breath.set_volume_db(-1000)
 	label_points.text = "points/{0}".format({0:int(research_points)})
 	label_energy.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	get_tree().paused = false
@@ -246,8 +255,8 @@ func format_time(time):
 	return "%02d:%02d.%02d" % [m, s, ms]
 
 func pickup(pickup_type):
-	$pickup_sound.play()
-	$pickup_sound.seek(0.3)	
+	$sounds/pickup_sound.play()
+	$sounds/pickup_sound.seek(0.3)	
 	if pickup_type == 0:
 		research_points += 1
 		got_research_point_signal.emit()
@@ -306,11 +315,28 @@ func regular_jump():
 
 func pitiful_jump():
 	jump_ex(20.0)
+	
+func jump_sound():
+	$sounds/jump.get_children().pick_random().play()
+
+func play_step():
+	$Camera/Feet.position.x = -$Camera/Feet.position.x
+	$Camera/Feet.get_children().pick_random().play()
+	step_distance=0
+
+func throw_object(obj):
+	get_parent().add_child(obj)
+	obj.global_transform = item_spawn.global_transform
+	obj.linear_velocity = -obj.global_transform.basis.z.normalized()*throw_speed + velocity
+	$sounds/throw.play()
 
 func _physics_process(delta):
 	if controls_locked:
 		return
-		
+	
+	if global_position.y < chamber_bottom - 100.0:
+		_player_dead(velocity, 2)	
+	
 	var energy_restoring = true
 		
 	dodge_timeout-=delta
@@ -350,7 +376,7 @@ func _physics_process(delta):
 		if info_timeout <= 0.0:
 			info_message.visible = false
 	
-	$breath.set_volume_db((tanh(current_energy-100)+1)*(-1000))
+	$sounds/breath.set_volume_db((tanh(current_energy-100)+1)*(-1000))
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir = Input.get_vector("player_strafe_left", "player_strafe_right", "player_forward", "player_reverse")
@@ -371,19 +397,25 @@ func _physics_process(delta):
 			dodge_buffer = Vector3(0.0,0.0,0.0)
 	else: 		
 		if direction:	
-			step_distance += delta
-			if step_distance>0.5:
-				$Camera/Feet.position.x = -$Camera/Feet.position.x
-				$Camera/Feet.get_children().pick_random().play()
-				step_distance=0
+			var vel = velocity
+			vel.y = 0.0
+			step_distance += delta * velocity.length() * 0.3
+			if step_distance>1.0:
+				play_step()
 		if old_velocity.y < -(fatal_velocity + level_strength*1.0):
+			if perk_fall1:
+				if energy_boost > 0.0:
+					antigrav_protection = true
 			if antigrav_charges > 0 and not antigrav_protection:
 				if perk_boots1:
 					antigrav_charges-=1
 					antigrav_protection=true
+					$sounds/jump_boots.play()
 			if not antigrav_protection:
 				label_dead.text = "v = {0}".format({0:snapped(old_velocity.y,0.01)})	
 				_player_dead(old_velocity, 1)
+		elif old_velocity.y < -1.0:
+			play_step()
 		antigrav_protection = false
 	
 	old_velocity = velocity
@@ -430,6 +462,7 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("player_jump"):
 			if is_on_floor():
 				pitiful_jump()
+				jump_sound()
 				jump_energy_limit = jump_energy
 		if Input.is_action_just_released("player_jump"):
 			jump_energy_limit = 0.0
@@ -440,6 +473,7 @@ func _physics_process(delta):
 			if antigrav_charges > 0:
 				velocity.y += jump_velocity_antigrav
 				antigrav_charges -= 1
+				$sounds/jump_boots.play()
 				antigrav_protection = true
 				antigrav_jump_available = 0.0
 	
@@ -527,6 +561,7 @@ func _input(event):
 				current_energy -= je
 				je /= dodge_energy			
 				velocity.y += dodge_velocity_vertical*je
+				jump_sound()
 				dodge_buffer = Vector3(act.x, 0.0, act.y)*dodge_velocity_horizontal*je
 				antigrav_jump_available = 0.6
 				last_strafe = Vector2i(0,0)
@@ -545,9 +580,7 @@ func _input(event):
 					if perk_ward1:
 						ward.lockpick = true
 					ward.lifetime = 10.0 + level_ward*0.5
-					get_parent().add_child(ward)
-					ward.global_transform = item_spawn.global_transform
-					ward.linear_velocity = -ward.global_transform.basis.z.normalized()*throw_speed + velocity
+					throw_object(ward)
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
@@ -565,9 +598,7 @@ func _input(event):
 					teleporter = teleporter_scene.instantiate()
 					teleporter.deploy_speed = 0.5 + level_teleport*0.2
 					teleporter.player = self
-					get_parent().add_child(teleporter)
-					teleporter.global_transform = item_spawn.global_transform
-					teleporter.linear_velocity = -teleporter.global_transform.basis.z.normalized()*throw_speed + velocity
+					throw_object(teleporter)
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
 				if teleporter!=null:
@@ -575,10 +606,12 @@ func _input(event):
 						var bs = basis
 						teleporter.activate(bs)
 						$FX/Teleport.run()
+						$sounds/teleport.play()
 						teleporter = null
 				elif perk_tele2 and teleporter_locstack.size()>0 and teleporter_charges >= 2:
 					var bs = basis
 					$FX/Teleport.run()
+					$sounds/teleport.play()
 					teleporter_charges -= 2
 					await get_tree().create_timer(1.0).timeout
 					global_position = teleporter_locstack.front()
@@ -629,7 +662,10 @@ func roll_head(death_velocity):
 	dead_body.global_transform = self.global_transform
 	dead_body.linear_velocity = death_velocity	
 	remove_child(camera)
-	dead_body.add_child(camera)	
+	dead_body.add_child(camera)
+	var sounds = $sounds
+	remove_child(sounds)
+	dead_body.add_child(sounds)	
 	queue_free()
 
 func _player_dead(death_velocity, cause):
@@ -642,20 +678,24 @@ func _player_dead(death_velocity, cause):
 	
 	if cause==0:
 		death_screen.find_child("cause_spores").show()
+		$sounds/death.get_children().pick_random().play()
 	if cause==1:
 		death_screen.find_child("cause_crashed").show()
+		$sounds/death.get_children().pick_random().play()
 	if cause==2:
 		death_screen.find_child("cause_fell").show()
+		$sounds/death_fall.play()		
 		
 	#victory
 	if cause==10:
 		death_screen.find_child("info").text = "You've cleared the facility in {0} ".format({0:format_time(time_passed)})
 		death_screen.find_child("cause_victory").show()
+		$sounds/victory.play()		
 
 	call_deferred("roll_head", death_velocity)
 
 func _on_breath_finished():
-	$breath.play()
+	$sounds/breath.play()
 	
 func _show_menu():		
 	death_screen.show()
