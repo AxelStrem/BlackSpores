@@ -20,12 +20,10 @@
 size = Vector3(44.643, 21.4832, 37.6189)
 
 [node name="Chamber" instance=ExtResource("1_j8o8b")]
+chamber_tag = 8
 
 [node name="LevelIn" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.9939, 0, 1.99227)
-
-[node name="Floor60" parent="LevelIn" index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.99392, 0, 2.00773)
 
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0061, -6.6, -10.0077)

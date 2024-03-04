@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dhp6yf0e27h62" path="res://level_parts/building_blocks/ceiling_02.tscn" id="4_ae155"]
 [ext_resource type="PackedScene" uid="uid://nbtpy06ouaab" path="res://level_parts/lab/lab_01.tscn" id="5_ayytd"]
 [ext_resource type="PackedScene" uid="uid://terq7ea5w6yt" path="res://level_parts/building_blocks/kill_zone.tscn" id="5_oysgp"]
+[ext_resource type="PackedScene" uid="uid://db7qk26sbhnh4" path="res://models/truck.dae" id="6_rhcfw"]
 [ext_resource type="PackedScene" uid="uid://cy7pct6fyxcjj" path="res://level_parts/building_blocks/auto_door.tscn" id="7_ohxgk"]
 [ext_resource type="PackedScene" uid="uid://b21lfcey82x68" path="res://models/corridors/ceiling_lamp.tscn" id="8_lhlfp"]
 [ext_resource type="PackedScene" uid="uid://b11vbq1vhr43u" path="res://menu/button_3d.tscn" id="10_0ckhs"]
@@ -16,7 +17,6 @@
 [ext_resource type="Script" path="res://levels/rotor.gd" id="11_eyt71"]
 [ext_resource type="PackedScene" uid="uid://efdij6qskdlt" path="res://menu/character_perk.tscn" id="12_elfhs"]
 [ext_resource type="Texture2D" uid="uid://dst4v0htyn0kb" path="res://tutorial.png" id="13_y73h3"]
-[ext_resource type="PackedScene" uid="uid://qhshaqrg0h50" path="res://levels/spore_placer.tscn" id="14_e2gvq"]
 [ext_resource type="Script" path="res://levels/game_start.gd" id="17_0pntl"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_i01np"]
@@ -124,6 +124,9 @@ transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2.00608,
 
 [node name="lab01" parent="LevelOut" instance=ExtResource("5_ayytd")]
 transform = Transform3D(-8.74228e-08, 0, 2, 0, 2, 0, -2, 0, -8.74228e-08, 6, 0, -2)
+
+[node name="truck" parent="LevelOut/lab01" instance=ExtResource("6_rhcfw")]
+transform = Transform3D(0.0866025, 0, -0.05, 0, 0.1, 0, 0.05, 0, 0.0866025, 3.4, 1.05664, 3.55)
 
 [node name="PlayerDetector" type="Area3D" parent="."]
 collision_layer = 0
@@ -319,7 +322,7 @@ condition_node = NodePath("../PanelWard")
 [node name="PerkTele2" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
 transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.327908, 0.0422201)
 index = 5
-tag = "Rollback Teleporter"
+tag = "Rollback Tele "
 tip = "For 2 charges teleport 5 seconds back in time"
 price = 20
 condition_node = NodePath("../PanelTeleporter")
@@ -328,7 +331,7 @@ condition_level = 10
 [node name="PerkInventory" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
 transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.506226, 0.0422201)
 index = 6
-tag = "Extra Inventory"
+tag = "Extra Inventory "
 tip = "You can carry twice as much of each powerup"
 price = 15
 condition_node = NodePath("../PanelStrength")
@@ -337,7 +340,7 @@ condition_level = 10
 [node name="PerkWard2" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
 transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.415596, 0.0422201)
 index = 7
-tag = "Extended Wards"
+tag = "Extended Wards "
 tip = "Wards have larger area of effect"
 condition_node = NodePath("../PanelWard")
 condition_level = 10
@@ -345,14 +348,14 @@ condition_level = 10
 [node name="PerkThrow" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
 transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.590357, 0.0422201)
 index = 8
-tag = "Upper Body Strength"
+tag = "Arm Strength "
 tip = "Increased throw force for teleporters and wards"
 condition_node = NodePath("../PanelStrength")
 
 [node name="PerkFall" parent="ScreenCharacter" node_paths=PackedStringArray("condition_node") instance=ExtResource("12_elfhs")]
 transform = Transform3D(0.7, 0, -1.06581e-14, 0, 0.7, 0, -1.49214e-13, 0, 0.7, -0.0165518, -0.681241, 0.0422201)
 index = 9
-tag = "Energy Shield"
+tag = "Energy Shield "
 tip = "No fall damage during Energy Boost"
 price = 5
 condition_node = NodePath("../PanelStamina")
@@ -445,8 +448,6 @@ modulate = Color(0.709804, 0.827451, 0.890196, 1)
 texture = ExtResource("13_y73h3")
 region_enabled = true
 region_rect = Rect2(0, 152.016, 1024, 742.239)
-
-[node name="SporePlacer" parent="." instance=ExtResource("14_e2gvq")]
 
 [node name="StartingScripts" type="Node3D" parent="."]
 script = ExtResource("17_0pntl")

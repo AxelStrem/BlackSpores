@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dvbcqr5uhrh1u" path="res://levels/chamber04.tscn" id="1_onq53"]
 
 [node name="Chamber" instance=ExtResource("1_onq53")]
+chamber_tag = 4
 
 [node name="LevelIn" parent="." index="0"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -22.0049, -3.8743e-07, -26.773)

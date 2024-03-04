@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dhp6yf0e27h62" path="res://level_parts/building_blocks/ceiling_02.tscn" id="8_dyvl8"]
 
 [node name="Chamber" instance=ExtResource("1_1fl3g")]
+chamber_tag = 4
 
 [node name="LevelIn" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.994, 26.4, -10.773)

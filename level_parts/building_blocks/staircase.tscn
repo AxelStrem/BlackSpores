@@ -41,7 +41,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dj526")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_03pf6"]
-size = Vector3(4.662, 0.154, 1.999)
+size = Vector3(4.67878, 0.0934795, 1.999)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emb3b"]
 size = Vector3(3.89439, 0.0623169, 1.99878)
@@ -61,7 +61,7 @@ surface_material_override/0 = ExtResource("2_b6rte")
 [node name="StaticBody3D" type="StaticBody3D" parent="Scale2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scale2/StaticBody3D"]
-transform = Transform3D(0.92558, 0.378552, 0, -0.378552, 0.92558, 0, 0, 0, 1, -0.820528, 0.742107, -0.00280762)
+transform = Transform3D(0.917533, 0.397661, 0, -0.397661, 0.917533, 0, 0, 0, 1, -0.824218, 0.710923, -0.00280762)
 shape = SubResource("BoxShape3D_03pf6")
 
 [node name="Area3D" type="Area3D" parent="Scale2"]

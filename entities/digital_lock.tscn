@@ -87,65 +87,70 @@ bus = &"SFX-Room"
 
 [node name="beeps" type="Node3D" parent="." index="8"]
 
-[node name="beep1" type="AudioStreamPlayer3D" parent="beeps" index="0"]
+[node name="freq1" type="Node3D" parent="beeps" index="0"]
+
+[node name="beep1" type="AudioStreamPlayer3D" parent="beeps/freq1" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 0.74
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep2" type="AudioStreamPlayer3D" parent="beeps/freq1" index="1"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 0.82
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep3" type="AudioStreamPlayer3D" parent="beeps/freq1" index="2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+stream = ExtResource("5_6226k")
+volume_db = -5.0
+pitch_scale = 0.91
+max_polyphony = 4
+bus = &"SFX-Room"
+
+[node name="beep4" type="AudioStreamPlayer3D" parent="beeps/freq1" index="3"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 stream = ExtResource("5_6226k")
 volume_db = -5.0
 max_polyphony = 4
 bus = &"SFX-Room"
 
-[node name="beep2" type="AudioStreamPlayer3D" parent="beeps" index="1"]
+[node name="freq2" type="Node3D" parent="beeps" index="1"]
+
+[node name="beep5" type="AudioStreamPlayer3D" parent="beeps/freq2" index="0"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 stream = ExtResource("5_6226k")
 volume_db = -5.0
-pitch_scale = 0.5
+pitch_scale = 1.28
 max_polyphony = 4
 bus = &"SFX-Room"
 
-[node name="beep3" type="AudioStreamPlayer3D" parent="beeps" index="2"]
+[node name="beep6" type="AudioStreamPlayer3D" parent="beeps/freq2" index="1"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 stream = ExtResource("5_6226k")
 volume_db = -5.0
-pitch_scale = 0.75
+pitch_scale = 1.42
 max_polyphony = 4
 bus = &"SFX-Room"
 
-[node name="beep4" type="AudioStreamPlayer3D" parent="beeps" index="3"]
+[node name="beep7" type="AudioStreamPlayer3D" parent="beeps/freq2" index="2"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 stream = ExtResource("5_6226k")
 volume_db = -5.0
-pitch_scale = 0.25
+pitch_scale = 1.57
 max_polyphony = 4
 bus = &"SFX-Room"
 
-[node name="beep5" type="AudioStreamPlayer3D" parent="beeps" index="4"]
+[node name="beep8" type="AudioStreamPlayer3D" parent="beeps/freq2" index="3"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 stream = ExtResource("5_6226k")
 volume_db = -5.0
-pitch_scale = 1.5
-max_polyphony = 4
-bus = &"SFX-Room"
-
-[node name="beep6" type="AudioStreamPlayer3D" parent="beeps" index="5"]
-stream = ExtResource("5_6226k")
-volume_db = -5.0
-pitch_scale = 1.25
-max_polyphony = 4
-bus = &"SFX-Room"
-
-[node name="beep7" type="AudioStreamPlayer3D" parent="beeps" index="6"]
-stream = ExtResource("5_6226k")
-volume_db = -5.0
-pitch_scale = 1.75
-max_polyphony = 4
-bus = &"SFX-Room"
-
-[node name="beep8" type="AudioStreamPlayer3D" parent="beeps" index="7"]
-stream = ExtResource("5_6226k")
-volume_db = -5.0
-pitch_scale = 2.0
-max_polyphony = 4
-bus = &"SFX-Room"
-
-[node name="beep9" type="AudioStreamPlayer3D" parent="beeps" index="8"]
-stream = ExtResource("5_6226k")
-volume_db = -5.0
-pitch_scale = 2.5
+pitch_scale = 1.74
 max_polyphony = 4
 bus = &"SFX-Room"
 

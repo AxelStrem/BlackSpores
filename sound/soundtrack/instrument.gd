@@ -13,6 +13,7 @@ const bar_l1 = [[2,4],[4,6],[6,8],[8,10]]
 const bar_c1 = [[10,12]]
 
 @export var volume = 0.0
+@export var btype = 0
 
 var bar_now = 0
 var bar_next = 0
@@ -55,22 +56,22 @@ func set_state(s):
 		state = 0
 
 func select_bar():
-	bar_next = 0
-	return
-	
-	#if state == 0:
-	#	bar_next = bar_now + 1
-	#	bar_counter += 1
-	#	if bar_next >= int_now[1]:
-	#		int_now = bass_get_int()
-	#		bar_next = int_now[0]
-	#if state == 1:
-	#	bar_next = 0
-	#	state = 2
-	#	return
-	#if state == 2:
-	#	bar_next = 1
-	#	return
+	if btype == 0:
+		bar_next = 0
+	else:
+		if state == 0:
+			bar_next = bar_now + 1
+			bar_counter += 1
+			if bar_next >= int_now[1]:
+				int_now = bass_get_int()
+				bar_next = int_now[0]
+		if state == 1:
+			bar_next = 0
+			state = 2
+			return
+		if state == 2:
+			bar_next = 1
+			return
 		
 
 func reset_players():

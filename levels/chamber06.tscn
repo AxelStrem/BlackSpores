@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="7_b26el"]
 
 [node name="Chamber" instance=ExtResource("1_t2f6y")]
+chamber_tag = 6
 
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -120.206, 0, -83.5077)

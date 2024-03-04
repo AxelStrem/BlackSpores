@@ -20,6 +20,7 @@ script = ExtResource("1_q84vv")
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="door"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8, 2, 0)
 stream = ExtResource("3_883wh")
+volume_db = -5.403
 max_db = 6.0
 bus = &"SFX-Room"
 

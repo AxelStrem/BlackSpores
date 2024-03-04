@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://clp5psok5hubs" path="res://levels/chamber09_segment.tscn" id="7_tljke"]
 
 [node name="Chamber" instance=ExtResource("1_ao2ce")]
+chamber_tag = 9
 
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.0061, 0, 1.9923)

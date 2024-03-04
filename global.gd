@@ -5,21 +5,66 @@ var first_run = true
 
 var perks_array = [0,0,0,0,0,0,0,0,0,0]
 
-var picked_nums = [-1, -1, -1]
+var picked_nums = [-1]
 
 var level_scenes = [
-	[preload("res://levels/chamber01.tscn"), 1.0],
- 	[preload("res://levels/chamber02.tscn"), 1.0],
- 	[preload("res://levels/chamber_troll.tscn"), 1.0],
-	[preload("res://levels/chamber04_reversed.tscn"),0.8],
-	[preload("res://levels/chamber04.tscn"), 0.2],
-	[preload("res://levels/chamber05.tscn"), 1.0],
-	[preload("res://levels/chamber06.tscn"), 0.5],
-	[preload("res://levels/chamber06_alt.tscn"), 0.5],
-	[preload("res://levels/chamber07.tscn"), 1.0],
-	[preload("res://levels/chamber08.tscn"), 0.5],
-	[preload("res://levels/chamber08_alt.tscn"), 0.5],
-	[preload("res://levels/chamber09.tscn"), 1.0]
+	[preload("res://levels/chamber01.tscn"), 1.0, 1],
+ 	[preload("res://levels/chamber02.tscn"), 1.0, 2],
+ 	[preload("res://levels/chamber_troll.tscn"), 1.0, 3],
+	[preload("res://levels/chamber04_reversed.tscn"),0.8, 4],
+	[preload("res://levels/chamber04.tscn"), 0.2, 4],
+	[preload("res://levels/chamber05.tscn"), 1.0, 5],
+	[preload("res://levels/chamber06.tscn"), 0.5, 6],
+	[preload("res://levels/chamber06_alt.tscn"), 0.5, 6],
+	[preload("res://levels/chamber07.tscn"), 1.0, 7],
+	[preload("res://levels/chamber08.tscn"), 0.5, 8],
+	[preload("res://levels/chamber08_alt.tscn"), 0.5, 8],
+	[preload("res://levels/chamber09.tscn"), 1.0, 9],
+	[preload("res://levels/chamber10.tscn"), 1.0, 10],
+	[preload("res://levels/chamber11.tscn"), 100.0, 11]
+]
+
+var level_scenes1 = [
+	[preload("res://levels/chamber01.tscn"), 1.0, 1],
+ 	[preload("res://levels/chamber02.tscn"), 1.0, 2],
+	[preload("res://levels/chamber04_reversed.tscn"),0.8, 4],
+	[preload("res://levels/chamber04.tscn"), 0.2, 4],
+	[preload("res://levels/chamber05.tscn"), 1.0, 5],
+	[preload("res://levels/chamber11.tscn"), 1.0, 11]
+]
+
+var level_scenes2 = [
+	[preload("res://levels/chamber01.tscn"), 1.0, 1],
+ 	[preload("res://levels/chamber02.tscn"), 1.0, 2],
+	[preload("res://levels/chamber04_reversed.tscn"),0.8, 4],
+	[preload("res://levels/chamber04.tscn"), 0.2, 4],
+	[preload("res://levels/chamber05.tscn"), 1.0, 5],
+ 	[preload("res://levels/chamber_troll.tscn"), 1.0, 3],
+	[preload("res://levels/chamber06.tscn"), 0.5, 6],
+	[preload("res://levels/chamber06_alt.tscn"), 0.5, 6],
+	[preload("res://levels/chamber08.tscn"), 0.5, 8],
+	[preload("res://levels/chamber08_alt.tscn"), 0.5, 8]
+]
+
+var level_scenes3 = [
+	[preload("res://levels/chamber04_reversed.tscn"),0.8, 4],
+	[preload("res://levels/chamber05.tscn"), 1.0, 5],
+ 	[preload("res://levels/chamber_troll.tscn"), 1.0, 3],
+	[preload("res://levels/chamber06.tscn"), 0.5, 6],
+	[preload("res://levels/chamber06_alt.tscn"), 0.5, 6],
+	[preload("res://levels/chamber07.tscn"), 1.0, 7],
+	[preload("res://levels/chamber08.tscn"), 0.5, 8],
+	[preload("res://levels/chamber08_alt.tscn"), 0.5, 8],
+	[preload("res://levels/chamber10.tscn"), 1.0, 10]
+]
+
+var level_scenes4 = [
+	[preload("res://levels/chamber05.tscn"), 1.0, 5],
+	[preload("res://levels/chamber06.tscn"), 0.5, 6],
+	[preload("res://levels/chamber06_alt.tscn"), 0.5, 6],
+	[preload("res://levels/chamber07.tscn"), 1.0, 7],
+	[preload("res://levels/chamber09.tscn"), 1.0, 9],
+	[preload("res://levels/chamber10.tscn"), 1.0, 10]
 ]
 
 var test_chamber_scene = preload("res://levels/test_chamber.tscn")
@@ -33,23 +78,25 @@ func random_direction():
 	var z = randf_range(-1.0,1.0)
 	return Vector3(cos(a),sin(a),z)
 
-func roll_num():
+func roll_num(scenes):
 	var prob_sum = 0.0
 	var prob_roll = []
-	for l in level_scenes:
+	for l in scenes:
 		prob_sum+=l[1]
 		prob_roll.append(prob_sum)
 	
-	var picked = picked_nums.back()
-	while picked_nums.find(picked)!=-1:
+	var picked = 0
+	var sn = picked_nums.back()
+	while picked_nums.find(sn)!=-1:
 		var p = randf()*prob_sum
-		for i in range(level_scenes.size()):
+		for i in range(scenes.size()):
 			picked = i
 			if p < prob_roll[i]:
 				break
+		sn = scenes[picked][2]
 	
 	picked_nums.pop_front()
-	picked_nums.append(picked)
+	picked_nums.append(sn)
 	
 	return picked
 
@@ -57,11 +104,22 @@ func generate_level(number):
 	if number > total_chambers:
 		return null
 		
-	var picked = roll_num()
+	var scenes = level_scenes
+	if number <= 5:
+		scenes = level_scenes1
+	elif number <= 10:
+		scenes = level_scenes2
+	elif number <= 15:
+		scenes = level_scenes3
+	else:
+		scenes = level_scenes4
+	
+		
+	var picked = roll_num(scenes)
 		
 	var scene = victory_scene
 	if number < total_chambers:
-		scene = level_scenes[picked][0]
+		scene = scenes[picked][0]
 	if test_chamber:
 		scene = test_chamber_scene	
 	

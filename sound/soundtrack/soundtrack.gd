@@ -4,7 +4,7 @@ var instruments = []
 
 func _ready():
 	#instruments = [$Bass]
-	instruments = [$Ambient01]
+	instruments = [$Ambient01, $Bass]
 
 func play():
 	for i in instruments:

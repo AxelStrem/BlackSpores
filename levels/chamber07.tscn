@@ -30,6 +30,7 @@
 size = Vector3(68.0345, 16.4147, 54)
 
 [node name="Chamber" instance=ExtResource("1_bf4qm")]
+chamber_tag = 7
 
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -58.269, 19.3299, 1.9923)
@@ -662,7 +663,6 @@ transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 
 [node name="one_of" parent="L3/R/S1" index="0" instance=ExtResource("14_d3xf0")]
 
 [node name="S1L" type="Node3D" parent="L3/R/S1/one_of" index="0"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Struct01" parent="L3/R/S1/one_of/S1L" index="0" instance=ExtResource("7_y32iv")]
 transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 0, 1, 0, -4.37114e-08, 14.4, -0.4, 0)
@@ -701,7 +701,6 @@ transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 0, 1, 0, -4.37114e
 transform = Transform3D(-4.37114e-08, 0, -1, -8.88178e-16, 1, 0, 1, 0, -4.37114e-08, -3.6, -0.400002, 0)
 
 [node name="S1R" type="Node3D" parent="L3/R/S1/one_of" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Struct02" parent="L3/R/S1/one_of/S1R" index="0" instance=ExtResource("7_y32iv")]
 transform = Transform3D(-4.37114e-08, 0, -1, -1.77636e-15, 1, 0, 1, 0, -4.37114e-08, 14.4, -0.4, 4)

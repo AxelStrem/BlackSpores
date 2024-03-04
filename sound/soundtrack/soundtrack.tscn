@@ -13,7 +13,8 @@ script = ExtResource("1_s8bwh")
 
 [node name="Bass" type="Node" parent="."]
 script = ExtResource("2_g4lbq")
-volume = 10.0
+volume = -2.0
+btype = 1
 
 [node name="Player01" type="AudioStreamPlayer" parent="Bass"]
 stream = ExtResource("2_ypvuj")

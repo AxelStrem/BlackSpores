@@ -9,6 +9,8 @@ var energy_regain_speed = 30.0
 var dead = false;
 var old_velocity = Vector3(0.0,0.0,0.0)
 
+var mouse_sens = 1.0
+
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -138,6 +140,9 @@ const jump_type = 3 # 0 - usual jump
 var spores_on_player = 0.0
 var spore_resistance = 2.0
 var touching_spores = 0
+
+var spores_close = 0.0
+var spores_intensity = 0.0
 
 @onready var death_screen = $Camera/DeathScreen
 @onready var restart_button = $Camera/DeathScreen/restartButton
@@ -339,6 +344,15 @@ func _physics_process(delta):
 	
 	var energy_restoring = true
 		
+	var sclose = $SporeDetector.get_overlapping_areas().size()
+	spores_close = spores_close*0.9 + sclose*0.1
+	if spores_close > 100.0:
+		spores_close = 100.0
+	spores_intensity = log(spores_close + 1.0)
+	$sounds/spores01.volume_db = spores_intensity*13.0 - 80.0
+	$sounds/spores02.volume_db = spores_intensity*11.0 - 75.0
+	$sounds/spores03.volume_db = spores_intensity*9.0 - 70.0
+		
 	dodge_timeout-=delta
 	if dodge_timeout<0.0:
 		dodge_timeout=0.0
@@ -368,7 +382,8 @@ func _physics_process(delta):
 	label_consumables.text = "{0} Antigrav / {1} Tele / {2} Ward".format({0:int(antigrav_charges), 1:teleporter_charges, 2:ward_charges})
 	var game = get_game_root()
 	if game:
-		label_debug.text = "Spores in chamber {0}, spread period {1}, total {2}".format({0:game.current_chamber_spore, 1:int(game.spore_timer_adjusted()*10000.0), 2:get_parent().total_spores})
+		label_debug.text = "Spores in chamber {0}, spread period {1}, total {2}, close {3}".format({0:game.current_chamber_spore, 
+		1:int(game.spore_timer_adjusted()*10000.0), 2:get_parent().total_spores, 3:spores_close})
 		label_dead.text = "Chamber {0}".format({0:current_chamber})
 		
 	if info_timeout > 0.0:
@@ -583,9 +598,11 @@ func _input(event):
 					throw_object(ward)
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
-		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity))
-		camera.rotate_x(deg_to_rad(event.relative.y * -camera_sensitivity))
+		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity * mouse_sens))
+		camera.rotate_x(deg_to_rad(event.relative.y * -camera_sensitivity * mouse_sens))
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -70, 70)
+		camera.rotation_degrees.z = 0.0
+		camera.rotation_degrees.y = 0.0
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:

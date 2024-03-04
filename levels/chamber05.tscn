@@ -24,6 +24,7 @@
 size = Vector3(50, 9.4, 54)
 
 [node name="Chamber" instance=ExtResource("1_mf42g")]
+chamber_tag = 5
 
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.9061, -6, 2.0923)

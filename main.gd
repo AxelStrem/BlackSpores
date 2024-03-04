@@ -320,7 +320,7 @@ func _ready():
 	pass # Replace with function body.
 
 func start_game():
-	game_started = true
+	$spore_start_delay.start()
 	$player.unlock_controls()
 
 func activate_spore(s):
@@ -467,3 +467,7 @@ func _every_second():
 			l.queue_free()
 			spawned_levels.erase(l)
 			return
+
+
+func _on_spore_start_delay_timeout():
+	game_started = true

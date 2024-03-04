@@ -17,6 +17,7 @@ var b_spores_out = false
 @export var spore_list = []
 @export var spore_graph = {}
 
+@export var chamber_tag = 0
 
 var full_node_list = []
 var nl_semaphore : Semaphore

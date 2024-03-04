@@ -60,5 +60,11 @@ func _process(delta):
 		
 
 func _on_start_game():
+	
 	get_parent().get_parent().get_parent().start_game()	
+	$GameStartDelay.start()
+
+
+
+func _on_game_start_delay_timeout():
 	start_sequence()

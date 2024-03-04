@@ -26,8 +26,9 @@ func _process(delta):
 		complexity -= speed*delta
 		beep_interval -= speed*delta
 		if beep_interval < 0.0:
-			beep_interval = 0.2
-			$beeps.get_children().pick_random().play()
+			beep_interval = 0.15+0.15*randf()
+			$beeps/freq1.get_children().pick_random().play()
+			$beeps/freq2.get_children().pick_random().play()
 		$ScreenProgress/MeshInstance3D.scale.x = lerp(target_scale, 0.0, complexity/init_comp)
 		if complexity < 0.0:
 			if target!=null:

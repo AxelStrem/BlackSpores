@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cdnp7m10iov7p" path="res://level_parts/decorations/struct02.tscn" id="28_votqq"]
 
 [node name="Chamber" instance=ExtResource("1_cqnps")]
+chamber_tag = 1
 
 [node name="Walls1" type="Node3D" parent="." index="6"]
 

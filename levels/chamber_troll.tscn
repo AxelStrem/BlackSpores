@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bh52fmrohsquw" path="res://level_parts/obstacles/obstacle1.tscn" id="13_lrxnr"]
 
 [node name="Chamber" instance=ExtResource("1_vnvw7")]
+chamber_tag = 3
 
 [node name="LevelIn" parent="." index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.0061, 0, 1.99227)

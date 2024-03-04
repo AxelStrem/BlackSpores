@@ -20,6 +20,7 @@ size = Vector3(44.643, 21.4832, 37.6189)
 script = ExtResource("1_34spb")
 level_in = NodePath("LevelIn")
 level_out = NodePath("LevelOut")
+chamber_tag = 3
 
 [node name="LevelIn" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.9939, 0, 1.99227)
