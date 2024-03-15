@@ -24,6 +24,9 @@ chamber_tag = 11
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.0061, 13.5, -58.0077)
 
+[node name="CollisionShape3D" parent="PlayerDetector" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1297, 5.53725, -32.3429)
+
 [node name="Floor" type="Node3D" parent="." index="7"]
 
 [node name="Floor01" parent="Floor" index="0" instance=ExtResource("2_ak0rf")]

@@ -16,6 +16,9 @@ chamber_tag = 9
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -90.0061, 0, 1.9923)
 
+[node name="CollisionShape3D" parent="PlayerDetector" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.7164, 5.53725, 2.01866)
+
 [node name="p1" type="Node3D" parent="." index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 2)
 

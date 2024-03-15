@@ -311,6 +311,7 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 1.16471e-22, 0, 1.16471e-22, 1, -0.45052, -0.027055, -2.14555)
 no_depth_test = true
 render_priority = 20
+modulate = Color(0.772549, 0.423529, 0.290196, 1)
 text = "30 chambers away from the evacuation exit"
 
 [node name="cause_victory" type="Node3D" parent="player/Camera/DeathScreen"]
@@ -501,6 +502,12 @@ bus = &"SFX-Room"
 [node name="pickup_sound" type="AudioStreamPlayer" parent="player/sounds"]
 stream = ExtResource("10_1arfx")
 volume_db = 12.104
+bus = &"SFX"
+
+[node name="pickup_sound2" type="AudioStreamPlayer" parent="player/sounds"]
+stream = ExtResource("10_1arfx")
+volume_db = 12.104
+pitch_scale = 1.1
 bus = &"SFX"
 
 [node name="throw" type="AudioStreamPlayer" parent="player/sounds"]

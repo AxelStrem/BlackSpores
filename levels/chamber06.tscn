@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cwy4x0c8kwufp"]
+[gd_scene load_steps=15 format=3 uid="uid://cwy4x0c8kwufp"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_t2f6y"]
 [ext_resource type="PackedScene" uid="uid://bsx181u4v8naq" path="res://level_parts/corridors/corridor.tscn" id="2_0mv8s"]
@@ -13,6 +13,8 @@
 [ext_resource type="PackedScene" uid="uid://beutvw1yk14gm" path="res://level_parts/corridors/corridor_door.tscn" id="6_ygf1h"]
 [ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="7_b26el"]
 [ext_resource type="PackedScene" uid="uid://dlj74fpjh3pw0" path="res://pickups/pickup_datapoint_spawner.tscn" id="10_gml80"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_38lo6"]
 
 [node name="Chamber" instance=ExtResource("1_t2f6y")]
 chamber_tag = 6
@@ -102,7 +104,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.9, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.8, 2.9, 0)
 
 [node name="PlayerDetector" parent="." index="2"]
-transform = Transform3D(1.92, 0, 0, 0, 1, 0, 0, 0, 4, -32, 0, 31)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 0, 31)
+
+[node name="CollisionShape3D" parent="PlayerDetector" index="0"]
+transform = Transform3D(69.975, 0, -121.2, 0, 40, 0, 121.2, 0, 69.975, -33.9638, 1.53725, -28.5233)
+shape = SubResource("BoxShape3D_38lo6")
 
 [node name="Base" type="Node3D" parent="." index="7"]
 

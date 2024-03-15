@@ -92,6 +92,9 @@ transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 2.00609,
 [node name="PlayerDetector" parent="." index="2"]
 transform = Transform3D(1.617, 0, 0, 0, 1, 0, 0, 0, 1, -19, 0, 13)
 
+[node name="CollisionShape3D" parent="PlayerDetector" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.758248, 5.53725, -10.8112)
+
 [node name="KillZone" parent="." index="3"]
 transform = Transform3D(-40.8, 0, 0, 0, 2.4, 0, 0, 0, 17, -16, -15, 5)
 

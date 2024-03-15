@@ -22,7 +22,7 @@ const aircontrol_damp = 1.0
 const crouch_speed = 10.0
 
 const full_height = 2.7
-const full_rad = 0.9
+const full_rad = 0.8
 const crouch_height = 1.5
 const crouch_rad = 0.7
 
@@ -276,7 +276,9 @@ func pickup(pickup_type):
 	var extra = 1
 	if perk_bonus:
 		if randf()<0.1:
-			extra = 2		
+			extra = 2
+			$sounds/pickup_sound2.play()
+			
 	if pickup_type == 0:
 		research_points += 1 * extra
 		got_research_point_signal.emit()
@@ -466,6 +468,15 @@ func _physics_process(delta):
 	if antigrav_jump_available < 0.0:
 		antigrav_jump_available = 0.0
 		
+	if Input.is_action_just_pressed("player_jump") and !is_on_floor():
+		if antigrav_jump_available > 0.0:
+			if antigrav_charges > 0:
+				velocity.y += jump_velocity_antigrav
+				antigrav_charges -= 1
+				$sounds/jump_boots.play()
+				antigrav_protection = true
+				antigrav_jump_available = 0.0
+		
 	if jump_type == 1:
 		if Input.is_action_just_released("player_jump"):
 			regular_jump()
@@ -490,7 +501,7 @@ func _physics_process(delta):
 			jump_energy_built = 0.0
 			
 	if jump_type == 3:
-		if Input.is_action_pressed("player_jump") and jump_energy_limit>0.0:
+		if Input.is_action_pressed("player_jump") and jump_energy_limit > 0.0:
 			var ed = 400.0*delta
 			if ed > current_energy:
 				ed = current_energy
@@ -508,15 +519,6 @@ func _physics_process(delta):
 		if Input.is_action_just_released("player_jump"):
 			jump_energy_limit = 0.0
 			
-			
-	if Input.is_action_just_pressed("player_jump") and !is_on_floor():
-		if antigrav_jump_available > 0.0:
-			if antigrav_charges > 0:
-				velocity.y += jump_velocity_antigrav
-				antigrav_charges -= 1
-				$sounds/jump_boots.play()
-				antigrav_protection = true
-				antigrav_jump_available = 0.0
 	
 	#Handle crouch
 	var crouch_test = Input.is_action_pressed("player_crouch")
@@ -615,10 +617,11 @@ func _input(event):
 				velocity.y += dodge_velocity_vertical*je
 				jump_sound()
 				dodge_buffer = Vector3(act.x, 0.0, act.y)*dodge_velocity_horizontal*je
-				antigrav_jump_available = 0.6
+				#antigrav_jump_available = 0.6
 				last_strafe = Vector2i(0,0)
 				dodge_timeout = 0.0
 				dodge_cooldown = 0.6
+				time_off_ground = 0.5
 			
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_Q:

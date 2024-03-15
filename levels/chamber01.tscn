@@ -74,6 +74,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -8, 0,
 [node name="Wall15" parent="Walls1" index="12" instance=ExtResource("2_gfa5x")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, -17.1754)
 
+[node name="CeilingLamp01" parent="Walls1/Wall15" index="3" instance=ExtResource("7_tkmhm")]
+transform = Transform3D(0.707107, 0.707107, 1.28028e-08, -0.707107, 0.707107, 3.09086e-08, 1.28028e-08, -3.09086e-08, 1, -0.436291, 3, 1.90709e-08)
+
 [node name="Wall16" parent="Walls1" index="13" instance=ExtResource("2_gfa5x")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4, 0, -17.1754)
 
@@ -361,6 +364,12 @@ transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 4, 0, -2
 
 [node name="Ceiling9" parent="Walls1" index="107" instance=ExtResource("4_2c05h")]
 transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 4, 0, -20.9078)
+
+[node name="CeilingLamp" parent="Walls1/Ceiling9" index="1" instance=ExtResource("9_tf7r7")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 6.01944, 0.0145588)
+
+[node name="CeilingLamp2" parent="Walls1/Ceiling9" index="2" instance=ExtResource("9_tf7r7")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -9.53674e-07, 6.39043, 5.01456)
 
 [node name="Wall45" parent="Walls1" index="108" instance=ExtResource("5_ap5tg")]
 transform = Transform3D(1, 0, 1.62921e-07, 0, 1, 0, -1.62921e-07, 0, 1, 8, 0, -28.9078)
