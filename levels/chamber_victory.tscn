@@ -117,7 +117,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.9939, 0, 2.00773)
 
 [node name="Silo" parent="LevelIn" index="40" instance=ExtResource("6_7pwwx")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -44.8, 0, 2)
-complexity = 10.0
+complexity = 5.0
+door_speed = 0.1
+slide_speed = 0.5
+locks_destructible = false
 
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0061, 324, -26.7077)

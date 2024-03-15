@@ -23,4 +23,4 @@ transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, -89.4052
 transform = Transform3D(3.93402e-07, 0, 3, 0, 3, 0, -3, 0, 3.93402e-07, -75.1052, 2.188, 87.7551)
 
 [node name="LobbyStub2" parent="Base" index="16"]
-transform = Transform3D(1, 0, -1.74845e-07, 0, 1, 0, 1.74845e-07, 0, 1, -60.7951, 2.2, -40.9097)
+transform = Transform3D(1, 0, -1.74845e-07, 0, 1, 0, 1.74845e-07, 0, 1, -60.7951, 2.00415, -55.3097)

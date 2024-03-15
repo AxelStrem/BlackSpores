@@ -1,7 +1,8 @@
 extends Node3D
 
 var state = 0
-var speed = 0.0
+#var speed = 0.0
+var lockpickers = []
 var openers = 0
 @export var target : Node3D = null
 @export var complexity = 5.0
@@ -15,6 +16,11 @@ func init():
 	init_comp *= (level.level_difficulty / 10.0)
 	complexity = init_comp 
 
+func update_complexity(c):
+	complexity = c
+	init_comp = c
+	init()
+
 func _ready():
 	target_scale = $ScreenProgress/MeshInstance3D.scale.x
 	init_comp = complexity
@@ -23,6 +29,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if state==1:
+		var speed = 0.0
+		for l in lockpickers:
+			speed += l.get_lockpick_skill()
 		complexity -= speed*delta
 		beep_interval -= speed*delta
 		if beep_interval < 0.0:
@@ -55,7 +64,7 @@ func update_state():
 
 func _on_player_entered(body):
 	openers+=1
-	speed += body.get_lockpick_skill()
+	lockpickers.append(body)
 	if state!=2:
 		state = 1
 		update_state()
@@ -63,11 +72,10 @@ func _on_player_entered(body):
 
 func _on_player_exited(body):
 	openers-=1
-	speed -= body.get_lockpick_skill()
+	lockpickers.erase(body)
 	if openers == 0:
 		if state==1:
 			state = 0
-			speed = 0.0
 			update_state()
 
 

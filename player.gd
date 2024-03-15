@@ -22,7 +22,7 @@ const aircontrol_damp = 1.0
 const crouch_speed = 10.0
 
 const full_height = 2.7
-const full_rad = 0.7
+const full_rad = 0.9
 const crouch_height = 1.5
 const crouch_rad = 0.7
 
@@ -47,8 +47,10 @@ var perk_ward1 = false
 var perk_tele2 = false
 var perk_inventory = false
 var perk_ward2 = false
-var perk_throw = true
-var perk_fall1 = true
+var perk_throw = false
+var perk_fall1 = false
+var perk_bonus = false
+var perk_ward3 = false
 
 var ground_close = false
 var last_frame_on_ground = false
@@ -148,6 +150,13 @@ var spores_intensity = 0.0
 @onready var restart_button = $Camera/DeathScreen/restartButton
 @onready var menu_button = $Camera/DeathScreen/quitToMenuButton
 
+func add_energy_boost(b):
+	var eb = energy_boost * energy_boost
+	var ab = b * b
+	energy_boost = sqrt(eb + ab)
+	hud.set_infinite_energy(true)
+	
+
 func update_profile(skills, perks):
 	level_speed = skills[0]
 	level_stamina = skills[1]
@@ -156,16 +165,18 @@ func update_profile(skills, perks):
 	level_ward = skills[4]
 	level_strength = skills[5]
 	
-	perk_boots1 = (perks[0]!=0)
-	perk_cumulative = (perks[1]!=0)
-	perk_hacking1 = (perks[2]!=0)
-	perk_tele1 = (perks[3]!=0)
-	perk_ward1 = (perks[4]!=0)
-	perk_tele2 = (perks[5]!=0)
-	perk_inventory = (perks[6]!=0)
-	perk_ward2 = (perks[7]!=0)
-	perk_throw = (perks[8]!=0)
-	perk_fall1 = (perks[9]!=0)
+	perk_boots1 = (perks[0]==2)
+	perk_cumulative = (perks[1]==2)
+	perk_hacking1 = (perks[2]==2)
+	perk_tele1 = (perks[3]==2)
+	perk_ward1 = (perks[4]==2)
+	perk_tele2 = (perks[5]==2)
+	perk_inventory = (perks[6]==2)
+	perk_ward2 = (perks[7]==2)
+	perk_throw = (perks[8]==2)
+	perk_fall1 = (perks[9]==2)
+	perk_ward3 = (perks[10]==2)
+	perk_bonus = (perks[11]==2)
 	
 	if perk_inventory:
 		antigrav_charges_max = antigrav_charges_base*2
@@ -261,41 +272,46 @@ func format_time(time):
 
 func pickup(pickup_type):
 	$sounds/pickup_sound.play()
-	$sounds/pickup_sound.seek(0.3)	
+	$sounds/pickup_sound.seek(0.3)
+	var extra = 1
+	if perk_bonus:
+		if randf()<0.1:
+			extra = 2		
 	if pickup_type == 0:
-		research_points += 1
+		research_points += 1 * extra
 		got_research_point_signal.emit()
 		label_points.text = "points/{0}".format({0:int(research_points)})
 		display_info("Picked up a research datapoint")
 		return true
 	if pickup_type == 1:
-		energy_boost = energy_boost_duration
+		add_energy_boost(energy_boost_duration)
+		if extra == 2:
+			add_energy_boost(energy_boost_duration)
 		if perk_cumulative:
-			energy_regain_speed += 2.0
+			energy_regain_speed += 2.0 * extra
 			display_info("Picked up an energy boost. Energy recovery rate at {0}%".format({0:int(energy_regain_speed/0.3)}))
 		else:
 			display_info("Picked up an energy boost")
-		hud.set_infinite_energy(true)
 		return true
 	if pickup_type == 2:
 		if antigrav_charges >= antigrav_charges_max:
 			display_info("Antigrav charges full")
 			return false
-		antigrav_charges = min(antigrav_charges_max, antigrav_charges + antigrav_charges_bonus)
+		antigrav_charges = min(antigrav_charges_max, antigrav_charges + antigrav_charges_bonus*extra)
 		display_info("Picked up Anti-Gravity Boots. Press jump twice to engage")
 		return true
 	if pickup_type == 3:
 		if teleporter_charges >= teleporter_charges_max:
 			display_info("Teleporter charges full")
 			return false
-		teleporter_charges = min(teleporter_charges_max, teleporter_charges + teleporter_charges_bonus)
+		teleporter_charges = min(teleporter_charges_max, teleporter_charges + teleporter_charges_bonus*extra)
 		display_info("Picked up a Teleporter. Left click to deploy, right click to teleport")
 		return true
 	if pickup_type == 4:
 		if ward_charges >= ward_charges_max:
 			display_info("Ward charges full")
 			return false
-		ward_charges = min(ward_charges_max, ward_charges + ward_charges_bonus)
+		ward_charges = min(ward_charges_max, ward_charges + ward_charges_bonus*extra)
 		display_info("Picked up a Ward. Press Q to deploy")
 		return true
 	return true
@@ -304,12 +320,12 @@ func pickup(pickup_type):
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func jump_ex(je):
-	if is_on_floor() and je>0.0:
+	if is_on_floor_ex() and je>0.0:
 		velocity.y = jump_velocity*(je/jump_energy)
 		antigrav_jump_available = 0.6
 
 func regular_jump():
-	if is_on_floor():
+	if is_on_floor_ex():
 		var je = current_energy
 		if je > jump_energy:
 			je = jump_energy
@@ -335,9 +351,19 @@ func throw_object(obj):
 	obj.linear_velocity = -obj.global_transform.basis.z.normalized()*throw_speed + velocity
 	$sounds/throw.play()
 
+var time_off_ground = 0.0
+
+func is_on_floor_ex():
+	return time_off_ground < 0.15
+
 func _physics_process(delta):
 	if controls_locked:
 		return
+		
+	if is_on_floor():
+		time_off_ground = 0.0
+	else:
+		time_off_ground += delta
 	
 	if global_position.y < chamber_bottom - 100.0:
 		_player_dead(velocity, 2)	
@@ -475,7 +501,7 @@ func _physics_process(delta):
 			current_energy -= ed
 			velocity.y += jump_velocity * 0.8 * ed/jump_energy
 		if Input.is_action_just_pressed("player_jump"):
-			if is_on_floor():
+			if is_on_floor_ex():
 				pitiful_jump()
 				jump_sound()
 				jump_energy_limit = jump_energy
@@ -493,7 +519,13 @@ func _physics_process(delta):
 				antigrav_jump_available = 0.0
 	
 	#Handle crouch
-	if Input.is_action_pressed("player_crouch"):
+	var crouch_test = Input.is_action_pressed("player_crouch")
+	if $head_bumper.has_overlapping_bodies():
+		#var b = $head_bumper.get_overlapping_bodies()
+		crouch_test = true
+	#if $head_bumper.has_overlapping_areas():
+	#	crouch_test = true
+	if crouch_test:
 		crouch+=crouch_speed*delta
 	else:
 		crouch-=crouch_speed*delta
@@ -511,9 +543,14 @@ func _physics_process(delta):
 	
 	if is_on_floor():
 		var acc_vector = direction
+		var dir_correction = 1.0
 		if !direction:
-			acc_vector = -Vector3(velocity.x,0.0,velocity.z).normalized() 
-		var max_speed = SPEED*speed_coef*(1.0-spores_on_player)
+			acc_vector = -Vector3(velocity.x,0.0,velocity.z).normalized()
+		else:
+			dir_correction = abs(direction.dot(Vector3(velocity.x, 0.0, velocity.z).normalized()))
+			if dir_correction < 0.1:
+				dir_correction = 0.1
+		var max_speed = SPEED*speed_coef*(1.0-spores_on_player)*dir_correction
 		
 		if Input.is_action_pressed("player_run") and direction:
 			energy_restoring = false
@@ -569,7 +606,7 @@ func _input(event):
 			last_strafe = act
 			dodge_timeout = 0.2
 		else:
-			if is_on_floor():
+			if is_on_floor_ex():
 				var je = current_energy
 				if je > dodge_energy:
 					je = dodge_energy
@@ -594,6 +631,8 @@ func _input(event):
 						ward = ward_scene.instantiate()
 					if perk_ward1:
 						ward.lockpick = true
+					if perk_ward3:
+						ward.slowdown = 0.5
 					ward.lifetime = 10.0 + level_ward*0.5
 					throw_object(ward)
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

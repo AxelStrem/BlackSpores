@@ -13,6 +13,7 @@ var button_pressed = false
 @export var background_color : Color = Color.DIM_GRAY
 @export var background_hover : Color = Color.DIM_GRAY
 @export var background_inactive : Color = Color.DIM_GRAY
+@export var action = ""
 
 var background_material = null
 
@@ -43,6 +44,8 @@ func update():
 
 func _ready():
 	$Label3D.render_priority = render_priority
+	if render_priority > 10:
+		$Label3D.no_depth_test = true
 	update()
 
 func activate():
@@ -68,6 +71,8 @@ func deactivate():
 func _input(event):
 	if !active:
 		return
+	if action != "" and event.is_action_pressed(action):
+		button_clicked.emit()
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed == true:
 			if self.mouse_in:

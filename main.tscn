@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://da3nba0wrnhxx"]
+[gd_scene load_steps=54 format=3 uid="uid://da3nba0wrnhxx"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_kjcn1"]
 [ext_resource type="Script" path="res://player.gd" id="3_1xpxi"]
@@ -32,10 +32,14 @@
 [ext_resource type="AudioStream" uid="uid://cb7ny8drm0ptt" path="res://sound/death01.wav" id="24_kyy2v"]
 [ext_resource type="AudioStream" uid="uid://cii27lipdls0" path="res://sound/death_fall.wav" id="24_y1j6y"]
 [ext_resource type="AudioStream" uid="uid://cfef6thj7fot7" path="res://sound/death02.wav" id="25_p38kl"]
+[ext_resource type="PackedScene" uid="uid://dr3v0h7tldtsh" path="res://level_parts/building_blocks/crate_01.tscn" id="33_2ihp3"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_k67sy"]
 radius = 0.7
-height = 2.87003
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jc2ow"]
+radius = 0.306765
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_4g3m7"]
 viewport_path = NodePath("player/HUDViewport")
@@ -181,12 +185,22 @@ transform = Transform3D(0.95566, -0.25049, 0.154821, -0.294474, -0.812919, 0.502
 visible = false
 
 [node name="player" type="CharacterBody3D" parent="."]
-transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, -264.002, -26.6631)
-collision_layer = 1553
+transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, -264.051, -26.6631)
+collision_layer = 1552
 script = ExtResource("3_1xpxi")
 
 [node name="hitbox" type="CollisionShape3D" parent="player"]
 shape = SubResource("CapsuleShape3D_k67sy")
+
+[node name="head_bumper" type="Area3D" parent="player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20734, 0)
+collision_layer = 0
+input_ray_pickable = false
+priority = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="player/head_bumper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.85556, 0)
+shape = SubResource("CapsuleShape3D_jc2ow")
 
 [node name="Camera" type="Camera3D" parent="player"]
 transform = Transform3D(1, -1.32405e-08, 6.7017e-10, 1.32405e-08, 0.99489, -0.100969, 6.70155e-10, 0.100969, 0.99489, 0, 0.533417, -0.285965)
@@ -411,6 +425,7 @@ process_mode = 3
 transform = Transform3D(0.193266, -7.73411e-17, -1.77636e-14, 1.94801e-15, 0.193266, -1.11759e-08, -1.77636e-14, 1.11759e-08, 0.193266, -0.232458, -0.177809, -0.521931)
 text = "Try again"
 render_priority = 20
+action = "player_jump"
 
 [node name="quitToMenuButton" parent="player/Camera/DeathScreen" instance=ExtResource("5_7jcy2")]
 process_mode = 3
@@ -611,6 +626,9 @@ autostart = true
 
 [node name="spore_start_delay" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="Crate01" parent="." instance=ExtResource("33_2ihp3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.2542, -267.44, -24.9159)
 
 [connection signal="button_clicked" from="player/Camera/DeathScreen/restartButton" to="." method="_on_restart_button_button_clicked"]
 [connection signal="button_clicked" from="player/Camera/DeathScreen/quitToMenuButton" to="." method="_on_quit_to_menu_button_clicked"]

@@ -8,12 +8,14 @@ var start_lifetime = 0.0
 var zscale = 1.0
 var game = null
 var lockpick = false
+var slowdown = 1.0
 
 var spore_destructible_scene = preload("res://spore_destructible.tscn")
 
 @export var radius = 10.0
 
 var crot = Vector3(0.0,0.0,0.0)
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	angular_damp = 1.0
@@ -46,7 +48,6 @@ func _process(delta):
 			engaged = true
 			if lockpick:
 				$ward/lock_opener.monitorable = true
-			$particles.emitting = true
 			$ward_light.light_energy = 100.0
 			game = Global.get_game_root(self)
 			if game!=null:
@@ -54,7 +55,9 @@ func _process(delta):
 			start_lifetime = lifetime
 			zscale = $ward/WardProgressBar.scale.y			
 	if deploying == 3:
-		lifetime-=delta
+		if slowdown == 1.0:
+			$particles.emitting = true			
+		lifetime -= delta * slowdown
 		$ward/WardProgressBar.scale.y = zscale*(lifetime / start_lifetime)		
 		if lifetime < 0:
 			deploying = 4

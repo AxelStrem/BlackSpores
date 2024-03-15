@@ -25,10 +25,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
 
 [node name="staircase" parent="one_of_staircases/Staircase_Pickup" instance=ExtResource("3_duln5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.89978, 0.0100489, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.79342, -0.132924, -1)
 
 [node name="staircase2" parent="one_of_staircases/Staircase_Pickup" instance=ExtResource("3_duln5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.20022, 3.31005, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.21587, 3.28257, -1)
 
 [node name="PickupSpawner" parent="one_of_staircases/Staircase_Pickup" instance=ExtResource("4_3uocs")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 1, 0, -1)
@@ -48,10 +48,10 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.200
 [node name="Staircase_Empty" type="Node3D" parent="one_of_staircases"]
 
 [node name="staircase" parent="one_of_staircases/Staircase_Empty" instance=ExtResource("3_duln5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95504, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.02511, -0.131724, -1)
 
 [node name="staircase2" parent="one_of_staircases/Staircase_Empty" instance=ExtResource("3_duln5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.14496, 3.3, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.06962, 3.27378, -1)
 
 [node name="Railing2" parent="one_of_staircases/Staircase_Empty" instance=ExtResource("5_eh5bu")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10, 6.6, -5)
@@ -169,7 +169,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10, 6.
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 10, 6.6, -5)
 
 [node name="LongBeam" type="Node3D" parent="one_of_staircases/Staircase_Destroyed"]
-transform = Transform3D(0.998806, -0.0488498, 0, 0.0488498, 0.998806, 0, 0, 0, 1, 0, -0.3, 0)
+transform = Transform3D(0.998806, -0.0488498, 0, 0.0488498, 0.998806, 0, 0, 0, 1, 0.4, -0.2, 0.0999999)
 
 [node name="Beam01" parent="one_of_staircases/Staircase_Destroyed/LongBeam" instance=ExtResource("6_2jp0w")]
 transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 1, 3, 0)
@@ -180,14 +180,11 @@ transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 
 [node name="Beam03" parent="one_of_staircases/Staircase_Destroyed/LongBeam" instance=ExtResource("6_2jp0w")]
 transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 4.62523, 1.30953, 0)
 
-[node name="Beam04" parent="one_of_staircases/Staircase_Destroyed/LongBeam" instance=ExtResource("6_2jp0w")]
-transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 8.25046, -0.380946, 0)
-
 [node name="Beam05" parent="one_of_staircases/Staircase_Destroyed/LongBeam" instance=ExtResource("6_2jp0w")]
 transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, -6.25046, 6.38095, 0)
 
 [node name="LongBeam2" type="Node3D" parent="one_of_staircases/Staircase_Destroyed"]
-transform = Transform3D(0.998806, -0.0488498, 0, 0.0488498, 0.998806, 0, 0, 0, 1, 0, -0.3, -2)
+transform = Transform3D(0.998806, -0.0488498, 0, 0.0488498, 0.998806, 0, 0, 0, 1, 0.4, -0.2, -2.2)
 
 [node name="Beam01" parent="one_of_staircases/Staircase_Destroyed/LongBeam2" instance=ExtResource("6_2jp0w")]
 transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 1, 3, 0)
@@ -199,7 +196,10 @@ transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 
 transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 4.62523, 1.30953, 0)
 
 [node name="Beam04" parent="one_of_staircases/Staircase_Destroyed/LongBeam2" instance=ExtResource("6_2jp0w")]
-transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 8.25046, -0.380946, 0)
+transform = Transform3D(0.312676, 0.422618, 0, -0.145803, 0.906308, 0, 0, 0, 1, 7.06188, 0.171243, 0)
+
+[node name="Beam06" parent="one_of_staircases/Staircase_Destroyed/LongBeam2" instance=ExtResource("6_2jp0w")]
+transform = Transform3D(0.312676, 0.422617, 0, -0.145803, 0.906308, 0, 0, 0, 1, 7.06188, 0.171243, 2.29862)
 
 [node name="Beam05" parent="one_of_staircases/Staircase_Destroyed/LongBeam2" instance=ExtResource("6_2jp0w")]
 transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, -6.25046, 6.38095, 0)
@@ -207,10 +207,10 @@ transform = Transform3D(0.906308, 0.422618, 0, -0.422618, 0.906308, 0, 0, 0, 1, 
 [node name="Staircase_Reversed" type="Node3D" parent="one_of_staircases"]
 
 [node name="staircase" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("3_duln5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.95378, -0.0242326, -1)
 
 [node name="staircase2" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("3_duln5")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.9, 3.4, -5)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.9633, 3.34578, -5)
 
 [node name="Floor01" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("2_5qfes")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.3, -1)
@@ -280,7 +280,7 @@ transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, -9.9, 
 spawn_probability = 0.3
 
 [node name="Wall02" parent="one_of_staircases/Staircase_Reversed" instance=ExtResource("7_aqkiw")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5.6, 6.5, -1.1)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -5.6, 6.32946, -1.1)
 
 [node name="Walkway" type="Node3D" parent="."]
 

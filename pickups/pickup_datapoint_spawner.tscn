@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dlj74fpjh3pw0"]
+
+[ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="1_gg88b"]
+
+[node name="PickupSpawner" instance=ExtResource("1_gg88b")]
+spawn_probability = 1.0
+pill = false
+boots = false
+teleport = false
+ward = false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bkhcg2j48hplt"]
+[gd_scene load_steps=20 format=3 uid="uid://bkhcg2j48hplt"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_6ltah"]
 [ext_resource type="PackedScene" uid="uid://cnu76vigll10m" path="res://levels/chamber04_floor.tscn" id="2_o152s"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://8sa582fprbad" path="res://one_of.tscn" id="9_fqaiu"]
 [ext_resource type="PackedScene" uid="uid://bk6ro78efnftv" path="res://entities/digital_lock.tscn" id="10_h88c1"]
 [ext_resource type="PackedScene" uid="uid://dipfxw78owbfx" path="res://level_parts/building_blocks/railing.tscn" id="10_xotn1"]
+[ext_resource type="PackedScene" uid="uid://dlj74fpjh3pw0" path="res://pickups/pickup_datapoint_spawner.tscn" id="11_6xu8t"]
 [ext_resource type="PackedScene" uid="uid://dycy4oyf2uoy4" path="res://level_parts/building_blocks/beam.tscn" id="11_a70gu"]
 [ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="12_aopnh"]
 [ext_resource type="PackedScene" uid="uid://bju0m06pn6kg6" path="res://level_parts/building_blocks/ceiling_01.tscn" id="13_q0c3l"]
@@ -347,6 +348,10 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -7,
 [node name="Wall24" parent="Floor01A/Floor64" index="18" instance=ExtResource("6_v6cs4")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -7, 4)
 
+[node name="PickupSpawner" parent="Floor01A/Floor64/Wall24" index="3" instance=ExtResource("11_6xu8t")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2.86102e-06, 1, -6)
+spawn_probability = 0.5
+
 [node name="Wall25" parent="Floor01A/Floor64" index="19" instance=ExtResource("6_v6cs4")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, -7, 0)
 
@@ -669,6 +674,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 [node name="PickupSpawner" parent="WallA/Wall11/Floor01" index="1" instance=ExtResource("12_aopnh")]
 spawn_probability = 0.3
 
+[node name="PickupSpawner2" parent="WallA/Wall11/Floor01" index="2" instance=ExtResource("12_aopnh")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4, 0, 0)
+spawn_probability = 1.0
+pill = false
+boots = false
+teleport = false
+ward = false
+
 [node name="Floor02" parent="WallA/Wall11" index="4" instance=ExtResource("3_644bx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.5, 0)
 
@@ -756,6 +769,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 16, -1
 [node name="one_of" parent="." index="11" instance=ExtResource("9_fqaiu")]
 
 [node name="F1" type="Node3D" parent="one_of" index="0"]
+visible = false
 
 [node name="Floor03" parent="one_of/F1" index="0" instance=ExtResource("3_644bx")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
@@ -842,6 +856,7 @@ transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 4, 0, 12
 transform = Transform3D(3.3, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.3, 2)
 
 [node name="PickupSpawner" parent="one_of/F2/one_of/Beam01" index="1" instance=ExtResource("12_aopnh")]
+transform = Transform3D(0.909091, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 spawn_probability = 1.0
 
 [node name="empty" type="Node3D" parent="one_of/F2/one_of" index="1"]

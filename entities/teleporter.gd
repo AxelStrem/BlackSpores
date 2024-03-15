@@ -14,7 +14,7 @@ func _ready():
 
 func _exit_tree():
 	if player!=null:
-		if player.teleporter == null:
+		if player.teleporter == null or player.teleporter == self:
 			player.hud.tele_destroyed()
 		
 var player_basis = null
@@ -26,8 +26,7 @@ func activate(bs):
 func _on_activate_timer_timeout():
 	player.global_transform = global_transform
 	if player.perk_tele1:
-		player.energy_boost = player.teleporter_energy_boost
-		player.hud.set_infinite_energy(true)						
+		player.add_energy_boost(player.teleporter_energy_boost)
 	player.translate_object_local(Vector3.UP*1.5)
 	player.basis = player_basis
 	player.crouch = 1.0
@@ -35,6 +34,9 @@ func _on_activate_timer_timeout():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	if player!=null and position.y < player.position.y - 100.0:
+		queue_free()
+	
 	if deploying==0 and linear_velocity.length_squared()<0.1:
 		sleeping = true
 		deploying = 1
@@ -54,7 +56,7 @@ func _process(delta):
 		if $teleporter_net.scale.x > 0.13:
 			deploying = 3
 			engaged = true
-			if player:
+			if player != null:
 				player.hud.tele_online()
 				player.tele_online()
 			$OmniLight3D.show()

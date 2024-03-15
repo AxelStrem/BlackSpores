@@ -51,6 +51,7 @@ func update():
 			$button3D.text = tag + "OFF"
 			$button3D.background_color = Color(0.2,0.4,0.2)
 			$button3D.background_hover = Color(0.3,0.6,0.3)
+		$button3D.activate()
 	$button3D.update()
 
 func _ready():

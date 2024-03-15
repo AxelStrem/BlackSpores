@@ -3,7 +3,7 @@ extends Node
 var spore_scale = 1.0
 var first_run = true
 
-var perks_array = [0,0,0,0,0,0,0,0,0,0]
+var perks_array = [0,0,0,0,0,0,0,0,0,0,0,0]
 
 var picked_nums = [-1]
 

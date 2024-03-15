@@ -220,6 +220,10 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.8, 0
 [node name="Wall20" parent="P1" index="50" instance=ExtResource("8_nf108")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.8, 0, 20)
 
+[node name="digital_lock" parent="P1/Wall20" index="3" node_paths=PackedStringArray("target") instance=ExtResource("11_2t3ll")]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, -2.38419e-07, 2, -2.1)
+target = NodePath("../../AutoDoor2")
+
 [node name="Wall21" parent="P1" index="51" instance=ExtResource("8_nf108")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.8, 0, 16)
 
@@ -519,35 +523,39 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5999, 0, 19.9837)
 transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 12.073, 1.77888, -18.0199)
 target = NodePath("../AutoDoor")
 
-[node name="digital_lock2" parent="P1" index="120" node_paths=PackedStringArray("target") instance=ExtResource("11_2t3ll")]
+[node name="digital_lock3" parent="P1" index="120" node_paths=PackedStringArray("target") instance=ExtResource("11_2t3ll")]
+transform = Transform3D(0.5, 0, 0, 0, -2.18557e-08, -0.5, 0, 0.5, -2.18557e-08, 5.873, 1.77888, -18.0199)
+target = NodePath("../AutoDoor")
+
+[node name="digital_lock2" parent="P1" index="121" node_paths=PackedStringArray("target") instance=ExtResource("11_2t3ll")]
 transform = Transform3D(-0.5, -4.47035e-08, 1.33227e-15, 0, -2.18557e-08, -0.5, 4.47035e-08, -0.5, 2.18557e-08, 12.073, 1.77888, 21.9801)
 target = NodePath("../AutoDoor2")
 
-[node name="GiantWall" parent="P1" index="121" instance=ExtResource("12_3ea4p")]
+[node name="GiantWall" parent="P1" index="122" instance=ExtResource("12_3ea4p")]
 transform = Transform3D(-0.24, 0, -8.74228e-08, 0, 1, 0, 2.09815e-08, 0, -1, -1.1, 0, -7.9)
 
-[node name="GiantWall2" parent="P1" index="122" instance=ExtResource("12_3ea4p")]
+[node name="GiantWall2" parent="P1" index="123" instance=ExtResource("12_3ea4p")]
 transform = Transform3D(-0.24, 0, -8.74228e-08, 0, 1, 0, 2.09815e-08, 0, -1, -7.7, 0, -7.9)
 
-[node name="GiantWall3" parent="P1" index="123" instance=ExtResource("12_3ea4p")]
+[node name="GiantWall3" parent="P1" index="124" instance=ExtResource("12_3ea4p")]
 transform = Transform3D(3.46194e-08, 0, -1, 0, 1, 0, 0.264, 0, 1.31134e-07, -9.7, 0, -0.500001)
 
-[node name="GiantWall4" parent="P1" index="124" instance=ExtResource("12_3ea4p")]
+[node name="GiantWall4" parent="P1" index="125" instance=ExtResource("12_3ea4p")]
 transform = Transform3D(3.46194e-08, 0, -1, 0, 1, 0, 0.264, 0, 1.31134e-07, -9.7, 0, 5.5)
 
-[node name="Beam01" parent="P1" index="125" instance=ExtResource("13_okddw")]
+[node name="Beam01" parent="P1" index="126" instance=ExtResource("13_okddw")]
 transform = Transform3D(-4.37114e-08, 0, -4.5, 0, 1, 0, 1, 0, -1.96701e-07, 9, 0, 20)
 
-[node name="CeilingLamp01" parent="P1" index="126" instance=ExtResource("14_108hh")]
+[node name="CeilingLamp01" parent="P1" index="127" instance=ExtResource("14_108hh")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 2.8, 0)
 
-[node name="CeilingLamp03" parent="P1" index="127" instance=ExtResource("14_108hh")]
+[node name="CeilingLamp03" parent="P1" index="128" instance=ExtResource("14_108hh")]
 transform = Transform3D(-4.37114e-08, 0, 1, -0.5, 0.866025, -2.18557e-08, -0.866025, -0.5, -3.78552e-08, 22, 3.2, 0)
 
-[node name="CeilingLamp04" parent="P1" index="128" instance=ExtResource("14_108hh")]
+[node name="CeilingLamp04" parent="P1" index="129" instance=ExtResource("14_108hh")]
 transform = Transform3D(1.19209e-07, 4.47035e-08, -1, -0.5, 0.866025, -2.21213e-08, 0.866025, 0.5, 1.19209e-07, 22, 3.2, 4)
 
-[node name="CeilingLamp02" parent="P1" index="129" instance=ExtResource("14_108hh")]
+[node name="CeilingLamp02" parent="P1" index="130" instance=ExtResource("14_108hh")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 14, 2.8, 4)
 
 [node name="P2" type="Node3D" parent="." index="9"]

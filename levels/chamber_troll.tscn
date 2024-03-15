@@ -44,6 +44,14 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0,
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14, 0, 24)
 spawn_probability = 1.0
 
+[node name="PickupSpawner2" parent="one_of/Opt1" index="3" instance=ExtResource("11_65u7e")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 5, 0, 24)
+spawn_probability = 1.0
+pill = false
+boots = false
+teleport = false
+ward = false
+
 [node name="Opt2" type="Node3D" parent="one_of" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -43.2)
 
@@ -56,6 +64,14 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 12, 0,
 [node name="PickupSpawner" parent="one_of/Opt2" index="2" instance=ExtResource("11_65u7e")]
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 14, 0, 24)
 spawn_probability = 1.0
+
+[node name="PickupSpawner2" parent="one_of/Opt2" index="3" instance=ExtResource("11_65u7e")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4, 0, 24)
+spawn_probability = 1.0
+pill = false
+boots = false
+teleport = false
+ward = false
 
 [node name="Ceiling" parent="." index="7" instance=ExtResource("4_5l4cr")]
 transform = Transform3D(7.84, 0, 0, 0, -1, 1.44248e-06, 0, -8.74229e-08, -16.5, -50.7, 13.1794, 0)

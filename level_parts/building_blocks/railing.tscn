@@ -42,10 +42,10 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dbs4w")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xy8s1"]
-size = Vector3(0.275497, 0.569641, 3.53406)
+size = Vector3(0.167045, 0.51796, 3.5307)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_py2h4"]
-size = Vector3(0.275497, 0.381989, 3.53406)
+size = Vector3(0.209149, 0.317, 3.534)
 
 [node name="Railing" type="Node3D"]
 
@@ -58,12 +58,12 @@ surface_material_override/0 = ExtResource("1_ck3y0")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22157, 1.05392, -0.0195923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16734, 1.04116, -0.0179132)
 shape = SubResource("BoxShape3D_xy8s1")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.26566, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22157, 1.14775, -0.0195923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.05151, 1.09447, -0.0195923)
 shape = SubResource("BoxShape3D_py2h4")

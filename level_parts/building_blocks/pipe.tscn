@@ -4,7 +4,7 @@
 [ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_yd3gu"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_l3dgh"]
-height = 1.90853
+height = 1.93375
 radius = 0.158298
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_emb3b"]
@@ -53,10 +53,11 @@ transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 [node name="StaticBody3D" type="StaticBody3D" parent="Scale2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scale2/StaticBody3D"]
-transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.000335693, -0.159788, -0.00344862)
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, -0.158, 0)
 shape = SubResource("CylinderShape3D_l3dgh")
 
 [node name="Area3D" type="Area3D" parent="Scale2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0936565, 0)
 collision_layer = 2
 collision_mask = 0
 monitoring = false

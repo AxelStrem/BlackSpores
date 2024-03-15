@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cwy4x0c8kwufp"]
+[gd_scene load_steps=14 format=3 uid="uid://cwy4x0c8kwufp"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_t2f6y"]
 [ext_resource type="PackedScene" uid="uid://bsx181u4v8naq" path="res://level_parts/corridors/corridor.tscn" id="2_0mv8s"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://blorqlq8ll2fu" path="res://level_parts/corridors/lobby_stub.tscn" id="6_g65g5"]
 [ext_resource type="PackedScene" uid="uid://beutvw1yk14gm" path="res://level_parts/corridors/corridor_door.tscn" id="6_ygf1h"]
 [ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="7_b26el"]
+[ext_resource type="PackedScene" uid="uid://dlj74fpjh3pw0" path="res://pickups/pickup_datapoint_spawner.tscn" id="10_gml80"]
 
 [node name="Chamber" instance=ExtResource("1_t2f6y")]
 chamber_tag = 6
@@ -178,7 +179,13 @@ transform = Transform3D(-6.5567e-07, 0, -3, 0, 3, 0, 3, 0, -6.5567e-07, -32.1441
 transform = Transform3D(-6.5567e-07, 0, -3, 0, 3, 0, 3, 0, -6.5567e-07, -46.4441, 2.188, 44.8903)
 
 [node name="LobbyStub2" parent="Base" index="16" instance=ExtResource("6_g65g5")]
-transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, -60.7951, 2.2, 44.7903)
+transform = Transform3D(-1, 0, 8.74227e-08, 0, 1, 0, -8.74227e-08, 0, -1, -60.7951, 2.01116, 59.1903)
+
+[node name="Corridor23" parent="Base/LobbyStub2" index="1" instance=ExtResource("2_0mv8s")]
+transform = Transform3D(-3, 0, 2.62268e-07, 0, 3, 0, -2.62268e-07, 0, -3, -0.0489998, 0.188, 0.0493927)
+
+[node name="PickupSpawner2" parent="Base/LobbyStub2/Corridor23" index="15" instance=ExtResource("10_gml80")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, -0.714201, 0)
 
 [node name="Lobby8" parent="Base" index="17" instance=ExtResource("4_l5sy2")]
 transform = Transform3D(3, 0, -5.24536e-07, 0, 3, 0, 5.24536e-07, 0, 3, -60.7951, 2.2, 44.7903)

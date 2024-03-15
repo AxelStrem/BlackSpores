@@ -40,7 +40,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 8)
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="VendingMachine" parent="Walls/Wall06/WallHatchHigh" instance=ExtResource("4_cw37t")]
-transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3, 0, 0.320946)
+transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3, 0, 0.690128)
 
 [node name="Crate01" parent="Walls/Wall06/WallHatchHigh" instance=ExtResource("4_26nyb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.24742, 0, -1.34604)
@@ -64,7 +64,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.80026, 0.38328, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7326, 0.38328, 2.86102e-06)
 
 [node name="Cover3" parent="Walls/Wall06/WallHatchHigh/Vent/Vent2/one_of" instance=ExtResource("8_sy68n")]
-transform = Transform3D(0.517967, -7.83189e-09, 0.8554, -0.18068, 0.977438, 0.109406, -0.836101, -0.211222, 0.506281, -2.84197, -3.64961, 1.26211)
+transform = Transform3D(0.241708, -0.0636985, 0.968256, -0.18068, 0.977438, 0.109406, -0.953379, -0.201388, 0.224746, -2.84197, -3.64961, 1.38641)
 
 [node name="Wall07" parent="Walls" instance=ExtResource("1_rg72e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 4)

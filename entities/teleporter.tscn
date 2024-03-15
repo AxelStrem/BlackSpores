@@ -8,7 +8,7 @@
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_20riv"]
 margin = 0.003
-height = 0.107458
+height = 0.0819192
 radius = 0.219296
 
 [node name="Teleporter" type="RigidBody3D"]
@@ -17,11 +17,11 @@ contact_monitor = true
 script = ExtResource("1_8c84i")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000501037, 0.00734473, -0.00144923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000501037, 0.00981553, -0.00144923)
 shape = SubResource("CylinderShape3D_20riv")
 
 [node name="teleporter2" parent="." instance=ExtResource("1_o37rn")]
-transform = Transform3D(1.69579, 0, 0, 0, 1.69579, 0, 0, 0, 1.69579, 0, 0, 0)
+transform = Transform3D(1.69579, 0, 0, 0, 1.69579, 0, 0, 0, 1.69579, 0, 0.00890169, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.375229, 0)
@@ -29,7 +29,7 @@ visible = false
 light_color = Color(0.407843, 0.843137, 1, 1)
 
 [node name="teleporter_net" parent="." instance=ExtResource("2_1clin")]
-transform = Transform3D(0.0190713, 0, 0, 0, 0.0190713, 0, 0, 0, 0.0190713, 0, 0, 0)
+transform = Transform3D(0.0190713, 0, 0, 0, 0.0190713, 0, 0, 0, 0.0190713, 0, 0.00890169, 0)
 
 [node name="SporeDestructible" parent="." instance=ExtResource("4_4hkox")]
 

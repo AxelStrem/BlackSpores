@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ctirpqnvbqvfv"]
+[gd_scene load_steps=10 format=3 uid="uid://ctirpqnvbqvfv"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_ao2ce"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_5n42l"]
@@ -6,7 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://c5wmeiu03gmh8" path="res://level_parts/building_blocks/wall_01_light.tscn" id="4_flb8t"]
 [ext_resource type="PackedScene" uid="uid://dipfxw78owbfx" path="res://level_parts/building_blocks/railing.tscn" id="5_2ppj1"]
 [ext_resource type="PackedScene" uid="uid://bg13w8tx0i5e0" path="res://level_parts/building_blocks/wall_01.tscn" id="6_8m6hi"]
+[ext_resource type="PackedScene" uid="uid://dycy4oyf2uoy4" path="res://level_parts/building_blocks/beam.tscn" id="7_k2trm"]
 [ext_resource type="PackedScene" uid="uid://clp5psok5hubs" path="res://levels/chamber09_segment.tscn" id="7_tljke"]
+[ext_resource type="PackedScene" uid="uid://dlj74fpjh3pw0" path="res://pickups/pickup_datapoint_spawner.tscn" id="8_3465b"]
 
 [node name="Chamber" instance=ExtResource("1_ao2ce")]
 chamber_tag = 9
@@ -90,6 +92,15 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, -7
 
 [node name="Wall09" parent="p1" index="16" instance=ExtResource("6_8m6hi")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, 0, 10)
+
+[node name="Beam01" parent="p1/Wall09" index="3" instance=ExtResource("7_k2trm")]
+
+[node name="PickupSpawner" parent="p1/Wall09/Beam01" index="1" instance=ExtResource("8_3465b")]
+
+[node name="Beam02" parent="p1/Wall09" index="4" instance=ExtResource("7_k2trm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="PickupSpawner" parent="p1/Wall09/Beam02" index="1" instance=ExtResource("8_3465b")]
 
 [node name="Wall10" parent="p1" index="17" instance=ExtResource("6_8m6hi")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2, -7, 10)

@@ -144,6 +144,7 @@ func check_wards(vec, extra_radius):
 		var p2 = w.global_position
 		var rad = w.radius
 		if (p1-p2).length()<(rad + extra_radius):
+			w.slowdown = 1.0
 			return true
 	return false
 

@@ -43,10 +43,10 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dbs4w")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xy8s1"]
-size = Vector3(0.275497, 0.569641, 3.53406)
+size = Vector3(0.122341, 0.515457, 3.53406)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_py2h4"]
-size = Vector3(0.275497, 0.381989, 3.53406)
+size = Vector3(0.20912, 0.241493, 3.53406)
 
 [sub_resource type="QuadMesh" id="QuadMesh_yhl64"]
 size = Vector2(3.75, 0.195)
@@ -65,14 +65,14 @@ surface_material_override/0 = ExtResource("1_5nbpf")
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22157, 1.05392, -0.0195923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.16049, 1.04326, -0.0195923)
 shape = SubResource("BoxShape3D_xy8s1")
 
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.26566, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.22157, 1.14775, -0.0195923)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08636, 1.13833, -0.0195923)
 shape = SubResource("BoxShape3D_py2h4")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

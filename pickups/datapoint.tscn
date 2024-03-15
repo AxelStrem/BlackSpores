@@ -15,7 +15,7 @@ material = SubResource("StandardMaterial3D_fcbl7")
 [node name="pickup" instance=ExtResource("1_bti1i")]
 
 [node name="spiral" parent="model" index="0" instance=ExtResource("2_k8e3b")]
-transform = Transform3D(0.0961363, 0.0275285, 0, -0.0275285, 0.0961363, 0, 0, 0, 0.1, -0.124171, 0.527953, 0)
+transform = Transform3D(0.0808625, 0.0231549, 0, -0.0231549, 0.0808625, 0, 0, 0, 0.0841123, -0.124171, 0.583976, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="model" index="1"]
 transform = Transform3D(1.25786, 0, 0, 0, 1.25786, 0, 0, 0, 1.25786, 0, 0.943461, 0)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bh52fmrohsquw"]
+[gd_scene load_steps=7 format=3 uid="uid://bh52fmrohsquw"]
 
 [ext_resource type="PackedScene" uid="uid://8sa582fprbad" path="res://one_of.tscn" id="1_tqojn"]
 [ext_resource type="PackedScene" uid="uid://ftgguj2m6lpo" path="res://level_parts/obstacles/obstacle1A.tscn" id="2_t2ns0"]
 [ext_resource type="PackedScene" uid="uid://b355o4i7tl2xj" path="res://level_parts/obstacles/obstacle1B.tscn" id="3_ob71t"]
 [ext_resource type="PackedScene" uid="uid://3qkd1k17snq1" path="res://level_parts/obstacles/obstacle1C.tscn" id="4_3uioe"]
 [ext_resource type="PackedScene" uid="uid://4s2vnbbt7jcr" path="res://level_parts/obstacles/obstacle1D.tscn" id="5_wxwlj"]
+[ext_resource type="PackedScene" uid="uid://b64ogox1rw14d" path="res://level_parts/obstacles/obstacle1E.tscn" id="6_xjhpb"]
 
 [node name="Obstacle1" type="Node3D"]
 
@@ -18,3 +19,5 @@
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 4, 0, 12)
 
 [node name="Obstacle1D" parent="one_of" instance=ExtResource("5_wxwlj")]
+
+[node name="Obstacle1a2" parent="one_of" instance=ExtResource("6_xjhpb")]

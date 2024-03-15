@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bbcfj6nufotlm"]
+[gd_scene load_steps=32 format=3 uid="uid://bbcfj6nufotlm"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_lou1f"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="2_2etuv"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://c1syd6jkfchcw" path="res://level_parts/building_blocks/wall_02.tscn" id="17_g7108"]
 [ext_resource type="PackedScene" uid="uid://j4gckxfd3gen" path="res://level_parts/building_blocks/pipe.tscn" id="17_t1vm2"]
 [ext_resource type="PackedScene" uid="uid://bju0m06pn6kg6" path="res://level_parts/building_blocks/ceiling_01.tscn" id="18_sixbj"]
+[ext_resource type="PackedScene" uid="uid://dlj74fpjh3pw0" path="res://pickups/pickup_datapoint_spawner.tscn" id="20_mfciw"]
 [ext_resource type="PackedScene" uid="uid://dolck6iq5o3yq" path="res://level_parts/building_blocks/crate_02.tscn" id="22_ykwxh"]
 [ext_resource type="PackedScene" uid="uid://dr3v0h7tldtsh" path="res://level_parts/building_blocks/crate_01.tscn" id="23_tumxc"]
 [ext_resource type="PackedScene" uid="uid://ns5685hjhtgj" path="res://level_parts/building_blocks/tree2.tscn" id="24_li414"]
@@ -1076,7 +1077,23 @@ transform = Transform3D(1, 1.16415e-10, 1.7053e-13, 0, 1, 8.9447e-11, -5.68434e-
 
 [node name="SecF" type="Node3D" parent="." index="12"]
 
-[node name="S1" type="Node3D" parent="SecF" index="0"]
+[node name="PickupSpawner" parent="SecF" index="0" instance=ExtResource("10_jmtp2")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -38, 8.8, 2)
+spawn_probability = 1.0
+pill = false
+boots = false
+teleport = false
+ward = false
+
+[node name="PickupSpawner2" parent="SecF" index="1" instance=ExtResource("10_jmtp2")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 11, 8.8, 2)
+spawn_probability = 1.0
+pill = false
+boots = false
+teleport = false
+ward = false
+
+[node name="S1" type="Node3D" parent="SecF" index="2"]
 
 [node name="Struct01" parent="SecF/S1" index="0" instance=ExtResource("14_5wlrq")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 13, 9, 3)
@@ -1210,7 +1227,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -39, 9
 [node name="Struct54" parent="SecF/S1" index="43" instance=ExtResource("14_5wlrq")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -39, 9, 1)
 
-[node name="H1" type="Node3D" parent="SecF" index="1"]
+[node name="H1" type="Node3D" parent="SecF" index="3"]
 
 [node name="Struct55" parent="SecF/H1" index="0" instance=ExtResource("15_a8iil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 0)
@@ -1233,7 +1250,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 6)
 [node name="Struct61" parent="SecF/H1" index="6" instance=ExtResource("15_a8iil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 8)
 
-[node name="H2" type="Node3D" parent="SecF" index="2"]
+[node name="H2" type="Node3D" parent="SecF" index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, 0, 0)
 
 [node name="Struct55" parent="SecF/H2" index="0" instance=ExtResource("15_a8iil")]
@@ -1257,7 +1274,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 6)
 [node name="Struct61" parent="SecF/H2" index="6" instance=ExtResource("15_a8iil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 8)
 
-[node name="H3" type="Node3D" parent="SecF" index="3"]
+[node name="H3" type="Node3D" parent="SecF" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, 0)
 
 [node name="Struct55" parent="SecF/H3" index="0" instance=ExtResource("15_a8iil")]
@@ -1281,7 +1298,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 6)
 [node name="Struct61" parent="SecF/H3" index="6" instance=ExtResource("15_a8iil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 8)
 
-[node name="H4" type="Node3D" parent="SecF" index="4"]
+[node name="H4" type="Node3D" parent="SecF" index="6"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, 0)
 
 [node name="Struct55" parent="SecF/H4" index="0" instance=ExtResource("15_a8iil")]
@@ -1305,7 +1322,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 6)
 [node name="Struct61" parent="SecF/H4" index="6" instance=ExtResource("15_a8iil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 8)
 
-[node name="H5" type="Node3D" parent="SecF" index="5"]
+[node name="H5" type="Node3D" parent="SecF" index="7"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 49, 0, 0)
 
 [node name="Struct55" parent="SecF/H5" index="0" instance=ExtResource("15_a8iil")]
@@ -1329,7 +1346,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 6)
 [node name="Struct61" parent="SecF/H5" index="6" instance=ExtResource("15_a8iil")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8.8, 8)
 
-[node name="one_of" parent="SecF" index="6" instance=ExtResource("11_rj73q")]
+[node name="one_of" parent="SecF" index="8" instance=ExtResource("11_rj73q")]
 
 [node name="W1" type="Node3D" parent="SecF/one_of" index="0"]
 
@@ -1378,6 +1395,10 @@ transform = Transform3D(1, 0, -1.74846e-07, 0, 1, 0, 1.74846e-07, 0, 1, 16.0116,
 [node name="VendingMachine" parent="one_of5/S2" index="1" instance=ExtResource("3_u4vfe")]
 transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 14.9939, 0, -0.50773)
 
+[node name="PickupSpawner" parent="one_of5/S2/VendingMachine" index="8" instance=ExtResource("20_mfciw")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -2, 1.5, 0)
+spawn_probability = 0.5
+
 [node name="Floor77" parent="one_of5/S2" index="2" instance=ExtResource("2_2etuv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0061, 0, 8.00773)
 
@@ -1391,6 +1412,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0061, 0, 12.0077)
 
 [node name="Floor81" parent="one_of5/S2" index="5" instance=ExtResource("2_2etuv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.0061, 0, 16.0077)
+
+[node name="PickupSpawner" parent="one_of5/S2/Floor81" index="1" instance=ExtResource("20_mfciw")]
+spawn_probability = 0.25
+
+[node name="PickupSpawner2" parent="one_of5/S2/Floor81" index="2" instance=ExtResource("20_mfciw")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4, 0, 0)
+spawn_probability = 0.25
 
 [node name="Floor83" parent="one_of5/S2" index="6" instance=ExtResource("2_2etuv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.0061, 0, 16.0077)

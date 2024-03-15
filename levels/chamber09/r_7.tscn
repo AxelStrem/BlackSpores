@@ -67,7 +67,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 0, -8)
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 4, 0, 0)
 
 [node name="staircase2" parent="Wall02/Floor04" instance=ExtResource("5_bdtc7")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 7.99999, 3.4, 4)
+transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 7.99999, 3.55304, 4)
 
 [node name="WallHatchLow" parent="Wall02" instance=ExtResource("6_54hy5")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.99948, 0.130341, -4)

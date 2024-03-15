@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b64q2u0m86i83"]
+[gd_scene load_steps=31 format=3 uid="uid://b64q2u0m86i83"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_cqnps"]
 [ext_resource type="PackedScene" uid="uid://chxd1muqmud8w" path="res://level_parts/building_blocks/floor_01.tscn" id="1_uv686"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://dhp6yf0e27h62" path="res://level_parts/building_blocks/ceiling_02.tscn" id="4_2c05h"]
 [ext_resource type="PackedScene" uid="uid://lmywsuv6nju4" path="res://level_parts/building_blocks/wall_bars.tscn" id="4_4mfv3"]
 [ext_resource type="PackedScene" uid="uid://c1syd6jkfchcw" path="res://level_parts/building_blocks/wall_02.tscn" id="5_ap5tg"]
+[ext_resource type="PackedScene" uid="uid://dlj74fpjh3pw0" path="res://pickups/pickup_datapoint_spawner.tscn" id="5_v7iiu"]
 [ext_resource type="PackedScene" uid="uid://vp5oimxvdd4a" path="res://level_parts/building_blocks/wall_hatch_high.tscn" id="6_wlxdm"]
 [ext_resource type="PackedScene" uid="uid://cvq0jnrp64bv5" path="res://level_parts/building_blocks/CeilingLamp01.tscn" id="7_tkmhm"]
 [ext_resource type="PackedScene" uid="uid://dbhklbnem0dqx" path="res://pickups/pickup_spawner.tscn" id="8_glks8"]
@@ -285,6 +286,9 @@ transform = Transform3D(1.00507, 0, 0, 0, 1.00507, 0, 0, 0, 1.00507, -8.01013, 6
 
 [node name="Floor27" parent="Walls1" index="83" instance=ExtResource("1_uv686")]
 transform = Transform3D(1.00507, 0, 0, 0, 1.00507, 0, 0, 0, 1.00507, -3.98987, 6.74249, -8.78609)
+
+[node name="PickupSpawner" parent="Walls1/Floor27" index="1" instance=ExtResource("5_v7iiu")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -1.98991)
 
 [node name="Floor28" parent="Walls1" index="84" instance=ExtResource("1_uv686")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6.74249, -12.776)

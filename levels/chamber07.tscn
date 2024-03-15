@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bd0rkb0kbsero"]
+[gd_scene load_steps=28 format=3 uid="uid://bd0rkb0kbsero"]
 
 [ext_resource type="PackedScene" uid="uid://digvvc4qd6qr" path="res://levels/chamber_empty.tscn" id="1_bf4qm"]
 [ext_resource type="PackedScene" uid="uid://bihdlmx3671g7" path="res://levels/chamber05_lobby.tscn" id="2_p0ul7"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dr3v0h7tldtsh" path="res://level_parts/building_blocks/crate_01.tscn" id="5_6axca"]
 [ext_resource type="PackedScene" uid="uid://bc2aq7fagi26u" path="res://models/corridors/corridor_lamp.tscn" id="5_brnbv"]
 [ext_resource type="PackedScene" uid="uid://duigbbx7qtld5" path="res://level_parts/building_blocks/railing_light.tscn" id="5_tricd"]
+[ext_resource type="PackedScene" uid="uid://dlj74fpjh3pw0" path="res://pickups/pickup_datapoint_spawner.tscn" id="6_fjrjr"]
 [ext_resource type="PackedScene" uid="uid://cy7pct6fyxcjj" path="res://level_parts/building_blocks/auto_door.tscn" id="6_k4y2k"]
 [ext_resource type="PackedScene" uid="uid://d0ja84tfbh3jj" path="res://level_parts/building_blocks/vents/vent90.tscn" id="6_kl4wb"]
 [ext_resource type="PackedScene" uid="uid://cgahimap2hkd7" path="res://level_parts/building_blocks/wall_hatch_low.tscn" id="6_mfnjk"]
@@ -175,6 +176,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2, 6.04318, -0.00636601)
 [node name="Floor43" parent="L2" index="37" instance=ExtResource("3_bxmjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -36.2, 6.04318, -0.00636601)
 
+[node name="PickupSpawner" parent="L2/Floor43" index="1" instance=ExtResource("6_fjrjr")]
+spawn_probability = 0.5
+
 [node name="Floor38" parent="L2" index="38" instance=ExtResource("3_bxmjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2, 6.04318, 3.99363)
 
@@ -198,6 +202,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.2, 13.0432, -4.00637)
 
 [node name="Floor47" parent="L2" index="45" instance=ExtResource("3_bxmjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.2, 13.0432, -0.00636601)
+
+[node name="PickupSpawner" parent="L2/Floor47" index="1" instance=ExtResource("6_fjrjr")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -1, 0, 2)
 
 [node name="Floor51" parent="L2" index="46" instance=ExtResource("3_bxmjl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.2, 13.0432, -0.00636601)
@@ -384,9 +391,10 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -7.9, 
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -7.9, 0, 8)
 
 [node name="Beam01" parent="L2/Floor42/Wall16" index="3" instance=ExtResource("16_4iefh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.09782e-08, 0, 0.934978)
 
 [node name="Beam02" parent="L2/Floor42/Wall16" index="4" instance=ExtResource("16_4iefh")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, -6, 0)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.06473, -6, 0)
 
 [node name="Wall17" parent="L2/Floor42" index="9" instance=ExtResource("4_sa6lq")]
 transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -7.9, -6, 8)
@@ -605,6 +613,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -22.2,
 [node name="Struct23" parent="L2/Floor01A/Floor11" index="22" instance=ExtResource("6_mnsja")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -24.2, 3.8, 15.6)
 
+[node name="PickupSpawner" parent="L2/Floor01A/Floor11/Struct23" index="3" instance=ExtResource("6_fjrjr")]
+spawn_probability = 0.5
+
 [node name="Struct24" parent="L2/Floor01A/Floor11" index="23" instance=ExtResource("6_mnsja")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26.2, 3.8, 15.6)
 
@@ -616,6 +627,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.8000
 
 [node name="Struct27" parent="L2/Floor01A/Floor11" index="26" instance=ExtResource("6_mnsja")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -0.199985, 3.8, 15.6)
+
+[node name="PickupSpawner" parent="L2/Floor01A/Floor11/Struct27" index="3" instance=ExtResource("6_fjrjr")]
+spawn_probability = 0.5
 
 [node name="Struct34" parent="L2/Floor01A/Floor11" index="27" instance=ExtResource("6_mnsja")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.80001, 3.8, 15.6)
@@ -853,6 +867,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 16, 5)
 
 [node name="Struct03" parent="L3/S2" index="1" instance=ExtResource("6_mnsja")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 16, 3)
+
+[node name="PickupSpawner" parent="L3/S2/Struct03" index="3" instance=ExtResource("6_fjrjr")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, -1)
+spawn_probability = 0.5
 
 [node name="Struct04" parent="L3/S2" index="2" instance=ExtResource("6_mnsja")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16, 16, 1)
