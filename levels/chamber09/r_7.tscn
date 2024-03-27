@@ -51,6 +51,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 6.9, -4)
 [node name="Floor08" parent="Wall02" instance=ExtResource("3_70pde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6.9, -4)
 
+[node name="Wall01" parent="Wall02/Floor08" instance=ExtResource("4_px1d6")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.6, 0, 0)
+
 [node name="Floor09" parent="Wall02" instance=ExtResource("3_70pde")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 6.9, -8)
 
@@ -259,6 +262,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.10001, -0.4, 2.80001)
 
 [node name="AutoDoor2" parent="." instance=ExtResource("1_p4p80")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 7, 2)
+no_top = true
 
 [node name="Wall12" parent="." instance=ExtResource("2_nuya3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -10, 7, 2)

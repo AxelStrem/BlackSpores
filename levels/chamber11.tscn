@@ -22,7 +22,7 @@
 chamber_tag = 11
 
 [node name="LevelOut" parent="." index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.0061, 13.5, -58.0077)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46.0061, 13.5773, -58.0077)
 
 [node name="CollisionShape3D" parent="PlayerDetector" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.1297, 5.53725, -32.3429)
@@ -826,22 +826,22 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 11.
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 8, 4.7, 3.8147e-05)
 
 [node name="Floor01" parent="F2/Floor23/Wall07" index="3" instance=ExtResource("2_ak0rf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0725, 0)
 
 [node name="Floor02" parent="F2/Floor23/Wall07" index="4" instance=ExtResource("2_ak0rf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.0725, 0)
 
 [node name="Floor03" parent="F2/Floor23/Wall07" index="5" instance=ExtResource("2_ak0rf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0725, 4)
 
 [node name="Floor04" parent="F2/Floor23/Wall07" index="6" instance=ExtResource("2_ak0rf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.0725, 4)
 
 [node name="Floor05" parent="F2/Floor23/Wall07" index="7" instance=ExtResource("2_ak0rf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0725, 8)
 
 [node name="Floor06" parent="F2/Floor23/Wall07" index="8" instance=ExtResource("2_ak0rf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2, 8)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 2.0725, 8)
 
 [node name="Wall08" parent="F2/Floor23" index="8" instance=ExtResource("3_bn1ho")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 8, 4.7, 4.00005)
@@ -987,16 +987,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.8, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.2, 0)
 
 [node name="staircase" parent="F2/Floor30" index="4" instance=ExtResource("4_onmin")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.10303, 0)
 
 [node name="staircase2" parent="F2/Floor30" index="5" instance=ExtResource("4_onmin")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.10303, -4)
 
 [node name="staircase3" parent="F2/Floor30" index="6" instance=ExtResource("4_onmin")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3.4, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3.50303, 0)
 
 [node name="staircase4" parent="F2/Floor30" index="7" instance=ExtResource("4_onmin")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3.4, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 3.50303, -4)
 
 [node name="Floor31" parent="F2" index="37" instance=ExtResource("2_ak0rf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 6.8, -52)

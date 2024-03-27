@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bwj5nrp441rws"
-path="res://.godot/imported/icon.png-ad599c65cb62254d7fde72c3cb829a7d.ctex"
+uid="uid://bpq88yxwmncon"
+path="res://.godot/imported/icon_taskbar.png-9c008b12cb422f621b9fd0e6b8b205c1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://yoba/icon.png"
-dest_files=["res://.godot/imported/icon.png-ad599c65cb62254d7fde72c3cb829a7d.ctex"]
+source_file="res://yoba/icon_taskbar.png"
+dest_files=["res://.godot/imported/icon_taskbar.png-9c008b12cb422f621b9fd0e6b8b205c1.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

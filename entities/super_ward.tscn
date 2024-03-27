@@ -15,6 +15,3 @@ transform = Transform3D(0.259, 0, 0, 0, 0.259, 0, 0, 0, 0.259, 0, 0, 0)
 
 [node name="lock_opener" parent="ward" index="4"]
 transform = Transform3D(16.253, 0, 0, 0, 16.253, 0, 0, 0, 16.253, 0, 0, 0)
-collision_layer = 1024
-monitoring = false
-monitorable = false

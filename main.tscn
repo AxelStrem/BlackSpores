@@ -178,6 +178,7 @@ size = Vector3(196.664, 4.61426, 267.326)
 [node name="main" type="Node3D" groups=["game"]]
 process_mode = 1
 script = ExtResource("1_kjcn1")
+debug_items = true
 soundtrack = true
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
@@ -186,7 +187,7 @@ visible = false
 
 [node name="player" type="CharacterBody3D" parent="."]
 transform = Transform3D(1.31134e-07, 0, -1, 0, 1, 0, 1, 0, 1.31134e-07, 4.07206, -264.051, -26.6631)
-collision_layer = 1552
+collision_layer = 67088
 script = ExtResource("3_1xpxi")
 
 [node name="hitbox" type="CollisionShape3D" parent="player"]
@@ -572,11 +573,11 @@ bus = &"SFX-Room"
 [node name="HUDViewport" type="SubViewport" parent="player"]
 own_world_3d = true
 transparent_bg = true
+handle_input_locally = false
 size = Vector2i(1920, 1080)
 
 [node name="Camera3D" type="Camera3D" parent="player/HUDViewport"]
 projection = 1
-current = true
 size = 2.268
 near = 0.01
 
@@ -643,6 +644,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20.2542, -267.44, -24.9159)
 [connection signal="area_entered" from="player/Area3D" to="player" method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="player/Area3D" to="player" method="_on_area_3d_area_exited"]
 [connection signal="finished" from="player/sounds/breath" to="player" method="_on_breath_finished"]
+[connection signal="hud_frame_selected" from="player/HUDViewport/Camera3D/HUD" to="player" method="_on_hud_hud_frame_selected"]
 [connection signal="timeout" from="player/FX/Teleport/Timer" to="player/FX/Teleport" method="_on_timer_timeout"]
 [connection signal="timeout" from="player/EverySec" to="player" method="_on_every_sec_timeout"]
 [connection signal="timeout" from="every_second" to="." method="_every_second"]

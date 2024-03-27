@@ -82,6 +82,12 @@ var antigrav_charges_base = 10
 var antigrav_charges_max = 10
 const antigrav_charges_bonus = 3
 
+var box_charges = 0
+const box_charges_bonus = 3
+const box_charges_base = 10
+var box_charges_max = 10
+var box_scene = preload("res://entities/box.tscn")
+
 var teleporter_charges = 0
 var teleporter_charges_max = 7
 const teleporter_charges_base = 7
@@ -146,6 +152,11 @@ var touching_spores = 0
 var spores_close = 0.0
 var spores_intensity = 0.0
 
+var item_selected = -1
+const item_box = 0
+const item_tele = 1
+const item_ward = 2
+
 @onready var death_screen = $Camera/DeathScreen
 @onready var restart_button = $Camera/DeathScreen/restartButton
 @onready var menu_button = $Camera/DeathScreen/quitToMenuButton
@@ -181,6 +192,7 @@ func update_profile(skills, perks):
 	if perk_inventory:
 		antigrav_charges_max = antigrav_charges_base*2
 		ward_charges_max = ward_charges_base*2
+		box_charges_max = box_charges_base*2
 		teleporter_charges_max = teleporter_charges_base*2
 	else:
 		antigrav_charges_max = antigrav_charges_base
@@ -316,6 +328,13 @@ func pickup(pickup_type):
 		ward_charges = min(ward_charges_max, ward_charges + ward_charges_bonus*extra)
 		display_info("Picked up a Ward. Press Q to deploy")
 		return true
+	if pickup_type == 5:
+		if box_charges >= box_charges_max:
+			display_info("Piston Cube charges full")
+			return false
+		box_charges = min(box_charges_max, box_charges + box_charges_bonus*extra)
+		display_info("Picked up a Piston Cube.")
+		return true
 	return true
 
 # Get the gravity from the project settings to be synced with RigidDynamicBody nodes.
@@ -361,6 +380,8 @@ func is_on_floor_ex():
 func _physics_process(delta):
 	if controls_locked:
 		return
+		
+	
 		
 	if is_on_floor():
 		time_off_ground = 0.0
@@ -414,6 +435,10 @@ func _physics_process(delta):
 		1:int(game.spore_timer_adjusted()*10000.0), 2:get_parent().total_spores, 3:spores_close})
 		label_dead.text = "Chamber {0}".format({0:current_chamber})
 		
+	if not dead:
+		death_screen.find_child("info").text = "Chamber #{0}; Containment breach T+{1} ".format({0:current_chamber, 1:format_time(time_passed)})
+	
+		
 	if info_timeout > 0.0:
 		info_timeout -= delta
 		if info_timeout <= 0.0:
@@ -429,6 +454,7 @@ func _physics_process(delta):
 	hud.set_grav_bonus(antigrav_charges)
 	hud.set_teleport_bonus(teleporter_charges)
 	hud.set_ward_bonus(ward_charges)
+	hud.set_box_bonus(box_charges)
 	# Add the gravity.
 	if not is_on_floor():
 		energy_restoring = false
@@ -593,6 +619,9 @@ func _physics_process(delta):
 func _input(event):
 	if controls_locked:
 		return
+		
+	hud.input(event)
+		
 	var act = Vector2i(0,0)
 	if event.is_action_pressed("player_strafe_left"):
 		act = Vector2i(-1,0)
@@ -622,22 +651,7 @@ func _input(event):
 				dodge_timeout = 0.0
 				dodge_cooldown = 0.6
 				time_off_ground = 0.5
-			
-	if event is InputEventKey:
-		if event.pressed and event.keycode == KEY_Q:
-			if ward_charges > 0:
-					ward_charges -= 1
-					var ward = null
-					if perk_ward2:
-						ward = exward_scene.instantiate()
-					else:
-						ward = ward_scene.instantiate()
-					if perk_ward1:
-						ward.lockpick = true
-					if perk_ward3:
-						ward.slowdown = 0.5
-					ward.lifetime = 10.0 + level_ward*0.5
-					throw_object(ward)
+						
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#rotation_helper.rotate_x(deg2rad(event.relative.y * MOUSE_SENSITIVITY))
 		self.rotate_y(deg_to_rad(event.relative.x * -camera_sensitivity * mouse_sens))
@@ -648,47 +662,58 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
-				if teleporter_charges > 0:
-					teleporter_charges -= 1
-					hud.tele_created()
-					if teleporter!=null:
-						teleporter.player = null
-						teleporter.queue_free()
-					teleporter = teleporter_scene.instantiate()
-					teleporter.deploy_speed = 0.5 + level_teleport*0.2
-					teleporter.player = self
-					throw_object(teleporter)
+				match item_selected:
+					item_tele:
+						if teleporter_charges > 0:
+							teleporter_charges -= 1
+							hud.tele_created()
+							if teleporter!=null:
+								teleporter.player = null
+								teleporter.queue_free()
+							teleporter = teleporter_scene.instantiate()
+							teleporter.deploy_speed = 0.5 + level_teleport*0.2
+							teleporter.player = self
+							throw_object(teleporter)
+					item_ward:
+						if ward_charges > 0:
+							ward_charges -= 1
+							var ward = null
+							if perk_ward2:
+								ward = exward_scene.instantiate()
+							else:
+								ward = ward_scene.instantiate()
+							if perk_ward1:
+								ward.lockpick = true
+							if perk_ward3:
+								ward.slowdown = 0.5
+							ward.lifetime = 10.0 + level_ward*0.5
+							throw_object(ward)
+					item_box:
+						if box_charges > 0:
+							box_charges -= 1
+							var box = box_scene.instantiate()
+							throw_object(box)
 		if event.button_index == MOUSE_BUTTON_RIGHT:
 			if event.pressed:
-				if teleporter!=null:
-					if teleporter.engaged:
-						var bs = basis
-						teleporter.activate(bs)
-						$FX/Teleport.run()
-						$sounds/teleport.play()
-						teleporter = null
-				elif perk_tele2 and teleporter_locstack.size()>0 and teleporter_charges >= 2:
-					var bs = basis
-					$FX/Teleport.run()
-					$sounds/teleport.play()
-					teleporter_charges -= 2
-					await get_tree().create_timer(1.0).timeout
-					global_position = teleporter_locstack.front()
-					velocity = Vector3.ZERO
-					basis = bs
+				match item_selected:
+					item_tele:
+						if teleporter!=null:
+							if teleporter.engaged:
+								var bs = basis
+								teleporter.activate(bs)
+								$FX/Teleport.run()
+								$sounds/teleport.play()
+								teleporter = null
+						elif perk_tele2 and teleporter_locstack.size()>0 and teleporter_charges >= 2:
+							var bs = basis
+							$FX/Teleport.run()
+							$sounds/teleport.play()
+							teleporter_charges -= 2
+							await get_tree().create_timer(1.0).timeout
+							global_position = teleporter_locstack.front()
+							velocity = Vector3.ZERO
+							basis = bs
 					
-					
-					
-	#if event.is_action_pressed("player_jump") and ground_close and not jumping:
-	#	velocity += vec_up*jump_impulse
-	#	ground_close = false
-	#	jumping = true
-	#	$JumpDelay.start()
-	#if event.is_action_pressed("player_save") and ground_close:
-		#checkpoint = translation
-		#checkpoint_time = time_passed
-	#if event.is_action_pressed("player_reset"):
-	#	kill_player()
 
 
 func _on_AirtimeDelay_timeout():
@@ -777,3 +802,7 @@ func _on_every_sec_timeout():
 		teleporter_locstack.push_back(global_position)
 		if teleporter_locstack.size() > 5:
 			teleporter_locstack.pop_front()
+
+
+func _on_hud_hud_frame_selected(frame):
+	item_selected = frame

@@ -6,12 +6,15 @@ var dw_scene = preload("res://level_parts/building_blocks/door_w.tscn")
 @export var window_probability = 0.5
 @export var speed = 1.5
 @export var gap = 4.0
+@export var no_top = false
 
 var state = 0
 var locks = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var dr = null
+	if no_top:
+		$doorway.remove_child($doorway/MeshInstance3D)
 	if randf()<window_probability:
 		dr = dw_scene.instantiate()
 	else:

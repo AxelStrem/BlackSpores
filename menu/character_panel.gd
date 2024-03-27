@@ -3,6 +3,7 @@ extends Node3D
 @export var index = 0
 @export var trait_name = "Speed"
 @export var alt = "Each level increases character base speed by 3%"
+@export var cap_level = 20
 
 var current_level = 0
 # Called when the node enters the scene tree for the first time.
@@ -23,4 +24,7 @@ func set_points(level, rp, price):
 	if rp >= price:
 		$button3D.activate()
 	else:
+		$button3D.deactivate()
+	if current_level >= cap_level:
+		$button3D.set_text("MAX")
 		$button3D.deactivate()

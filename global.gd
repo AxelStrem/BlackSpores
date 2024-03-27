@@ -150,3 +150,11 @@ func list_children_recursive(node):
 		else:
 			nodes.append(N)
 	return nodes
+	
+func is_an_ancestor(node, ancestor):
+	if node == null:
+		return false
+	if node == ancestor:
+		return true
+	var p = node.get_parent()
+	return is_an_ancestor(p, ancestor)

@@ -1,9 +1,11 @@
 extends Node3D
 
 var active_spores = -1
+@export var no_top = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	if no_top:
+		remove_child($MeshInstance3D)
 
 func activate_spore(_s):
 	if active_spores<0:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://xbxengdr8k64"]
+[gd_scene load_steps=12 format=3 uid="uid://xbxengdr8k64"]
 
 [ext_resource type="Script" path="res://spore_consumable.gd" id="1_3yelo"]
 [ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_esdfm"]
+[ext_resource type="Material" uid="uid://4psf70uffr4l" path="res://level_parts/building_blocks/vent_metal.tres" id="3_p0cg5"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mw3vj"]
 size = Vector3(0.871475, 2.19221, 4.01636)
@@ -52,6 +53,8 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rrcfi")
 
+[sub_resource type="BoxMesh" id="BoxMesh_d5e1f"]
+
 [node name="doorway" type="Node3D"]
 script = ExtResource("1_3yelo")
 
@@ -94,3 +97,8 @@ transform = Transform3D(-8.74228e-08, 0, -2, 0, 2, 0, 2, 0, -8.74228e-08, 0, 0, 
 mesh = SubResource("ArrayMesh_8hjvg")
 skeleton = NodePath("")
 surface_material_override/0 = ExtResource("2_esdfm")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5525, 0, 0, 0, 5.94, 0, 0, 0, 3.9, 2.48654, 9.1, 0)
+mesh = SubResource("BoxMesh_d5e1f")
+surface_material_override/0 = ExtResource("3_p0cg5")

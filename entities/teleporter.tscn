@@ -11,7 +11,8 @@ margin = 0.003
 height = 0.0819192
 radius = 0.219296
 
-[node name="Teleporter" type="RigidBody3D"]
+[node name="Teleporter" type="RigidBody3D" groups=["piston_sensitive"]]
+collision_layer = 65537
 max_contacts_reported = 1
 contact_monitor = true
 script = ExtResource("1_8c84i")

@@ -7,8 +7,8 @@
 [node name="LevelOut" parent="." index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.0061, -6.6, 13.9923)
 
-[node name="Wall05" parent="P2/Floor38" index="4"]
+[node name="Wall05" parent="P2/Floor38" index="6"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 4)
 
-[node name="Wall06" parent="P2/Floor38" index="5"]
+[node name="Wall06" parent="P2/Floor38" index="7"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 8)

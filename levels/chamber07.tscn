@@ -290,6 +290,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 1.9, 2)
 [node name="AutoDoor" parent="L2/Floor54" index="12" instance=ExtResource("6_k4y2k")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -4, -0.5, 7.6)
 window_probability = 0.0
+no_top = true
 
 [node name="VendingMachine" parent="L2/Floor54/AutoDoor" index="4" instance=ExtResource("7_h5jmo")]
 transform = Transform3D(-2, 0, -1.74846e-07, 0, 2, 0, 1.74846e-07, 0, -2, -3, 0.5, 2.9)

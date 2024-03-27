@@ -5,8 +5,8 @@ resource_name = "Reverb"
 room_size = 0.69
 damping = 0.58
 spread = 0.67
-dry = 0.72
-wet = 0.38
+dry = 0.84
+wet = 0.14
 
 [resource]
 bus/0/volume_db = 4.23351
@@ -29,4 +29,4 @@ bus/3/bypass_fx = false
 bus/3/volume_db = 0.0
 bus/3/send = &"SFX"
 bus/3/effect/0/effect = SubResource("AudioEffectReverb_b4dpe")
-bus/3/effect/0/enabled = false
+bus/3/effect/0/enabled = true

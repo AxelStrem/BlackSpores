@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://cdxpw6f3thxlr"]
 
-[ext_resource type="Script" path="res://spore_consumable.gd" id="1_ytexi"]
+[ext_resource type="Script" path="res://level_parts/building_blocks/displace_random.gd" id="1_8lmju"]
 [ext_resource type="Material" uid="uid://b2i3qwo1g2vxp" path="res://models/palette01_basic.tres" id="2_2ed8l"]
 [ext_resource type="PackedScene" uid="uid://dolck6iq5o3yq" path="res://level_parts/building_blocks/crate_02.tscn" id="3_grojh"]
 
@@ -45,7 +45,8 @@ shadow_mesh = SubResource("ArrayMesh_w1ycp")
 size = Vector3(0.153591, 5.83874, 0.0836295)
 
 [node name="hooked_crate" type="Node3D"]
-script = ExtResource("1_ytexi")
+script = ExtResource("1_8lmju")
+displace = Vector3(0, 1, 0)
 
 [node name="Scale2" type="Node3D" parent="."]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)

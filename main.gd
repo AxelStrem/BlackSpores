@@ -309,6 +309,7 @@ func _ready():
 		$player.antigrav_charges = 20
 		$player.teleporter_charges = 14
 		$player.ward_charges = 10
+		$player.box_charges = 20
 	if !show_info:
 		$player/Camera/LabelFPS.hide()
 		$player/Camera/LabelTime.hide()
